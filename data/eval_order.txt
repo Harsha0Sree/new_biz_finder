@@ -1,0 +1,423 @@
+  0  1000.0M Advanced Machine Intelligence La Artificial Intelligence      ok
+  1  1000.0M Ineffable Intelligence                                        ok
+  2   480.0M humans&, inc.                    AI / Collaboration Tools     ok
+  3   255.0M Fundamental Technologies Inc.    Enterprise AI / Predictive A ok
+  4   230.0M Mal                              Fintech                      ok
+  5   220.0M H.AI SAS                         AI Agents                    ok
+  6   200.0M Mirendil                         Artificial Intelligence      ok
+  7   189.9M Armadin, Inc.                    Cybersecurity / AI Security  dead
+  8   150.0M Inferact                         AI / Machine Learning Infere ok
+  9   126.0M Poolside AI                      Writing AI                   ok
+ 10   113.0M Mistral AI                       Open Source Solutions        ok
+ 11   107.0M Trase                            Artificial Intelligence      ok
+ 12   100.0M Callosum                         Artificial Intelligence      ok
+ 13   100.0M Gradium                          Artificial Intelligence      ok
+ 14   100.0M Ent                              Cybersecurity                js_only
+ 15   100.0M RadixArk, Inc.                   AI Infrastructure / Open-Sou ok
+ 16   100.0M Tranch, Inc.                     B2B buy-now-pay-later (BNPL) ok
+ 17    90.0M Veeda AI                         Artificial Intelligence      ok
+ 18    85.0M Decade                           Fintech                      ok
+ 19    75.0M Tenzai                           Cybersecurity                ok
+ 20    71.0M Enigma                           Artificial Intelligence and  ok
+ 21    70.0M Artemis Global Technologies, Inc Cybersecurity / AI Security  ok
+ 22    66.0M NewCore                          Cybersecurity                ok
+ 23    65.0M Sycamore Labs, Inc.              Enterprise AI Agent Operatin ok
+ 24    65.0M Vega                             Cybersecurity / Security Ana ok
+ 25    61.0M Jazz Limited                     Cybersecurity / Data Loss Pr ok
+ 26    61.0M Gambit Security Ltd.             AI Resilience Platform / Cyb ok
+ 27    60.0M Corma                            Cybersecurity                ok
+ 28    60.0M Oak                              Cybersecurity                ok
+ 29    60.0M Entire                           Developer Tools              ok
+ 30    60.0M MainFunc                         AI Search Engine             ok
+ 31    58.0M ZyG                              eCommerce AI / Agentic Opera ok
+ 32    55.0M microagi                         Industrial Automation/Roboti js_only
+ 33    55.0M Elorian AI                       Artificial Intelligence      ok
+ 34    53.0M Descope, Inc.                    Authentication and User Mana ok
+ 35    52.0M Fish Audio                       Artificial Intelligence      ok
+ 36    51.0M Minimus                          Cybersecurity                ok
+ 37    51.0M Gutsy.io Inc.                    Cybersecurity                dead
+ 38    50.0M Radical Numerics                 Artificial Intelligence      js_only
+ 39    50.0M Hypha                            Financial Technology         ok
+ 40    50.0M Inherent Laboratories            Artificial Intelligence      ok
+ 41    50.0M ai&                              AI Infrastructure Platform   ok
+ 42    50.0M Rowspace AI, Inc.                AI Financial Intelligence    js_only
+ 43    50.0M Daydream                         Product Search and Discovery ok
+ 44    50.0M Health GPT, Inc.                 Health General Intelligence  ok
+ 45    47.0M Antithesis Operations, LLC.      Quality Assurance Software   ok
+ 46    45.8M Poetiq                           AI Meta-System / Reasoning E ok
+ 47    45.0M Cylake                           Cybersecurity / AI-Native Se ok
+ 48    44.0M DEFCON AI, Inc.                  Logistics Insights           ok
+ 49    42.0M Applied AI Corporation Limited   AI Platform                  ok
+ 50    41.0M Mirelo AI GmbH                   AI Audio Technology / Video  ok
+ 51    41.0M Indus AI Technologies, Inc. (Max Accounting Automation / AI A ok
+ 52    41.0M Sarvam AI                                                     ok
+ 53    41.0M Exodigo Ltd.                     Subsurface Mapping Platform  ok
+ 54    40.0M Monogram                         Artificial Intelligence      ok
+ 55    40.0M Coral Automation Inc. (Mandolin) AI-powered Healthcare Automa ok
+ 56    40.0M WaveForms AI                     AI Voices                    dead
+ 57    38.5M Sumble                           Sales Intelligence / AI / Da ok
+ 58    38.0M SmartSuite Holdings LLC          Work Management              ok
+ 59    37.6M Liquid AI, Inc.                  AI Foundation Models         ok
+ 60    36.0M Orchid Security, Inc.            Identity Management and Secu ok
+ 61    35.0M Arkenstone Defense               GovTech                      ok
+ 62    35.0M Astelia, Inc.                    AI-Exposure Management / Cyb ok
+ 63    35.0M Resolve AI, Inc.                 Software Automation          ok
+ 64    35.0M Decagon AI, Inc.                 Customer Support             ok
+ 65    35.0M Bioptimus                        AI Bioscience                ok
+ 66    35.0M Unaric                           Salesforce ISV               ok
+ 67    34.0M Harmony                          Enterprise AI                ok
+ 68    34.0M JetStream Security Inc.          AI Governance / AI Security  ok
+ 69    34.0M Fullcast, Inc.                   Revenue Operations (RevOps)  ok
+ 70    33.0M Ornn                             AI Infrastructure / Marketpl ok
+ 71    32.0M Hang Ten Systems                 Enterprise AI                ok
+ 72    32.0M Frontera Health, Inc.            AI Healthcare Solutions      ok
+ 73    31.4M Asteromorph                      Artificial Intelligence      ok
+ 74    31.0M Luel                             AI Data Marketplace          ok
+ 75    30.0M Maximum Technologies Inc.        Fintech                      ok
+ 76    30.0M Agon                             Defence Technology           js_only
+ 77    30.0M Nebex                            Fintech                      ok
+ 78    30.0M Dapple                           AI Infrastructure            ok
+ 79    30.0M Inner AI                         AI Agents / Business Automat js_only
+ 80    30.0M Predoc                           Health Information Managemen ok
+ 81    30.0M Aurasell, Inc.                   CRM / AI-native Business Sof ok
+ 82    30.0M Virtue AI Inc.                   AI Security                  ok
+ 83    30.0M Wordware.ai                      AI Development               ok
+ 84    30.0M Slingshot AI                     Mental Health Care           ok
+ 85    30.0M CuspAI                           Search Engine                dead
+ 86    30.0M FlexAI                           AI Compute                   ok
+ 87    30.0M Sakana AI                        AI                           ok
+ 88    29.0M Subquadratic, Inc.               AI Infrastructure / Large La ok
+ 89    28.5M Vectara, Inc.                    Conversational GenAI Search  ok
+ 90    28.0M Crash Override Inc.              Engineering Relationship Man ok
+ 91    28.0M Quris Technologies LTD.          Bio-AI Clinical Prediction P ok
+ 92    27.0M Velocity                         AI Infrastructure / AdTech   ok
+ 93    27.0M Ploy                             Marketing Automation         ok
+ 94    27.0M Pramaana Labs                    Artificial Intelligence      ok
+ 95    27.0M Config                           AI, Robotics Data, Machine L ok
+ 96    27.0M Mimic Networks, Inc.             Ransomware Defense           ok
+ 97    27.0M Borderless AI Ventures, Inc.     Payroll Solution             ok
+ 98    27.0M CentML, Inc.                     AI and ML Model Optimization dead
+ 99    26.0M Fluxco                           Procurement Software         js_only
+100    26.0M VTVK Inc.                        Productivity Software        ok
+101    25.0M Lithosquare                      AI, Deeptech, Climate Tech   ok
+102    25.0M NavigateAI, Inc.                 Construction Tech            ok
+103    25.0M Fulcrum, Inc.                    Insurance AI / Workflow Auto ok
+104    25.0M Span                             Developer Intelligence / AI  ok
+105    25.0M MAI                              AI Marketing / Performance A dead
+106    25.0M All Blue Labs, Inc.              Finance and Operations Manag dead
+107    25.0M Unstructured Technologies, Inc.  LLM Data Preprocessing Solut ok
+108    25.0M MindsDB, Inc.                    Data Science & Machine Learn ok
+109    25.0M Endor Labs Inc.                  Dependency Lifecycle Managem ok
+110    25.0M TandemAI Suzhou Co., Ltd         Drug Discovery Solution      ok
+111    24.5M Emerald AI                       AI Energy Management, Grid O ok
+112    24.0M F2                               Fintech and AI               ok
+113    24.0M Avtal                            Digital Engagement Platform  ok
+114    24.0M Mem0                                                          ok
+115    24.0M Lumana.AI, Inc.                  Video Security Solution      ok
+116    23.5M Auxia, Inc.                      Marketing Personalization    ok
+117    23.0M WisdomAI, Inc.                   AI Data Analytics, Business  ok
+118    23.0M Talent Fabric Ltd.               AI Recruitment Software      ok
+119    23.0M Fal.ai                           AI Infrastructure and Genera ok
+120    22.9M Monument Technology              Fintech                      ok
+121    22.3M Ideogram                         Generative AI Text to Image  dead
+122    22.0M Spiral                           Data Infrastructure / Databa ok
+123    22.0M Exa Labs, Inc.                   AI Search Engine             ok
+124    22.0M NeuBird, Inc.                    IT Operations Platform       ok
+125    22.0M InsuRights                       Health benefit platform      ok
+126    22.0M Abeap.ai                         Data-management platform     ok
+127    21.5M Nace AI, Inc.                    Enterprise AI Workflow Autom ok
+128    21.5M ScaleOps Labs Ltd.               Cloud Resource Management    ok
+129    21.5M Pinata Technologies, Inc.        NFT-focused media distributi ok
+130    21.0M Thira                            Enterprise AI Automation     ok
+131    21.0M Ciroos, Inc.                     AI Operations / DevOps / Sit ok
+132    21.0M PlayAI                           Conversational Voice AI      dead
+133    21.0M Decart.AI Inc.                   AI Infrastructure            ok
+134    21.0M Command Zero, Inc.               Cyber Investigation          ok
+135    20.8M Constantinople Operating Company Banking Software             ok
+136    20.0M Twin1 AI                         AI Platform                  ok
+137    20.0M Attestable                       Cybersecurity                ok
+138    20.0M Jack & Jill                      Recruitment Technology       ok
+139    20.0M Way Security                     Cybersecurity                ok
+140    20.0M Bloom Security                   Cybersecurity                ok
+141    20.0M Trooly                           Artificial Intelligence and  ok
+142    20.0M SkyPilot                         AI Infrastructure            ok
+143    20.0M Runta                            AI Infrastructure            ok
+144    20.0M Tangos                           Financial Technology         ok
+145    20.0M NeuralTrust                      Cybersecurity                ok
+146    20.0M Aether AI                        Artificial Intelligence      ok
+147    20.0M Minerva                          Marketing Technology         ok
+148    20.0M HeyDonto AI Technology           Healthcare Software          ok
+149    20.0M Tensormesh                       Artificial Intelligence      ok
+150    20.0M Ciridae                          AI Transformation Platform / ok
+151    20.0M Standard Kernel Co.              AI Infrastructure / GPU Opti ok
+152    20.0M Solid Data, Inc.                 Enterprise AI / Semantic Dat ok
+153    20.0M Endra Systems AB                 AI Construction / MEP Design ok
+154    20.0M Opti.ai, Inc.                    AI-native IAM / Identity Sec ok
+155    20.0M octonomy AI, GmbH                AI Workforce Automation / En ok
+156    20.0M FriendliAI, Inc.                 AI Infrastructure / AI Infer ok
+157    20.0M TurinTech, Inc.                  Software Optimization        ok
+158    20.0M RunPod, Inc.                     Dev Platform                 ok
+159    20.0M Adaptive ML, Inc.                Gen AI Platform              ok
+160    20.0M Contextual AI, Inc.              AI-based Productivity        ok
+161    20.0M Together Computer Inc.           Open-source AI and Cloud Pla ok
+162    20.0M Chaos Labs, Inc.                 Economic Security and Risk M ok
+163    20.0M Unlikely Artificial Intelligence AI Crossword                 ok
+164    20.0M ArrePath                         Machine learning (ML) and im ok
+165    20.0M Klub Works Pvt. Ltd.             Fintech platform             js_only
+166    20.0M Kronologic Inc.                  Calendar Monetization™ engin ok
+167    19.5M Mana Bio Ltd.                    AI-based Drug Delivery       ok
+168    19.4M infinnity financial technologies Fully digital card managemen dead
+169    19.3M AuthMind Inc.                    Identity Protection / Cybers ok
+170    19.1M Altruistiq                       Cloud-based sustainability p ok
+171    18.5M EarnOS                           Digital Advertising          js_only
+172    18.5M Zephyr AI, Inc.                  Drug Discovery               js_only
+173    18.2M AI Proteins, Inc.                High-Throughput Drug Discove ok
+174    18.0M Overtone                         Consumer Software            ok
+175    18.0M Axiomatic AI                     Engineering AI / Scientific  ok
+176    18.0M Lumia Security, Inc.             AI Security & Governance     ok
+177    18.0M Ariga Technologies, Ltd.         Database Schema Management   js_only
+178    18.0M Chroma, Inc.                     AI Native Open-Source Embedd ok
+179    18.0M Protex AI Limited                AI-powered workplace safety  ok
+180    17.8M Replicate, Inc.                  Machine Learning             ok
+181    17.5M Rilian Technologies, Inc.        AI Cybersecurity / Defense T ok
+182    17.5M Aboon                            Fintech / Retirement & Wealt ok
+183    17.5M M3ter Holdings Limited.          Metering and pricing engine  ok
+184    17.2M AKA Foods Ltd.                   AI Food Formulation / Sensor ok
+185    17.0M QIZ Security                     Cybersecurity                ok
+186    17.0M OpenTrade                        Fintech                      ok
+187    17.0M fonio.ai                         AI Customer Communication    ok
+188    17.0M Band                             AI Agents, Enterprise Commun ok
+189    17.0M Jimini Health, Inc.              Healthcare AI / Behavioral H ok
+190    17.0M Meridian                         AI Financial Modeling / Agen ok
+191    17.0M Extend                           Document Processing / AI Inf ok
+192    17.0M Fixie.ai, Inc.                   LLM Application Platform     ok
+193    17.0M Winn.AI Labs Ltd.                AI Assistant                 ok
+194    17.0M Vibrant Planet                   Cloud-based Technology Platf ok
+195    16.5M Code Metal, Inc.                 AI Workflows Development     ok
+196    16.5M Nudge Security, Inc.             SaaS Security and Governance ok
+197    16.4M Theom, Inc.                      Cloud Data Security          ok
+198    16.2M Emmi AI GmbH                     Engineering Simulation       ok
+199    16.1M Sintra                           AI Assistant / AI Automation ok
+200    16.0M Frontier Health                  Healthcare AI                ok
+201    16.0M Drafted                          AI Home Design               ok
+202    16.0M Pit                              AI-native Enterprise Operati ok
+203    16.0M Arcads.ai                        AI-powered Marketing Video P ok
+204    16.0M Bounti Labs Inc.                 AI Sales                     ok
+205    16.0M Cytactic Cyber Management Ltd.   Cybersecurity                ok
+206    16.0M Forward                          Financial                    ok
+207    16.0M Claritas Software Solutions Ltd. Cybersecurity                ok
+208    16.0M Codegen, Inc.                    AI-Assisted Code Development ok
+209    16.0M Outbound AI, Inc.                Conversation AI Cloud        ok
+210    16.0M Gable, Inc.                      Workplace and Management Sol ok
+211    16.0M Jarvis ML Inc.                   Machine Learning Platform    js_only
+212    16.0M Faros AI, Inc.                   Engineering operations platf ok
+213    15.8M CasaPerks Technologies, Inc.     SaaS                         ok
+214    15.5M Helios Global Payments Solutions Workforce Management / HR Te ok
+215    15.2M Wondr Medical                    Digital Health               js_only
+216    15.0M telli                            AI                           ok
+217    15.0M Infinity.inc                     AI Infrastructure            ok
+218    15.0M Vorflux                          AI Software Engineering      js_only
+219    15.0M SimpleAI                         FinTech                      ok
+220    15.0M Multifactor                      Cybersecurity                ok
+221    15.0M Hive                             AI/Robotics                  ok
+222    15.0M Poseidon                         AI Data Infrastructure       ok
+223    15.0M Legend                           SocialFi / Web3              ok
+224    15.0M MOTHER.tech                      AI Creative Tools            js_only
+225    15.0M SageOx                           Artificial Intelligence, Col js_only
+226    15.0M Trajectory                       Artificial Intelligence      ok
+227    15.0M Payment Box, Inc.                Enterprise Commerce Platform ok
+228    15.0M Rork, Inc.                       AI-powered App Development / ok
+229    15.0M Kana                             Marketing AI / Agentic AI /  ok
+230    15.0M Reflow System Inc.               Workforce and Workflow Intel ok
+231    15.0M Duvo                             Retail Operations / AI Autom ok
+232    15.0M Raindrop                         AI Agent Monitoring / Observ ok
+233    15.0M TransCrypts                      Blockchain / Digital Identit js_only
+234    15.0M Finster AI, Inc.                 Financial AI / Investment Ba ok
+235    15.0M DhiWise USA Inc. (Rocket)        AI App-Building / No-Code De ok
+236    15.0M Spara, Inc.                      Conversational AI / Inbound  ok
+237    15.0M PipeImob Technology Ltda         Proptech / Real Estate Softw ok
+238    15.0M Echo, Inc.                       Enterprise Infrastructure /  ok
+239    15.0M CRED                             AI-Powered Predictive Intell ok
+240    15.0M Pixee, Inc.                      Application Security / AI Au ok
+241    15.0M Gallatin AI, Inc.                Defense Technology / Predict ok
+242    15.0M Yutori, Inc.                     AI-Personal Assistants       ok
+243    15.0M Observo AI                       AI Observability Solutions   ok
+244    15.0M BrightAI                         AI Infrastructure Solutions  ok
+245    15.0M Quantum Rise, Inc.               AI Automation                ok
+246    15.0M Prodia Inc.                      AI Image Generation          ok
+247    15.0M RightHub Limited                 IP Management                ok
+248    15.0M ENTITLE I.O LTD                  Permission Management        ok
+249    15.0M Oort, Inc.                       Enterprise Identity Threat D ok
+250    15.0M Validio AB                       Data Quality Validation and  ok
+251    15.0M Tenyx, Inc.                      Voice-based AI solutions     dead
+252    15.0M BeamUP, Ltd.                     AI-powered building design p ok
+253    15.0M Groundswell Giving, Inc.         Philanthropy-as-a-Service pl ok
+254    15.0M Anchor                           Autonomous billing platform  ok
+255    15.0M Clovers AI Inc.                  Intelligent interview platfo dead
+256    14.9M Ritmo Capital SL                 a growth capital and analyti ok
+257    14.7M District                         AI Commerce Platform         dead
+258    14.5M DM Technologies GmbH (Plato)     AI Operating System / Sales  ok
+259    14.5M Citizen Health Corporation       Healthcare Software          ok
+260    14.3M The Path                         Mental Health AI             ok
+261    14.0M Ingenix                          AI Drug Development          ok
+262    14.0M OKAPI:Orbits GmbH                Space Traffic Management     dead
+263    14.0M EonArk                           AI Biotechnology             ok
+264    14.0M Upriver                          Data Engineering / AI Infras ok
+265    14.0M Golden Analytics                 Business Intelligence        ok
+266    14.0M Simple AI Lab Company            Voice AI Sales & Contact Cen ok
+267    14.0M Leona Health                     HealthTech / AI Clinical Wor ok
+268    14.0M Pollo AI                         AI Image and Video Generatio ok
+269    14.0M CoPlane, Inc.                    Enterprise Software / AI / E ok
+270    14.0M Brontobytes, Inc. (Bronto)       AI-Native Logging / Observab ok
+271    14.0M Lace Software, Inc.              AI-Customer Service / Revenu ok
+272    14.0M Noetik, Inc.                     AI-Drug Discovery            ok
+273    14.0M Deepchecks Inc.                  Continuous Machine Learning  js_only
+274    14.0M Commercebear, Inc.               Selling Platform             dead
+275    14.0M Loops                            AI-Augmented Product Growth  ok
+276    14.0M Kompliant, Inc.                  end-to-end lifecycle complia ok
+277    14.0M Clarisights LLP                  Data ingestion and analytics ok
+278    14.0M Anduin, Inc.                     Intelligence-Based Billing™  dead
+279    13.8M Haiper Limited                   Video-Generative AI Platform js_only
+280    13.6M ReFiBuy, Inc.                    Agentic Commerce Optimizatio ok
+281    13.5M Revenium                         AI Financial / AI Cost Intel ok
+282    13.5M Bonsai Robotics, Inc.            Computer Vision-based Roboti ok
+283    13.5M Protect AI, Inc.                 AI and ML Systems Security   ok
+284    13.5M Spice AI, Inc.                   Application Platform         ok
+285    13.5M SPIRITT Labs Ltd.                App Makers Software          js_only
+286    13.3M ClaimSorted, Inc.                Insurtech / AI / Claims Mana ok
+287    13.3M Alison Technologies Ltd.         AI Creative Solutions        ok
+288    13.2M Tako                             Payroll and HR               ok
+289    13.2M Sorter, Inc.                     AI-powered Sales Email Coach ok
+290    13.0M Beacon Security                  Cybersecurity                ok
+291    13.0M Marker                           SaaS                         ok
+292    13.0M Illoca, Inc.                     AI-Powered Architectural Des ok
+293    13.0M Trent AI Ltd.                    AI Security / Cybersecurity  ok
+294    13.0M Una Software, Inc.               Financial Planning & Analysi ok
+295    13.0M Level3AI                         Enterprise AI / Customer Exp ok
+296    13.0M ProcureAi Ltd                    AI-native Procurement Automa ok
+297    13.0M Attuned Intelligence, Inc.       Healthcare AI / Voice AI / P ok
+298    13.0M Agentic Labs, Inc (Accordance)   AI for Accounting & Tax / Pr ok
+299    13.0M Runware, Inc.                    AI Media Generation / AI Inf ok
+300    13.0M Village Platforms, Inc (Coworker Enterprise AI / Productivity ok
+301    13.0M Gomboc AI                        Cloud Security               ok
+302    13.0M Cake AI Technologies, Inc.       AI Infrastructure            ok
+303    13.0M DataCrunch                       AI Computing                 ok
+304    13.0M Illumex Technologies Inc.        Generative Semantic Fabric P dead
+305    13.0M Light, Inc.                      Finance Solution             ok
+306    13.0M AISAP LTD.                       Medical Ultrasound           ok
+307    13.0M Archetype AI, Inc.               Physical AI Foundational Mod ok
+308    13.0M Refine Intelligence Ltd.         Anti-Money Laundering Softwa ok
+309    13.0M Gaiia                            Operating System for Telcos  ok
+310    13.0M BetterLeap, Inc.                 AI-powered Candidate Sourcin ok
+311    13.0M BridgeWise                       Financial Research Software  ok
+312    13.0M Talent Fabric Ltd.               AI-powered Recruitment Platf none
+313    13.0M Everafter.ai Ltd.                Customer management platform ok
+314    13.0M Pillar Srl                       Construction Management Soft ok
+315    13.0M kausable                         Artificial Intelligence      js_only
+316    13.0M Skalar                           FinTech                      ok
+317    13.0M Six Robotics                     DefenceTech                  ok
+318    13.0M Cortea                           AuditTech / AI-Powered Audit ok
+319    13.0M Jet HR srl                       Payroll Automation and Human ok
+320    12.8M Aurascape AI                     Gen AI Security Solutions    ok
+321    12.8M Finicast, Inc.                   Planning Software            dead
+322    12.8M Mantium Inc                      Cloud platform for building  dead
+323    12.5M FormX                            Construction Technology      ok
+324    12.5M Seltz                            AI Search                    ok
+325    12.5M Nullify, Inc.                    AI-Powered Product Security  ok
+326    12.5M Zingage                          AI Care Delivery / HealthTec ok
+327    12.5M Datawizz                         AI Infrastructure / Speciali ok
+328    12.5M MetalBear, Inc.                  Developer Tools / DevOps / K ok
+329    12.5M Landbase                         Go-To-Market Solutions       ok
+330    12.5M Trademo Technologies Inc.        Supply chain management and  ok
+331    12.4M ThreatFabric B.V.                Fraud Protection Software    ok
+332    12.2M Pryzm Dynamics Inc.              AI Government Procurement    ok
+333    12.0M Axis Robotics                    Artificial Intelligence      ok
+334    12.0M GreenVibe                        Construction Technology      ok
+335    12.0M geoSurge                         AI/Data Engineering          ok
+336    12.0M Exaba                            Cloud Storage                ok
+337    12.0M Perceptic                        AI for Drug Development      ok
+338    12.0M NanoCo                           Enterprise AI                ok
+339    12.0M Juno                             AI-powered Tax Automation /  ok
+340    12.0M UNLTD, Inc.                      AI-powered construction / In ok
+341    12.0M The Mobile-First Company         AI Productivity / SMB Tools  ok
+342    12.0M AdsGency                         AI & LLM Advertising Automat js_only
+343    12.0M Planyear, Inc.                   AI / Benefits Consulting / I ok
+344    12.0M Conduct AI Ltd.                  Enterprise AI / ERP Moderniz ok
+345    12.0M Octup                            Logistics Operations / AI fo none
+346    12.0M Corvic, Inc.                     Enterprise AI / Cognitive In ok
+347    12.0M Arcade AI, Inc.                  AI Infrastructure and Automa ok
+348    12.0M Splight, Inc.                    Grid and Energy Management   dead
+349    12.0M Nextdata                         Data-Mesh-Native Platform    ok
+350    12.0M Sweet Security Ltd.              Cloud Security               ok
+351    12.0M Firmbase Ltd.                    Modern Financial Planning an dead
+352    12.0M Protei Bio Ltd.                  Proteomics and Drug Discover js_only
+353    12.0M Twelve Labs, Inc.                AI-powered Video Search Plat ok
+354    12.0M boostsecurity.io Inc             DevSecOps Automation platfor ok
+355    12.0M Fintastic Technologies, Inc.     FP&A Software                ok
+356    12.0M ‍Kula Technologies Inc.          Recruitment Platform         ok
+357    12.0M Gramsoft Ltd.                    Strategic Marketing Platform dead
+358    12.0M GGWP                             AI-powered Games and Content ok
+359    12.0M Cion Digital, Inc.               SaaS blockchain orchestratio dead
+360    12.0M Cognixion Inc                    AI-powered neural interfaces ok
+361    12.0M Axelera AI                       AI solutions                 ok
+362    11.9M Lawhive, Ltd                     Legal                        ok
+363    11.9M Luminovo GmbH                    Electronic Software Suite    ok
+364    11.8M Kotoba Technologies, Inc.        Real-time Speech Generation  ok
+365    11.8M Augmenta                         Building Design Platform     ok
+366    11.7M DatalogyAI                       Dataset Curation             ok
+367    11.6M Knit Health Technologies, Inc.   Healthcare AI / Clinical Int ok
+368    11.6M Nile Platform, Inc.              Database                     ok
+369    11.6M dyte, Inc.                       Live Video and Audio platfor ok
+370    11.6M Duna                             Business Identity and Compli ok
+371    11.5M Inner Logic                      Health Technology            ok
+372    11.5M BlueFlag Security Inc.           Defense                      ok
+373    11.5M Parspec, Inc.                    Construction Product Procure ok
+374    11.5M FedML, Inc.                      MLOps platform and Collabora dead
+375    11.5M Dianthus Inc.                    Ecommerce                    ok
+376    11.3M Hadrian Security B. V.           Security Platform            ok
+377    11.3M Reliant AI, Inc.                 AI Data Analytics            ok
+378    11.1M Norm AI, Inc.                    Regulatory Compliance        ok
+379    11.0M NeoSoul                          AI Trading Infrastructure    js_only
+380    11.0M AGent Energy                     Energy Tech                  ok
+381    11.0M Intropy                          SaaS                         ok
+382    11.0M White Circle                     AI Security / AI Governance  ok
+383    11.0M VideoTutor                       EdTech / AI Tutoring         ok
+384    11.0M SkyfireAI, Inc.                  AI / Drone Operations Platfo ok
+385    11.0M Onit Security, Inc.              Cybersecurity / Exposure Man ok
+386    11.0M Littlebird                       AI Assistant / Productivity  ok
+387    11.0M Hush Security                    Cybersecurity / Machine Iden ok
+388    11.0M HavocAI Inc.                     Maritime Autonomy Solutions  ok
+389    11.0M UnifyApps                        Integration                  ok
+390    11.0M Espresso AI                      Data Warehouse Optimization  ok
+391    11.0M Prophet Security, Inc.           Cybersecurity                ok
+392    11.0M Atomicwork, Inc.                 AI-powered Employee Support  ok
+393    11.0M Akooda, Inc.                     Operations Intelligence Plat js_only
+394    11.0M AptEdge.io, Inc.                 Answer Engine                dead
+395    11.0M Codium Ltd.                      AI-powered Interactive Code  ok
+396    11.0M Savant Labs Inc.                 Analytics Automation         ok
+397    11.0M Meliora Therapeutics Private Lim Computational Platform       js_only
+398    11.0M Kinetix SAS                      3D animation                 ok
+399    11.0M Nabla Bio, Inc.                  AI-first protein design plat ok
+400    11.0M Whatslly                         Conversational Sales platfor ok
+401    10.8M Warren                           FinTech                      ok
+402    10.8M Avanti Studios                   Gambling/Gaming Software     ok
+403    10.8M paretos GmbH                     AI-based decision intelligen ok
+404    10.8M Gardin Ltd                       closed-loop growth & nutriti ok
+405    10.8M MULTIVERSE COMPUTING, S.L.       Quantum Computing            ok
+406    10.8M Arc                              Voice AI                     ok
+407    10.7M Polysense                        Food Technology / Industrial ok
+408    10.7M Mia Share, Inc. (Lumion)         EdTech / SaaS for Trade & Te ok
+409    10.7M DeepJudge AG                     AI Legal Search              ok
+410    10.6M Nectar Social                    Social Commerce / Generative ok
+411    10.6M Nexusflow.ai Inc.                Generative AI Cybersecurity  dead
+412    10.5M Katalyze AI                      Enterprise AI                ok
+413    10.5M Stilta                           Legal Technology             ok
+414    10.5M Lemon Slice                      AI Video / Conversational AI js_only
+415    10.5M AirMDR, Inc.                     AI / Cybersecurity / Managed ok
+416    10.5M Matia Inc.                       Data Management              ok
+417    10.5M Binarly, Inc.                    Supply Chain Security        js_only
+418    10.5M Ten Key Labs Incorporated        AI-powered Cap Table and Equ ok
+419    10.5M Revefi, Inc.                     AI-powered Enterprise Data P ok
+420    10.5M NocoDB Inc.                      open-source no-code Database ok
+421    10.3M Uare.ai                          Individual AI / Digital Twin ok
+422    10.2M SeeChange Technologies Ltd.      Retail Solutions             ok
