@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+
+# Local Kilo runtime data
+.kilo/
+
+# Cached HTTP responses (390MB) and derived text caches
+data/cache/
+
+# Egg-info directory
+new_biz_finder.egg-info/
+
+# Node (kilo runtime deps)
+node_modules/
+
+# Eval batch files are intermediate working state; rebuildable from data/companies.json
+data/eval_batches/
