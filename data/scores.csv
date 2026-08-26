@@ -1,0 +1,68 @@
+rank,company,domain,archetype,usd_equivalent,software_category,total,tier,confidence,applied_gates,P1,P2,P3,P4,P5,P6,P7,P8,P9
+1,"Decagon AI, Inc.",decagon.ai,sales_marketing_cx,35000000.0,Customer Support,68.11,B,high,,6.679,7.0,7.564,7.867,5.467,5.608,6.12,5.733,8.85
+2,Sumble,sumble.com,sales_marketing_cx,38500000.0,Sales Intelligence / AI / Data Analytics,67.27,B,high,,6.821,7.014,7.307,7.575,5.617,5.25,6.17,5.675,8.525
+3,"Indus AI Technologies, Inc. (Maxima)",maxima.ai,vertical_ai_saas,41000000.0,Accounting Automation / AI Agents,65.37,B,high,,6.329,6.743,7.414,7.492,5.6,5.008,6.05,5.933,7.85
+4,Entire,entire.io,ai_infra_devtools,60000000.0,Developer Tools,64.41,C,high,,6.457,6.536,6.343,7.508,5.575,6.208,6.2,6.1,7.4
+5,ZyG,zyg.com,sales_marketing_cx,58000000.0,eCommerce AI / Agentic Operating System,64.24,C,medium,,6.107,6.8,7.507,6.875,5.2,5.417,6.1,5.742,6.9
+6,"Rowspace AI, Inc.",rowspace.ai,vertical_ai_saas,50000000.0,AI Financial Intelligence,63.81,C,high,,6.664,6.493,7.057,7.567,5.283,4.692,5.72,5.575,7.4
+7,SmartSuite Holdings LLC,smartsuite.com,vertical_ai_saas,38000000.0,Work Management,63.53,C,high,,6.579,7.05,6.621,6.383,5.767,5.542,5.99,5.642,6.7
+8,"Fullcast, Inc.",fullcast.com,sales_marketing_cx,34000000.0,Revenue Operations (RevOps),62.68,C,high,,6.436,6.893,7.021,5.917,5.617,5.283,5.99,5.325,6.25
+9,"Orchid Security, Inc.",orchid.security,vertical_ai_saas,36000000.0,Identity Management and Security,62.6,C,high,,6.243,6.421,6.764,7.067,5.408,4.992,5.74,5.917,7.65
+10,Mirelo AI GmbH,mirelo.ai,ai_infra_devtools,41000000.0,AI Audio Technology / Video Tools,62.28,C,high,,6.221,6.657,6.564,7.008,5.108,5.583,5.77,5.583,7.85
+11,Fish Audio,fish.audio,ai_infra_devtools,52000000.0,Artificial Intelligence,62.01,C,high,,5.95,6.621,6.714,7.317,5.258,4.883,6.08,5.692,7.9
+12,"RadixArk, Inc.",radixark.com,ai_infra_devtools,100000000.0,AI Infrastructure / Open-Source AI Inference Platform,61.48,C,high,,6.121,5.907,6.629,6.558,5.833,5.983,5.82,5.575,6.95
+13,Applied AI Corporation Limited,aaico.com,vertical_ai_saas,42000000.0,AI Platform,61.38,C,high,,6.036,6.471,7.343,6.417,5.283,4.708,5.57,5.742,6.575
+14,Inferact,inferact.ai,ai_infra_devtools,150000000.0,AI / Machine Learning Inference,61.33,C,high,,6.121,5.907,6.536,6.725,5.833,5.983,5.82,5.575,6.5
+15,Fundamental Technologies Inc.,fundamental.tech,ai_infra_devtools,255000000.0,Enterprise AI / Predictive Analytics / Foundation Models,60.94,C,high,,5.643,6.214,7.179,6.875,5.058,5.433,5.85,6.167,7.0
+16,"Resolve AI, Inc.",resolve.ai,ai_infra_devtools,35000000.0,Software Automation,60.82,C,high,,5.829,6.079,6.657,7.55,5.2,4.758,5.92,5.633,7.85
+17,Gradium,gradium.ai,ai_infra_devtools,100000000.0,Artificial Intelligence,60.81,C,high,,5.621,6.6,6.9,6.725,4.867,5.142,6.23,5.8,7.9
+18,Gutsy.io Inc.,gutsy.com,vertical_ai_saas,51000000.0,Cybersecurity,60.74,C,medium,,6.1,6.336,6.636,6.583,5.258,4.95,5.54,5.558,7.4
+19,"Armadin, Inc.",armadin.com,vertical_ai_saas,189900000.0,Cybersecurity / AI Security Platform,60.64,C,low,,5.271,6.771,7.329,6.892,5.35,3.858,5.82,6.0,6.9
+20,"Astelia, Inc.",astelia.io,vertical_ai_saas,35000000.0,AI-Exposure Management / Cybersecurity,60.64,C,high,,5.414,6.336,7.021,7.067,5.05,4.608,5.74,5.917,7.65
+21,MainFunc,genspark.ai,vertical_ai_saas,60000000.0,AI Search Engine,60.58,C,medium,,6.629,6.393,5.7,5.95,5.725,5.542,6.73,4.892,6.575
+22,Coral Automation Inc. (Mandolin),mandolin.com,healthtech_bio,40000000.0,AI-powered Healthcare Automation,60.53,C,high,,5.821,6.364,7.15,7.675,4.983,4.15,5.37,5.617,7.65
+23,Tenzai,tenzai.com,vertical_ai_saas,75000000.0,Cybersecurity,60.43,C,high,,5.271,6.771,7.329,6.708,5.35,3.858,5.82,6.0,6.9
+24,Minimus,minimus.io,vertical_ai_saas,51000000.0,Cybersecurity,60.41,C,medium,,5.986,6.229,6.657,6.433,5.242,5.058,5.74,6.042,6.575
+25,"Descope, Inc.",descope.com,ai_infra_devtools,53000000.0,Authentication and User Management,59.64,C,high,,6.486,6.621,5.786,6.375,5.725,4.033,5.74,5.433,6.45
+26,"Antithesis Operations, LLC.",antithesis.com,ai_infra_devtools,47000000.0,Quality Assurance Software,58.8,C,high,,4.914,5.786,6.329,7.358,5.233,6.317,5.74,5.742,7.4
+27,Poetiq,poetiq.ai,ai_infra_devtools,45800000.0,AI Meta-System / Reasoning Engine,58.53,C,high,,5.95,5.921,6.321,6.225,5.317,5.417,5.74,4.95,6.45
+28,Sarvam AI,sarvam.ai,ai_infra_devtools,41000000.0,,58.42,C,high,,5.329,6.493,6.671,6.767,4.958,5.208,5.03,5.525,6.95
+29,"Sycamore Labs, Inc.",sycamore.so,ai_infra_devtools,65000000.0,Enterprise AI Agent Operating System,58.1,C,high,,5.414,6.071,6.471,6.9,4.867,5.0,5.54,5.758,6.9
+30,H.AI SAS,hcompany.ai,ai_infra_devtools,220000000.0,AI Agents,57.96,C,high,,5.114,6.05,6.893,6.667,4.95,5.008,5.72,5.35,7.45
+31,Vega,vega.io,vertical_ai_saas,65000000.0,Cybersecurity / Security Analytics,57.66,C,medium,,5.371,5.643,6.529,6.733,5.033,4.608,5.69,5.833,6.45
+32,Unaric,unaric.com,other,35000000.0,Salesforce ISV,56.11,C,high,,6.086,5.893,5.721,5.917,5.2,5.075,5.43,4.708,5.175
+33,Jazz Limited,jazz.security,vertical_ai_saas,61000000.0,Cybersecurity / Data Loss Prevention (DLP),56.01,C,medium,,4.7,5.357,6.621,6.8,4.717,4.458,5.69,5.85,6.95
+34,"Artemis Global Technologies, Inc.",artemissecurity.com,vertical_ai_saas,70000000.0,Cybersecurity / AI Security,55.28,C,medium,,4.7,5.5,6.571,6.225,4.717,4.4,5.69,6.0,6.45
+35,NewCore,newcore.com,vertical_ai_saas,66000000.0,Cybersecurity,55.27,C,medium,,4.7,5.629,6.35,6.542,4.717,4.442,5.54,5.85,6.45
+36,Gambit Security Ltd.,gambit.security,vertical_ai_saas,61000000.0,AI Resilience Platform / Cybersecurity,54.77,C,medium,,4.736,5.5,6.2,6.358,4.717,4.758,5.54,5.517,6.45
+37,Ent,ent.ai,vertical_ai_saas,100000000.0,Cybersecurity,54.54,C,low,,4.4,5.193,6.479,6.725,4.717,4.25,5.69,6.0,6.45
+38,Oak,oak.id,vertical_ai_saas,60000000.0,Cybersecurity,54.47,C,medium,,4.571,5.629,6.2,6.283,4.717,4.442,5.54,5.85,6.45
+39,ai&,aiand.com,ai_infra_devtools,50000000.0,AI Infrastructure Platform,54.22,C,medium,,5.693,5.907,6.457,5.467,4.417,5.358,4.43,4.942,4.1
+40,Hypha,hypha.co,fintech_regtech,50000000.0,Financial Technology,53.47,C,medium,,5.5,5.743,6.057,5.65,4.733,4.183,5.34,5.075,5.5
+41,Cylake,cylake.com,vertical_ai_saas,45000000.0,Cybersecurity / AI-Native Security Platform,52.05,C,medium,,4.55,5.086,5.936,6.45,4.717,3.8,5.14,5.558,5.95
+42,Callosum,callosum.com,ai_infra_devtools,100000000.0,Artificial Intelligence,48.04,D,high,,3.464,4.221,6.179,6.092,4.008,5.983,4.8,5.258,5.05
+43,Mirendil,mirendil.com,ai_infra_devtools,200000000.0,Artificial Intelligence,45.61,D,high,,3.814,4.586,4.614,5.808,4.158,4.892,4.9,5.15,4.225
+44,"Health GPT, Inc.",hippocraticai.com,healthtech_bio,50000000.0,Health General Intelligence (HGI),45.23,D,high,,3.993,4.536,5.507,6.75,4.05,2.192,4.12,4.875,5.75
+45,Trase,trase.ai,healthtech_bio,107000000.0,Artificial Intelligence,45.09,D,medium,,3.929,4.443,5.807,5.983,4.267,2.408,4.63,4.817,5.0
+46,microagi,microagi.ai,vertical_ai_saas,55000000.0,Industrial Automation/Robotics,44.79,D,high,,3.486,4.171,5.479,6.133,3.433,3.842,4.07,5.075,5.0
+47,Mistral AI,mistral.ai,ai_infra_devtools,113000000.0,Open Source Solutions,42.78,D,high,,3.871,3.693,3.993,5.808,3.767,4.908,4.2,4.575,5.175
+48,Poolside AI,poolside.ai,ai_infra_devtools,126000000.0,Writing AI,41.67,D,high,,3.714,3.307,4.086,5.45,3.825,5.058,4.33,4.492,4.675
+49,"Liquid AI, Inc.",liquid.ai,ai_infra_devtools,37600000.0,AI Foundation Models,41.57,D,high,,3.7,3.436,3.879,5.792,3.9,4.442,4.2,4.533,5.175
+50,Corma,corma.ai,ai_infra_devtools,60000000.0,Cybersecurity,41.11,D,high,,3.329,3.307,4.214,5.85,3.767,4.783,4.31,4.533,4.725
+51,WaveForms AI,waveforms.ai,ai_infra_devtools,40000000.0,AI Voices,40.5,D,high,,4.129,3.307,3.207,5.683,3.6,4.183,4.02,4.383,5.175
+52,"humans&, inc.",humansand.ai,ai_infra_devtools,480000000.0,AI / Collaboration Tools,39.12,D,high,,3.079,3.271,3.914,5.867,3.725,4.183,4.26,5.333,2.875
+53,Inherent Laboratories,inherentlabs.ai,ai_infra_devtools,50000000.0,Artificial Intelligence,38.71,D,high,,3.629,3.179,3.171,5.517,3.433,4.392,4.15,4.55,4.225
+54,Advanced Machine Intelligence Labs,amilabs.xyz,ai_infra_devtools,1000000000.0,Artificial Intelligence,36.83,D,high,,2.614,3.243,3.993,5.825,3.117,3.517,4.44,5.208,2.875
+55,Elorian AI,elorian.ai,ai_infra_devtools,55000000.0,Artificial Intelligence,36.6,D,high,,2.857,2.986,3.171,5.367,3.433,4.392,4.15,4.7,4.225
+56,Veeda AI,veeda.ai,ai_infra_devtools,90000000.0,Artificial Intelligence,35.86,D,high,,2.6,3.021,3.171,5.658,3.133,4.442,4.15,4.7,3.775
+57,Enigma,enigma.inc,ai_infra_devtools,71000000.0,Artificial Intelligence and Robotics Software,34.32,D,high,,2.329,2.986,3.171,5.342,3.025,3.992,4.15,4.7,3.775
+58,Bioptimus,bioptimus.com,healthtech_bio,35000000.0,AI Bioscience,33.14,D,high,,2.636,2.786,2.593,5.508,2.942,3.092,3.73,4.4,4.225
+59,Ineffable Intelligence,ineffable.ai,ai_infra_devtools,1000000000.0,,31.53,D,high,,2.336,2.636,2.536,5.025,3.175,3.692,3.79,4.5,2.425
+60,Daydream,daydream.ing,other,50000000.0,Product Search and Discovery,14.52,D,high,G4,5.786,5.964,6.364,6.417,4.833,5.417,5.47,4.858,6.575
+61,Monogram,monogram.ai,other,40000000.0,Artificial Intelligence,14.1,D,high,G4,5.614,5.871,5.35,6.15,5.108,5.542,5.59,4.767,7.4
+62,"Tranch, Inc.",tranch.com,fintech_regtech,100000000.0,B2B buy-now-pay-later (BNPL) platform,7.79,D,high,G2,5.371,5.429,6.057,5.667,4.133,3.858,5.22,5.033,6.0
+63,Mal,mal.ai,fintech_regtech,230000000.0,Fintech,7.67,D,high,G2,5.514,5.829,5.893,5.275,4.942,3.133,4.58,5.242,5.05
+64,Decade,decade.com,fintech_regtech,85000000.0,Fintech,7.61,D,medium,G2,5.371,5.736,5.679,5.95,4.433,3.283,4.25,5.242,5.5
+65,"DEFCON AI, Inc.",defconai.com,vertical_ai_saas,44000000.0,Logistics Insights,6.82,D,medium,G2,4.121,4.593,5.357,5.65,3.817,3.075,4.04,4.8,5.45
+66,Radical Numerics,radicalnumerics.ai,healthtech_bio,50000000.0,Artificial Intelligence,3.15,D,high,G3,2.507,2.657,2.593,5.192,2.942,2.4,3.73,4.55,4.225
+67,Exodigo Ltd.,exodigo.com,other,41000000.0,Subsurface Mapping Platform,2.37,D,high,G1,3.293,4.021,6.236,6.208,3.733,4.733,4.5,4.692,6.125
