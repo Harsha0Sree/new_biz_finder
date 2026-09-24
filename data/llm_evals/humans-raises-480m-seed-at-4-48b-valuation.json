@@ -1,0 +1,28 @@
+{
+  "slug": "humans-raises-480m-seed-at-4-48b-valuation",
+  "company": "humans&,\u00a0inc.",
+  "domain": "humansand.ai",
+  "website": "https://humansand.ai/",
+  "usd_equivalent": 480000000.0,
+  "raised_raw": "$480.0M",
+  "round_field": "Seed",
+  "funding_date": "January 2026",
+  "lead_investor": "",
+  "software_category": "AI / Collaboration Tools",
+  "pricing": null,
+  "in_previous_67": true,
+  "provider": "nvidia",
+  "model": "openai/gpt-oss-20b",
+  "score": 15,
+  "verdict": "The human\u2011centric AI lab *humans&* is a research\u2011heavy venture with no publicly\u2011available product, pricing, or use\u2011case demos. The core promise\u2014\u201cAI that augments human collaboration\u201d\u2014is too vague to translate into a concrete, high\u2011ticket service that",
+  "parsed": {},
+  "raw_response": "**Executive Conclusion**  \nThe human\u2011centric AI lab *humans&* is a research\u2011heavy venture with no publicly\u2011available product, pricing, or use\u2011case demos. The core promise\u2014\u201cAI that augments human collaboration\u201d\u2014is too vague to translate into a concrete, high\u2011ticket service that a solo operator can build in 1\u20132 days. The opportunity is therefore **disqualified** for a beginner agency in India.  \n\n---\n\n## 1. AI Report Analysis (Phase\u202f1)\n\n| Signal | Observation |\n|--------|-------------|\n| **Emerging category** | Human\u2011centric AI, multi\u2011agent collaboration tools. |\n| **Repeated problem** | Teams waste time on meetings, knowledge silos, and task follow\u2011up. |\n| **Buyer behavior** | Companies are exploring AI assistants, but most solutions are still generic chatbots. |\n| **AI adoption** | Multi\u2011agent RL and long\u2011horizon planning are research\u2011stage; no mature SaaS exists. |\n| **New workflow** | AI\u2011mediated collaboration (e.g., AI co\u2011host, knowledge graph). |\n| **Disproportionate funding** | $480\u202fM seed indicates hype, not product maturity. |\n| **Manual labor** | High; current solutions rely on human note\u2011takers, project managers. |\n| **New workflow** | AI\u2011driven knowledge capture and action\u2011item tracking. |\n| **Valuable outcome** | Faster decision\u2011making, reduced",
+  "usage": {
+    "prompt_tokens": 7953,
+    "total_tokens": 10001,
+    "completion_tokens": 2048,
+    "prompt_tokens_details": null
+  },
+  "error": null,
+  "evaluated_at": "2026-09-13T10:09:42Z"
+}

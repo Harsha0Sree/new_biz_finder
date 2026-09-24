@@ -24,13 +24,11 @@ def test_ground_truth(title, expected):
     assert ok == expected, f"{title}: {reason}"
 
 
-def test_strictly_above_threshold():
-    # NOTE: plan's validation list marks "Arc Raises $10.76M Seed" as excluded,
-    # contradicting its own formal rule "strictly > $10M USD-equivalent".
-    # The formal rule wins: $10.76M > $10M -> included.
+def test_threshold_at_least_10m():
     assert qualifies("Arc Raises $10.76M Seed")[0] is True
-    assert qualifies("X Raises $10,000,000 Seed")[0] is False
-    assert qualifies("X Raises $10,000,001 Seed")[0] is True
+    assert qualifies("X Raises $10,000,000 Seed")[0] is True
+    assert qualifies("Metacognition Raises $10M Pre-seed")[0] is True
+    assert qualifies("X Raises $9,999,999 Seed")[0] is False
 
 
 def test_currency_conversion():
@@ -100,6 +98,8 @@ def test_round_labels():
     assert parse_round("Maxed Raises $850K in Funding").kind == "unlabeled"
 
 
-def test_pre_seed_excluded_even_when_large():
+def test_pre_seed_included_when_large():
     ok, why = qualifies("BigCo Raises $25 Million in Pre-Seed Round")
-    assert ok is False and why == "round_pre-seed"
+    assert ok is True and why == "ok_pre_seed"
+    assert qualifies("Metacognition Raises $10M Pre-seed")[0] is True
+    assert qualifies("SmallCo Raises $2 Million in Pre-Seed Round")[0] is False

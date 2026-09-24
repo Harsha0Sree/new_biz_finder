@@ -1,0 +1,23 @@
+{
+  "slug": "fundamental-raises-255-million-in-funding",
+  "company": "Fundamental Technologies Inc.",
+  "domain": "fundamental.tech",
+  "website": "https://fundamental.tech/",
+  "usd_equivalent": 255000000.0,
+  "raised_raw": "$255.0M",
+  "round_field": "Seed and Series A",
+  "funding_date": "February 2026",
+  "lead_investor": "Oak HC/FT",
+  "software_category": "Enterprise AI / Predictive Analytics / Foundation Models",
+  "pricing": null,
+  "in_previous_67": true,
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T10:33:26Z"
+}

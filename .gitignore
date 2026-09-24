@@ -24,3 +24,10 @@ node_modules/
 
 # Eval batch files are intermediate working state; rebuildable from data/companies.json
 data/eval_batches/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+

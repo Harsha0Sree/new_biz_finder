@@ -22,7 +22,7 @@ INR_USD_PER_CRORE = 120_000.0
 INR_USD_PER_LAKH = 1_200.0
 
 THRESHOLD_USD = 10_000_000.0
-STRICTLY_ABOVE = True
+STRICTLY_ABOVE = False
 
 # first capture group = currency, second = numeric amount (commas/dots allowed)
 _MONEY_RE = re.compile(
@@ -177,24 +177,25 @@ def parse_round(title: str) -> RoundLabel:
 
 
 def qualifies(title: str) -> tuple[bool, str]:
-    """Return (qualifies, reason). Qualifies = seed-ish round AND >$10M USD.
+    """Return (qualifies, reason). Qualifies = seed/pre-seed/pre-series-a AND >=$10M USD.
 
     Reasons starting with "check_article_" mean the title alone cannot decide
     and the article's Funding Details block must be consulted.
     """
     amt, val_amt = parse_raise_amount(title)
     rnd = parse_round(title)
-    if rnd.kind in ("pre-seed", "other-series"):
+    if rnd.kind == "other-series":
         return False, f"round_{rnd.kind}"
     if amt is None:
         if val_amt is not None:
             return True, "check_article_valuation_only"
         return False, "no_parsable_amount"
-    if not amt.usd_equivalent > THRESHOLD_USD:
+    if amt.usd_equivalent < THRESHOLD_USD:
         return False, f"amount_below_threshold ({amt.usd_equivalent:.0f} USD)"
     if rnd.kind == "unlabeled":
         return True, "ok_unlabeled_check_round_in_article"
-    reason = "ok"
     if rnd.kind == "pre-series-a":
-        reason = "ok_pre_series_a_flagged"
-    return True, reason
+        return True, "ok_pre_series_a_flagged"
+    if rnd.kind == "pre-seed":
+        return True, "ok_pre_seed"
+    return True, "ok"

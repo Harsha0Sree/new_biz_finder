@@ -1,0 +1,23 @@
+{
+  "slug": "fluxco-raises-26m-seed",
+  "company": "Fluxco",
+  "domain": "fluxco.com",
+  "website": "https://fluxco.com",
+  "usd_equivalent": 26000000.0,
+  "raised_raw": "$26M",
+  "round_field": "Seed",
+  "funding_date": "July 2026",
+  "lead_investor": "Congruent Ventures, 8VC",
+  "software_category": "Procurement Software",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T11:51:45Z"
+}

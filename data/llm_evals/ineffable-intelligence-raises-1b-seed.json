@@ -1,0 +1,35 @@
+{
+  "slug": "ineffable-intelligence-raises-1b-seed",
+  "company": "Ineffable Intelligence",
+  "domain": "ineffable.ai",
+  "website": "https://ineffable.ai",
+  "usd_equivalent": 1000000000.0,
+  "raised_raw": "$1B",
+  "round_field": "Seed",
+  "funding_date": "May 14, 2026",
+  "lead_investor": "",
+  "software_category": "",
+  "pricing": null,
+  "in_previous_67": true,
+  "provider": "nvidia",
+  "model": "openai/gpt-oss-20b",
+  "score": 0,
+  "verdict": "Disqualified \u2013 Ineffable Intelligence is a research\u2011focused AI startup with no commercial product or solvable business pain, making it unsuitable for a solo agency opportunity.",
+  "parsed": {
+    "score": 0,
+    "verdict": "Disqualified \u2013 Ineffable Intelligence is a research\u2011focused AI startup with no commercial product or solvable business pain, making it unsuitable for a solo agency opportunity.",
+    "can_reproduce_48h": false,
+    "agency_tier": "Disqualified",
+    "primary_risk": "No clear business problem or market; the startup is purely research, not a product or service that can be sold.",
+    "target_service_offer": "N/A"
+  },
+  "raw_response": "**Executive Conclusion**\n\nIneffable Intelligence is a research\u2011oriented AI startup focused on building a \u201csuperlearner\u201d that discovers knowledge through reinforcement learning. The company has no publicly available product, pricing, or sales model, and its mission is to push the boundaries of AI rather than solve a specific, commercially\u2011relevant pain point. Consequently, there is no clear business problem that a solo agency could address, no obvious ROI for potential clients, and no feasible way to replicate the startup\u2019s core value with LLMs or no\u2011code tools in 1\u20132\u202fdays. The opportunity is therefore **disqualified** as an agency\u2011sellable service.\n\n---\n\n### 1. Company Overview\n\n| Item | Detail |\n|------|--------|\n| **Name** | Ineffable Intelligence |\n| **Website** | https://ineffable.ai |\n| **Funding** | $1\u202fB seed (May\u202f2026) |\n| **Product** | Research\u2011level superlearning foundation model (no commercial product) |\n| **Target Market** | None specified |\n| **Pricing** | Not disclosed |\n| **Business Model** | Not disclosed |\n\n---\n\n### 2. 25\u2011Criterion Evaluation\n\n| # | Criterion | Score (0\u20135) | Rationale |\n|---|-----------|--------------|-----------|\n| 1 | Problem Severity | 0 | No business pain addressed. |\n| 2 | Problem Frequency | 0 | Not applicable. |\n| 3 | Existing Manual Pain | 0 | No manual process to replace. |\n| 4 | Financial Cost of Problem | 0 | No cost savings or revenue impact identified. |\n| 5 | Urgency | 0 | No urgent need for superintelligence. |\n| 6 | Obviousness of Value | 0 | Value proposition is abstract and requires deep explanation. |\n| 7 | ROI Visibility | 0 | No measurable ROI for clients. |\n| 8 | Buyer Accessibility | 0 | No clear buyer persona. |\n| 9 | Buyer Purchasing Power | 0 | No target customer with budget. |\n|10 | High\u2011Ticket Potential | 0 | No product to price. |\n|11 | AI Replicability | 0 | Superlearning requires custom RL research, not replicable with LLMs/no\u2011code. |\n|12 | 1\u20132\u202fDay MVP Feasibility | 0 | Impossible to build or deliver. |\n|13 | Service\u2011vs\u2011Software Suitability | 0 | Not a serviceable workflow. |\n|14 | Human Substitution Potential | 0 | No human\u2011driven process to replace. |\n|15 | Differentiation Without Proprietary Tech | 0 | Proprietary research; no alternative. |\n|16 | No\u2011Case\u2011Study Sellability | 0 | No product to demo. |\n|17 | India\u2011Origin Friction | 0 | Irrelevant. |\n|18 | Geographic Market Size | 0 | No market defined. |\n|19 | Customer Concentration | 0 | None. |\n|20 | Competition | 0 | No comparable services. |\n|21 | Blue\u2011Ocean Potential | 0 | No niche to exploit. |\n|22 | Commoditization Risk | 0 | Not a service. |\n|23 | Operational Complexity | 0 | No operations. |\n|24 | Compliance / Regulatory Burden | 0 | Not applicable. |\n|25 | Solo\u2011Agency Fit | 0 | No feasible service. |\n\n**Total (weighted)**: 0/100\n\n---\n\n### 3. Hard\u2011Reality Tests\n\n| Test | Result | Explanation |\n|------|--------|-------------|\n| **48\u2011Hour Replication Test** | NO | No product or workflow to replicate. |\n| **$5,000 Buyer Test** | NO | No buyer, no pain, no ROI. |\n| **No\u2011Case\u2011Study Test** | N/A | Not applicable. |\n| **Why Not Do It Internally?** | N/A | No internal need. |\n| **Painkiller Test** | FIRE\u2011EXTINGUISHER? | Not a painkiller; no pain. |\n\n---\n\n### 4. Verdict\n\n**Disqualified** \u2013 The startup\u2019s mission is pure research; it does not present a commercial problem that can be solved by a solo agency using LLMs/no\u2011code tools in a short timeframe. The lack of a product, pricing, or target market renders it unsuitable for agency conversion.\n\n---\n\n### 5. JSON Output\n\n```json\n{\n  \"score\": 0,\n  \"verdict\": \"Disqualified \u2013 Ineffable Intelligence is a research\u2011focused AI startup with no commercial product or solvable business pain, making it unsuitable for a solo agency opportunity.\",\n  \"can_reproduce_48h\": false,\n  \"agency_tier\": \"Disqualified\",\n  \"primary_risk\": \"No clear business problem or market; the startup is purely research, not a product or service that can be sold.\",\n  \"target_service_offer\": \"N/A\"\n}\n```",
+  "usage": {
+    "prompt_tokens": 6171,
+    "total_tokens": 7870,
+    "completion_tokens": 1699,
+    "prompt_tokens_details": null
+  },
+  "error": null,
+  "evaluated_at": "2026-09-13T10:09:11Z"
+}

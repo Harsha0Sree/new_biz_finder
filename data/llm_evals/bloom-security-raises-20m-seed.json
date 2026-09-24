@@ -1,0 +1,23 @@
+{
+  "slug": "bloom-security-raises-20m-seed",
+  "company": "Bloom Security",
+  "domain": "bloom.security",
+  "website": "https://bloom.security",
+  "usd_equivalent": 20000000.0,
+  "raised_raw": "$20M",
+  "round_field": "Seed",
+  "funding_date": "July 30, 2026",
+  "lead_investor": "Glilot Capital Partners, Ten Eleven Ventures (1011vc)",
+  "software_category": "Cybersecurity",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T11:37:21Z"
+}

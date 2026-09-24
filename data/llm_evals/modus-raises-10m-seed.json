@@ -1,0 +1,23 @@
+{
+  "slug": "modus-raises-10m-seed",
+  "company": "Modus",
+  "domain": "getmodus.com",
+  "website": "https://getmodus.com/",
+  "usd_equivalent": 10000000.0,
+  "raised_raw": "$10M",
+  "round_field": "Seed",
+  "funding_date": "July 29, 2026",
+  "lead_investor": "Insight Partners",
+  "software_category": "Artificial Intelligence",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T11:41:38Z"
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "fish-audio-raises-52m-seed",
+  "company": "Fish Audio",
+  "domain": "fish.audio",
+  "website": "https://fish.audio",
+  "usd_equivalent": 52000000.0,
+  "raised_raw": "$52M",
+  "round_field": "Seed",
+  "funding_date": "July 28, 2026",
+  "lead_investor": "Coreline Ventures, Capital Today",
+  "software_category": "Artificial Intelligence",
+  "pricing": null,
+  "in_previous_67": true,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T11:48:39Z"
+}

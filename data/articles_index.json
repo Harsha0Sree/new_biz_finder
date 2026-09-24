@@ -1,9 +1,1063 @@
 {
- "crawled_at": "2026-08-24T17:34:31Z",
+ "crawled_at": "2026-09-13T11:11:41Z",
  "max_page": 351,
- "count": 4203,
+ "count": 4583,
  "errors": [],
  "articles": [
+  {
+   "slug": "wyre-ai-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/wyre-ai-raises-5m-seed/",
+   "title": "Wyre AI Raises $5M Seed",
+   "date": "2026-09-11",
+   "tag_page": 1
+  },
+  {
+   "slug": "safebox-raises-1-11m-seed",
+   "url": "https://www.thesaasnews.com/news/safebox-raises-1-11m-seed/",
+   "title": "Safebox Raises $1.11M Seed",
+   "date": "2026-09-11",
+   "tag_page": 1
+  },
+  {
+   "slug": "leotrace-raises-1-45m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/leotrace-raises-1-45m-pre-seed/",
+   "title": "LeoTrace Raises \u00a31.45M Pre-seed",
+   "date": "2026-09-11",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "kavia-ai-announces-strategic-investment",
+   "url": "https://www.thesaasnews.com/news/kavia-ai-announces-strategic-investment/",
+   "title": "KAVIA AI Raises Seed Funding Round",
+   "date": "2026-09-11",
+   "tag_page": 1
+  },
+  {
+   "slug": "grubel-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/grubel-raises-3m-pre-seed/",
+   "title": "Grubel Raises \u20ac3M Pre-seed",
+   "date": "2026-09-11",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "enigmata-inc-raises-6-5m-seed",
+   "url": "https://www.thesaasnews.com/news/enigmata-inc-raises-6-5m-seed/",
+   "title": "Enigmata Raises $6.5M Seed",
+   "date": "2026-09-11",
+   "tag_page": 1
+  },
+  {
+   "slug": "ed-ai-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/ed-ai-raises-5m-seed/",
+   "title": "Ed.ai Raises \u20ac5M Seed",
+   "date": "2026-09-11",
+   "tag_page": 1
+  },
+  {
+   "slug": "onix-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/onix-raises-5m-pre-seed/",
+   "title": "Onix Raises $5M Pre-seed",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into",
+   "url": "https://www.thesaasnews.com/news/moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into/",
+   "title": "Charikaty Raises Pre-seed Round at \u20ac3 Million Valuation",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "metacognition-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/metacognition-raises-10m-pre-seed/",
+   "title": "Metacognition Raises $10M Pre-seed",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "helmguard-raises-7-3m-seed",
+   "url": "https://www.thesaasnews.com/news/helmguard-raises-7-3m-seed/",
+   "title": "HelmGuard Raises $7.3M Seed",
+   "date": "2026-09-10",
+   "tag_page": 1
+  },
+  {
+   "slug": "fusionality-raises-3-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/fusionality-raises-3-7m-pre-seed/",
+   "title": "Fusionality Raises $3.7M Pre-seed",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "eubrics-raises-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/eubrics-raises-pre-seed-funding/",
+   "title": "Eubrics Raises Pre-Seed Funding",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "claimqi-raises-500k-seed",
+   "url": "https://www.thesaasnews.com/news/claimqi-raises-500k-seed/",
+   "title": "ClaimQI Raises $500K Seed",
+   "date": "2026-09-10",
+   "tag_page": 1
+  },
+  {
+   "slug": "bynario-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bynario-raises-2-1m-pre-seed/",
+   "title": "Bynario Raises \u20ac2.1M Pre-seed",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "botsi-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/botsi-raises-1-5m-pre-seed/",
+   "title": "Botsi Raises $1.5M Pre-seed",
+   "date": "2026-09-10",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "pixeom-raises-seed-funding",
+   "url": "https://www.thesaasnews.com/news/pixeom-raises-seed-funding/",
+   "title": "Pixeom Raises Seed Round",
+   "date": "2026-09-09",
+   "tag_page": 2
+  },
+  {
+   "slug": "fundly-ai-raises-4m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/fundly-ai-raises-4m-pre-series-a/",
+   "title": "Fundly.ai Raises $4M Pre-Series A",
+   "date": "2026-09-09",
+   "tag_page": 2
+  },
+  {
+   "slug": "videogen-raises-3-3m-seed",
+   "url": "https://www.thesaasnews.com/news/videogen-raises-3-3m-seed/",
+   "title": "VideoGen Raises $3.3M Seed",
+   "date": "2026-09-09",
+   "tag_page": 1
+  },
+  {
+   "slug": "outline-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/outline-raises-3m-seed/",
+   "title": "Outline Raises $3M Seed",
+   "date": "2026-09-09",
+   "tag_page": 1
+  },
+  {
+   "slug": "moneyball-ai-raises-undisclosed-pre-seed",
+   "url": "https://www.thesaasnews.com/news/moneyball-ai-raises-undisclosed-pre-seed/",
+   "title": "Moneyball.ai Raises Undisclosed Pre-seed",
+   "date": "2026-09-09",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "limetax-raises-36m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/limetax-raises-36m-pre-seed/",
+   "title": "Limetax Raises \u20ac36M Pre-seed",
+   "date": "2026-09-09",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "herdr-raises-6m-seed",
+   "url": "https://www.thesaasnews.com/news/herdr-raises-6m-seed/",
+   "title": "Herdr Raises $6M Seed",
+   "date": "2026-09-09",
+   "tag_page": 1
+  },
+  {
+   "slug": "fryte-mobility-raises-3-5m-seed",
+   "url": "https://www.thesaasnews.com/news/fryte-mobility-raises-3-5m-seed/",
+   "title": "FRYTE Mobility Raises \u20ac3.5M Seed",
+   "date": "2026-09-09",
+   "tag_page": 1
+  },
+  {
+   "slug": "concorda-raises-3-8m-seed",
+   "url": "https://www.thesaasnews.com/news/concorda-raises-3-8m-seed/",
+   "title": "Concorda Raises $3.8M Seed",
+   "date": "2026-09-09",
+   "tag_page": 1
+  },
+  {
+   "slug": "veridue-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/veridue-raises-4m-pre-seed/",
+   "title": "Veridue Raises $4M Pre-seed",
+   "date": "2026-09-08",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "tellia-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/tellia-raises-5m-pre-seed/",
+   "title": "Tellia Raises $5M Pre-seed",
+   "date": "2026-09-08",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "sci2sci-raises-1-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sci2sci-raises-1-2m-pre-seed/",
+   "title": "sci2sci Raises \u20ac1.2M Pre-seed",
+   "date": "2026-09-08",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "hydrosight-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/hydrosight-raises-5m-seed/",
+   "title": "HydroSight Raises $5M Seed",
+   "date": "2026-09-08",
+   "tag_page": 2
+  },
+  {
+   "slug": "articuler-ai-raises-tens-of-millions-seed",
+   "url": "https://www.thesaasnews.com/news/articuler-ai-raises-tens-of-millions-seed/",
+   "title": "Articuler.ai Raises CNY tens of millions Seed",
+   "date": "2026-09-08",
+   "tag_page": 2
+  },
+  {
+   "slug": "aitane-raises-30m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/aitane-raises-30m-pre-series-a/",
+   "title": "Aitane Raises \u00a530M Pre-Series A",
+   "date": "2026-09-08",
+   "tag_page": 2
+  },
+  {
+   "slug": "keep-converting-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/keep-converting-raises-2m-pre-seed/",
+   "title": "Keep Converting Raises $2M Pre-seed",
+   "date": "2026-09-08",
+   "tag": "pre-seed",
+   "tag_page": 1
+  },
+  {
+   "slug": "openreserve-secures-seed-round",
+   "url": "https://www.thesaasnews.com/news/openreserve-secures-seed-round/",
+   "title": "OpenReserve Secures Seed Round",
+   "date": "2026-09-07",
+   "tag_page": 3
+  },
+  {
+   "slug": "scait-raises-chf150000-seed",
+   "url": "https://www.thesaasnews.com/news/scait-raises-chf150000-seed/",
+   "title": "SCAIT Raises CHF150,000 Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "sav-raises-3-5m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/sav-raises-3-5m-pre-series-a/",
+   "title": "Sav Raises $3.5M Pre-Series A",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "jipur-robotics-raises-4-3m-seed",
+   "url": "https://www.thesaasnews.com/news/jipur-robotics-raises-4-3m-seed/",
+   "title": "Jipur Robotics Raises \u20ac4.3M Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "idraj-raises-sar-2-25-million-pre-seed",
+   "url": "https://www.thesaasnews.com/news/idraj-raises-sar-2-25-million-pre-seed/",
+   "title": "IDRAJ Raises SAR 2.25 million Pre-seed",
+   "date": "2026-09-07",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "gaia-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/gaia-raises-1-5m-pre-seed/",
+   "title": "Gaia Raises $1.5M Pre-seed",
+   "date": "2026-09-07",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "fluencify-raises-4-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/fluencify-raises-4-3m-pre-seed/",
+   "title": "Fluencify Raises $4.3M Pre-seed",
+   "date": "2026-09-07",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "dawraty-raises-2m-seed",
+   "url": "https://www.thesaasnews.com/news/dawraty-raises-2m-seed/",
+   "title": "Dawraty Raises $2M Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "cato-raises-6m-seed",
+   "url": "https://www.thesaasnews.com/news/cato-raises-6m-seed/",
+   "title": "Cato Raises \u20ac6M Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "agentmail-raises-6m-seed",
+   "url": "https://www.thesaasnews.com/news/agentmail-raises-6m-seed/",
+   "title": "AgentMail Raises $6M Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "aaa-c-h-a-rm-raises-4m-seed",
+   "url": "https://www.thesaasnews.com/news/aaa-c-h-a-rm-raises-4m-seed/",
+   "title": "AAA C(H+A)RM Raises $4M Seed",
+   "date": "2026-09-07",
+   "tag_page": 2
+  },
+  {
+   "slug": "creoir-raises-seed-investment",
+   "url": "https://www.thesaasnews.com/news/creoir-raises-seed-investment/",
+   "title": "Creoir Raises Seed Investment",
+   "date": "2026-09-06",
+   "tag_page": 3
+  },
+  {
+   "slug": "parlayx-raises-1-25m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/parlayx-raises-1-25m-pre-seed/",
+   "title": "ParlayX Raises $1.25M Pre-seed",
+   "date": "2026-09-06",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "zeit-ai-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/zeit-ai-raises-5m-seed/",
+   "title": "Zeit AI Raises \u20ac5M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "yolearn-ai-raises-undisclosed-seed",
+   "url": "https://www.thesaasnews.com/news/yolearn-ai-raises-undisclosed-seed/",
+   "title": "YoLearn.ai Raises Undisclosed Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "piney-raises-1-6m-seed",
+   "url": "https://www.thesaasnews.com/news/piney-raises-1-6m-seed/",
+   "title": "Piney Raises \u20ac1.6M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "ollie-raises-7-5m-seed",
+   "url": "https://www.thesaasnews.com/news/ollie-raises-7-5m-seed/",
+   "title": "Ollie Raises $7.5M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "oddpool-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/oddpool-raises-3m-seed/",
+   "title": "Oddpool Raises $3M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "nayla-raises-17-9m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/nayla-raises-17-9m-pre-series-a/",
+   "title": "Nayla Raises $17.9M Pre-Series A",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "emberos-raises-5-5m-seed",
+   "url": "https://www.thesaasnews.com/news/emberos-raises-5-5m-seed/",
+   "title": "Emberos Raises $5.5M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "akedo-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/akedo-raises-5m-seed/",
+   "title": "AKEDO Raises $5M Seed",
+   "date": "2026-09-04",
+   "tag_page": 3
+  },
+  {
+   "slug": "atira-raises-17-5m-pre-seed-seed",
+   "url": "https://www.thesaasnews.com/news/atira-raises-17-5m-pre-seed-seed/",
+   "title": "Atira Raises $17.5M in Funding",
+   "date": "2026-09-04",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "zsystems-raises-1-65m-seed",
+   "url": "https://www.thesaasnews.com/news/zsystems-raises-1-65m-seed/",
+   "title": "ZSystems Raises $1.65M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "plenti-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/plenti-raises-3m-seed/",
+   "title": "Plenti Raises $3M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "physical-superintelligence-raises-58m-seed",
+   "url": "https://www.thesaasnews.com/news/physical-superintelligence-raises-58m-seed/",
+   "title": "Physical Superintelligence Raises $58M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "pharosyn-raises-2-5m-seed",
+   "url": "https://www.thesaasnews.com/news/pharosyn-raises-2-5m-seed/",
+   "title": "Pharosyn Raises \u20ac2.5M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "newdays-raises-16m-seed",
+   "url": "https://www.thesaasnews.com/news/newdays-raises-16m-seed/",
+   "title": "NewDays Raises $16M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "laters-com-raises-1-5m-seed",
+   "url": "https://www.thesaasnews.com/news/laters-com-raises-1-5m-seed/",
+   "title": "Laters.com Raises $1.5M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "flamingo-raises-4-5m-seed",
+   "url": "https://www.thesaasnews.com/news/flamingo-raises-4-5m-seed/",
+   "title": "Flamingo Raises $4.5M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "catch-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/catch-raises-5m-seed/",
+   "title": "Catch Raises $5M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "ai-score-raises-4m-seed",
+   "url": "https://www.thesaasnews.com/news/ai-score-raises-4m-seed/",
+   "title": "AI Score Raises \u00a34M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "abwab-ai-raises-4m-seed",
+   "url": "https://www.thesaasnews.com/news/abwab-ai-raises-4m-seed/",
+   "title": "Abwab.ai Raises $4M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "3c-coding-school-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/3c-coding-school-raises-3m-seed/",
+   "title": "3C Coding School Raises $3M Seed",
+   "date": "2026-09-03",
+   "tag_page": 4
+  },
+  {
+   "slug": "aslan-protects-raises-20-8m-seed",
+   "url": "https://www.thesaasnews.com/news/aslan-protects-raises-20-8m-seed/",
+   "title": "Aslan Protects Raises $20.8M Seed",
+   "date": "2026-09-03",
+   "tag_page": 3
+  },
+  {
+   "slug": "askpolly-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/askpolly-raises-3m-seed/",
+   "title": "askpolly Raises $3M Seed",
+   "date": "2026-09-03",
+   "tag_page": 3
+  },
+  {
+   "slug": "souk-raises-1-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/souk-raises-1-6m-pre-seed/",
+   "title": "Souk Raises $1.6M Pre-seed",
+   "date": "2026-09-03",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "scopia-surgical-raises-2-65m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/scopia-surgical-raises-2-65m-pre-seed/",
+   "title": "Scopia Surgical Raises $2.65M Pre-seed",
+   "date": "2026-09-03",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "maison-safqa-raises-620000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/maison-safqa-raises-620000-pre-seed/",
+   "title": "Maison Safqa Raises $620,000 Pre-seed",
+   "date": "2026-09-03",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "backbone-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/backbone-raises-4m-pre-seed/",
+   "title": "Backbone Raises \u20ac4M Pre-seed",
+   "date": "2026-09-03",
+   "tag": "pre-seed",
+   "tag_page": 2
+  },
+  {
+   "slug": "stack-health-raises-21m-seed",
+   "url": "https://www.thesaasnews.com/news/stack-health-raises-21m-seed/",
+   "title": "Stack Health Raises $21M Seed",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "metal-raises-4-5m-seed",
+   "url": "https://www.thesaasnews.com/news/metal-raises-4-5m-seed/",
+   "title": "Metal Raises $4.5M Seed",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "intellicia-raises-3-4b-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/intellicia-raises-3-4b-pre-series-a/",
+   "title": "Intellicia Raises KRW 3.4B Pre-Series A",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "holifya-raises-2m-seed",
+   "url": "https://www.thesaasnews.com/news/holifya-raises-2m-seed/",
+   "title": "Holifya Raises \u20ac2M Seed",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "drumbeat-raises-nz2m-seed",
+   "url": "https://www.thesaasnews.com/news/drumbeat-raises-nz2m-seed/",
+   "title": "Drumbeat Raises NZ$2M Seed",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "docpharma-raises-2m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/docpharma-raises-2m-pre-series-a/",
+   "title": "DocPharma Raises $2M Pre-Series A",
+   "date": "2026-09-02",
+   "tag_page": 5
+  },
+  {
+   "slug": "creedom-raises-4-1cr-seed",
+   "url": "https://www.thesaasnews.com/news/creedom-raises-4-1cr-seed/",
+   "title": "Creedom Raises \u20b94.1Cr Seed",
+   "date": "2026-09-02",
+   "tag_page": 4
+  },
+  {
+   "slug": "visko-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/visko-raises-10m-pre-seed/",
+   "title": "Visko Raises $10M Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "passhub-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/passhub-raises-1-5m-pre-seed/",
+   "title": "PassHub Raises $1.5M Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "monid-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/monid-raises-2-1m-pre-seed/",
+   "title": "Monid Raises $2.1M Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "malakah-raises-600000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/malakah-raises-600000-pre-seed/",
+   "title": "Malakah Raises $600,000 Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "fambot-raises-3-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/fambot-raises-3-5m-pre-seed/",
+   "title": "Fambot Raises $3.5M Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "dataagent-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/dataagent-raises-10m-pre-seed/",
+   "title": "DataAgent Raises $10M Pre-seed",
+   "date": "2026-09-02",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "trustedrouter-raises-1-25m-seed",
+   "url": "https://www.thesaasnews.com/news/trustedrouter-raises-1-25m-seed/",
+   "title": "TrustedRouter Raises $1.25M Seed",
+   "date": "2026-09-01",
+   "tag_page": 6
+  },
+  {
+   "slug": "entity-raises-5-8m-seed",
+   "url": "https://www.thesaasnews.com/news/entity-raises-5-8m-seed/",
+   "title": "Entity Raises $5.8M Seed",
+   "date": "2026-09-01",
+   "tag_page": 6
+  },
+  {
+   "slug": "scifin-raises-44m-seed",
+   "url": "https://www.thesaasnews.com/news/scifin-raises-44m-seed/",
+   "title": "SciFin Raises $44M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "orchestra-raises-3-3m-seed",
+   "url": "https://www.thesaasnews.com/news/orchestra-raises-3-3m-seed/",
+   "title": "Orchestra Raises $3.3M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "huscarl-raises-5-6m-seed",
+   "url": "https://www.thesaasnews.com/news/huscarl-raises-5-6m-seed/",
+   "title": "Huscarl Raises $5.6M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "guickly-raises-4-2m-seed",
+   "url": "https://www.thesaasnews.com/news/guickly-raises-4-2m-seed/",
+   "title": "Guickly Raises $4.2M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "empirik-raises-21m-seed",
+   "url": "https://www.thesaasnews.com/news/empirik-raises-21m-seed/",
+   "title": "Empirik Raises $21M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "air-raises-50m-seed",
+   "url": "https://www.thesaasnews.com/news/air-raises-50m-seed/",
+   "title": "AIR Raises $50M Seed",
+   "date": "2026-09-01",
+   "tag_page": 5
+  },
+  {
+   "slug": "oppex-ai-raises-4-2cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/oppex-ai-raises-4-2cr-pre-seed/",
+   "title": "Oppex AI Raises \u20b94.2Cr Pre-seed",
+   "date": "2026-09-01",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "aranya-raises-11m-pre-seed-seed",
+   "url": "https://www.thesaasnews.com/news/aranya-raises-11m-pre-seed-seed/",
+   "title": "Aranya Raises $11M in Funding",
+   "date": "2026-09-01",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "roma-ai-raises-1-2m-seed",
+   "url": "https://www.thesaasnews.com/news/roma-ai-raises-1-2m-seed/",
+   "title": "Roma AI Raises $1.2M Seed",
+   "date": "2026-08-31",
+   "tag_page": 6
+  },
+  {
+   "slug": "opencheck-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/opencheck-raises-3m-seed/",
+   "title": "OpenCheck Raises $3M Seed",
+   "date": "2026-08-31",
+   "tag_page": 6
+  },
+  {
+   "slug": "blue-voice-raises-6m-seed",
+   "url": "https://www.thesaasnews.com/news/blue-voice-raises-6m-seed/",
+   "title": "Blue Voice Raises $6M Seed",
+   "date": "2026-08-31",
+   "tag_page": 6
+  },
+  {
+   "slug": "apate-ai-raises-11-4m-seed",
+   "url": "https://www.thesaasnews.com/news/apate-ai-raises-11-4m-seed/",
+   "title": "Apate.AI Raises $11.4M Seed",
+   "date": "2026-08-31",
+   "tag_page": 6
+  },
+  {
+   "slug": "remedium-network-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/remedium-network-raises-1-5m-pre-seed/",
+   "title": "Remedium Network Raises $1.5M Pre-seed",
+   "date": "2026-08-31",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "principle-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/principle-raises-2m-pre-seed/",
+   "title": "Principle Raises $2M Pre-seed",
+   "date": "2026-08-31",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "arca-digital-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/arca-digital-raises-1m-pre-seed/",
+   "title": "Arca Digital Raises \u20ac1M Pre-Seed",
+   "date": "2026-08-31",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "advisar-raises-750k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/advisar-raises-750k-pre-seed/",
+   "title": "Advisar Raises $750K Pre-seed",
+   "date": "2026-08-31",
+   "tag": "pre-seed",
+   "tag_page": 3
+  },
+  {
+   "slug": "clementine-raises-1-7m-seed",
+   "url": "https://www.thesaasnews.com/news/clementine-raises-1-7m-seed/",
+   "title": "Clementine Raises \u20ac1.7M Seed",
+   "date": "2026-08-30",
+   "tag_page": 6
+  },
+  {
+   "slug": "hearvana-ai-raises-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/hearvana-ai-raises-6m-pre-seed/",
+   "title": "Hearvana AI Raises $6M Pre-seed",
+   "date": "2026-08-30",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "nekkyo-co-ltd-raises-200m-seed",
+   "url": "https://www.thesaasnews.com/news/nekkyo-co-ltd-raises-200m-seed/",
+   "title": "Nekkyo Co., Ltd. Raises \u00a5200M in Funding",
+   "date": "2026-08-28",
+   "tag_page": 6
+  },
+  {
+   "slug": "handshaik-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/handshaik-raises-1-7m-pre-seed/",
+   "title": "Handshaik Raises \u00a31.7M Pre-seed",
+   "date": "2026-08-28",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "arrival-raises-500000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/arrival-raises-500000-pre-seed/",
+   "title": "Arrival Raises \u00a3500,000 Pre-seed",
+   "date": "2026-08-28",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "miihealth-ai-raises-undisclosed-seed",
+   "url": "https://www.thesaasnews.com/news/miihealth-ai-raises-undisclosed-seed/",
+   "title": "MiiHealth AI Closes Seed Round",
+   "date": "2026-08-27",
+   "tag_page": 7
+  },
+  {
+   "slug": "arga-labs-raises-10m-seed",
+   "url": "https://www.thesaasnews.com/news/arga-labs-raises-10m-seed/",
+   "title": "Arga Labs Raises $10M Seed",
+   "date": "2026-08-27",
+   "tag_page": 7
+  },
+  {
+   "slug": "yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration",
+   "url": "https://www.thesaasnews.com/news/yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration/",
+   "title": "FinTax Raises Seed at $40M Valuation",
+   "date": "2026-08-27",
+   "tag_page": 6
+  },
+  {
+   "slug": "wippi-raises-1-2m-seed",
+   "url": "https://www.thesaasnews.com/news/wippi-raises-1-2m-seed/",
+   "title": "Wippi Raises $1.2M Seed",
+   "date": "2026-08-27",
+   "tag_page": 6
+  },
+  {
+   "slug": "multiplier-raises-6m-seed",
+   "url": "https://www.thesaasnews.com/news/multiplier-raises-6m-seed/",
+   "title": "Multiplier Raises $6M Seed",
+   "date": "2026-08-27",
+   "tag_page": 6
+  },
+  {
+   "slug": "atorie-raises-9-5m-seed",
+   "url": "https://www.thesaasnews.com/news/atorie-raises-9-5m-seed/",
+   "title": "Atorie Raises $9.5M Seed",
+   "date": "2026-08-27",
+   "tag_page": 6
+  },
+  {
+   "slug": "volve-raises-3m-seed",
+   "url": "https://www.thesaasnews.com/news/volve-raises-3m-seed/",
+   "title": "Volve Raises $3M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "veryai-raises-10m-seed",
+   "url": "https://www.thesaasnews.com/news/veryai-raises-10m-seed/",
+   "title": "VeryAI Raises $10M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "stellaria-raises-aed-25m-seed",
+   "url": "https://www.thesaasnews.com/news/stellaria-raises-aed-25m-seed/",
+   "title": "Stellaria Raises AED 25M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "primero-raises-12m-seed",
+   "url": "https://www.thesaasnews.com/news/primero-raises-12m-seed/",
+   "title": "Primero Raises $12M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "omicsbank-raises-2-25m-seed",
+   "url": "https://www.thesaasnews.com/news/omicsbank-raises-2-25m-seed/",
+   "title": "OmicsBank Raises $2.25M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "keenable-raises-26m-seed",
+   "url": "https://www.thesaasnews.com/news/keenable-raises-26m-seed/",
+   "title": "Keenable Raises $26M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "discernis-raises-2-5m-seed",
+   "url": "https://www.thesaasnews.com/news/discernis-raises-2-5m-seed/",
+   "title": "Discernis Raises $2.5M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "colibritd-raises-4m-seed",
+   "url": "https://www.thesaasnews.com/news/colibritd-raises-4m-seed/",
+   "title": "ColibriTD Raises \u20ac4M Seed",
+   "date": "2026-08-26",
+   "tag_page": 7
+  },
+  {
+   "slug": "solace-care-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/solace-care-raises-2-1m-pre-seed/",
+   "title": "Solace Care Raises \u20ac2.1M Pre-seed",
+   "date": "2026-08-26",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "raff-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/raff-raises-1-7m-pre-seed/",
+   "title": "Raff Raises $1.7M Pre-seed",
+   "date": "2026-08-26",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "oliver-ai-raises-pre-seed",
+   "url": "https://www.thesaasnews.com/news/oliver-ai-raises-pre-seed/",
+   "title": "Oliver AI Raises Pre-seed Round",
+   "date": "2026-08-26",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "flowt-raises-undisclosed-pre-seed",
+   "url": "https://www.thesaasnews.com/news/flowt-raises-undisclosed-pre-seed/",
+   "title": "Flowt Raises Pre-seed Funding",
+   "date": "2026-08-26",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "verascient-raises-1-2m-seed",
+   "url": "https://www.thesaasnews.com/news/verascient-raises-1-2m-seed/",
+   "title": "Verascient Raises $1.2M Pre-Seed",
+   "date": "2026-08-25",
+   "tag_page": 8
+  },
+  {
+   "slug": "hermetiq-raises-2-2m-seed",
+   "url": "https://www.thesaasnews.com/news/hermetiq-raises-2-2m-seed/",
+   "title": "Hermetiq Raises $2.2M Seed",
+   "date": "2026-08-25",
+   "tag_page": 7
+  },
+  {
+   "slug": "ecomid-raises-17m-seed",
+   "url": "https://www.thesaasnews.com/news/ecomid-raises-17m-seed/",
+   "title": "eComID Raises $17M Seed",
+   "date": "2026-08-25",
+   "tag_page": 7
+  },
+  {
+   "slug": "sume-closes-pre-seed-round",
+   "url": "https://www.thesaasnews.com/news/sume-closes-pre-seed-round/",
+   "title": "Sume Closes Pre-seed",
+   "date": "2026-08-25",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "repodo-raises-8-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/repodo-raises-8-2m-pre-seed/",
+   "title": "Repodo Raises \u20ac8.2M Pre-seed",
+   "date": "2026-08-25",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "itoflow-raises-2-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/itoflow-raises-2-5m-pre-seed/",
+   "title": "Itoflow Raises $2.5M Pre-seed",
+   "date": "2026-08-25",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "bower-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bower-raises-2m-pre-seed/",
+   "title": "Bower Raises $2M Pre-seed",
+   "date": "2026-08-25",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "auckland-university-navigators-student-raises-venture-capital-for-crime-fighting-startup-at",
+   "url": "https://www.thesaasnews.com/news/auckland-university-navigators-student-raises-venture-capital-for-crime-fighting-startup-at/",
+   "title": "Azonic Raises Pre-seed Round",
+   "date": "2026-08-25",
+   "tag": "pre-seed",
+   "tag_page": 4
+  },
+  {
+   "slug": "osmo-studio-raises-5m-seed",
+   "url": "https://www.thesaasnews.com/news/osmo-studio-raises-5m-seed/",
+   "title": "Osmo Studio Raises $5M Seed",
+   "date": "2026-08-24",
+   "tag_page": 8
+  },
+  {
+   "slug": "neno-raises-6-6m-seed",
+   "url": "https://www.thesaasnews.com/news/neno-raises-6-6m-seed/",
+   "title": "Neno Raises \u20ac6.6M Seed",
+   "date": "2026-08-24",
+   "tag_page": 8
+  },
+  {
+   "slug": "fina-raises-1m-seed",
+   "url": "https://www.thesaasnews.com/news/fina-raises-1m-seed/",
+   "title": "Fina Raises $1M Seed",
+   "date": "2026-08-24",
+   "tag_page": 8
+  },
+  {
+   "slug": "euler-raises-4-3m-seed",
+   "url": "https://www.thesaasnews.com/news/euler-raises-4-3m-seed/",
+   "title": "EULER Raises $4.3M Seed",
+   "date": "2026-08-24",
+   "tag_page": 8
+  },
+  {
+   "slug": "boldr-raises-5m-pre-series-a",
+   "url": "https://www.thesaasnews.com/news/boldr-raises-5m-pre-series-a/",
+   "title": "Boldr Raises $5M Pre-Series A",
+   "date": "2026-08-24",
+   "tag_page": 8
+  },
+  {
+   "slug": "tross-raises-pre-seed-round",
+   "url": "https://www.thesaasnews.com/news/tross-raises-pre-seed-round/",
+   "title": "Tross Raises Pre-Seed Round",
+   "date": "2026-08-24",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "swish-basket-raises-3-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/swish-basket-raises-3-2m-pre-seed/",
+   "title": "Swish Basket Raises $3.2M Pre-seed",
+   "date": "2026-08-24",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "riven-systems-raises-7-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/riven-systems-raises-7-9m-pre-seed/",
+   "title": "Riven Systems Raises $7.9M Pre-seed",
+   "date": "2026-08-24",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "kazimi-raises-2-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kazimi-raises-2-2m-pre-seed/",
+   "title": "Kazimi Raises \u20ac2.2M Pre-seed",
+   "date": "2026-08-24",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "embedd-raises-2-31m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/embedd-raises-2-31m-pre-seed/",
+   "title": "Embedd Raises \u20ac2.31M Pre-seed",
+   "date": "2026-08-24",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
   {
    "slug": "t54-labs-raises-5m-seed",
    "url": "https://www.thesaasnews.com/news/t54-labs-raises-5m-seed/",
@@ -31,6 +1085,22 @@
    "title": "Atlas Quant Closes Oversubscribed Seed Round",
    "date": "2026-08-24",
    "tag_page": 1
+  },
+  {
+   "slug": "ginastee-raises-115000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ginastee-raises-115000-pre-seed/",
+   "title": "Ginastee Raises $115,000 Pre-seed",
+   "date": "2026-08-23",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "clearpath-ai-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/clearpath-ai-raises-1m-pre-seed/",
+   "title": "ClearPath AI Raises \u00a31M Pre-seed",
+   "date": "2026-08-23",
+   "tag": "pre-seed",
+   "tag_page": 5
   },
   {
    "slug": "willow-voice-raises-4-2m-seed",
@@ -61,11 +1131,43 @@
    "tag_page": 1
   },
   {
+   "slug": "paralo-raises-270000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/paralo-raises-270000-pre-seed/",
+   "title": "Paralo Raises \u00a3270,000 Pre-seed",
+   "date": "2026-08-21",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "austrian-deep-tech-startup-deepentix-raises-six-figure-pre-seed-for-enterprise-ai-platform",
+   "url": "https://www.thesaasnews.com/news/austrian-deep-tech-startup-deepentix-raises-six-figure-pre-seed-for-enterprise-ai-platform/",
+   "title": "Deepentix Raises six-figure Pre-seed",
+   "date": "2026-08-21",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
    "slug": "synthefy-raises-6-5m-seed",
    "url": "https://www.thesaasnews.com/news/synthefy-raises-6-5m-seed/",
    "title": "Synthefy Raises $6.5M Seed",
    "date": "2026-08-21",
    "tag_page": 1
+  },
+  {
+   "slug": "xsquare-raises-undisclosed-pre-seed",
+   "url": "https://www.thesaasnews.com/news/xsquare-raises-undisclosed-pre-seed/",
+   "title": "XSquare Raises Undisclosed Pre-seed",
+   "date": "2026-08-20",
+   "tag": "pre-seed",
+   "tag_page": 5
+  },
+  {
+   "slug": "guideless-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/guideless-raises-1m-pre-seed/",
+   "title": "Guideless Raises \u20ac1M Pre-seed",
+   "date": "2026-08-20",
+   "tag": "pre-seed",
+   "tag_page": 5
   },
   {
    "slug": "velatir-raises-5m-seed",
@@ -108,6 +1210,38 @@
    "title": "Artwod Raises \u20ac1.1M Seed",
    "date": "2026-08-20",
    "tag_page": 1
+  },
+  {
+   "slug": "space-raises-2-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/space-raises-2-4m-pre-seed/",
+   "title": "Space Raises $2.4M Pre-seed",
+   "date": "2026-08-19",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "pensata-inc-raises-246000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/pensata-inc-raises-246000-pre-seed/",
+   "title": "Pensata Raises $246,000 Pre-seed",
+   "date": "2026-08-19",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "kyvvu-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kyvvu-raises-1m-pre-seed/",
+   "title": "Kyvvu Raises \u20ac1M Pre-seed",
+   "date": "2026-08-19",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "aisel-health-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/aisel-health-raises-1-7m-pre-seed/",
+   "title": "Aisel Health Raises \u20ac1.7M Pre-seed",
+   "date": "2026-08-19",
+   "tag": "pre-seed",
+   "tag_page": 5
   },
   {
    "slug": "yardops-raises-500000-seed",
@@ -159,6 +1293,22 @@
    "tag_page": 2
   },
   {
+   "slug": "zenalyst-raises-3cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/zenalyst-raises-3cr-pre-seed/",
+   "title": "Zenalyst Raises \u20b93Cr Pre-seed",
+   "date": "2026-08-18",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "pouchers-raises-500000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/pouchers-raises-500000-pre-seed/",
+   "title": "Pouchers Raises $500,000 Pre-seed",
+   "date": "2026-08-18",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
    "slug": "peripheral-raises-8-7m-seed",
    "url": "https://www.thesaasnews.com/news/peripheral-raises-8-7m-seed/",
    "title": "Peripheral Raises $8.7M Seed",
@@ -208,6 +1358,54 @@
    "tag_page": 2
   },
   {
+   "slug": "rozenama-raises-150000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/rozenama-raises-150000-pre-seed/",
+   "title": "Rozenama Raises $150,000 Pre-seed",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation",
+   "url": "https://www.thesaasnews.com/news/mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation/",
+   "title": "Eternity Raises Pre-seed at $1M Valuation",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "kordata-dynamics-secures-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kordata-dynamics-secures-pre-seed/",
+   "title": "Kordata Dynamics Secures Pre-Seed",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "kiara-health-raises-undisclosed-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kiara-health-raises-undisclosed-pre-seed/",
+   "title": "Kiara Health Raises Undisclosed Pre-seed",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "brdg-raises-850000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/brdg-raises-850000-pre-seed/",
+   "title": "Brdg Raises $850,000 Pre-seed",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
+   "slug": "astute-raises-1-03m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/astute-raises-1-03m-pre-seed/",
+   "title": "Astute Raises \u20ac1.03M Pre-seed",
+   "date": "2026-08-17",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
    "slug": "xpander-raises-7-5m-seed",
    "url": "https://www.thesaasnews.com/news/xpander-raises-7-5m-seed/",
    "title": "Xpander Raises $7.5M Seed",
@@ -243,6 +1441,14 @@
    "tag_page": 3
   },
   {
+   "slug": "finley-raises-1-85m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/finley-raises-1-85m-pre-seed/",
+   "title": "Finley Raises $1.85M Pre-seed",
+   "date": "2026-08-16",
+   "tag": "pre-seed",
+   "tag_page": 6
+  },
+  {
    "slug": "sophiie-ai-raises-a5m-seed",
    "url": "https://www.thesaasnews.com/news/sophiie-ai-raises-a5m-seed/",
    "title": "Sophiie AI Raises A$5M Seed",
@@ -262,6 +1468,14 @@
    "title": "BLOX Raises $1M Seed",
    "date": "2026-08-16",
    "tag_page": 3
+  },
+  {
+   "slug": "ocean-intelligence-raises-pre-seed-round-to-take-nz-ocean-science-to-australia",
+   "url": "https://www.thesaasnews.com/news/ocean-intelligence-raises-pre-seed-round-to-take-nz-ocean-science-to-australia/",
+   "title": "Ocean Intelligence Raises Pre-seed Round",
+   "date": "2026-08-14",
+   "tag": "pre-seed",
+   "tag_page": 7
   },
   {
    "slug": "oddsblaze-raises-six-figure-seed",
@@ -290,6 +1504,14 @@
    "title": "Aisot Technologies Raises \u20ac2.13M Seed Extension",
    "date": "2026-08-14",
    "tag_page": 4
+  },
+  {
+   "slug": "walaw-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/walaw-raises-1-5m-pre-seed/",
+   "title": "Walaw Raises $1.5M Pre-seed",
+   "date": "2026-08-13",
+   "tag": "pre-seed",
+   "tag_page": 7
   },
   {
    "slug": "house-of-student-raises-2m-seed",
@@ -348,6 +1570,30 @@
    "tag_page": 4
   },
   {
+   "slug": "molt-ai-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/molt-ai-raises-1m-pre-seed/",
+   "title": "Molt AI Raises $1M Pre-seed",
+   "date": "2026-08-12",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "lane-raises-8-5cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/lane-raises-8-5cr-pre-seed/",
+   "title": "Lane Raises \u20b98.5Cr Pre-seed",
+   "date": "2026-08-12",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "flairmakers-raises-500k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/flairmakers-raises-500k-pre-seed/",
+   "title": "FlairMakers Raises \u00a3500k Pre-seed",
+   "date": "2026-08-12",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
    "slug": "pathway-raises-funding-at-500m-valuation",
    "url": "https://www.thesaasnews.com/news/pathway-raises-funding-at-500m-valuation/",
    "title": "Pathway Raises Funding at $500M Valuation",
@@ -381,6 +1627,54 @@
    "title": "Arab Therapy Raises $2M Pre-Series A",
    "date": "2026-08-12",
    "tag_page": 5
+  },
+  {
+   "slug": "zerolook-raises-1-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/zerolook-raises-1-6m-pre-seed/",
+   "title": "Zerolook Raises \u20ac1.6M Pre-seed",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "vecton-ai-raises-6cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/vecton-ai-raises-6cr-pre-seed/",
+   "title": "Vecton AI Raises \u20b96Cr Pre-seed",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "simaia-raises-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/simaia-raises-pre-seed-funding/",
+   "title": "Simaia Raises Pre-Seed Funding",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "palette-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/palette-raises-3m-pre-seed/",
+   "title": "Palette Raises \u20ac3M Pre-seed",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "friskai-raises-3-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/friskai-raises-3-6m-pre-seed/",
+   "title": "FriskAI Raises $3.6M Pre-seed",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
+   "slug": "cobi-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/cobi-raises-1m-pre-seed/",
+   "title": "Cobi Raises $1M Pre-seed",
+   "date": "2026-08-11",
+   "tag": "pre-seed",
+   "tag_page": 7
   },
   {
    "slug": "stealcut-raises-undisclosed-seed",
@@ -418,6 +1712,38 @@
    "tag_page": 5
   },
   {
+   "slug": "tennsa-raises-61000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/tennsa-raises-61000-pre-seed/",
+   "title": "Tennsa Raises $61,000 Pre-seed",
+   "date": "2026-08-10",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "lucrative-ai-inc-raises-500000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/lucrative-ai-inc-raises-500000-pre-seed/",
+   "title": "Lucrative AI Inc. Raises $500,000 Pre-seed",
+   "date": "2026-08-10",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "elevtalk-secures-pre-seed-financing-pioneering-custom-voice-interaction-solutions-for",
+   "url": "https://www.thesaasnews.com/news/elevtalk-secures-pre-seed-financing-pioneering-custom-voice-interaction-solutions-for/",
+   "title": "ElevTalk Raises Pre-Seed Financing",
+   "date": "2026-08-10",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "innocens-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/innocens-raises-1-5m-pre-seed/",
+   "title": "Innocens Raises \u20ac1.5M Pre-Seed",
+   "date": "2026-08-10",
+   "tag": "pre-seed",
+   "tag_page": 7
+  },
+  {
    "slug": "pally-raises-5-2m-seed",
    "url": "https://www.thesaasnews.com/news/pally-raises-5-2m-seed/",
    "title": "Pally Raises $5.2M Seed",
@@ -453,11 +1779,35 @@
    "tag_page": 5
   },
   {
+   "slug": "lemma-raises-2-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/lemma-raises-2-3m-pre-seed/",
+   "title": "Lemma Raises $2.3M Pre-seed",
+   "date": "2026-08-09",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
    "slug": "fitting-raises-1-1m-seed",
    "url": "https://www.thesaasnews.com/news/fitting-raises-1-1m-seed/",
    "title": "Fitting Raises $1.1M Seed",
    "date": "2026-08-09",
    "tag_page": 6
+  },
+  {
+   "slug": "m-sian-ai-startup-petrolprice-secures-silicon-valley-backing-sarawak-tribune",
+   "url": "https://www.thesaasnews.com/news/m-sian-ai-startup-petrolprice-secures-silicon-valley-backing-sarawak-tribune/",
+   "title": "PetrolPrice Secures Pre-seed",
+   "date": "2026-08-07",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "amigo-raises-4-5cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/amigo-raises-4-5cr-pre-seed/",
+   "title": "Amigo Raises \u20b94.5Cr Pre-seed",
+   "date": "2026-08-07",
+   "tag": "pre-seed",
+   "tag_page": 8
   },
   {
    "slug": "wild-zebra-raises-6m-seed",
@@ -516,6 +1866,14 @@
    "tag_page": 6
   },
   {
+   "slug": "skinbit-raises-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/skinbit-raises-6m-pre-seed/",
+   "title": "SkinBit Raises $6M Pre-seed",
+   "date": "2026-08-05",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
    "slug": "worldscape-raises-10m-seed-extension",
    "url": "https://www.thesaasnews.com/news/worldscape-raises-10m-seed-extension/",
    "title": "Worldscape Raises $10M Seed Extension",
@@ -572,10 +1930,50 @@
    "tag_page": 8
   },
   {
+   "slug": "strattum-raises-3-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/strattum-raises-3-2m-pre-seed/",
+   "title": "Strattum Raises $3.2M Pre-seed",
+   "date": "2026-08-04",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "shiplog-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/shiplog-raises-1m-pre-seed/",
+   "title": "Shiplog Raises $1M Pre-seed",
+   "date": "2026-08-04",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "june-ai-raises-20m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/june-ai-raises-20m-pre-seed/",
+   "title": "June AI Raises $20M Pre-seed",
+   "date": "2026-08-04",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
+   "slug": "estel-technologies-raises-270000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/estel-technologies-raises-270000-pre-seed/",
+   "title": "Estel Technologies Raises \u20ac270,000 Pre-seed",
+   "date": "2026-08-04",
+   "tag": "pre-seed",
+   "tag_page": 8
+  },
+  {
    "slug": "einship-raises-1m-seed",
    "url": "https://www.thesaasnews.com/news/einship-raises-1m-seed/",
    "title": "Einship Raises $1M Seed",
    "date": "2026-08-04",
+   "tag_page": 8
+  },
+  {
+   "slug": "aavalynx-raises-1-75m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/aavalynx-raises-1-75m-pre-seed/",
+   "title": "Aavalynx Raises \u20ac1.75M Pre-seed",
+   "date": "2026-08-04",
+   "tag": "pre-seed",
    "tag_page": 8
   },
   {
@@ -607,6 +2005,22 @@
    "tag_page": 7
   },
   {
+   "slug": "wayy-ai-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/wayy-ai-raises-2m-pre-seed/",
+   "title": "Wayy.ai Raises $2M Pre-seed",
+   "date": "2026-08-03",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
+   "slug": "blaze-tech-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/blaze-tech-raises-5m-pre-seed/",
+   "title": "Blaze.tech Raises $5M Pre-seed",
+   "date": "2026-08-03",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
    "slug": "unicity-labs-raises-3m-seed",
    "url": "https://www.thesaasnews.com/news/unicity-labs-raises-3m-seed/",
    "title": "Unicity Labs Raises $3M Seed",
@@ -626,6 +2040,14 @@
    "title": "Actualyze AI Raises $7M Seed",
    "date": "2026-08-03",
    "tag_page": 8
+  },
+  {
+   "slug": "fusepay-raises-350000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/fusepay-raises-350000-pre-seed/",
+   "title": "Fusepay Raises $350,000 Pre-seed",
+   "date": "2026-08-02",
+   "tag": "pre-seed",
+   "tag_page": 9
   },
   {
    "slug": "snapscale-raises-seed-funding",
@@ -670,6 +2092,22 @@
    "tag_page": 9
   },
   {
+   "slug": "liquid-interactive-raises-700k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/liquid-interactive-raises-700k-pre-seed/",
+   "title": "Liquid Interactive Raises $700K Pre-seed",
+   "date": "2026-07-31",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
+   "slug": "bundle-raises-5-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bundle-raises-5-5m-pre-seed/",
+   "title": "Bundle Raises $5.5M Pre-seed",
+   "date": "2026-07-31",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
    "slug": "axis-robotics-raises-12m-seed",
    "url": "https://www.thesaasnews.com/news/axis-robotics-raises-12m-seed/",
    "title": "Axis Robotics Raises $12M Seed",
@@ -705,6 +2143,14 @@
    "tag_page": 10
   },
   {
+   "slug": "sigvi-raises-1-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sigvi-raises-1-2m-pre-seed/",
+   "title": "Sigvi Raises \u20ac1.2M Pre-seed",
+   "date": "2026-07-30",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
    "slug": "polar-raises-5-7m-seed",
    "url": "https://www.thesaasnews.com/news/polar-raises-5-7m-seed/",
    "title": "Polar Raises $5.7M Seed",
@@ -723,6 +2169,14 @@
    "url": "https://www.thesaasnews.com/news/marquee-raises-4m-seed/",
    "title": "Marquee Raises $4M Seed",
    "date": "2026-07-30",
+   "tag_page": 9
+  },
+  {
+   "slug": "kinematic-trees-raises-585k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kinematic-trees-raises-585k-pre-seed/",
+   "title": "Kinematic Trees Raises \u00a3585K Pre-seed",
+   "date": "2026-07-30",
+   "tag": "pre-seed",
    "tag_page": 9
   },
   {
@@ -796,6 +2250,14 @@
    "tag_page": 10
   },
   {
+   "slug": "olomon-raises-2-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/olomon-raises-2-6m-pre-seed/",
+   "title": "Olomon Raises $2.6M Pre-seed",
+   "date": "2026-07-29",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
    "slug": "velpha-co-ltd-raises-60m-seed",
    "url": "https://www.thesaasnews.com/news/velpha-co-ltd-raises-60m-seed/",
    "title": "Velpha Raises \u00a560M Seed",
@@ -838,6 +2300,30 @@
    "tag_page": 10
   },
   {
+   "slug": "valuemize-raises-seven-figure-pre-seed",
+   "url": "https://www.thesaasnews.com/news/valuemize-raises-seven-figure-pre-seed/",
+   "title": "Valuemize Raises Seven-figure Pre-seed",
+   "date": "2026-07-28",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
+   "slug": "gro-solutions-raises-600000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/gro-solutions-raises-600000-pre-seed/",
+   "title": "GRO Solutions Raises $600,000 Pre-seed",
+   "date": "2026-07-28",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
+   "slug": "5u-ai-raises-3-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/5u-ai-raises-3-2m-pre-seed/",
+   "title": "5U AI Raises $3.2M Pre-seed",
+   "date": "2026-07-28",
+   "tag": "pre-seed",
+   "tag_page": 9
+  },
+  {
    "slug": "scape-raises-3-2m-seed",
    "url": "https://www.thesaasnews.com/news/scape-raises-3-2m-seed/",
    "title": "Scape Raises $3.2M Seed",
@@ -873,11 +2359,35 @@
    "tag_page": 11
   },
   {
+   "slug": "upkraft-raises-1-6cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/upkraft-raises-1-6cr-pre-seed/",
+   "title": "Upkraft Raises \u20b91.6Cr Pre-seed",
+   "date": "2026-07-27",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
+   "slug": "superstat-raises-3-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/superstat-raises-3-5m-pre-seed/",
+   "title": "Superstat Raises $3.5M Pre-seed",
+   "date": "2026-07-27",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
    "slug": "pilot-protocol-raises-4-5m-seed",
    "url": "https://www.thesaasnews.com/news/pilot-protocol-raises-4-5m-seed/",
    "title": "Pilot Protocol Raises $4.5M Seed",
    "date": "2026-07-27",
    "tag_page": 10
+  },
+  {
+   "slug": "doctorbook-raises-16000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/doctorbook-raises-16000-pre-seed/",
+   "title": "Doctorbook Raises $16,000 Pre-seed",
+   "date": "2026-07-27",
+   "tag": "pre-seed",
+   "tag_page": 9
   },
   {
    "slug": "aampere-raises-4-2m-seed",
@@ -906,6 +2416,22 @@
    "title": "EQON Raises $6M Seed",
    "date": "2026-07-24",
    "tag_page": 11
+  },
+  {
+   "slug": "coverwatch-raises-4-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/coverwatch-raises-4-5m-pre-seed/",
+   "title": "Coverwatch Raises $4.5M Pre-seed",
+   "date": "2026-07-24",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
+   "slug": "cast-insights-raises-4-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/cast-insights-raises-4-5m-pre-seed/",
+   "title": "Cast Insights Raises $4.5M Pre-seed",
+   "date": "2026-07-24",
+   "tag": "pre-seed",
+   "tag_page": 10
   },
   {
    "slug": "petra-labs-raises-5-2m-seed",
@@ -948,6 +2474,22 @@
    "title": "Lasken AI Raises Seed Round",
    "date": "2026-07-23",
    "tag_page": 11
+  },
+  {
+   "slug": "epic-markets-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/epic-markets-raises-10m-pre-seed/",
+   "title": "Epic Markets Raises $10M Pre-seed",
+   "date": "2026-07-23",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
+   "slug": "chatfeatured-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/chatfeatured-raises-2m-pre-seed/",
+   "title": "ChatFeatured Raises $2M Pre-seed",
+   "date": "2026-07-23",
+   "tag": "pre-seed",
+   "tag_page": 10
   },
   {
    "slug": "telli-raises-15m-seed",
@@ -997,6 +2539,22 @@
    "title": "Cheiron Raises $8M Seed",
    "date": "2026-07-22",
    "tag_page": 12
+  },
+  {
+   "slug": "ossprey-raises-2-65m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ossprey-raises-2-65m-pre-seed/",
+   "title": "Ossprey Raises $2.65M Pre-seed",
+   "date": "2026-07-22",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
+   "slug": "iceland-s-sowilo-secures-pre-seed-backing-to-expand-ai-fashion-product-platform-catecut",
+   "url": "https://www.thesaasnews.com/news/iceland-s-sowilo-secures-pre-seed-backing-to-expand-ai-fashion-product-platform-catecut/",
+   "title": "Sowilo Secures Pre-Seed",
+   "date": "2026-07-22",
+   "tag": "pre-seed",
+   "tag_page": 10
   },
   {
    "slug": "voxshell-raises-800000-seed",
@@ -1055,6 +2613,14 @@
    "tag_page": 12
   },
   {
+   "slug": "stonemason-raises-pre-seed-funding-to-build-a-portfolio-of-software-companies",
+   "url": "https://www.thesaasnews.com/news/stonemason-raises-pre-seed-funding-to-build-a-portfolio-of-software-companies/",
+   "title": "Stonemason Raises Pre-Seed Funding to Build a Portfolio of Software Companies",
+   "date": "2026-07-21",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
    "slug": "trasia-raises-1-75m-seed",
    "url": "https://www.thesaasnews.com/news/trasia-raises-1-75m-seed/",
    "title": "Trasia Raises $1.75M Seed",
@@ -1111,6 +2677,22 @@
    "tag_page": 13
   },
   {
+   "slug": "think-raises-8m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/think-raises-8m-pre-seed/",
+   "title": "Think Raises $8M Pre-seed",
+   "date": "2026-07-20",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
+   "slug": "becertain-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/becertain-raises-1-7m-pre-seed/",
+   "title": "BeCertain Raises \u00a31.7M Pre-seed",
+   "date": "2026-07-20",
+   "tag": "pre-seed",
+   "tag_page": 10
+  },
+  {
    "slug": "vorflux-raises-15m-seed",
    "url": "https://www.thesaasnews.com/news/vorflux-raises-15m-seed/",
    "title": "Vorflux Raises $15M Seed",
@@ -1151,6 +2733,22 @@
    "title": "Beacon Security Raises $13M Seed",
    "date": "2026-07-17",
    "tag_page": 14
+  },
+  {
+   "slug": "horizon-trade-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/horizon-trade-raises-2m-pre-seed/",
+   "title": "Horizon Trade Raises $2M Pre-seed",
+   "date": "2026-07-17",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
+   "slug": "edvisor-raises-1-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/edvisor-raises-1-3m-pre-seed/",
+   "title": "Edvisor Raises $1.3M Pre-seed",
+   "date": "2026-07-17",
+   "tag": "pre-seed",
+   "tag_page": 10
   },
   {
    "slug": "pulse-security-raises-8m-seed",
@@ -1209,6 +2807,14 @@
    "tag_page": 14
   },
   {
+   "slug": "logcat-ai-raises-2-55m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/logcat-ai-raises-2-55m-pre-seed/",
+   "title": "logcat.ai Raises $2.55M Pre-seed",
+   "date": "2026-07-16",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
    "slug": "thira-raises-21m-seed",
    "url": "https://www.thesaasnews.com/news/thira-raises-21m-seed/",
    "title": "Thira Raises $21M Seed",
@@ -1265,6 +2871,14 @@
    "tag_page": 15
   },
   {
+   "slug": "mio-raises-1-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/mio-raises-1-9m-pre-seed/",
+   "title": "Mio Raises \u20ac1.9M Pre-seed",
+   "date": "2026-07-15",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
    "slug": "tripwip-raises-4-2m-seed",
    "url": "https://www.thesaasnews.com/news/tripwip-raises-4-2m-seed/",
    "title": "TripWip Raises $4.2M Seed",
@@ -1291,6 +2905,22 @@
    "title": "Guthrie AI Raises $4M Seed",
    "date": "2026-07-14",
    "tag_page": 16
+  },
+  {
+   "slug": "connectionary-raises-pre-seed-funding-from-bluepoint-partners-to-build-ai-decision-infrastructure",
+   "url": "https://www.thesaasnews.com/news/connectionary-raises-pre-seed-funding-from-bluepoint-partners-to-build-ai-decision-infrastructure/",
+   "title": "Connectionary Raises Pre-Seed Funding from Bluepoint Partners",
+   "date": "2026-07-14",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
+   "slug": "algorix-raises-pre-seed-funding-from-kakao-ventures-to-build-unified-data-layer-for-enterprise-ai",
+   "url": "https://www.thesaasnews.com/news/algorix-raises-pre-seed-funding-from-kakao-ventures-to-build-unified-data-layer-for-enterprise-ai/",
+   "title": "Algorix Raises Pre-Seed Funding",
+   "date": "2026-07-14",
+   "tag": "pre-seed",
+   "tag_page": 11
   },
   {
    "slug": "zeamicybersecurity-raises-50000000-pre-series-a",
@@ -1377,6 +3007,30 @@
    "tag_page": 16
   },
   {
+   "slug": "sortmyprep-raises-350000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sortmyprep-raises-350000-pre-seed/",
+   "title": "Sortmyprep Raises $350,000 Pre-seed",
+   "date": "2026-07-13",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
+   "slug": "hyades-raises-a990k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/hyades-raises-a990k-pre-seed/",
+   "title": "Hyades Raises A$990k Pre-seed",
+   "date": "2026-07-13",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
+   "slug": "edysor-ai-raises-1-2cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/edysor-ai-raises-1-2cr-pre-seed/",
+   "title": "Edysor.ai Raises \u20b91.2Cr Pre-seed",
+   "date": "2026-07-13",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
    "slug": "sphinx-raises-7-1m-seed",
    "url": "https://www.thesaasnews.com/news/sphinx-raises-7-1m-seed/",
    "title": "Sphinx Raises $7.1M Seed",
@@ -1403,6 +3057,14 @@
    "title": "ESGAgent.ai Raises $1.7M Seed",
    "date": "2026-07-12",
    "tag_page": 17
+  },
+  {
+   "slug": "magicport-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/magicport-raises-3m-pre-seed/",
+   "title": "MagicPort Raises $3M Pre-seed",
+   "date": "2026-07-12",
+   "tag": "pre-seed",
+   "tag_page": 11
   },
   {
    "slug": "qiz-security-raises-17m-seed",
@@ -1438,6 +3100,22 @@
    "title": "LendUs Raises $5M Seed",
    "date": "2026-07-10",
    "tag_page": 17
+  },
+  {
+   "slug": "immigify-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/immigify-raises-1m-pre-seed/",
+   "title": "Immigify Raises $1M+ Pre-seed",
+   "date": "2026-07-10",
+   "tag": "pre-seed",
+   "tag_page": 11
+  },
+  {
+   "slug": "azraq-raises-oversubscribed-pre-seed-to-price-the-risk-behind-the-data-centre-boom",
+   "url": "https://www.thesaasnews.com/news/azraq-raises-oversubscribed-pre-seed-to-price-the-risk-behind-the-data-centre-boom/",
+   "title": "Azraq Raises Pre-Seed",
+   "date": "2026-07-10",
+   "tag": "pre-seed",
+   "tag_page": 11
   },
   {
    "slug": "viewsml-raises-4-9m-seed",
@@ -1487,6 +3165,62 @@
    "title": "Birdsview Raises \u20ac2.5M Seed",
    "date": "2026-07-09",
    "tag_page": 18
+  },
+  {
+   "slug": "sherpa-raises-2-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sherpa-raises-2-2m-pre-seed/",
+   "title": "Sherpa Raises $2.2M Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "reverse-fashion-raises-seven-figure-pre-seed-extension",
+   "url": "https://www.thesaasnews.com/news/reverse-fashion-raises-seven-figure-pre-seed-extension/",
+   "title": "reverse.fashion Raises Seven-figure Pre-seed Extension",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "onpoint-raises-600000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/onpoint-raises-600000-pre-seed/",
+   "title": "Onpoint Raises $600,000 Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "exhibitly-raises-1-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/exhibitly-raises-1-4m-pre-seed/",
+   "title": "Exhibitly Raises \u20ac1.4M Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "avelin-ai-raises-3-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/avelin-ai-raises-3-7m-pre-seed/",
+   "title": "AVELIN AI Raises $3.7M Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "alchemic-raises-rs-2-5-crore-pre-seed",
+   "url": "https://www.thesaasnews.com/news/alchemic-raises-rs-2-5-crore-pre-seed/",
+   "title": "Alchemic Raises Rs 2.5 crore Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "thumpn-raises-3-75m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/thumpn-raises-3-75m-pre-seed/",
+   "title": "thumpN Raises $3.75M Pre-seed",
+   "date": "2026-07-09",
+   "tag": "pre-seed",
+   "tag_page": 11
   },
   {
    "slug": "whering-raises-7m-seed",
@@ -1566,6 +3300,46 @@
    "tag_page": 18
   },
   {
+   "slug": "wonderdog-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/wonderdog-raises-5m-pre-seed/",
+   "title": "Wonderdog Raises $5M Pre-seed",
+   "date": "2026-07-08",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "optimly-raises-800000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/optimly-raises-800000-pre-seed/",
+   "title": "Optimly Raises $800,000 Pre-seed",
+   "date": "2026-07-08",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "macrodata-labs-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/macrodata-labs-raises-4m-pre-seed/",
+   "title": "Macrodata Labs Raises $4M Pre-seed",
+   "date": "2026-07-08",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "gyre-energy-raises-1-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/gyre-energy-raises-1-3m-pre-seed/",
+   "title": "Gyre Energy Raises $1.3M Pre-seed",
+   "date": "2026-07-08",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
+   "slug": "8layers-raises-1m-pre-seed-extension",
+   "url": "https://www.thesaasnews.com/news/8layers-raises-1m-pre-seed-extension/",
+   "title": "8Layers Raises \u20ac1M Pre-seed Extension",
+   "date": "2026-07-08",
+   "tag": "pre-seed",
+   "tag_page": 12
+  },
+  {
    "slug": "tangos-raises-20m-seed",
    "url": "https://www.thesaasnews.com/news/tangos-raises-20m-seed/",
    "title": "Tangos Raises $20M Seed",
@@ -1599,6 +3373,46 @@
    "title": "Arkenstone Defense Raises $35M Seed",
    "date": "2026-07-07",
    "tag_page": 19
+  },
+  {
+   "slug": "hyperdev-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/hyperdev-raises-1m-pre-seed/",
+   "title": "HyperDev Raises $1M Pre-seed",
+   "date": "2026-07-07",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "display-dev-raises-470000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/display-dev-raises-470000-pre-seed/",
+   "title": "Display.dev Raises \u20ac470,000 Pre-seed",
+   "date": "2026-07-07",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "branddu-ai-raises-300000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/branddu-ai-raises-300000-pre-seed/",
+   "title": "Branddu AI Raises $300,000 Pre-seed",
+   "date": "2026-07-07",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "auxilius-raises-1-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/auxilius-raises-1-3m-pre-seed/",
+   "title": "Auxilius Raises \u20ac1.3M Pre-seed",
+   "date": "2026-07-07",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "paraito-raises-c2-65m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/paraito-raises-c2-65m-pre-seed/",
+   "title": "Paraito Raises C$2.65M Pre-seed",
+   "date": "2026-07-07",
+   "tag": "pre-seed",
+   "tag_page": 12
   },
   {
    "slug": "worldmodeldata-raises-7m-seed-round",
@@ -1650,6 +3464,14 @@
    "tag_page": 20
   },
   {
+   "slug": "stoa-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/stoa-raises-2-1m-pre-seed/",
+   "title": "Stoa Raises \u20ac2.1M Pre-seed",
+   "date": "2026-07-06",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
    "slug": "geosurge-raises-12m-seed",
    "url": "https://www.thesaasnews.com/news/geosurge-raises-12m-seed/",
    "title": "geoSurge Raises $12M Seed",
@@ -1678,6 +3500,14 @@
    "tag_page": 20
   },
   {
+   "slug": "talp-raises-20m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/talp-raises-20m-pre-seed/",
+   "title": "Talp Secures Pre-Seed Funding at $20 Million Valuation",
+   "date": "2026-07-03",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
    "slug": "housapp-closes-eur4-3m-seed-round",
    "url": "https://www.thesaasnews.com/news/housapp-closes-eur4-3m-seed-round/",
    "title": "HousApp Closes \u20ac4.3M Seed Round",
@@ -1704,6 +3534,38 @@
    "title": "Smallest.ai Raises $8M Seed",
    "date": "2026-07-02",
    "tag_page": 20
+  },
+  {
+   "slug": "odisha-born-british-entrepreneur-arun-kar-invests-in-digizene-founded-by-rinki-singh-the-wire",
+   "url": "https://www.thesaasnews.com/news/odisha-born-british-entrepreneur-arun-kar-invests-in-digizene-founded-by-rinki-singh-the-wire/",
+   "title": "Digizene Raises Pre-Seed Round",
+   "date": "2026-07-02",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "librari-raises-1-75m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/librari-raises-1-75m-pre-seed/",
+   "title": "Librari Raises $1.75M Pre-seed",
+   "date": "2026-07-02",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "callie-care-raises-500k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/callie-care-raises-500k-pre-seed/",
+   "title": "Callie Care Raises $500K Pre-Seed",
+   "date": "2026-07-02",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "bidscript-raises-0-8m-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/bidscript-raises-0-8m-pre-seed-funding/",
+   "title": "BidScript Raises $0.8M Pre-Seed Funding",
+   "date": "2026-07-02",
+   "tag": "pre-seed",
+   "tag_page": 13
   },
   {
    "slug": "turingdream-raises-7m-seed",
@@ -1762,6 +3624,78 @@
    "tag_page": 21
   },
   {
+   "slug": "zelara-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/zelara-raises-3m-pre-seed/",
+   "title": "Zelara Raises \u20ac3M Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "yolearn-ai-raises-500000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/yolearn-ai-raises-500000-pre-seed/",
+   "title": "YoLearn.ai Raises $500,000 Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "dawnguard-raises-3-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/dawnguard-raises-3-4m-pre-seed/",
+   "title": "Dawnguard Raises $3.4M Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "clairva-raises-500k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/clairva-raises-500k-pre-seed/",
+   "title": "Clairva Raises $500K Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "brainsmingle-raises-400000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/brainsmingle-raises-400000-pre-seed/",
+   "title": "BrainsMingle Raises $400,000 Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "bianca-raises-500k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bianca-raises-500k-pre-seed/",
+   "title": "Bianca Raises $500K Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "appnigma-ai-closes-pre-seed-round-led-by-betaboom-globenewswire",
+   "url": "https://www.thesaasnews.com/news/appnigma-ai-closes-pre-seed-round-led-by-betaboom-globenewswire/",
+   "title": "Appnigma AI Closes Pre Seed Round Led by BetaBoom - GlobeNewswire",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "xylo-raises-2-8m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/xylo-raises-2-8m-pre-seed/",
+   "title": "Xylo Raises \u00a32.8M Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
+   "slug": "adjacent-raises-2-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/adjacent-raises-2-5m-pre-seed/",
+   "title": "Adjacent Raises $2.5M Pre-seed",
+   "date": "2026-07-01",
+   "tag": "pre-seed",
+   "tag_page": 13
+  },
+  {
    "slug": "wakei-inc-raises-jpy130m-seed",
    "url": "https://www.thesaasnews.com/news/wakei-inc-raises-jpy130m-seed/",
    "title": "WAKEI Inc. Raises JPY 130M Seed",
@@ -1795,6 +3729,30 @@
    "title": "Lucida AI Raises $7M Seed",
    "date": "2026-06-30",
    "tag_page": 21
+  },
+  {
+   "slug": "stabyl-raises-2-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/stabyl-raises-2-7m-pre-seed/",
+   "title": "Stabyl Raises $2.7M Pre-seed",
+   "date": "2026-06-30",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "nomerra-lands-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/nomerra-lands-2m-pre-seed/",
+   "title": "Nomerra Lands $2M Pre-Seed",
+   "date": "2026-06-30",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "floqer-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/floqer-raises-2m-pre-seed/",
+   "title": "Floqer Raises $2M Pre-seed",
+   "date": "2026-06-30",
+   "tag": "pre-seed",
+   "tag_page": 14
   },
   {
    "slug": "earnos-raises-18-5m-pre-series-a",
@@ -1860,6 +3818,30 @@
    "tag_page": 22
   },
   {
+   "slug": "wakeline-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/wakeline-raises-2-1m-pre-seed/",
+   "title": "Wakeline Raises \u20ac2.1M Pre-seed",
+   "date": "2026-06-29",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "serpier-raises-eur1-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/serpier-raises-eur1-4m-pre-seed/",
+   "title": "Serpier Raises \u20ac1.4M Pre-Seed",
+   "date": "2026-06-29",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
+   "slug": "akro-raises-700000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/akro-raises-700000-pre-seed/",
+   "title": "Akro Raises $700,000 Pre-seed",
+   "date": "2026-06-29",
+   "tag": "pre-seed",
+   "tag_page": 14
+  },
+  {
    "slug": "se3-labs-raises-5-5m-seed",
    "url": "https://www.thesaasnews.com/news/se3-labs-raises-5-5m-seed/",
    "title": "SE3 Labs Raises \u20ac5.5M in Funding",
@@ -1874,6 +3856,30 @@
    "tag_page": 23
   },
   {
+   "slug": "techdollar-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/techdollar-raises-3m-pre-seed/",
+   "title": "Techdollar Raises $3M Pre-seed",
+   "date": "2026-06-28",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "supermemory-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/supermemory-raises-3m-pre-seed/",
+   "title": "Supermemory Raises $3M Pre-seed",
+   "date": "2026-06-28",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "lytmus-ai-raises-5cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/lytmus-ai-raises-5cr-pre-seed/",
+   "title": "Lytmus AI Raises \u20b95Cr Pre-seed",
+   "date": "2026-06-28",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
    "slug": "marichi-labs-raises-a-seed-round-to-build-an-ai-first-start-up-leveraging-deep-tech",
    "url": "https://www.thesaasnews.com/news/marichi-labs-raises-a-seed-round-to-build-an-ai-first-start-up-leveraging-deep-tech/",
    "title": "Marichi Labs Raises Seed Round",
@@ -1886,6 +3892,14 @@
    "title": "Kalipso Raises $3.2M Seed",
    "date": "2026-06-26",
    "tag_page": 23
+  },
+  {
+   "slug": "aristo-intelligence-raises-pre-seed-funding-from-kakao-ventures-to-build-long-term-wowtale",
+   "url": "https://www.thesaasnews.com/news/aristo-intelligence-raises-pre-seed-funding-from-kakao-ventures-to-build-long-term-wowtale/",
+   "title": "Aristo Intelligence Raises Pre-seed Round",
+   "date": "2026-06-26",
+   "tag": "pre-seed",
+   "tag_page": 15
   },
   {
    "slug": "sellit9-raises-4-1m-seed",
@@ -1979,6 +3993,30 @@
    "tag_page": 23
   },
   {
+   "slug": "neurometric-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/neurometric-raises-4m-pre-seed/",
+   "title": "Neurometric Raises $4M Pre-seed",
+   "date": "2026-06-25",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "ground-raises-3-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ground-raises-3-6m-pre-seed/",
+   "title": "Ground Raises $3.6M Pre-seed",
+   "date": "2026-06-25",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "daya-raises-2-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/daya-raises-2-4m-pre-seed/",
+   "title": "Daya Raises $2.4M Pre-seed",
+   "date": "2026-06-25",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
    "slug": "valence-ai-raises-5m-seed",
    "url": "https://www.thesaasnews.com/news/valence-ai-raises-5m-seed/",
    "title": "Valence AI Raises $5M in Funding",
@@ -2014,6 +4052,54 @@
    "tag_page": 24
   },
   {
+   "slug": "oxford-university-incubated-lumenai-secures-pre-seed-backing-from-corpora-ai",
+   "url": "https://www.thesaasnews.com/news/oxford-university-incubated-lumenai-secures-pre-seed-backing-from-corpora-ai/",
+   "title": "Lumenai Raises Pre-seed Round",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "anchorbase-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/anchorbase-raises-2m-pre-seed/",
+   "title": "Anchorbase Raises $2M Pre-seed",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "superplane-raises-2-28m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/superplane-raises-2-28m-pre-seed/",
+   "title": "SuperPlane Raises \u20ac2.28M Pre-seed",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "overworld-raises-4-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/overworld-raises-4-5m-pre-seed/",
+   "title": "Overworld Raises $4.5M Pre-seed",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "nudge-raises-1-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/nudge-raises-1-1m-pre-seed/",
+   "title": "Nudge Raises $1.1M Pre-seed",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
+   "slug": "centsight-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/centsight-raises-1-5m-pre-seed/",
+   "title": "CentSight Raises $1.5M Pre-seed",
+   "date": "2026-06-24",
+   "tag": "pre-seed",
+   "tag_page": 15
+  },
+  {
    "slug": "concord-raises-3m-seed",
    "url": "https://www.thesaasnews.com/news/concord-raises-3m-seed/",
    "title": "Concord Raises $3M Seed",
@@ -2026,6 +4112,46 @@
    "title": "Concord Raises $3M Seed",
    "date": "2026-06-23",
    "tag_page": 24
+  },
+  {
+   "slug": "superpal-raises-500k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/superpal-raises-500k-pre-seed/",
+   "title": "Superpal Raises \u20ac500K Pre-seed",
+   "date": "2026-06-23",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "sherlocks-ai-raises-7-5cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sherlocks-ai-raises-7-5cr-pre-seed/",
+   "title": "Sherlocks AI Raises \u20b97.5Cr Pre-seed",
+   "date": "2026-06-23",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "kyrok-raises-3-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kyrok-raises-3-1m-pre-seed/",
+   "title": "Kyrok Raises \u20ac3.1M Pre-seed",
+   "date": "2026-06-23",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "fika-jobs-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/fika-jobs-raises-4m-pre-seed/",
+   "title": "Fika Jobs Raises $4M Pre-seed",
+   "date": "2026-06-23",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "bharattender-raises-1-25cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bharattender-raises-1-25cr-pre-seed/",
+   "title": "BharatTender Raises \u20b91.25Cr Pre-seed",
+   "date": "2026-06-23",
+   "tag": "pre-seed",
+   "tag_page": 16
   },
   {
    "slug": "turboflow-raises-6m-seed",
@@ -2089,6 +4215,14 @@
    "title": "ChemT Raises $4M Seed",
    "date": "2026-06-22",
    "tag_page": 25
+  },
+  {
+   "slug": "smart-bricks-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/smart-bricks-raises-5m-pre-seed/",
+   "title": "Smart Bricks Raises $5M Pre-seed",
+   "date": "2026-06-22",
+   "tag": "pre-seed",
+   "tag_page": 16
   },
   {
    "slug": "franklin-raises-1-6m-seed",
@@ -2224,6 +4358,30 @@
    "tag_page": 26
   },
   {
+   "slug": "reltix-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/reltix-raises-3m-pre-seed/",
+   "title": "Reltix Raises \u20ac3M Pre-seed",
+   "date": "2026-06-18",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "crest-raises-3-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/crest-raises-3-1m-pre-seed/",
+   "title": "CREST Raises $3.1M Pre-seed",
+   "date": "2026-06-18",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
+   "slug": "creator-platform-influish-raises-pre-seed-funding-from-clovia-co-founder-and-others",
+   "url": "https://www.thesaasnews.com/news/creator-platform-influish-raises-pre-seed-funding-from-clovia-co-founder-and-others/",
+   "title": "Influish Raises Pre-seed",
+   "date": "2026-06-18",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
    "slug": "trackersuite-ai-raises-6cr-pre-series-a",
    "url": "https://www.thesaasnews.com/news/trackersuite-ai-raises-6cr-pre-series-a/",
    "title": "TrackerSuite AI Raises \u20b96Cr Pre-Series A",
@@ -2280,6 +4438,30 @@
    "tag_page": 27
   },
   {
+   "slug": "tonada-raises-2-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/tonada-raises-2-6m-pre-seed/",
+   "title": "Tonada Raises \u20ac2.6M Pre-seed",
+   "date": "2026-06-17",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "sovra-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sovra-raises-2m-pre-seed/",
+   "title": "Sovra Raises $2M Pre-seed",
+   "date": "2026-06-17",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "tryll-raises-600000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/tryll-raises-600000-pre-seed/",
+   "title": "Tryll Raises $600,000 Pre-seed",
+   "date": "2026-06-17",
+   "tag": "pre-seed",
+   "tag_page": 16
+  },
+  {
    "slug": "swsh-raises-4m-seed",
    "url": "https://www.thesaasnews.com/news/swsh-raises-4m-seed/",
    "title": "swsh Raises $4M Seed",
@@ -2306,6 +4488,46 @@
    "title": "ContraVault AI Raises $3.1M Pre-Series A",
    "date": "2026-06-16",
    "tag_page": 28
+  },
+  {
+   "slug": "whybrilliant-raises-eur1m-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/whybrilliant-raises-eur1m-pre-seed-funding/",
+   "title": "WhyBrilliant Raises \u20ac1M Pre-Seed Funding",
+   "date": "2026-06-16",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "pickappo-raises-sar-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/pickappo-raises-sar-2m-pre-seed/",
+   "title": "Pickappo Raises SAR 2M Pre-seed",
+   "date": "2026-06-16",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "optiak-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/optiak-raises-4m-pre-seed/",
+   "title": "Optiak Raises \u20ac4M Pre-seed",
+   "date": "2026-06-16",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "githits-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/githits-raises-1-5m-pre-seed/",
+   "title": "GitHits Raises \u20ac1.5M Pre-seed",
+   "date": "2026-06-16",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "flyweel-raises-2-41m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/flyweel-raises-2-41m-pre-seed/",
+   "title": "Flyweel Raises $2.41M Pre-seed",
+   "date": "2026-06-16",
+   "tag": "pre-seed",
+   "tag_page": 17
   },
   {
    "slug": "copperlane-raises-4-1m-seed",
@@ -2371,6 +4593,22 @@
    "tag_page": 28
   },
   {
+   "slug": "scait-raises-high-six-figure-pre-seed",
+   "url": "https://www.thesaasnews.com/news/scait-raises-high-six-figure-pre-seed/",
+   "title": "SCAIT Closes Oversubscribed Pre-Seed Round",
+   "date": "2026-06-15",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "causa-prima-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/causa-prima-raises-10m-pre-seed/",
+   "title": "Causa Prima Raises $10M Pre-seed",
+   "date": "2026-06-15",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
    "slug": "youlabs-raises-2-6m-seed",
    "url": "https://www.thesaasnews.com/news/youlabs-raises-2-6m-seed/",
    "title": "YouLabs Raises $2.6M Seed",
@@ -2411,6 +4649,38 @@
    "title": "Cashmere Raises $5M Seed",
    "date": "2026-06-14",
    "tag_page": 29
+  },
+  {
+   "slug": "mimir-raises-518-3k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/mimir-raises-518-3k-pre-seed/",
+   "title": "Mimir Raises \u20ac518.3k Pre-seed",
+   "date": "2026-06-14",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "sunbay-raises-550k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sunbay-raises-550k-pre-seed/",
+   "title": "Sunbay Raises \u20ac550k Pre-seed",
+   "date": "2026-06-14",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "mnx-raises-6-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/mnx-raises-6-4m-pre-seed/",
+   "title": "MNX Raises $6.4M Pre-seed",
+   "date": "2026-06-14",
+   "tag": "pre-seed",
+   "tag_page": 17
+  },
+  {
+   "slug": "concentrate-ai-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/concentrate-ai-raises-5m-pre-seed/",
+   "title": "Concentrate AI Raises $5M Pre-seed",
+   "date": "2026-06-14",
+   "tag": "pre-seed",
+   "tag_page": 17
   },
   {
    "slug": "niteshift-raises-7m-seed",
@@ -2460,6 +4730,30 @@
    "title": "Compuvi Raises Seed Funding at $40M Valuation",
    "date": "2026-06-12",
    "tag_page": 29
+  },
+  {
+   "slug": "shopagentic-raises-1-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/shopagentic-raises-1-9m-pre-seed/",
+   "title": "ShopAgentic Raises \u20ac1.9M Pre-seed",
+   "date": "2026-06-12",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "friday4-30-raises-335000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/friday4-30-raises-335000-pre-seed/",
+   "title": "Friday4:30 Raises \u00a3335,000 Pre-seed",
+   "date": "2026-06-12",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "enera-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/enera-raises-2m-pre-seed/",
+   "title": "Enera Raises $2M Pre-seed",
+   "date": "2026-06-12",
+   "tag": "pre-seed",
+   "tag_page": 18
   },
   {
    "slug": "uncovr-raises-7m-seed",
@@ -2553,6 +4847,38 @@
    "tag_page": 30
   },
   {
+   "slug": "relai-raises-6-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/relai-raises-6-9m-pre-seed/",
+   "title": "RELAI Raises $6.9M in Total Funding",
+   "date": "2026-06-11",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "myka-secures-pre-seed-funding-to-expand-insurance-access-in-nigeria-tech-in-africa",
+   "url": "https://www.thesaasnews.com/news/myka-secures-pre-seed-funding-to-expand-insurance-access-in-nigeria-tech-in-africa/",
+   "title": "Myka Secures Pre\u2011Seed Funding",
+   "date": "2026-06-11",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "courtroom-emerges-from-stealth-to-bring-the-jury-room-into-the-war-room",
+   "url": "https://www.thesaasnews.com/news/courtroom-emerges-from-stealth-to-bring-the-jury-room-into-the-war-room/",
+   "title": "Courtroom Raises Pre-seed",
+   "date": "2026-06-11",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "cardnexus-raises-3-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/cardnexus-raises-3-5m-pre-seed/",
+   "title": "CardNexus Raises \u20ac3.5M Pre-seed",
+   "date": "2026-06-11",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
    "slug": "upriver-raises-14m-seed",
    "url": "https://www.thesaasnews.com/news/upriver-raises-14m-seed/",
    "title": "Upriver Raises $14M Seed",
@@ -2593,6 +4919,54 @@
    "title": "BazaarNow Raises \u20b972Cr Seed",
    "date": "2026-06-10",
    "tag_page": 31
+  },
+  {
+   "slug": "record-os-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/record-os-raises-2m-pre-seed/",
+   "title": "Record OS Raises $2M Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "cantilever-raises-250k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/cantilever-raises-250k-pre-seed/",
+   "title": "Cantilever Raises \u00a3250k Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "soffi-raises-4-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/soffi-raises-4-6m-pre-seed/",
+   "title": "Soffi Raises $4.6M Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "rotomate-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/rotomate-raises-2-1m-pre-seed/",
+   "title": "Rotomate Raises \u20ac2.1M Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "bucketlistt-raises-1-07cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bucketlistt-raises-1-07cr-pre-seed/",
+   "title": "Bucketlistt Raises INR 1.07Cr Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 18
+  },
+  {
+   "slug": "archastro-raises-6-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/archastro-raises-6-2m-pre-seed/",
+   "title": "ArchAstro Raises $6.2M Pre-seed",
+   "date": "2026-06-10",
+   "tag": "pre-seed",
+   "tag_page": 18
   },
   {
    "slug": "willow-raises-7m-seed",
@@ -2649,6 +5023,30 @@
    "title": "fonio.ai Raises $17M Seed",
    "date": "2026-06-09",
    "tag_page": 31
+  },
+  {
+   "slug": "zaro-raises-5-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/zaro-raises-5-1m-pre-seed/",
+   "title": "Zaro Raises $5.1M Pre-seed",
+   "date": "2026-06-09",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "opereit-raises-2-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/opereit-raises-2-5m-pre-seed/",
+   "title": "Opereit Raises $2.5M Pre-seed",
+   "date": "2026-06-09",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "infohawk-raises-2-25m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/infohawk-raises-2-25m-pre-seed/",
+   "title": "InfoHawk Raises $2.25M Pre-seed",
+   "date": "2026-06-09",
+   "tag": "pre-seed",
+   "tag_page": 19
   },
   {
    "slug": "verse8-raises-5m-seed",
@@ -2735,6 +5133,78 @@
    "tag_page": 32
   },
   {
+   "slug": "twoway-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/twoway-raises-1-5m-pre-seed/",
+   "title": "TwoWay Raises \u20ac1.5M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "happysupport-raises-200000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/happysupport-raises-200000-pre-seed/",
+   "title": "HappySupport Raises \u20ac200,000 Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "wassist-raises-1-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/wassist-raises-1-1m-pre-seed/",
+   "title": "Wassist Raises $1.1M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "thea-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/thea-raises-4m-pre-seed/",
+   "title": "Thea Raises $4M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "retriever-raises-500m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/retriever-raises-500m-pre-seed/",
+   "title": "Retriever Raises 500M KRW Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "qanooni-ai-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/qanooni-ai-raises-2m-pre-seed/",
+   "title": "Qanooni AI Raises $2M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "firewave-raises-500000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/firewave-raises-500000-pre-seed/",
+   "title": "Firewave Raises $500,000 Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "beatpulselabs-raises-1-8m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/beatpulselabs-raises-1-8m-pre-seed/",
+   "title": "BeatpulseLabs Raises $1.8M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
+   "slug": "asterix-health-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/asterix-health-raises-2-1m-pre-seed/",
+   "title": "Asterix Health Raises \u00a32.1M Pre-seed",
+   "date": "2026-06-08",
+   "tag": "pre-seed",
+   "tag_page": 19
+  },
+  {
    "slug": "tirefly-raises-seed-funding-to-scale-ai-certified-used-tire-platform-nationwide",
    "url": "https://www.thesaasnews.com/news/tirefly-raises-seed-funding-to-scale-ai-certified-used-tire-platform-nationwide/",
    "title": "TIREFLY Raises Seed Funding",
@@ -2805,6 +5275,14 @@
    "tag_page": 33
   },
   {
+   "slug": "gyver-raises-1-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/gyver-raises-1-4m-pre-seed/",
+   "title": "Gyver Raises \u20ac1.4M Pre-seed",
+   "date": "2026-06-07",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
    "slug": "offroad-raises-7m-seed",
    "url": "https://www.thesaasnews.com/news/offroad-raises-7m-seed/",
    "title": "Offroad Raises $7M Seed",
@@ -2838,6 +5316,38 @@
    "title": "Cense Raises \u20ac6.5M Seed",
    "date": "2026-06-05",
    "tag_page": 34
+  },
+  {
+   "slug": "np-company-raises-6m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/np-company-raises-6m-pre-seed/",
+   "title": "NP Company Raises \u20ac6M Pre-seed",
+   "date": "2026-06-05",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "inxm-raises-5-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/inxm-raises-5-7m-pre-seed/",
+   "title": "INXM Raises \u20ac5.7M Pre-seed",
+   "date": "2026-06-05",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "emphere-raises-2-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/emphere-raises-2-1m-pre-seed/",
+   "title": "Emphere Raises $2.1M Pre-seed",
+   "date": "2026-06-05",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "aethexai-raises-3m-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/aethexai-raises-3m-pre-seed-2/",
+   "title": "AethexAI Raises $3M Pre-seed",
+   "date": "2026-06-05",
+   "tag": "pre-seed",
+   "tag_page": 20
   },
   {
    "slug": "zerodrift-raises-10m-seed",
@@ -2901,6 +5411,38 @@
    "title": "Champ AI Raises $8.5M Seed",
    "date": "2026-06-04",
    "tag_page": 34
+  },
+  {
+   "slug": "vivilo-raises-628000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/vivilo-raises-628000-pre-seed/",
+   "title": "Vivilo Raises \u20ac628,000 Pre-seed",
+   "date": "2026-06-04",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "prolearn-raises-30cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/prolearn-raises-30cr-pre-seed/",
+   "title": "ProLearn Raises \u20b930Cr Pre-seed",
+   "date": "2026-06-04",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "medielaj-raises-100000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/medielaj-raises-100000-pre-seed/",
+   "title": "MediElaj Raises $100,000 Pre-seed",
+   "date": "2026-06-04",
+   "tag": "pre-seed",
+   "tag_page": 20
+  },
+  {
+   "slug": "aethexai-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/aethexai-raises-3m-pre-seed/",
+   "title": "AethexAI Raises $3M Pre-seed",
+   "date": "2026-06-04",
+   "tag": "pre-seed",
+   "tag_page": 20
   },
   {
    "slug": "stratusgrid-raises-3m-seed",
@@ -3048,6 +5590,118 @@
    "title": "Hamilton AI Raises $7.5M Seed",
    "date": "2026-06-03",
    "tag_page": 35
+  },
+  {
+   "slug": "lemhi-emerges-from-stealth-with-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/lemhi-emerges-from-stealth-with-pre-seed-funding/",
+   "title": "Lemhi Emerges from Stealth with Pre-Seed Funding",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "twin-prime-raises-10m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/twin-prime-raises-10m-pre-seed/",
+   "title": "Twin Prime Raises $10M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "series-raises-5-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/series-raises-5-1m-pre-seed/",
+   "title": "Series Raises $5.1M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "poppy-raises-1-25m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/poppy-raises-1-25m-pre-seed/",
+   "title": "Poppy Raises $1.25M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "nardo-raises-a1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/nardo-raises-a1m-pre-seed/",
+   "title": "Nardo Raises A$1M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "kaavio-raises-2-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/kaavio-raises-2-9m-pre-seed/",
+   "title": "Kaavio Raises $2.9M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "ficus-raises-2-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ficus-raises-2-4m-pre-seed/",
+   "title": "Ficus Raises $2.4M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "extraordinary-money-xmo-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/extraordinary-money-xmo-raises-4m-pre-seed/",
+   "title": "Extraordinary Money (XMO) Raises $4M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "everyday-raises-2-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/everyday-raises-2-5m-pre-seed/",
+   "title": "Everyday^ Raises \u20ac2.5M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "daakit-raises-138k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/daakit-raises-138k-pre-seed/",
+   "title": "DAAKit Raises $138K Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "craon-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/craon-raises-1m-pre-seed/",
+   "title": "CRAON Raises $1M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "conelabs-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/conelabs-raises-1-5m-pre-seed/",
+   "title": "ConeLabs Raises $1.5M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "candy-ecosystem-raises-100000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/candy-ecosystem-raises-100000-pre-seed/",
+   "title": "Candy Ecosystem Raises $100,000 Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 21
+  },
+  {
+   "slug": "upstream-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/upstream-raises-3m-pre-seed/",
+   "title": "Upstream Raises $3M Pre-seed",
+   "date": "2026-06-03",
+   "tag": "pre-seed",
+   "tag_page": 20
   },
   {
    "slug": "kin-health-raises-9m-seed",
@@ -3288,6 +5942,110 @@
    "tag_page": 37
   },
   {
+   "slug": "peekabox-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/peekabox-raises-1-5m-pre-seed/",
+   "title": "Peekabox Raises $1.5M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "infrawatch-raises-3m-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/infrawatch-raises-3m-pre-seed-2/",
+   "title": "Infrawatch Raises $3M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "qutwo-raises-25m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/qutwo-raises-25m-pre-seed/",
+   "title": "QuTwo Raises \u20ac25M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "pebble-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/pebble-raises-1m-pre-seed/",
+   "title": "Pebble Raises $1M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "owners-id-raises-260000-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/owners-id-raises-260000-pre-seed-2/",
+   "title": "Owners ID Raises $260,000 Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "jobsupi-raises-250k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/jobsupi-raises-250k-pre-seed/",
+   "title": "JobsUPI Raises $250K Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "jabali-ai-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/jabali-ai-raises-5m-pre-seed/",
+   "title": "Jabali AI Raises $5M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "cimento-ai-raises-3m-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/cimento-ai-raises-3m-pre-seed-2/",
+   "title": "Cimento AI Raises $3M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "boop-raises-200000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/boop-raises-200000-pre-seed/",
+   "title": "Boop Raises $200,000 Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "bhindi-io-raises-4m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/bhindi-io-raises-4m-pre-seed/",
+   "title": "Bhindi.io Raises $4M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "banza-raises-1-million-pre-seed",
+   "url": "https://www.thesaasnews.com/news/banza-raises-1-million-pre-seed/",
+   "title": "Banza Raises $1 million Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "alp-bio-raises-1-9m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/alp-bio-raises-1-9m-pre-seed/",
+   "title": "ALP Bio Raises \u20ac1.9M Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
+   "slug": "ai-library-raises-560000-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ai-library-raises-560000-pre-seed/",
+   "title": "AI Library Raises $560,000 Pre-seed",
+   "date": "2026-06-02",
+   "tag": "pre-seed",
+   "tag_page": 22
+  },
+  {
    "slug": "trajectory-raises-15m-seed",
    "url": "https://www.thesaasnews.com/news/trajectory-raises-15m-seed/",
    "title": "Trajectory Raises $15M Seed",
@@ -3428,6 +6186,102 @@
    "tag_page": 40
   },
   {
+   "slug": "rovia-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/rovia-raises-1m-pre-seed/",
+   "title": "Rovia Raises $1M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "ai-platforms-split-on-how-far-to-push-solar-o-m-automation-pv-magazine-global",
+   "url": "https://www.thesaasnews.com/news/ai-platforms-split-on-how-far-to-push-solar-o-m-automation-pv-magazine-global/",
+   "title": "AI platforms split on how far to push solar O&M automation - pv magazine Global",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "wittify-raises-1-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/wittify-raises-1-5m-pre-seed/",
+   "title": "Wittify Raises $1.5M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "veeper-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/veeper-raises-1-7m-pre-seed/",
+   "title": "Veeper Raises $1.7M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "synaps-raises-3-06m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/synaps-raises-3-06m-pre-seed/",
+   "title": "Synaps Raises \u20ac3.06M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "omaia-closes-pre-seed-round",
+   "url": "https://www.thesaasnews.com/news/omaia-closes-pre-seed-round/",
+   "title": "Omaia Closes Pre-Seed Round",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "misti-ai-raises-336000-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/misti-ai-raises-336000-pre-seed-2/",
+   "title": "Misti AI Raises $336,000 Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "mafer-ai-raises-2m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/mafer-ai-raises-2m-pre-seed/",
+   "title": "Mafer AI Raises \u20ac2M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "exomatter-raises-1-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/exomatter-raises-1-7m-pre-seed/",
+   "title": "ExoMatter Raises \u20ac1.7M Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "earsmartai-raises-250k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/earsmartai-raises-250k-pre-seed/",
+   "title": "EarSmartAI Raises $250K Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "ctc-global-solutions-corp-raises-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ctc-global-solutions-corp-raises-pre-seed/",
+   "title": "CTC Global Solutions Corp Raises Pre-Seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
+   "slug": "atheni-raises-440k-pre-seed",
+   "url": "https://www.thesaasnews.com/news/atheni-raises-440k-pre-seed/",
+   "title": "Atheni Raises $440K Pre-seed",
+   "date": "2026-06-01",
+   "tag": "pre-seed",
+   "tag_page": 23
+  },
+  {
    "slug": "paralign-health-raises-3m-seed",
    "url": "https://www.thesaasnews.com/news/paralign-health-raises-3m-seed/",
    "title": "Paralign Health Raises $3M Seed",
@@ -3503,6 +6357,54 @@
    "title": "CodeIntegrity Raises $5M Seed Round",
    "date": "2026-05-28",
    "tag_page": 42
+  },
+  {
+   "slug": "sumvin-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/sumvin-raises-1m-pre-seed/",
+   "title": "Sumvin Raises $1M Pre-Seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "proho-raises-1m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/proho-raises-1m-pre-seed/",
+   "title": "Proho Raises $1M Pre-seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "ponder-ai-raises-2-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/ponder-ai-raises-2-5m-pre-seed/",
+   "title": "Ponder AI Raises $2.5M Pre-seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "modiqo-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/modiqo-raises-3m-pre-seed/",
+   "title": "Modiqo Raises $3M Pre-seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "hypernova-raises-3m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/hypernova-raises-3m-pre-seed/",
+   "title": "Hypernova Raises $3M Pre-seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "crink-raises-1-8cr-pre-seed",
+   "url": "https://www.thesaasnews.com/news/crink-raises-1-8cr-pre-seed/",
+   "title": "Crink Raises \u20b91.8Cr Pre-seed",
+   "date": "2026-05-28",
+   "tag": "pre-seed",
+   "tag_page": 24
   },
   {
    "slug": "robbin-bags-8-million-seed-funding",
@@ -3629,6 +6531,54 @@
    "title": "Clouted Raises $7M Seed",
    "date": "2026-05-26",
    "tag_page": 43
+  },
+  {
+   "slug": "canyon-code-raises-5m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/canyon-code-raises-5m-pre-seed/",
+   "title": "Canyon Code Raises $5M Pre-Seed",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 25
+  },
+  {
+   "slug": "avrea-raises-4-7m-pre-seed",
+   "url": "https://www.thesaasnews.com/news/avrea-raises-4-7m-pre-seed/",
+   "title": "Avrea Raises $4.7M Pre-Seed",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 25
+  },
+  {
+   "slug": "voxmind-raises-546491-pre-seed",
+   "url": "https://www.thesaasnews.com/news/voxmind-raises-546491-pre-seed/",
+   "title": "Voxmind Raises \u00a3546,491 Pre-Seed",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "quantum-tiger-raises-pre-seed-at-2m-valuation",
+   "url": "https://www.thesaasnews.com/news/quantum-tiger-raises-pre-seed-at-2m-valuation/",
+   "title": "Quantum Tiger Raises Pre-Seed at $2M Valuation",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "m2-foundry-raises-pre-seed-funding",
+   "url": "https://www.thesaasnews.com/news/m2-foundry-raises-pre-seed-funding/",
+   "title": "M2 Foundry Raises Pre-Seed Funding",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 24
+  },
+  {
+   "slug": "charms-interactive-inc-raises-1-5m-pre-seed-2",
+   "url": "https://www.thesaasnews.com/news/charms-interactive-inc-raises-1-5m-pre-seed-2/",
+   "title": "Charms Interactive, Inc. Raises $1.5M Pre-Seed",
+   "date": "2026-05-26",
+   "tag": "pre-seed",
+   "tag_page": 24
   },
   {
    "slug": "nexus-inclusion-raises-3-5m-seed",

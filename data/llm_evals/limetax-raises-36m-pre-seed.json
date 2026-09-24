@@ -1,0 +1,23 @@
+{
+  "slug": "limetax-raises-36m-pre-seed",
+  "company": "Limetax",
+  "domain": "limetax.de",
+  "website": "https://limetax.de",
+  "usd_equivalent": 38880000.0,
+  "raised_raw": "\u20ac36M",
+  "round_field": "Pre-seed",
+  "funding_date": "September 9, 2026",
+  "lead_investor": "Motive Partners",
+  "software_category": "FinTech",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "evaluated_at": "2026-09-13T11:20:26Z"
+}

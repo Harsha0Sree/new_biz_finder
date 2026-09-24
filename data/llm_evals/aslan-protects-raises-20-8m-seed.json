@@ -1,0 +1,23 @@
+{
+  "slug": "aslan-protects-raises-20-8m-seed",
+  "company": "Aslan Protects",
+  "domain": "aslanprotects.com",
+  "website": "https://aslanprotects.com",
+  "usd_equivalent": 20800000.0,
+  "raised_raw": "$20.8M",
+  "round_field": "Seed",
+  "funding_date": "September 2026",
+  "lead_investor": "Khosla Ventures, XYZ Venture Capital",
+  "software_category": "Cyber Intelligence",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "evaluated_at": "2026-09-13T11:20:59Z"
+}

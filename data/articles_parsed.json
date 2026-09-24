@@ -7757,6 +7757,2398 @@
    "url": "https://www.thesaasnews.com/news/seechange-technologies-raises-8-million-in-seed-extension/",
    "date": "2023-11-21",
    "filter_reason": "ok"
+  },
+  "physical-superintelligence-raises-58m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://psi.inc",
+    "company": "Physical Superintelligence",
+    "raised": "$58M",
+    "round": "Seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "Breakthrough Energy Ventures",
+    "additional_investors": "Dragon Global, Robot Ventures, Solari, Susa, SV Angel, Valkyrie, Balaji Srinivasan, Anthony Scaramucci, OpenAI, NVIDIA, SoftBank Energy, Oracle, Hugging Face, JUMP Capital, a16z Scout Fund",
+    "software_category": "Artificial Intelligence",
+    "source": "https://www.prnewswire.com/news-releases/introducing-physical-superintelligence-the-worlds-most-advanced-physics-lab-staffed-by-virtual-physicists-to-discover-new-laws-of-the-universe-302865561.html"
+   },
+   "title": "Physical Superintelligence Raises $58M Seed",
+   "url": "https://www.thesaasnews.com/news/physical-superintelligence-raises-58m-seed/",
+   "date": "2026-09-03",
+   "filter_reason": "ok"
+  },
+  "air-raises-50m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://air.security",
+    "company": "AIR",
+    "raised": "$50M",
+    "round": "Seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "Sequoia Capital, Greenoaks",
+    "additional_investors": "Swish, Netz, Zach Frankel, Yinon Costica, Ofir Ehrlich, Anne Neuberger, Omer Adam, Varun Anand",
+    "software_category": "Cybersecurity",
+    "source": "https://techcrunch.com/2026/09/01/air-raises-50m-to-help-companies-vet-the-skills-and-add-ons-ai-agents-use/"
+   },
+   "title": "AIR Raises $50M Seed",
+   "url": "https://www.thesaasnews.com/news/air-raises-50m-seed/",
+   "date": "2026-09-01",
+   "filter_reason": "ok"
+  },
+  "scifin-raises-44m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://scifin.com",
+    "company": "SciFin",
+    "raised": "$44M",
+    "round": "Seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "Altimeter, Madrona",
+    "additional_investors": "Foundation Capital, S32, Zetta Ventures",
+    "software_category": "Revenue Intelligence",
+    "source": "https://finance.yahoo.com/technology/articles/scifin-emerges-stealth-44-million-150000906.html"
+   },
+   "title": "SciFin Raises $44M Seed",
+   "url": "https://www.thesaasnews.com/news/scifin-raises-44m-seed/",
+   "date": "2026-09-01",
+   "filter_reason": "ok"
+  },
+  "yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://fintax.tech",
+    "company": "FinTax",
+    "round": "Seed",
+    "funding_date": "August 27, 2026",
+    "lead_investor": "YZi Labs",
+    "additional_investors": "Amber, Hash House, Pundi AI, Waverider International, Nexus Holdings",
+    "software_category": "Fintech",
+    "source": "https://www.odaily.news/en/newsflash/513159"
+   },
+   "title": "FinTax Raises Seed at $40M Valuation",
+   "url": "https://www.thesaasnews.com/news/yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration/",
+   "date": "2026-08-27",
+   "filter_reason": "check_article_valuation_only"
+  },
+  "keenable-raises-26m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://keenable.ai",
+    "company": "Keenable",
+    "raised": "$26M",
+    "round": "Seed",
+    "funding_date": "August 25, 2026",
+    "lead_investor": "Accel",
+    "additional_investors": "Conviction Partners, business angels",
+    "software_category": "Artificial Intelligence",
+    "source": "https://techcrunch.com/2026/08/25/accel-backed-keenable-is-indexing-the-web-for-ai-agents/"
+   },
+   "title": "Keenable Raises $26M Seed",
+   "url": "https://www.thesaasnews.com/news/keenable-raises-26m-seed/",
+   "date": "2026-08-26",
+   "filter_reason": "ok"
+  },
+  "stack-health-raises-21m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://stackhealthcare.com",
+    "company": "Stack Health",
+    "raised": "$21M",
+    "round": "Seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "8VC",
+    "additional_investors": "A*, Heartland Ventures, The O.H.I.O. Fund",
+    "software_category": "Insurtech",
+    "source": "https://www.ohiotechnews.com/stack-health-raises-21m/"
+   },
+   "title": "Stack Health Raises $21M Seed",
+   "url": "https://www.thesaasnews.com/news/stack-health-raises-21m-seed/",
+   "date": "2026-09-02",
+   "filter_reason": "ok"
+  },
+  "empirik-raises-21m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://empirik.ai",
+    "company": "Empirik",
+    "raised": "$21M",
+    "round": "Seed",
+    "funding_date": "September 1, 2026",
+    "additional_investors": "Sequoia Capital, Canapi Ventures, Alumni Ventures",
+    "software_category": "Enterprise AI",
+    "source": "https://techcrunch.com/2026/09/01/sequoia-incubated-empirik-launches-with-21m-to-predict-outages-before-they-happen/"
+   },
+   "title": "Empirik Raises $21M Seed",
+   "url": "https://www.thesaasnews.com/news/empirik-raises-21m-seed/",
+   "date": "2026-09-01",
+   "filter_reason": "ok"
+  },
+  "aslan-protects-raises-20-8m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://aslanprotects.com",
+    "company": "Aslan Protects",
+    "raised": "$20.8M",
+    "round": "Seed",
+    "funding_date": "September 2026",
+    "lead_investor": "Khosla Ventures, XYZ Venture Capital",
+    "additional_investors": "BoxGroup, 2048 Ventures, Liquid 2 Ventures, Alumni Ventures",
+    "software_category": "Cyber Intelligence",
+    "source": "https://www.finsmes.com/2026/09/aslan-protects-raises-20-8m-in-seed-funding.html"
+   },
+   "title": "Aslan Protects Raises $20.8M Seed",
+   "url": "https://www.thesaasnews.com/news/aslan-protects-raises-20-8m-seed/",
+   "date": "2026-09-03",
+   "filter_reason": "ok"
+  },
+  "nayla-raises-17-9m-pre-series-a": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://naylafinance.com/",
+    "company": "Nayla",
+    "raised": "$17.9M",
+    "round": "Pre-Series A",
+    "funding_date": "September 2026",
+    "lead_investor": "Idrisi Ventures",
+    "additional_investors": "Suhail Ventures, Blominvest",
+    "software_category": "Fintech",
+    "source": "https://entarabi.com/en/2026/09/saudi-fintech-nayla-raises-17-9/"
+   },
+   "title": "Nayla Raises $17.9M Pre-Series A",
+   "url": "https://www.thesaasnews.com/news/nayla-raises-17-9m-pre-series-a/",
+   "date": "2026-09-04",
+   "filter_reason": "ok_pre_series_a_flagged"
+  },
+  "ecomid-raises-17m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://ecomid.com",
+    "company": "eComID",
+    "raised": "$17M",
+    "round": "Seed",
+    "funding_date": "August 25, 2026",
+    "lead_investor": "Systemiq Capital",
+    "additional_investors": "Regeneration.VC, Course Corrected, Stadium, CapitalT, Alan Mamedi, Sebastian Knutsson, Henrik Nordvall, Maria Raga, August Ers\u00e9us, Alexandra Sack, Gustav Gisseldahl, Filip Ekvall, Bo Ekl\u00f6f, Lucas Otterling, Madeleine Persson, Anaheta v. Berenberg-Consbruch",
+    "software_category": "eCommerce Technology",
+    "source": "https://www.ecomid.com/blog/seed-round/"
+   },
+   "title": "eComID Raises $17M Seed",
+   "url": "https://www.thesaasnews.com/news/ecomid-raises-17m-seed/",
+   "date": "2026-08-25",
+   "filter_reason": "ok"
+  },
+  "newdays-raises-16m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://newdays.ai",
+    "company": "NewDays",
+    "raised": "$16M",
+    "round": "Seed",
+    "funding_date": "September 2, 2026",
+    "lead_investor": "Madrona, General Catalyst",
+    "software_category": "HealthTech",
+    "source": "https://www.geekwire.com/2026/newdays-brings-its-ai-driven-dementia-care-platform-to-nevada-expands-seed-round-to-16m/"
+   },
+   "title": "NewDays Raises $16M Seed",
+   "url": "https://www.thesaasnews.com/news/newdays-raises-16m-seed/",
+   "date": "2026-09-03",
+   "filter_reason": "ok"
+  },
+  "primero-raises-12m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://primero.com/",
+    "company": "Primero",
+    "raised": "$12M",
+    "round": "Seed",
+    "funding_date": "August 25, 2026",
+    "lead_investor": "Kaszek, General Catalyst",
+    "additional_investors": "Various angel investors including shareholders and executives from FEMSA, Bimbo, Aeromexico, and Kimberly-Clark de Mexico",
+    "software_category": "Artificial Intelligence",
+    "source": "https://srnnews.com/mexicos-primero-raises-12-million-seed-to-bring-ai-to-latin-american-blue-chips/"
+   },
+   "title": "Primero Raises $12M Seed",
+   "url": "https://www.thesaasnews.com/news/primero-raises-12m-seed/",
+   "date": "2026-08-26",
+   "filter_reason": "ok"
+  },
+  "apate-ai-raises-11-4m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://apate.ai",
+    "company": "Apate.AI",
+    "raised": "$11.4M",
+    "round": "Seed",
+    "funding_date": "August 31, 2026",
+    "lead_investor": "Lobby Capital",
+    "additional_investors": "OIF Ventures, Investible, Concept Ventures, Baobab Ventures",
+    "software_category": "Cybersecurity",
+    "source": "https://app.dealroom.co/news/note/apate-ai-raises-11-4m-seed-to-turn-ai-scammers-against-themselves"
+   },
+   "title": "Apate.AI Raises $11.4M Seed",
+   "url": "https://www.thesaasnews.com/news/apate-ai-raises-11-4m-seed/",
+   "date": "2026-08-31",
+   "filter_reason": "ok"
+  },
+  "limetax-raises-36m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://limetax.de",
+    "company": "Limetax",
+    "raised": "\u20ac36M",
+    "round": "Pre-seed",
+    "funding_date": "September 9, 2026",
+    "lead_investor": "Motive Partners",
+    "additional_investors": "Activant, Heliad, Christian Lindner, Alexander Kudlich, Anton Rummel, Ante Spittler, Consortium of German banks",
+    "software_category": "FinTech",
+    "source": "https://www.eu-startups.com/2026/09/limetax-lands-e36-million-to-build-an-ai-powered-group-of-german-tax-and-accounting-firms/"
+   },
+   "title": "Limetax Raises \u20ac36M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/limetax-raises-36m-pre-seed/",
+   "date": "2026-09-09",
+   "filter_reason": "ok_pre_seed"
+  },
+  "tapline-raises-31-7-million-in-pre-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Tapline",
+    "raised": "\u20ac31.7M",
+    "round": "pre-Seed Round",
+    "funding_date": "December 2022",
+    "lead_investor": "Fasanara Capital (Debt), and V-Sharp Venture Studio (Equity)",
+    "additional_investors": "Antler, Black Pearls VC, 365 fintech, Depo Ventures, and Impetus Capital",
+    "website": "https://tapline.io/",
+    "software_category": "Trading Platform",
+    "source": "https://www.finextra.com/newsarticle/41455/digital-finance-platform-tapline-comes-out-of-stealth-with-funding?utm_medium=rssfinextra&utm_source=finextrafeed"
+   },
+   "title": "Tapline Raises \u20ac31.7 Million in pre-Seed Round",
+   "url": "https://www.thesaasnews.com/news/tapline-raises-31-7-million-in-pre-seed-round/",
+   "date": "2022-12-07",
+   "filter_reason": "ok_pre_seed"
+  },
+  "qutwo-raises-25m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "company": "QuTwo",
+    "raised": "\u20ac25M",
+    "round": "Pre-seed",
+    "funding_date": "May 5, 2026",
+    "lead_investor": "Yuri Milner, Xavier Niel, Nico Rosberg, Dieter Schwarz, Niklas Zennstr\u00f6m, startup founders from Hugging Space, Legora, Miro, Skype, Supercell, Wolt",
+    "software_category": "AI Software, Enterprise AI",
+    "website": "https://qutwo.com",
+    "source": "https://techcrunch.com/2026/05/05/peter-sarlins-qutwo-reaches-380m-valuation-in-angel-round/"
+   },
+   "title": "QuTwo Raises \u20ac25M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/qutwo-raises-25m-pre-seed/",
+   "date": "2026-06-02",
+   "filter_reason": "ok_pre_seed"
+  },
+  "june-ai-raises-20m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://june.ai",
+    "company": "June AI",
+    "raised": "$20M",
+    "round": "Pre-seed",
+    "funding_date": "August 3, 2026",
+    "lead_investor": "TIME Ventures",
+    "additional_investors": "Michael Dell, Diane Greene, Aaron Levie, George Kurtz, SV Angel, Conviction Embed, Abstract, A*, Vesey Ventures",
+    "software_category": "Enterprise Software",
+    "source": "https://www.globenewswire.com/news-release/2026/08/03/3337641/0/en/june-ai-emerges-from-stealth-to-reinvent-enterprise-software-implementation-for-the-ai-era.html"
+   },
+   "title": "June AI Raises $20M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/june-ai-raises-20m-pre-seed/",
+   "date": "2026-08-04",
+   "filter_reason": "ok_pre_seed"
+  },
+  "talp-raises-20m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://talp.ai/",
+    "company": "Talp",
+    "raised": "Undisclosed",
+    "round": "Pre-seed",
+    "funding_date": "July 3, 2026",
+    "lead_investor": "Formus Capital",
+    "additional_investors": "a16z Scout Fund",
+    "software_category": "AI Analytics",
+    "source": "https://www.startupresearcher.com/news/ai-persona-startup-talp-secures-20-million-in-pre-seed-funding"
+   },
+   "title": "Talp Secures Pre-Seed Funding at $20 Million Valuation",
+   "url": "https://www.thesaasnews.com/news/talp-raises-20m-pre-seed/",
+   "date": "2026-07-03",
+   "filter_reason": "check_article_valuation_only"
+  },
+  "atira-raises-17-5m-pre-seed-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://atira.ai",
+    "company": "Atira",
+    "raised": "$17.5M",
+    "round": "Pre-Seed, Seed",
+    "funding_date": "September 3, 2026",
+    "lead_investor": "Accel",
+    "additional_investors": "UVC, Fortino, Booom, Ann-Kristin Achleitner, Marc Bitzer, Markus Flik, Bastian Nominacher",
+    "software_category": "Industrial AI Software",
+    "source": "https://pulse2.com/atira-raises-17-5-million-to-build-ai-orchestration-platform-for-industrial-sales-engineering/"
+   },
+   "title": "Atira Raises $17.5M in Funding",
+   "url": "https://www.thesaasnews.com/news/atira-raises-17-5m-pre-seed-seed/",
+   "date": "2026-09-04",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "convergence-raises-12m-in-pre-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Convergence Labs Limited",
+    "raised": "$12.0M",
+    "round": "Pre-Seed",
+    "funding_date": "September 2024",
+    "lead_investor": "Balderton Capital",
+    "additional_investors": "Salesforce Ventures, Shopify Ventures",
+    "website": "https://convergence.ai/",
+    "software_category": "AI Assistant",
+    "source": "https://techcrunch.com/2024/09/25/convergence-ai-played-with-agents-for-years-until-raising-12m-to-give-them-long-term-memory/"
+   },
+   "title": "Convergence Raises $12M in Pre-Seed Round",
+   "url": "https://www.thesaasnews.com/news/convergence-raises-12m-in-pre-seed-round/",
+   "date": "2024-09-29",
+   "filter_reason": "ok_pre_seed"
+  },
+  "aranya-raises-11m-pre-seed-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://aranya.tech",
+    "company": "Aranya",
+    "raised": "$11M",
+    "round": "Pre-Seed, Seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "First Round Capital",
+    "additional_investors": "Box Group, Vermilion Cliffs, Asylum Ventures, Founder Collective, Parable VC, Uncommon Ventures",
+    "software_category": "AI Infrastructure Software",
+    "source": "Aranya"
+   },
+   "title": "Aranya Raises $11M in Funding",
+   "url": "https://www.thesaasnews.com/news/aranya-raises-11m-pre-seed-seed/",
+   "date": "2026-09-01",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "paid-secures-10m-in-pre-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Paid",
+    "raised": "\u20ac10.0M",
+    "round": "Pre-Seed",
+    "funding_date": "March 2025",
+    "lead_investor": "EQT Ventures, Sequoia Capital",
+    "additional_investors": "",
+    "website": "https://www.paid.ai/",
+    "software_category": "AI Agent Monetization & Business Infrastructure",
+    "source": "https://www.eu-startups.com/2025/03/paid-raises-e10-million-to-transform-ai-agent-economy-and-launch-beta-programme/"
+   },
+   "title": "Paid Secures \u20ac10M in Pre-Seed Round",
+   "url": "https://www.thesaasnews.com/news/paid-secures-10m-in-pre-seed-round/",
+   "date": "2025-03-26",
+   "filter_reason": "ok_pre_seed"
+  },
+  "metacognition-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://metacognitionai.com/",
+    "company": "Metacognition",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "September 2026",
+    "lead_investor": "Main Sequence",
+    "software_category": "Artificial Intelligence",
+    "source": "https://www.forbes.com.au/news/entrepreneurs/australian-ai-lab-metacognition-caps-record-pre-seed-raise/"
+   },
+   "title": "Metacognition Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/metacognition-raises-10m-pre-seed/",
+   "date": "2026-09-10",
+   "filter_reason": "ok_pre_seed"
+  },
+  "visko-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://visko.ai",
+    "company": "Visko",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "September 1, 2026",
+    "lead_investor": "Llama Ventures",
+    "software_category": "Artificial Intelligence",
+    "source": "https://www.prnewswire.com/news-releases/ai-startup-visko-closes-10-million-pre-seed-round-and-launches-orbis-its-first-live-model-302865890.html"
+   },
+   "title": "Visko Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/visko-raises-10m-pre-seed/",
+   "date": "2026-09-02",
+   "filter_reason": "ok_pre_seed"
+  },
+  "dataagent-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://data-agent.co",
+    "company": "DataAgent",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "September 2026",
+    "lead_investor": "MizMaa Ventures, Alicorn Venture Partners",
+    "software_category": "Infrastructure Software",
+    "source": "https://www.prnewswire.com/il/news-releases/dataagent-emerges-from-stealth-and-launches-remediation-first-platform-with-10-million-pre-seed-funding-302866110.html"
+   },
+   "title": "DataAgent Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/dataagent-raises-10m-pre-seed/",
+   "date": "2026-09-02",
+   "filter_reason": "ok_pre_seed"
+  },
+  "arga-labs-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://argalabs.com",
+    "company": "Arga Labs",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "August 26, 2026",
+    "lead_investor": "General Catalyst",
+    "additional_investors": "Box Group, Emergence, Gradient, SV Angel",
+    "software_category": "Enterprise AI",
+    "source": "https://techcrunch.com/2026/08/26/arga-is-building-a-better-way-to-train-enterprise-ai-agents/"
+   },
+   "title": "Arga Labs Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/arga-labs-raises-10m-seed/",
+   "date": "2026-08-27",
+   "filter_reason": "ok"
+  },
+  "veryai-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://very.org",
+    "company": "VeryAI",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "March 12, 2026",
+    "lead_investor": "Polychain Capital",
+    "additional_investors": "Berggruen Institute, Anagram",
+    "software_category": "Cybersecurity",
+    "source": "https://www.webwire.com/ViewPressRel.asp?aId=351926"
+   },
+   "title": "VeryAI Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/veryai-raises-10m-seed/",
+   "date": "2026-08-26",
+   "filter_reason": "ok"
+  },
+  "preview-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://preview.io/",
+    "company": "Preview",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "August 13, 2026",
+    "lead_investor": "Sequoia",
+    "software_category": "AI Video Production",
+    "source": "https://app.dealroom.co/news/note/sequoia-leads-10m-seed-for-preview-the-video-version-of-cursor"
+   },
+   "title": "Preview Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/preview-raises-10m-seed/",
+   "date": "2026-08-13",
+   "filter_reason": "ok"
+  },
+  "genera-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://www.genera.sh/",
+    "company": "Genera",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "August 11, 2026",
+    "lead_investor": "First Round Capital",
+    "additional_investors": "BoxGroup, WndrCo, Carpenter Capital, Success Venture Partners",
+    "software_category": "Enterprise AI",
+    "source": "https://app.dealroom.co/news/note/genera-raises-10m-seed-to-speed-up-enterprise-ai-deployments"
+   },
+   "title": "Genera Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/genera-raises-10m-seed/",
+   "date": "2026-08-12",
+   "filter_reason": "ok"
+  },
+  "malachyte-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://malachyte.com",
+    "company": "Malachyte",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "August 2026",
+    "lead_investor": "Bessemer Venture Partners",
+    "software_category": "AI/eCommerce",
+    "source": "https://www.pymnts.com/news/investment-tracker/2026/spotify-vets-ecommerce-focused-ai-startup-raises-10-million/"
+   },
+   "title": "Malachyte Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/malachyte-raises-10m-seed/",
+   "date": "2026-08-06",
+   "filter_reason": "ok"
+  },
+  "worldscape-raises-10m-seed-extension": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://worldscape.ai",
+    "company": "Worldscape",
+    "raised": "$10M",
+    "round": "Seed Extension",
+    "funding_date": "August 5, 2026",
+    "lead_investor": "Scout Ventures",
+    "additional_investors": "Radius Capital",
+    "software_category": "AI/Decision Intelligence",
+    "source": "https://www.prnewswire.com/news-releases/worldscape-raises-10-million-seed-extension-to-accelerate-ai-native-mission-engineering-302844185.html"
+   },
+   "title": "Worldscape Raises $10M Seed Extension",
+   "url": "https://www.thesaasnews.com/news/worldscape-raises-10m-seed-extension/",
+   "date": "2026-08-05",
+   "filter_reason": "ok"
+  },
+  "ellis-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://www.ellis.ai/",
+    "company": "Ellis",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "July 30, 2026",
+    "lead_investor": "First Round Capital",
+    "additional_investors": "645 Ventures, Harlem Capital, Khosla Ventures, Slow Ventures, Wilshire Lane, Westbound, Collide Capital, Gallery Ventures, Mellody Hobson, Josh Kushner, Immad Akhund",
+    "software_category": "Financial Technology",
+    "source": "https://alternativecreditinvestor.com/2026/07/30/private-credit-ai-platform-ellis-launches-with-10m-seed-funding/"
+   },
+   "title": "Ellis Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/ellis-raises-10m-seed/",
+   "date": "2026-07-31",
+   "filter_reason": "ok"
+  },
+  "modus-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://getmodus.com/",
+    "company": "Modus",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "July 29, 2026",
+    "lead_investor": "Insight Partners",
+    "additional_investors": "Soma Capital, Bullet Ventures, Eyal Kishon, Nadav Avrami, Cyera co-founders, Epsagon founders",
+    "software_category": "Artificial Intelligence",
+    "source": "https://hackernoon.com/modus-raises-$10m-seed-led-by-insight-partners-to-build-the-context-warehouse-for-enterprise-ai"
+   },
+   "title": "Modus Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/modus-raises-10m-seed/",
+   "date": "2026-07-30",
+   "filter_reason": "ok"
+  },
+  "credible-data-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://credibledata.com",
+    "company": "Credible Data",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "July 28, 2026",
+    "additional_investors": "Gradient, SignalFire, K5 Global, Godard Abel, Wes McKinney, Alex Dean, SV Angel",
+    "software_category": "Enterprise AI",
+    "source": "https://finance.yahoo.com/technology/ai/articles/credible-data-raises-10-million-130000745.html"
+   },
+   "title": "Credible Data Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/credible-data-raises-10m-seed/",
+   "date": "2026-07-29",
+   "filter_reason": "ok"
+  },
+  "epic-markets-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://epicmarkets.com/",
+    "company": "Epic Markets",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "July 22, 2026",
+    "lead_investor": "Karatage",
+    "software_category": "Fintech",
+    "source": "https://www.financemagnates.com/forex/citadel-veterans-raise-us10-million-pre-seed-to-launch-cfd-broker-epic-markets/"
+   },
+   "title": "Epic Markets Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/epic-markets-raises-10m-pre-seed/",
+   "date": "2026-07-23",
+   "filter_reason": "ok_pre_seed"
+  },
+  "sarborg-limited-raises-10-million-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://sarborg.com",
+    "company": "Sarborg Limited",
+    "raised": "$10 Million",
+    "round": "Seed",
+    "funding_date": "August 27, 2025",
+    "lead_investor": "Corvus Capital",
+    "software_category": "Artificial Intelligence",
+    "source": "https://www.globenewswire.com/news-release/2025/08/27/3140019/0/en/sarborg-limited-closes-10-million-seed-round-to-expand-proprietary-agentic-approach.html"
+   },
+   "title": "Sarborg Limited Raises $10 Million Seed",
+   "url": "https://www.thesaasnews.com/news/sarborg-limited-raises-10-million-seed/",
+   "date": "2026-07-13",
+   "filter_reason": "ok"
+  },
+  "reken-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://reken.ai",
+    "company": "Reken",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "July 13, 2026",
+    "additional_investors": "Greycroft, FPV Ventures",
+    "software_category": "Cybersecurity",
+    "source": "https://fortune.com/2026/07/13/ex-google-click-fraud-czar-emerges-from-stealth-with-an-on-device-ai-shield-against-ai-powered-phishing-deepfakes-and-other-scams/"
+   },
+   "title": "Reken Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/reken-raises-10m-seed/",
+   "date": "2026-07-13",
+   "filter_reason": "ok"
+  },
+  "arato-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://arato.ai",
+    "company": "Arato",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 29, 2026",
+    "lead_investor": "TLV Partners",
+    "additional_investors": "Jibe Ventures, Raghu Raghuram, Marianna Tessel",
+    "software_category": "AI Testing and Quality Assurance",
+    "source": "https://www.calcalistech.com/ctechnews/article/hjsft0j7me"
+   },
+   "title": "Arato Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/arato-raises-10m-seed/",
+   "date": "2026-06-29",
+   "filter_reason": "ok"
+  },
+  "magnitude-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://magnitude.ai",
+    "company": "Magnitude",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 24, 2026",
+    "lead_investor": "Ballistic Ventures",
+    "software_category": "Cybersecurity",
+    "source": "https://theaiinsider.tech/2026/06/24/magnitude-launches-from-stealth-with-10m-seed-funding-and-introduces-the-first-autonomous-ai-workforce-to-enable-third-party-risk-management-teams-in-the-mythos-era/"
+   },
+   "title": "Magnitude Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/magnitude-raises-10m-seed/",
+   "date": "2026-06-25",
+   "filter_reason": "ok"
+  },
+  "kotoba-technologies-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://site.kotoba.tech",
+    "company": "Kotoba Technologies",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 24, 2026",
+    "lead_investor": "Kindred Ventures",
+    "additional_investors": "Salesforce Ventures, Sony Innovation Fund",
+    "software_category": "Artificial Intelligence",
+    "source": "https://www.businesswire.com/news/home/20260624276012/en/Kotoba-Technologies-Raises-%2410-Million-in-Seed-Funding-to-Expand-Real-Time-Voice-AI-Platform-Across-East-Asia"
+   },
+   "title": "Kotoba Technologies Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/kotoba-technologies-raises-10m-seed/",
+   "date": "2026-06-25",
+   "filter_reason": "ok"
+  },
+  "causa-prima-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://causaprima.ai",
+    "company": "Causa Prima",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "June 16, 2026",
+    "lead_investor": "Creandum",
+    "additional_investors": "Kfund, HelloWorld, Angel Invest, Qonto, Pennylane, SAP, ING, SoFi, LIDL, DeepMind",
+    "software_category": "Fintech",
+    "source": "https://techfundingnews.com/causa-prima-10m-pre-seed-creandum-b2b-payments-ai-agents-network/"
+   },
+   "title": "Causa Prima Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/causa-prima-raises-10m-pre-seed/",
+   "date": "2026-06-15",
+   "filter_reason": "ok_pre_seed"
+  },
+  "hint-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "company": "Hint",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "May 2026",
+    "lead_investor": "Slow Ventures",
+    "additional_investors": "Montauk Capital, Tusk Venture Partners, Amplo, Energy Impact Partners, Hannah Grey VC, Brian Kelly",
+    "software_category": "Home Management Software, AI, Apps",
+    "website": "https://hinthome.com/",
+    "source": "https://www.businesswire.com/news/home/20260512987617/en/Martha-Stewart-Announces-Hint-a-New-Home-Management-Platform-Built-on-Human-Expertise-and-AI"
+   },
+   "title": "Hint Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/hint-raises-10m-seed/",
+   "date": "2026-06-07",
+   "filter_reason": "ok"
+  },
+  "zerodrift-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://zerodrift.ai",
+    "company": "ZeroDrift",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 2, 2026",
+    "lead_investor": "a16z Speedrun, Reign Ventures, PitchDrive Ventures, U&I Ventures",
+    "software_category": "AI Compliance",
+    "source": "https://techcrunch.com/2026/06/02/zerodrift-raises-10-million-to-protect-ai-models-from-themselves/"
+   },
+   "title": "ZeroDrift Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/zerodrift-raises-10m-seed/",
+   "date": "2026-06-04",
+   "filter_reason": "ok"
+  },
+  "archestra-ai-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "company": "Archestra.AI",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 2, 2026",
+    "lead_investor": "20VC",
+    "additional_investors": "Visible Ventures, Tenacity Capital, Olivier Pomel, Kieran Flanagan",
+    "software_category": "Artificial Intelligence",
+    "website": "https://archestra.ai",
+    "source": "https://tech.eu/2026/06/02/archestraai-raises-10m-to-unlock-next-gen-agentic-use-case/"
+   },
+   "title": "Archestra.AI Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/archestra-ai-raises-10m-seed/",
+   "date": "2026-06-04",
+   "filter_reason": "ok"
+  },
+  "plot-raises-10m-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://plot.so",
+    "company": "Plot",
+    "raised": "$10M",
+    "round": "Seed",
+    "funding_date": "June 2, 2026",
+    "lead_investor": "XYZ Venture Capital, Mischief Ventures",
+    "additional_investors": "Seven Seven Six, Acme Capital",
+    "software_category": "Marketing Technology",
+    "source": "https://www.citybiz.co/article/854612/plot-raises-10m-to-build-ai-powered-marketing-platform-around-social-video-data/"
+   },
+   "title": "Plot Raises $10M Seed",
+   "url": "https://www.thesaasnews.com/news/plot-raises-10m-seed/",
+   "date": "2026-06-03",
+   "filter_reason": "ok"
+  },
+  "twin-prime-raises-10m-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://twinprime.ai",
+    "company": "Twin Prime",
+    "raised": "$10M",
+    "round": "Pre-seed",
+    "funding_date": "May 14, 2026",
+    "lead_investor": "Expeditions",
+    "additional_investors": "Theon, American and European VCs, family offices, and angels from Palantir, Anduril, and Quorum",
+    "software_category": "Artificial Intelligence",
+    "source": "https://tech.eu/2026/05/14/twin-prime-lands-10m-pre-seed-to-build-frontier-ai-models-for-defence-and-security/"
+   },
+   "title": "Twin Prime Raises $10M Pre-seed",
+   "url": "https://www.thesaasnews.com/news/twin-prime-raises-10m-pre-seed/",
+   "date": "2026-06-03",
+   "filter_reason": "ok_pre_seed"
+  },
+  "tribal-raises-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Tribal",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "May 2026",
+    "lead_investor": "Team8",
+    "additional_investors": "dYdX Capital and enterprise software angel investors",
+    "website": "https://gotribal.ai/",
+    "software_category": "Enterprise AI / AI Agents / Workflow Automation",
+    "source": "https://www.globenewswire.com/news-release/2026/05/20/3298634/0/en/Tribal-Raises-10M-Seed-to-Bring-Context-Aware-AI-Agents-to-Enterprise-Systems.html"
+   },
+   "title": "Tribal Raises $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/tribal-raises-10m-seed-round/",
+   "date": "2026-05-20",
+   "filter_reason": "ok"
+  },
+  "synthetic-raises-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Synthetic, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "May 2026",
+    "lead_investor": "Khosla Ventures",
+    "additional_investors": "Basis Set Ventures, Tobi L\u00fctke, Kaz Nejatian, Zach Abrams, Cosmin Nicolaescu, Michael Tannenbaum",
+    "website": "https://synthetic.ai/",
+    "software_category": "AI Bookkeeping / Accounting Automation",
+    "source": "https://www.businesswire.com/news/home/20260514241304/en"
+   },
+   "title": "Synthetic Raises $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/synthetic-raises-10m-seed-round/",
+   "date": "2026-05-18",
+   "filter_reason": "ok"
+  },
+  "exponent-raises-10m-in-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Exponent",
+    "raised": "$10.0M",
+    "round": "Seed, Series A",
+    "funding_date": "May 2026",
+    "lead_investor": "Era, Chailease",
+    "additional_investors": "K8 Fund, Kyle Kuzma, Haza Foods, Chunara Group",
+    "website": "https://exponentfi.com/",
+    "software_category": "FinTech / Franchise Financial Management",
+    "source": "https://app.dealroom.co/news/feed/exponent-raises-10m-to-provide-financing-and-accounting-tools-for-franchise-operators"
+   },
+   "title": "Exponent Raises $10M in Funding",
+   "url": "https://www.thesaasnews.com/news/exponent-raises-10m-in-funding/",
+   "date": "2026-05-13",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "general-analysis-raises-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "General Analysis",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "April 2026",
+    "lead_investor": "Altos Ventures",
+    "additional_investors": "645 Ventures, Menlo Ventures, Y Combinator",
+    "website": "https://generalanalysis.com/",
+    "software_category": "Cybersecurity / AI Security (Agentic AI)",
+    "source": "https://www.businesswire.com/news/home/20260429247972/en/"
+   },
+   "title": "General Analysis Raises $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/general-analysis-raises-10m-seed-round/",
+   "date": "2026-04-29",
+   "filter_reason": "ok"
+  },
+  "marloo-bags-10m-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Marloo",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "April 2026",
+    "lead_investor": "Blackbird Ventures",
+    "additional_investors": "Icehouse Ventures",
+    "website": "https://www.marloo.com/",
+    "software_category": "Fintech / AI Productivity /\u00a0WealthTech",
+    "source": "https://www.marloo.com/blog/beyond-the-notetaker"
+   },
+   "title": "Marloo Bags $10M in Seed Round",
+   "url": "https://www.thesaasnews.com/news/marloo-bags-10m-in-seed-round/",
+   "date": "2026-04-28",
+   "filter_reason": "ok"
+  },
+  "almanac-health-raises-10m-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Almanac Health, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "April 2026",
+    "lead_investor": "F-Prime",
+    "additional_investors": "General Catalyst, Lightspeed Venture Partners",
+    "website": "https://almanac.chat/",
+    "software_category": "Healthcare AI / Clinical Decision Support",
+    "source": "https://www.businesswire.com/news/home/20260422202186/en/"
+   },
+   "title": "Almanac Health Raises $10M in Seed Round",
+   "url": "https://www.thesaasnews.com/news/almanac-health-raises-10m-in-seed-round/",
+   "date": "2026-04-23",
+   "filter_reason": "ok"
+  },
+  "actionai-raises-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "ActionAI",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "April 2026",
+    "website": "https://www.actionai.co/",
+    "software_category": "AI Infrastructure / AI Reliability & Governance",
+    "source": "https://www.prnewswire.com/news-releases/actionai-raises-10m-seed-to-fix-ais-trust-problem-302744706.html"
+   },
+   "title": "ActionAI Raises $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/actionai-raises-10m-seed-round/",
+   "date": "2026-04-20",
+   "filter_reason": "ok"
+  },
+  "primepoint-closes-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Primepoint",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "April 2026",
+    "lead_investor": "Navitas Capital",
+    "additional_investors": "Penny Jar Capital,\u00a0NextView\u00a0Ventures, GS Futures, Agla\u00e9 Ventures, Dr. Yann LeCun",
+    "website": "https://www.primepoint.ai/",
+    "software_category": "Construction AI / AI-Project Management",
+    "source": "https://www.globenewswire.com/news-release/2026/04/13/3272943/0/en/Primepoint-Closes-10M-Seed-Round-to-Advance-Intelligence-Platform-that-Reads-and-Understands-Construction-Drawings.html"
+   },
+   "title": "Primepoint Closes $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/primepoint-closes-10m-seed-round/",
+   "date": "2026-04-14",
+   "filter_reason": "ok"
+  },
+  "meltplan-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "MeltPlan, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "February 2026",
+    "lead_investor": "Bessemer Venture Partners",
+    "additional_investors": "noa",
+    "website": "https://www.meltplan.com/",
+    "software_category": "Construction AI / Pre-construction Planning",
+    "source": "https://www.meltplan.com/blogs/we-raised-14-million-to-build-the-planning-engine-for-construction"
+   },
+   "title": "MeltPlan Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/meltplan-raises-10-million-seed-round/",
+   "date": "2026-03-04",
+   "filter_reason": "ok"
+  },
+  "grotto-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Grotto, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "February 2026",
+    "lead_investor": "ICONIQ",
+    "additional_investors": "Asymmetric Capital Partners, David Dear, Caren Maio, Avi Dorfman",
+    "website": "https://grottoai.com/",
+    "software_category": "Vertical AI / Real Estate Leasing Intelligence",
+    "source": "https://www.businesswire.com/news/home/20260219949681/en/"
+   },
+   "title": "Grotto AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/grotto-ai-raises-10-million-in-seed-round/",
+   "date": "2026-02-22",
+   "filter_reason": "ok"
+  },
+  "electric-twin-raises-10m-in-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Electric Twin, Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "February 2026",
+    "lead_investor": "Atomico",
+    "additional_investors": "LocalGlobe, Mercuri, Samos Investments, Marc Andreessen, Cal Henderson, Eric Salama, Tom Shinner, Louis Mosley",
+    "website": "https://www.electrictwin.com/",
+    "software_category": "AI Audience Simulation / Predictive Analytics",
+    "source": "https://tech.eu/2026/02/12/electric-twin-expands-ai-audience-platform-with-14m-round/"
+   },
+   "title": "Electric Twin Raises $10M in Funding",
+   "url": "https://www.thesaasnews.com/news/electric-twin-raises-10m-in-funding/",
+   "date": "2026-02-16",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "breezy-raises-10-million-in-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Breezy Technologies, Inc.",
+    "raised": "$10.0M",
+    "round": "Pre-Seed",
+    "funding_date": "February 2026",
+    "lead_investor": "Ribbit Capital",
+    "additional_investors": "Fifth Wall, DST Global, Liquid 2 Ventures, O.G. Venture Partners,\u00a0Fidji\u00a0Simo, David Marcus",
+    "website": "https://www.breezy.com/",
+    "software_category": "AI /\u00a0PropTech\u00a0/ Real Estate Productivity",
+    "source": "https://www.prnewswire.com/news-releases/breezy-launches-the-worlds-first-independent-ai-operating-system-for-residential-real-estate-302676339.html"
+   },
+   "title": "Breezy Raises $10 Million in Funding",
+   "url": "https://www.thesaasnews.com/news/breezy-raises-10-million-in-funding/",
+   "date": "2026-02-02",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "risotto-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Risotto",
+    "raised": "$10.0M",
+    "round": "Seed\u00a0Round",
+    "funding_date": "January 2026",
+    "lead_investor": "Bonfire Ventures",
+    "additional_investors": "645 Ventures, Y Combinator, Ritual Capital,\u00a0Surgepoint\u00a0Capital",
+    "website": "https://www.tryrisotto.com/",
+    "software_category": "IT Support AI / Autonomous Help Desk",
+    "source": "https://www.webwire.com/ViewPressRel.asp?aId=349668"
+   },
+   "title": "Risotto Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/risotto-raises-10-million-seed-round/",
+   "date": "2026-01-28",
+   "filter_reason": "ok"
+  },
+  "chamelio-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Innovo\u00a0AI Inc. (Chamelio)",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "January 2026",
+    "lead_investor": "Work-Bench,\u00a0Emerge",
+    "additional_investors": "",
+    "website": "https://www.chamelio.com/",
+    "software_category": "Legal AI / Legal Intelligence Platform",
+    "source": "https://www.businesswire.com/news/home/20260127115341/en/"
+   },
+   "title": "Chamelio Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/chamelio-raises-10-million-seed-round/",
+   "date": "2026-01-27",
+   "filter_reason": "ok"
+  },
+  "atomic-insights-raises-10m-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Atomic Insights",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "January 2026",
+    "lead_investor": "Aquiline",
+    "additional_investors": "Northwestern Mutual Future Ventures, existing investors",
+    "website": "https://www.atomicinsights.io/",
+    "software_category": "WealthTech\u00a0/ Treasury & Payment Automation",
+    "source": "https://www.prnewswire.com/news-releases/atomic-insights-raises-10-million-in-seed-funding-to-modernize-payment-workflows-and-infrastructure-for-wealth-managers-302661083.html"
+   },
+   "title": "Atomic Insights Raises $10M Seed Round",
+   "url": "https://www.thesaasnews.com/news/atomic-insights-raises-10m-seed-round/",
+   "date": "2026-01-18",
+   "filter_reason": "ok"
+  },
+  "milestone-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Milestone, Limited",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "November 2025",
+    "lead_investor": "Heavybit,\u00a0Hanaco\u00a0Ventures",
+    "additional_investors": "Atlassian Ventures, John Donovan, Tom Preston-Werner, Paul Daugherty, Amit Agrawal",
+    "website": "https://mstone.ai/",
+    "software_category": "AI Analytics / Developer Tools",
+    "source": "https://www.prnewswire.com/il/news-releases/as-ai-takes-over-coding-milestone-raises-10m-to-make-ai-culture-measurable-302614600.html"
+   },
+   "title": "Milestone Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/milestone-raises-10-million-seed-round/",
+   "date": "2025-11-16",
+   "filter_reason": "ok"
+  },
+  "spacial-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Spacial AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "October 2025",
+    "lead_investor": "TLV Partners",
+    "additional_investors": "Mango Capital, Re Angels, HTV",
+    "website": "https://spacial.io/",
+    "software_category": "AI / ConstructionTech / Building Automation",
+    "source": "Anouchka Morris"
+   },
+   "title": "Spacial Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/spacial-raises-10-million-seed-round/",
+   "date": "2025-10-28",
+   "filter_reason": "ok"
+  },
+  "moonshot-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Moonshot AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "October 2025",
+    "lead_investor": "Mighty Capital",
+    "additional_investors": "Oceans Ventures, Uncorrelated, Garuda Ventures, Almaz Capital",
+    "website": "https://moonshot-ai.com/",
+    "software_category": "AI Website Optimization / No-Code Platform",
+    "source": "https://www.prnewswire.com/news-releases/moonshot-ai-secures-10m-in-seed-funding-for-ai-driven-autonomous-website-optimization-302590113.html"
+   },
+   "title": "Moonshot AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/moonshot-ai-raises-10-million-in-seed-round/",
+   "date": "2025-10-22",
+   "filter_reason": "ok"
+  },
+  "magic-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Magic",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "October 2025",
+    "lead_investor": "Lerer Hippeau",
+    "additional_investors": "Bling Capital, Floodgate, Major Food Group, VCR Group",
+    "website": "https://www.magic.company/",
+    "software_category": "AI-Powered CRM & Hospitality Intelligence Platform",
+    "source": "https://www.prnewswire.com/news-releases/magic-raises-10m-to-bring-ai-into-the-real-world-302589060.html"
+   },
+   "title": "Magic Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/magic-raises-10-million-in-seed-round/",
+   "date": "2025-10-20",
+   "filter_reason": "ok"
+  },
+  "vulcan-technologies-raises-10m-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Vulcan Technologies",
+    "raised": "$10.9M",
+    "round": "Seed",
+    "funding_date": "October 2025",
+    "lead_investor": "General Catalyst, Cubit Capital",
+    "additional_investors": "Trevor Rees-Jones, SV Angel, A*, Liquid 2 Ventures, Transpose, 468 Capital, Y Combinator, Founders of Dropbox",
+    "website": "https://vulcan-tech.com/",
+    "software_category": "Regulatory / Artificial Intelligence / Legal",
+    "source": "https://www.prnewswire.com/news-releases/vulcan-technologies-raises-10-9m-seed-round-to-modernize-regulatory-law-with-ai-302579056.html"
+   },
+   "title": "Vulcan Technologies Raises $10M in Seed Round",
+   "url": "https://www.thesaasnews.com/news/vulcan-technologies-raises-10m-in-seed-round/",
+   "date": "2025-10-10",
+   "filter_reason": "ok"
+  },
+  "genstore-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Genstore, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "September 2025",
+    "lead_investor": "Weimob",
+    "additional_investors": "Lighthouse Founders' Fund",
+    "website": "https://genstore.ai/",
+    "software_category": "AI E-commerce / Store Builder",
+    "source": "https://www.globenewswire.com/news-release/2025/09/23/3155019/0/en/AI-native-e-commerce-platform-Genstore-secures-10-million-in-seed-funding.html"
+   },
+   "title": "Genstore Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/genstore-secures-10-million-in-seed-round/",
+   "date": "2025-09-24",
+   "filter_reason": "ok"
+  },
+  "gridstrong-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "GridStrong, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "September 2025",
+    "lead_investor": "Congruent Ventures",
+    "additional_investors": "Energize Capital, Engie Renewables North America",
+    "website": "https://www.gridstrong.ai/",
+    "software_category": "AI / SaaS / Energy / Grid Compliance / Operations Automation",
+    "source": "https://www.prnewswire.com/news-releases/gridstrong-secures-10m-in-seed-funding-to-automate-grid-compliance-and-reliability-302558254.html"
+   },
+   "title": "GridStrong Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/gridstrong-raises-10-million-in-seed-round/",
+   "date": "2025-09-18",
+   "filter_reason": "ok"
+  },
+  "blocks-diy-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Blocks.diy",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "September 2025",
+    "lead_investor": "monday.com",
+    "additional_investors": "Qumra Capital, Entree Capital",
+    "website": "https://blocks.diy/",
+    "software_category": "AI Productivity / Workflow Automation",
+    "source": "https://www.prnewswire.com/news-releases/blocksdiy-raises-10m-to-let-teams-build-custom-ai-tools-in-minutes-302552642.html"
+   },
+   "title": "Blocks.diy Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/blocks-diy-raises-10-million-in-seed-round/",
+   "date": "2025-09-11",
+   "filter_reason": "ok"
+  },
+  "dazl-raises-10-million-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Dazl Technologies Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "September 2025",
+    "lead_investor": "40RTY Fund",
+    "additional_investors": "Wix, Nadav Abrahami (Co-founder of Wix)",
+    "website": "https://dazl.dev/",
+    "software_category": "AI Application Development / Generative AI / AI Creation",
+    "source": "https://www.prnewswire.com/news-releases/dazl-launches-with-10m-seed-pioneering-the-next-wave-of-market-ready-applications-302549049.html"
+   },
+   "title": "Dazl Raises $10 Million Seed Round",
+   "url": "https://www.thesaasnews.com/news/dazl-raises-10-million-seed-round/",
+   "date": "2025-09-08",
+   "filter_reason": "ok"
+  },
+  "iedugpt-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "iEduGPT",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "September 2025",
+    "lead_investor": "New Wheel Capital",
+    "additional_investors": "Baywise Capital, SWC Global, Uphonest Capital, K3 Ventures, Welight",
+    "website": "",
+    "software_category": "EdTech / AI-powered Learning / Exam Preparation",
+    "source": "https://www.prnewswire.com/apac/news-releases/iedugpt-the-next-gen-ai-learning-platform-for-professional-and-academic-exams-raises-10-million-seed-funding-302543563.html"
+   },
+   "title": "iEduGPT Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/iedugpt-raises-10-million-in-seed-round/",
+   "date": "2025-09-04",
+   "filter_reason": "ok"
+  },
+  "definite-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Definite",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "August 2025",
+    "lead_investor": "Costanoa",
+    "additional_investors": "Acrew Capital, Strategic Angels",
+    "website": "https://www.definite.app/",
+    "software_category": "AI-Native Data Platform / Enterprise Analytics",
+    "source": "https://www.prnewswire.com/news-releases/definite-raises-10-million-seed-round-to-deliver-ai-native-data-stack-for-modern-businesses-302535919.html"
+   },
+   "title": "Definite Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/definite-raises-10-million-in-seed-round/",
+   "date": "2025-08-21",
+   "filter_reason": "ok"
+  },
+  "julius-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Julius",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "July 2025",
+    "lead_investor": "Bessemer Venture Partners",
+    "additional_investors": "Y Combinator, Horizon VC, AI Grant, 8VC, and founders of Notion, Vercel, Replit, Perplexity, Intercom, Dropbox, Zapier, and Twilio",
+    "website": "https://www.julius.ai/",
+    "software_category": "AI/ML, Data Analytics, SaaS",
+    "source": "https://julius.ai/articles/funding-announcement"
+   },
+   "title": "Julius AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/julius-ai-raises-10-million-in-seed-round/",
+   "date": "2025-07-28",
+   "filter_reason": "ok"
+  },
+  "ai-work-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "AI.Work, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "June 2025",
+    "lead_investor": "A*, lool ventures",
+    "additional_investors": "Firstminute Capital, FirsthandVC, Timeless Partners, SV Angel, Eckstein Capital, Liquid2, Crossover VC",
+    "website": "https://ai.work/",
+    "software_category": "Enterprise AI / Intelligent Automation",
+    "source": "https://www.businesswire.com/news/home/20250610136686/en/"
+   },
+   "title": "ai.work Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/ai-work-raises-10-million-in-seed-round/",
+   "date": "2025-07-06",
+   "filter_reason": "ok"
+  },
+  "polar-raises-10-million-in-seed-round-2": {
+   "fetch": "ok",
+   "details": {
+    "company": "Polar Software, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "June 2025",
+    "lead_investor": "Accel",
+    "additional_investors": "Guillermo Rauch, Jared Palmer, Paul Copplestone, Tobi L\u00fctke, Harley Finkelstein, Michael Grinich, Thomas Paul Mann, Anton Osika, Jorn van Dijk, Koen Bok, Zeno Rocha, Steven Tey, S\u00e9bastien and Alexandre Chopin",
+    "website": "https://www.polar.sh/",
+    "software_category": "SaaS Billing & Payments Infrastructure",
+    "source": "https://siliconcanals.com/polar-secures-e9m/"
+   },
+   "title": "Polar Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/polar-raises-10-million-in-seed-round-2/",
+   "date": "2025-07-04",
+   "filter_reason": "ok"
+  },
+  "skyramp-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Skyramp, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "June 2025",
+    "lead_investor": "Sequoia Capital",
+    "additional_investors": "",
+    "website": "https://www.skyramp.dev/",
+    "software_category": "AI / Software Testing / Developer Tools",
+    "source": "https://www.skyramp.dev/blog-all/skyramp-launch"
+   },
+   "title": "Skyramp Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/skyramp-raises-10-million-in-seed-round/",
+   "date": "2025-06-24",
+   "filter_reason": "ok"
+  },
+  "polar-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Polar Software Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "June 2025",
+    "lead_investor": "Accel",
+    "additional_investors": "Guillermo Rauch, Jared Palmer, Paul Copplestone, Tobi L\u00fctke, Harley Finkelstein, Michael Grinich, Thomas Paul Mann, Anton Osika, Jorn van Dijk, Koen Bok, Zeno Rocha, Steven Tey, S\u00e9bastien Chopin, Alexandre Chopin",
+    "website": "https://www.polar.sh/",
+    "software_category": "Software as a Service (SaaS) / Billing Infrastructure",
+    "source": "https://siliconcanals.com/polar-secures-e9m/"
+   },
+   "title": "Polar Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/polar-raises-10-million-in-seed-round/",
+   "date": "2025-06-18",
+   "filter_reason": "ok"
+  },
+  "pwin-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "pWin.ai",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "June 2025",
+    "lead_investor": "Sanju Bansal",
+    "additional_investors": "Members of Blue Delta Capital, other GovCon industry leaders",
+    "website": "http://pwin.ai/",
+    "software_category": "AI Proposal Software / GovTech / Enterprise SaaS",
+    "source": "https://www.businesswire.com/news/home/20250602982844/en/"
+   },
+   "title": "pWin.ai Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/pwin-ai-raises-10-million-in-seed-round/",
+   "date": "2025-06-03",
+   "filter_reason": "ok"
+  },
+  "sympera-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Sympera Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "March 2025",
+    "lead_investor": "Nyca Partners, Viola Ventures",
+    "additional_investors": "",
+    "website": "https://sympera.ai/",
+    "software_category": "Agentic AI and AI-Relationship Banking",
+    "source": "https://www.prnewswire.com/news-releases/sympera-ai-raises-10-million-seed-funding-to-help-banks-tap-150b-smb-opportunity-302409551.html"
+   },
+   "title": "Sympera AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/sympera-ai-raises-10-million-in-seed-round/",
+   "date": "2025-03-25",
+   "filter_reason": "ok"
+  },
+  "augmenta-raises-10-million-in-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Augmenta Inc.",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "March 12, 2025",
+    "lead_investor": "Prelude Ventures",
+    "additional_investors": "Montage Ventures",
+    "website": "https://www.augmenta.ai/",
+    "software_category": "AI Building Design",
+    "source": "https://www.globenewswire.com/news-release/2025/03/12/3041392/0/en/Augmenta-Secures-10-Million-USD-in-Funding-to-Pioneer-AI-Driven-Building-Design.html"
+   },
+   "title": "Augmenta Raises $10 Million in Funding",
+   "url": "https://www.thesaasnews.com/news/augmenta-raises-10-million-in-funding/",
+   "date": "2025-03-13",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "aiceberg-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "AIceberg",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "March 2025",
+    "lead_investor": "SYN Ventures, Sprout & Oak",
+    "website": "https://www.aiceberg.ai/",
+    "software_category": "AI trust, safety, and compliance technology",
+    "source": "https://www.prnewswire.com/news-releases/aiceberg-secures-10-million-in-seed-funding-to-transform-ai-from-a-business-risk-to-a-competitive-advantage-302393452.html"
+   },
+   "title": "AIceberg Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/aiceberg-raises-10-million-in-seed-round/",
+   "date": "2025-03-06",
+   "filter_reason": "ok"
+  },
+  "sawmills-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Sawmills.AI",
+    "raised": "$10.0M",
+    "round": "Seed",
+    "funding_date": "February 2024",
+    "lead_investor": "Team8",
+    "additional_investors": "Mayfield, Alumni Ventures",
+    "website": "https://www.sawmills.ai/",
+    "software_category": "Telemetry Data Management",
+    "source": "https://www.sawmills.ai/blog/sawmills-exits-stealth-with-10m-to-tackle-skyrocketing-observability-costs-using-ai"
+   },
+   "title": "Sawmills Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/sawmills-raises-10-million-in-seed-round/",
+   "date": "2025-02-25",
+   "filter_reason": "ok"
+  },
+  "singulr-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Singulr AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "February 2025",
+    "lead_investor": "Nexus Venture Partners, Dell Technologies Capital",
+    "additional_investors": "",
+    "website": "https://www.singulr.ai/",
+    "software_category": "AI Governance and Security",
+    "source": "https://www.singulr.ai/news-events/singulr-ai-launch"
+   },
+   "title": "Singulr AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/singulr-ai-raises-10-million-in-seed-round/",
+   "date": "2025-02-23",
+   "filter_reason": "ok"
+  },
+  "integrail-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Integrail Corp.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "February 2025",
+    "website": "https://integrail.ai/",
+    "software_category": "Agentic AI / No-Code AI Automation",
+    "source": "https://www.globenewswire.com/news-release/2025/02/12/3025099/0/en/Agentic-AI-Startup-Integrail-Announces-10-Million-in-Seed-Funding-New-CEO-to-Drive-Uptake-of-New-Platform-Enabling-Any-Business-to-Create-AI-Workers.html"
+   },
+   "title": "Integrail Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/integrail-raises-10-million-in-seed-round/",
+   "date": "2025-02-18",
+   "filter_reason": "ok"
+  },
+  "qeen-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "qeen.ai",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "February 2025",
+    "lead_investor": "Prosus Ventures",
+    "additional_investors": "Wamda Capital, 10x Founders, Dara Holdings",
+    "website": "https://www.qeen.ai/",
+    "software_category": "AI Ecommerce Automation",
+    "source": "https://www.wamda.com/2025/02/wamda-capital-participates-qeenai-10-million-seed-round"
+   },
+   "title": "qeen.ai Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/qeen-ai-raises-10-million-in-seed-round/",
+   "date": "2025-02-04",
+   "filter_reason": "ok"
+  },
+  "lanai-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Lanai",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "January 2025",
+    "lead_investor": "Juxtapose",
+    "additional_investors": "Lux Capital, F7 Ventures, BAG",
+    "website": "https://www.withlanai.com/",
+    "software_category": "Enterprise AI",
+    "source": "https://www.businesswire.com/news/home/20250123017577/en/"
+   },
+   "title": "Lanai Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/lanai-secures-10-million-in-seed-round/",
+   "date": "2025-01-24",
+   "filter_reason": "ok"
+  },
+  "palona-ai-raises-10m-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Palona AI",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "January 2025",
+    "website": "https://palona.ai/",
+    "software_category": "Customer Engagement",
+    "source": "https://www.businesswire.com/news/home/20250123174563/"
+   },
+   "title": "Palona AI Raises $10M in Seed Round",
+   "url": "https://www.thesaasnews.com/news/palona-ai-raises-10m-in-seed-round/",
+   "date": "2025-01-23",
+   "filter_reason": "ok"
+  },
+  "hyperline-raises-10m-in-seed-extension": {
+   "fetch": "ok",
+   "details": {
+    "company": "Meterly SAS",
+    "raised": "$10.0M",
+    "round": "Seed Extension",
+    "funding_date": "January 2025",
+    "lead_investor": "Index Ventures",
+    "additional_investors": "",
+    "website": "https://www.hyperline.co/",
+    "software_category": "Revenue Management",
+    "source": "https://www.hyperline.co/resources/blog/hyperline-secured-a-new-round-of-funding-led-by-index-ventures"
+   },
+   "title": "Hyperline Raises $10M in Seed Extension",
+   "url": "https://www.thesaasnews.com/news/hyperline-raises-10m-in-seed-extension/",
+   "date": "2025-01-19",
+   "filter_reason": "ok"
+  },
+  "pathway-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Pathway",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "December 2024",
+    "lead_investor": "TQ Ventures",
+    "additional_investors": "Kadmos, Innovo, Market One Capital, Id4, Lukasz Kaiser",
+    "website": "https://pathway.com/",
+    "software_category": "AI Systems",
+    "source": "https://techcrunch.com/2024/11/29/as-cohere-and-writer-mine-the-live-ai-arena-pathway-joins-the-pack-with-a-10m-round/"
+   },
+   "title": "Pathway Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/pathway-raises-10-million-in-seed-round/",
+   "date": "2024-12-04",
+   "filter_reason": "ok"
+  },
+  "letta-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Letta",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2024",
+    "lead_investor": "Felicis",
+    "additional_investors": "Sunflower Capital, Essence VC, Jeff Dean, Clem Delangue",
+    "website": "https://www.letta.com/",
+    "software_category": "Agents Development",
+    "source": "https://www.finsmes.com/2024/09/letta-raises-10m-in-seed-financing.html"
+   },
+   "title": "Letta Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/letta-secures-10-million-in-seed-round/",
+   "date": "2024-09-23",
+   "filter_reason": "ok"
+  },
+  "with-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "With",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2024",
+    "website": "https://bewith.io/",
+    "software_category": "Community Engagement",
+    "source": "Ronny Hassid"
+   },
+   "title": "With Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/with-raises-10-million-in-seed-round/",
+   "date": "2024-09-18",
+   "filter_reason": "ok"
+  },
+  "protege-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Protege",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2024",
+    "lead_investor": "CRV",
+    "additional_investors": "SV Angel, Liquid 2 Ventures, Bloomberg Beta, Flex Capital, Adam D'Angelo, Travis May",
+    "website": "https://www.withprotege.ai/",
+    "software_category": "AI Development",
+    "source": "https://www.prnewswire.com/news-releases/protege-raises-10-million-and-launches-platform-for-ai-training-data-302244064.html"
+   },
+   "title": "Protege Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/protege-secures-10-million-in-seed-round/",
+   "date": "2024-09-11",
+   "filter_reason": "ok"
+  },
+  "napkin-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Napkin.ai Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "August 2024",
+    "lead_investor": "Accel, CRV",
+    "additional_investors": "",
+    "website": "https://www.napkin.ai/",
+    "software_category": "AI Document Editor",
+    "source": "https://www.webwire.com/ViewPressRel.asp?aId=325289"
+   },
+   "title": "Napkin Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/napkin-raises-10-million-in-seed-round/",
+   "date": "2024-08-07",
+   "filter_reason": "ok"
+  },
+  "hedra-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Hedra, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "August 2024",
+    "lead_investor": "Index Ventures, Abstract, A16Z Speedrun",
+    "website": "https://www.hedra.com/",
+    "software_category": "Video Creation",
+    "source": "https://www.hedra.com/blog/announcement"
+   },
+   "title": "Hedra Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/hedra-raises-10-million-in-seed-round/",
+   "date": "2024-08-04",
+   "filter_reason": "ok"
+  },
+  "athena-security-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Athena Security, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "August 2024",
+    "lead_investor": "Lisa Falzone, Chris Ciabarra",
+    "additional_investors": "",
+    "website": "https://www.athena-security.com/",
+    "software_category": "Weapons Detection System",
+    "source": "https://www.prnewswire.com/news-releases/athena-security-raises-10-million-for-concealed-weapons-detection-system-expansion-302212324.html"
+   },
+   "title": "Athena Security Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/athena-security-raises-10-million-in-seed-round/",
+   "date": "2024-08-01",
+   "filter_reason": "ok"
+  },
+  "campusai-raises-10-million-in-pre-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "CampusAI Holding LLC",
+    "raised": "$10.0M",
+    "round": "Pre-Seed Round",
+    "funding_date": "June 2024",
+    "website": "https://www.campus.ai/",
+    "software_category": "AI Training",
+    "source": "https://sifted.eu/articles/poland-campusai-metaverse-raise-news"
+   },
+   "title": "CampusAI Raises $10 Million in Pre-Seed Round",
+   "url": "https://www.thesaasnews.com/news/campusai-raises-10-million-in-pre-seed-round/",
+   "date": "2024-06-11",
+   "filter_reason": "ok_pre_seed"
+  },
+  "carv-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Carv.com, Inc",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "June 2024",
+    "lead_investor": "Global Founders Capital",
+    "additional_investors": "",
+    "website": "https://www.carv.com/",
+    "software_category": "AI Recruitment Solutions",
+    "source": "https://www.prnewswire.com/news-releases/amsterdam-based-carv-raises-10m-to-offload-admin-from-recruiters-and-realize-recruiter-ai-synergy-302162038.html"
+   },
+   "title": "Carv Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/carv-secures-10-million-in-seed-round/",
+   "date": "2024-06-04",
+   "filter_reason": "ok"
+  },
+  "numeric-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Numeric",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "May 2024",
+    "website": "https://www.numeric.io/",
+    "software_category": "AI Accounting",
+    "source": "Numeric Press Release"
+   },
+   "title": "Numeric Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/numeric-secures-10-million-in-seed-round/",
+   "date": "2024-05-07",
+   "filter_reason": "ok"
+  },
+  "udio-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Udio",
+    "raised": "\u20ac18.0M",
+    "round": "Unknown",
+    "funding_date": "April 2024",
+    "lead_investor": "a16z",
+    "additional_investors": "will.i.am, Common, Kevin Wall, Tay Keith, Steve Stoute\u2019sUnitedMasters, Mike Krieger, Oriol Vinyals",
+    "website": "https://www.udio.com/",
+    "software_category": "AI Music",
+    "source": "https://www.musicbusinessworldwide.com/new-ai-powered-instant-music-making-app-udio-raises-10m-launches-with-backing-from-will-i-am-common-unitedmasters-a16z/"
+   },
+   "title": "Udio Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/udio-raises-10-million-in-seed-round/",
+   "date": "2024-04-14",
+   "filter_reason": "ok"
+  },
+  "simbian-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Simbian, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "April 2024",
+    "website": "https://simbian.ai/",
+    "software_category": "Cybersecurity",
+    "source": "https://techcrunch.com/2024/04/11/simbian-brings-ai-to-existing-security-tools/"
+   },
+   "title": "Simbian Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/simbian-raises-10-million-in-seed-round/",
+   "date": "2024-04-12",
+   "filter_reason": "ok"
+  },
+  "reken-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Reken",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "January 2024",
+    "lead_investor": "Greycroft and FPV Ventures",
+    "additional_investors": "Firebolt Ventures, Fika Ventures, Omega Venture Partners, Homebrew, and JAZZ Venture Partners",
+    "website": "https://reken.ai/",
+    "software_category": "Cybersecurity",
+    "source": "https://www.einnews.com/pr_news/685145360/reken-raises-10m-seed-round-from-greycroft-fpv-to-use-ai-to-protect-against-generative-ai-enabled-fraud"
+   },
+   "title": "Reken Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/reken-raises-10-million-in-seed-round/",
+   "date": "2024-01-31",
+   "filter_reason": "ok"
+  },
+  "aim-security-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Aim Security",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "January 2024",
+    "lead_investor": "YL Ventures",
+    "additional_investors": "",
+    "website": "https://www.aim.security/",
+    "software_category": "Cybersecurity",
+    "source": "https://www.businesswire.com/news/home/20240131104732/en/"
+   },
+   "title": "Aim Security Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/aim-security-raises-10-million-in-seed-round/",
+   "date": "2024-01-31",
+   "filter_reason": "ok"
+  },
+  "chalk-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Chalk AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "December 2023",
+    "lead_investor": "General Catalyst, Unusual Ventures, and Xfund",
+    "additional_investors": "",
+    "website": "https://www.chalk.ai/",
+    "software_category": "Data Platform for Machine Learning",
+    "source": "https://www.businesswire.com/news/home/20231212959060/en/"
+   },
+   "title": "Chalk Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/chalk-raises-10-million-in-seed-round/",
+   "date": "2023-12-13",
+   "filter_reason": "ok"
+  },
+  "qortex-raises-10-million-in-seed-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Qortex, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed+ Round",
+    "funding_date": "December 2023",
+    "lead_investor": "GFT Ventures",
+    "additional_investors": "Silicon Road Ventures",
+    "website": "https://www.qortex.ai/",
+    "software_category": "Advertising",
+    "source": "https://alleywatch.com/2023/12/qortex-video-analytics-platform-adtech-highest-impact-placement-zack-rosenberg/"
+   },
+   "title": "Qortex Raises $10 Million in Seed+ Funding",
+   "url": "https://www.thesaasnews.com/news/qortex-raises-10-million-in-seed-funding/",
+   "date": "2023-12-10",
+   "filter_reason": "ok"
+  },
+  "gradient-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Preemo, Inc.",
+    "raised": "$10.OM",
+    "round": "Seed Round",
+    "funding_date": "October 2023",
+    "lead_investor": "Wing VC",
+    "additional_investors": "Mango Capital, Tokyo Black, The New Normal Fund, Secure Octane, Global Founders Capital",
+    "website": "https://gradient.ai/",
+    "software_category": "API Platform",
+    "source": "https://www.businesswire.com/news/home/20231005935546/en/"
+   },
+   "title": "Gradient Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/gradient-raises-10-million-in-seed-round/",
+   "date": "2023-10-05",
+   "filter_reason": "ok"
+  },
+  "echomark-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "EchoMark, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2023",
+    "lead_investor": "Craft Ventures",
+    "additional_investors": "",
+    "website": "https://www.echomark.com/",
+    "software_category": "Watermarking Solution",
+    "source": "https://www.prnewswire.com/news-releases/echomark-launches-ai-powered-solution-to-safeguard-private-communications-in-the-digital-age-301939647.html"
+   },
+   "title": "EchoMark Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/echomark-raises-10-million-in-seed-round/",
+   "date": "2023-10-02",
+   "filter_reason": "ok"
+  },
+  "blind-creator-raises-mx-10-million-in-pre-seed": {
+   "fetch": "ok",
+   "details": {
+    "company": "Blind Creator, Inc.",
+    "raised": "MX $10.0M",
+    "round": "Pre-Seed Round",
+    "funding_date": "September 2023",
+    "lead_investor": "",
+    "additional_investors": "Brian Requarth, Alejandra R\u00edos, Amador Holdings funds, Kuiper, and sixteen angel investors",
+    "website": "https://www.blindcreator.com/",
+    "software_category": "Management Software",
+    "source": "https://contxto.com/deals/blind-creator-raises-mx-10-million-in-pre-seed-round-to-boost-its-influencer-management-platform/"
+   },
+   "title": "Blind Creator Raises MX $10 Million in Pre-Seed",
+   "url": "https://www.thesaasnews.com/news/blind-creator-raises-mx-10-million-in-pre-seed/",
+   "date": "2023-09-24",
+   "filter_reason": "ok_pre_seed"
+  },
+  "lastmile-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "LastMile AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2023",
+    "lead_investor": "Gradient",
+    "additional_investors": "",
+    "website": "https://lastmileai.dev/",
+    "software_category": "AI Developer Platform",
+    "source": "https://techcrunch.com/2023/09/14/lastmile-ai-closes-10m-seed-round-to-operationalize-ai-models/"
+   },
+   "title": "LastMile AI Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/lastmile-ai-raises-10-million-in-seed-round/",
+   "date": "2023-09-15",
+   "filter_reason": "ok"
+  },
+  "mercanis-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Mercanis GmbH",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "August 2023",
+    "lead_investor": "Singals.VC, DI Technology, and Speedinvest",
+    "additional_investors": "Dr. Ulrich Piepel, Dr. Marcell Vollmer, Mirko Novakovic, and Victor Jacobsson",
+    "website": "https://www.mercanis.com/",
+    "software_category": "Procurement Software",
+    "source": "https://www.prnewswire.com/news-releases/mercanis-raises-10m-series-seed-investment-in-mission-to-boost-further-savings-for-procurement-teams-301903388.html"
+   },
+   "title": "Mercanis Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/mercanis-raises-10-million-in-seed-round/",
+   "date": "2023-08-17",
+   "filter_reason": "ok"
+  },
+  "plerion-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Plerion Pty Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "July 2023",
+    "lead_investor": "Prosus Ventures",
+    "additional_investors": "Cercano and Atlassian Ventures",
+    "website": "https://plerion.com/",
+    "software_category": "Cloud Security Platform",
+    "source": "https://techfundingnews.com/australian-startup-plerion-raises-10m-to-protect-businesses-and-individuals-from-cyber-threats/"
+   },
+   "title": "Plerion Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/plerion-raises-10-million-in-seed-round/",
+   "date": "2023-08-01",
+   "filter_reason": "ok"
+  },
+  "upp-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Upp Technologies Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "June 2023",
+    "lead_investor": "Bonfire Ventures",
+    "additional_investors": "",
+    "website": "https://upp.ai/",
+    "software_category": "Marketing Automation Software",
+    "source": "https://upp.ai/resources/upp-raises-10m-in-seed-funding/"
+   },
+   "title": "Upp. Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/upp-raises-10-million-in-seed-round/",
+   "date": "2023-07-06",
+   "filter_reason": "ok"
+  },
+  "datagalaxy-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "DataGalaxy",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "July 2023",
+    "lead_investor": "AV8 Ventures",
+    "additional_investors": "Orange Ventures, NewFund, and Evolem",
+    "website": "https://www.datagalaxy.com/",
+    "software_category": "Knowledge Management Software",
+    "source": "https://www.datagalaxy.com/en/blog/datagalaxy-soars-past-120-clients-secures-10m-funding/"
+   },
+   "title": "DataGalaxy Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/datagalaxy-raises-10-million-in-seed-round/",
+   "date": "2023-07-06",
+   "filter_reason": "ok"
+  },
+  "revsureai-closes-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "RevSure.AI Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "June 2023",
+    "lead_investor": "Neotribe Ventures and Innovation Endeavors",
+    "additional_investors": "Operator Collective and Correlation Ventures",
+    "website": "https://www.revsure.ai/",
+    "software_category": "Pipeline Acceleration and Readiness",
+    "source": "https://www.revsure.ai/press-release/revsure-ai-closes-10-million-seed-round-led-by-neotribe-ventures"
+   },
+   "title": "RevSure.AI Closes $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/revsureai-closes-10-million-in-seed-round/",
+   "date": "2023-06-07",
+   "filter_reason": "ok"
+  },
+  "memcyco-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "MEMCYCO Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "May 2023",
+    "lead_investor": "Capri Ventures and Venture Guides",
+    "additional_investors": "",
+    "website": "https://www.memcyco.com/",
+    "software_category": "Brand Protection Software Solutions",
+    "source": "Avi Krupman, Account Manager-InboundJunction"
+   },
+   "title": "Memcyco Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/memcyco-raises-10-million-in-seed-round/",
+   "date": "2023-05-24",
+   "filter_reason": "ok"
+  },
+  "aisles-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Aisles",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "April 2023",
+    "lead_investor": "Ignacio Rosales",
+    "additional_investors": "",
+    "website": "https://aisles.app/",
+    "software_category": "Shopping Experiences",
+    "source": "https://finance.yahoo.com/news/portland-based-retail-tech-start-200700974.html"
+   },
+   "title": "Aisles Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/aisles-raises-10-million-in-seed-round/",
+   "date": "2023-04-23",
+   "filter_reason": "ok"
+  },
+  "groundlight-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Groundlight, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "April 2023",
+    "lead_investor": "Madrona",
+    "additional_investors": "Greycroft Partners, Founders Co-op, Flying Fish, AscendVC and EssenceVC",
+    "website": "https://www.groundlight.ai/",
+    "software_category": "Computer Vision powered by Natural Language",
+    "source": "https://venturebeat.com/ai/groundlight-emerges-stealth-10m-seed-round-businesses-computer-vision/"
+   },
+   "title": "Groundlight Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/groundlight-raises-10-million-in-seed-round/",
+   "date": "2023-04-23",
+   "filter_reason": "ok"
+  },
+  "reeco-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Reeco T.M Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "March 2023",
+    "lead_investor": "Net Capital Ventures and Joule Ventures",
+    "additional_investors": "Eynat Guez",
+    "website": "https://www.reeco.io/",
+    "software_category": "Hospitality Marketplace",
+    "source": "Ronny Hassid"
+   },
+   "title": "Reeco Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/reeco-raises-10-million-in-seed-round/",
+   "date": "2023-03-28",
+   "filter_reason": "ok"
+  },
+  "kadence-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Kadence.Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "December 2022",
+    "lead_investor": "Kickstart Fund",
+    "additional_investors": "Manta Ray, Hambro Perks, Vectr7, Shadow Ventures, Forward VC, Cal Henderson, Shaun Ritchie, and Nick Bloom",
+    "website": "https://kadence.co/",
+    "software_category": "Hybrid Working Platform",
+    "source": "https://www.globenewswire.com/en/news-release/2022/12/07/2569595/0/en/Kadence-Announces-10M-Seed-Round.html"
+   },
+   "title": "Kadence Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/kadence-raises-10-million-in-seed-round/",
+   "date": "2022-12-28",
+   "filter_reason": "ok"
+  },
+  "capitol-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Capitol AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "November 2022",
+    "lead_investor": "468 Capital",
+    "additional_investors": "Designer Fund, Fuel Capital, Tokyo Black, Brian Chesky, Chase Coleman III, Nomad Capital, AirAngels, Sanno Capital, and John McCormick",
+    "website": "https://capitol.ai/",
+    "software_category": "Data Stories Platform",
+    "source": "https://www.businesswire.com/news/home/20221118005565/en/Capitol-Raises-10-Million-to-Revolutionize-Decision-Making-With-AI-Driven-Data-Stories-Platform-That-Liberates-the-Business-From-Data-Teams"
+   },
+   "title": "Capitol Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/capitol-raises-10-million-in-seed-round/",
+   "date": "2022-11-21",
+   "filter_reason": "ok"
+  },
+  "archy-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "GrindFoundry, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "November 2022",
+    "lead_investor": "Bessemer Venture Partners and CRV",
+    "additional_investors": "Alven, Nurzhas Makishev, Adapt Ventures, 2.12 Angels, Diagram Collective, Somrat Niyogi, Fidji Simo, and Thuan Pham",
+    "website": "https://www.archy.com/",
+    "software_category": "Payments and Management platform",
+    "source": "https://www.businesswire.com/news/home/20221107005378/en/Archy-Raises-10-Million-in-Funding-To-Simplify-Dental-Practice-Ownership"
+   },
+   "title": "Archy Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/archy-raises-10-million-in-seed-round/",
+   "date": "2022-11-07",
+   "filter_reason": "ok"
+  },
+  "wispr-raises-10-million-in-seed-ii-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "Wispr AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed II",
+    "funding_date": "October 2022",
+    "lead_investor": "Neo, Triple Point Capital, MVP Ventures, and Fred Ehrsam",
+    "additional_investors": "New Enterprise Associates (NEA) and 8VC",
+    "website": "https://wispr.ai/",
+    "software_category": "AI-enabled neurotechnology",
+    "source": "https://www.prnewswire.com/news-releases/wispr-raises-another-10m-to-build-a-more-natural-way-to-interact-with-technology-301657331.html"
+   },
+   "title": "Wispr Raises $10 Million in Seed II Funding",
+   "url": "https://www.thesaasnews.com/news/wispr-raises-10-million-in-seed-ii-funding/",
+   "date": "2022-10-24",
+   "filter_reason": "ok"
+  },
+  "velotix-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Velotix Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "October 2022",
+    "lead_investor": "Capri Ventures",
+    "additional_investors": "",
+    "website": "https://www.velotix.ai/",
+    "software_category": "AI-based data security platform",
+    "source": "https://www.prnewswire.com/il/news-releases/velotix-announces-launch-from-stealth-with-10m-seed-round-301654892.html"
+   },
+   "title": "Velotix Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/velotix-raises-10-million-in-seed-round/",
+   "date": "2022-10-23",
+   "filter_reason": "ok"
+  },
+  "outthink-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Outthink Limited",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "October 2022",
+    "lead_investor": "AlbionVC",
+    "additional_investors": "TriplePoint Capital, Forward Partners, Gapminder, and Innovate UK",
+    "website": "https://outthink.io/",
+    "software_category": "Cybersecurity Human Risk Management Platform",
+    "source": "https://techfundingnews.com/outthink-secures-10m-to-tackle-the-human-errors-behind-data-breaches/"
+   },
+   "title": "OutThink Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/outthink-raises-10-million-in-seed-round/",
+   "date": "2022-10-18",
+   "filter_reason": "ok"
+  },
+  "flyway-secures-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Flyway Technologies LTD",
+    "raised": "$10.0M",
+    "round": "seed and debt",
+    "funding_date": "Aug 2022",
+    "lead_investor": "Signal Ventures, Monday Capital, GroupRMC,",
+    "additional_investors": "Florian Hagenbuch and Alex Chatzieleftheriou",
+    "website": "https://flyway.app/",
+    "software_category": "Real Estate Application Software",
+    "source": "https://www.prnewswire.com/news-releases/flyway-launches-to-create-new-category-of-pied-a-terre-ownership-secures-10-million-in-seed-and-debt-funding-301610719.html"
+   },
+   "title": "Flyway Secures $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/flyway-secures-10-million-in-seed-round/",
+   "date": "2022-08-30",
+   "filter_reason": "ok"
+  },
+  "covu-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Vero Insurance Solutions, LLC.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "Aug 2022",
+    "lead_investor": "ManchesterStory Group",
+    "additional_investors": "",
+    "website": "https://covu.com/",
+    "software_category": "Digital Insurance",
+    "source": "https://www.businesswire.com/news/home/20220817005493/en/Insurance-Industry-Titans-Collaborate-to-Form-COVU-Helping-Insurance-Agents-and-Carriers-Build-Customer-Centric-Growth-Oriented-Businesses"
+   },
+   "title": "COVU Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/covu-raises-10-million-in-seed-round/",
+   "date": "2022-08-21",
+   "filter_reason": "ok"
+  },
+  "ceretax-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "CereTax, Inc",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "Aug 2022",
+    "lead_investor": "Leaders Fund",
+    "additional_investors": "",
+    "website": "https://www.ceretax.com/",
+    "software_category": "SaaS Sales Tax",
+    "source": "https://hypepotamus.com/news/alpharetta-based-ceretax-lands-10m-seed-round-comes-out-of-stealth-mode/"
+   },
+   "title": "CereTax Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/ceretax-raises-10-million-in-seed-round/",
+   "date": "2022-08-10",
+   "filter_reason": "ok"
+  },
+  "turnkey-lender-raises-10-million-in-funding": {
+   "fetch": "ok",
+   "details": {
+    "company": "TurnKey Lender Inc.",
+    "raised": "$10.0M",
+    "round": "Unknown",
+    "funding_date": "July 2022",
+    "lead_investor": "OTB Ventures",
+    "additional_investors": "DEG and Vertex Ventures",
+    "website": "https://www.turnkey-lender.com/",
+    "software_category": "Lending Management Software",
+    "source": "https://ffnews.com/newsarticle/turnkey-lender-raises-10-million-in-new-funding-round-appoints-christian-morales-as-chairman-of-the-board/"
+   },
+   "title": "TurnKey Lender Raises $10 Million in funding",
+   "url": "https://www.thesaasnews.com/news/turnkey-lender-raises-10-million-in-funding/",
+   "date": "2022-07-18",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "ravio-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Ravio Technologies Ltd.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "April 2022",
+    "lead_investor": "Northzone",
+    "website": "https://ravio.com/",
+    "software_category": "Employee Compensation platform",
+    "source": "https://tech.eu/2022/04/27/backing-startups-to-win-the-talent-war-ravio-raises-10-million/"
+   },
+   "title": "Ravio Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/ravio-raises-10-million-in-seed-round/",
+   "date": "2022-04-27",
+   "filter_reason": "ok"
+  },
+  "union-ai-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "Union Systems Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "April 2022",
+    "lead_investor": "NEA",
+    "additional_investors": "",
+    "website": "https://www.union.ai/",
+    "software_category": "Open-source Workflow Orchestration platform",
+    "source": "https://www.prnewswire.com/news-releases/unionai-raises-10m-in-seed-funding-for-ai-and-ml-orchestration-technology-301524104.html"
+   },
+   "title": "Union.ai Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/union-ai-raises-10-million-in-seed-round/",
+   "date": "2022-04-13",
+   "filter_reason": "ok"
+  },
+  "omniml-raises-10-million-in-seed-round": {
+   "fetch": "ok",
+   "details": {
+    "company": "OmniML",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "March 2022",
+    "lead_investor": "GGV Capital",
+    "additional_investors": "Qualcomm Ventures, Foothill Ventures, and a few other venture capital firms",
+    "website": "https://omniml.ai/",
+    "software_category": "AI Computing Edge",
+    "source": "https://www.businesswire.com/news/home/20220329005364/en/OmniML-Secures-10-Million-to-Accelerate-AI-Computing-on-Edge-Devices"
+   },
+   "title": "OmniML Raises $10 Million in Seed Round",
+   "url": "https://www.thesaasnews.com/news/omniml-raises-10-million-in-seed-round/",
+   "date": "2022-03-30",
+   "filter_reason": "ok"
+  },
+  "pagos-raises-10-million-led-by-underscore-vc-and-point72-ventures": {
+   "fetch": "ok",
+   "details": {
+    "company": "Pagos Solutions, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "October 2021",
+    "lead_investor": "Underscore VC and Point72 Ventures",
+    "additional_investors": "Amit Jhawar, Bill Ready, Billy Chen, and Rich LaBarca",
+    "website": "https://pagos.ai/",
+    "software_category": "Data and insight SaaS platform",
+    "source": "https://www.prnewswire.com/news-releases/pagos-raises-10m-to-scale-platform-helping-companies-understand-and-optimize-payments-performance-301401469.html"
+   },
+   "title": "Pagos Raises $10 Million in Seed Funding led by Underscore VC and",
+   "url": "https://www.thesaasnews.com/news/pagos-raises-10-million-led-by-underscore-vc-and-point72-ventures/",
+   "date": "2021-10-17",
+   "filter_reason": "ok"
+  },
+  "ai-powered-meeting-plugin-read-ai-emerges-from-stealth-with-10-million": {
+   "fetch": "ok",
+   "details": {
+    "company": "Read AI, Inc.",
+    "raised": "$10.0M",
+    "round": "Seed Round",
+    "funding_date": "September 2021",
+    "lead_investor": "Madrona Venture Group",
+    "additional_investors": "PSL Ventures and individual investors",
+    "website": "https://www.read.ai/",
+    "software_category": "AI-powered platform for meeting metrics",
+    "source": "https://venturebeat.com/2021/09/29/ai-powered-meeting-plugin-read-ai-emerges-from-stealth-with-10m/ https://www.read.ai/blog"
+   },
+   "title": "AI-powered Meeting Plugin Read AI Emerges from Stealth with $10 Million",
+   "url": "https://www.thesaasnews.com/news/ai-powered-meeting-plugin-read-ai-emerges-from-stealth-with-10-million/",
+   "date": "2021-09-29",
+   "filter_reason": "ok_unlabeled_check_round_in_article"
+  },
+  "moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://charikaty.com",
+    "company": "Charikaty",
+    "round": "Pre-seed",
+    "funding_date": "September 10, 2026",
+    "lead_investor": "Red Tape Ventures, Faris Al-Obaid, Faris Abdi",
+    "software_category": "Legaltech",
+    "source": "https://www.moroccoworldnews.com/2026/09/337847/moroccan-legaltech-charikaty-raises-pre-seed-round-at-e3-million-valuation/"
+   },
+   "title": "Charikaty Raises Pre-seed Round at \u20ac3 Million Valuation",
+   "url": "https://www.thesaasnews.com/news/moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into/",
+   "date": "2026-09-10",
+   "filter_reason": "check_article_valuation_only"
+  },
+  "quantum-tiger-raises-pre-seed-at-2m-valuation": {
+   "fetch": "ok",
+   "details": {
+    "company": "Quantum Tiger",
+    "raised": "Undisclosed",
+    "round": "Pre-seed",
+    "funding_date": "May 26, 2026",
+    "website": "https://www.quantumtiger.in/",
+    "software_category": "Artificial Intelligence / Enterprise Software",
+    "source": "https://indianstartupnews.com/funding/ai-native-strategic-intelligence-startup-quantum-tiger-raises-funding-at-2-million-valuation-11876344"
+   },
+   "title": "Quantum Tiger Raises Pre-Seed at $2M Valuation",
+   "url": "https://www.thesaasnews.com/news/quantum-tiger-raises-pre-seed-at-2m-valuation/",
+   "date": "2026-05-26",
+   "filter_reason": "check_article_valuation_only"
+  },
+  "mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation": {
+   "fetch": "ok",
+   "details": {
+    "website": "https://studyeternity.com",
+    "company": "Eternity",
+    "round": "Pre-seed",
+    "funding_date": "August 16, 2026",
+    "additional_investors": "private investor",
+    "software_category": "EdTech",
+    "source": "https://markets.businessinsider.com/news/stocks/mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation-1036461559"
+   },
+   "title": "Eternity Raises Pre-seed at $1M Valuation",
+   "url": "https://www.thesaasnews.com/news/mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation/",
+   "date": "2026-08-17",
+   "filter_reason": "check_article_valuation_only"
   }
  }
 }

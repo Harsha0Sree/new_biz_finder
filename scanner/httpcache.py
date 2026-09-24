@@ -13,8 +13,19 @@ import httpx
 ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = ROOT / "data" / "cache" / "pages"
 USER_AGENT = (
-    "new-biz-finder/0.1 (seed-round agency-opportunity research; polite crawler)"
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 )
+DEFAULT_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+}
 
 _last_request_ts = 0.0
 
@@ -76,15 +87,20 @@ def fetch(
     *,
     timeout: float = 15.0,
     retries: int = 2,
-    min_interval: float = 1.0,
+    min_interval: float = 0.5,
     follow_redirects: bool = True,
+    headers: dict[str, str] | None = None,
+    force_refetch: bool = False,
 ) -> Response:
     """Fetch url with disk cache. Cache hits are instant; misses are throttled."""
-    cached = load_cached(url)
-    if cached is not None:
-        return cached
+    if not force_refetch:
+        cached = load_cached(url)
+        if cached is not None:
+            return cached
 
-    headers = {"User-Agent": USER_AGENT, "Accept": "*/*"}
+    req_headers = dict(DEFAULT_HEADERS)
+    if headers:
+        req_headers.update(headers)
     last_error: Exception | None = None
     for attempt in range(retries + 1):
         if attempt:
@@ -94,7 +110,7 @@ def fetch(
             with httpx.Client(
                 timeout=timeout,
                 follow_redirects=follow_redirects,
-                headers=headers,
+                headers=req_headers,
             ) as client:
                 resp = client.get(url)
         except httpx.HTTPError as exc:

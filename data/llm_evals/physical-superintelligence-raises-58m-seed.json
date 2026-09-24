@@ -1,0 +1,23 @@
+{
+  "slug": "physical-superintelligence-raises-58m-seed",
+  "company": "Physical Superintelligence",
+  "domain": "psi.inc",
+  "website": "https://psi.inc",
+  "usd_equivalent": 58000000.0,
+  "raised_raw": "$58M",
+  "round_field": "Seed",
+  "funding_date": "September 1, 2026",
+  "lead_investor": "Breakthrough Energy Ventures",
+  "software_category": "Artificial Intelligence",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Server error '500 Internal Server Error' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Server error '500 Internal Server Error' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+  "evaluated_at": "2026-09-13T11:20:51Z"
+}

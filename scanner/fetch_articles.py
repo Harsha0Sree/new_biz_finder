@@ -199,6 +199,41 @@ def clean_site_url(url: str) -> str | None:
     return url
 
 
+def fetch_source_pr(source_url: str | None, slug: str) -> str | None:
+    """Fetch external source link (PR/news) and cache clean text for LLM context."""
+    if not source_url:
+        return None
+    url = clean_site_url(source_url)
+    if not url:
+        return None
+    target = ARTICLE_TEXT_DIR / f"source__{slug}.txt"
+    if target.exists():
+        return target.read_text(encoding="utf-8", errors="replace")
+    try:
+        resp = fetch(url, timeout=8.0, retries=1)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not resp.ok:
+            target.write_text("", encoding="utf-8")
+            return None
+        soup = BeautifulSoup(resp.text, "lxml")
+        title = soup.title.get_text(strip=True) if soup.title else ""
+        for tag in soup(["script", "style", "noscript", "svg", "iframe", "nav", "footer"]):
+            tag.decompose()
+        main_el = soup.find("article") or soup.find("main") or soup
+        text = main_el.get_text("\n", strip=True)
+        text = re.sub(r"\n{3,}", "\n\n", text)
+        if len(text) > 100:
+            header = f"Source Title: {title}\nSource URL: {url}\n\n" if title else f"Source URL: {url}\n\n"
+            content = header + text
+            target.write_text(content, encoding="utf-8")
+            return content
+        target.write_text("", encoding="utf-8")
+    except Exception:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("", encoding="utf-8")
+    return None
+
+
 def normalize_name(name: str) -> str:
     n = name.lower().strip()
     n = re.sub(r"[^\w\s]", "", n)
@@ -211,6 +246,41 @@ def domain_of(url: str | None) -> str | None:
         return None
     m = re.match(r"^https?://(?:www\.)?([^/:?#]+)", url)
     return m.group(1).lower() if m else None
+
+
+def clean_article_text(raw: str) -> str:
+    """Truncate article text immediately after the Source field, discarding footers/sidebars."""
+    # 1. Truncate at Source line (Source: https://... or Source:\nhttps://...)
+    m = re.search(r"(?i)\bSource\s*:\s*(?:https?://[^\s\n]+|[^\n]+)", raw)
+    if m:
+        cut = raw[: m.end()].strip()
+    else:
+        # Fallback if no Source field: cut before post footer markers
+        m2 = re.search(r"(?i)\n(?:by\s*\n\s*[A-Z][a-z]+|latest news|read more)", raw)
+        cut = raw[: m2.start()].strip() if m2 else raw.strip()
+
+    # 2. Remove author byline block near top if present
+    cut = re.sub(
+        r"(?i)\nby\s*\n\s*[A-Za-z\s.-]+\n\s*(?:Updated\s*\n\s*)?[A-Za-z]+ \d{1,2},? \d{4}\s*\n",
+        "\n",
+        cut,
+    )
+
+    # 3. Strip HTML blocks and UI artifacts
+    cut = re.sub(r"<div\b[^>]*>[\s\S]*?</div>", "", cut, flags=re.IGNORECASE)
+    cut = re.sub(r"<a\b[^>]*>[\s\S]*?</a>", "", cut, flags=re.IGNORECASE)
+    cut = re.sub(r"<[^>]+>", "", cut)
+
+    lines = []
+    for line in cut.splitlines():
+        l = line.strip()
+        if not l:
+            continue
+        if l.lower() in ("link copied!", "copy failed!", "link copied", "copy failed"):
+            continue
+        lines.append(l)
+
+    return "\n".join(lines)
 
 
 def load_parsed() -> dict:
@@ -250,12 +320,12 @@ def main() -> None:
         if not details:
             log_error(f"no funding-details block parsed {art['url']}")
             details = {}
-        # store stripped article text for evaluation stage
+        # store stripped article text for evaluation stage, cut strictly after Source
         ARTICLE_TEXT_DIR.mkdir(parents=True, exist_ok=True)
         soup = BeautifulSoup(resp.text, "lxml")
-        main_el = soup.find("main") or soup
-        body_text = main_el.get_text("\n", strip=True)
-        (ARTICLE_TEXT_DIR / f"article__{art['slug']}.txt").write_text(body_text)
+        art_el = soup.find("article", class_="gh-post-page__article") or soup.find("main") or soup
+        body_text = clean_article_text(art_el.get_text("\n", strip=True))
+        (ARTICLE_TEXT_DIR / f"article__{art['slug']}.txt").write_text(body_text, encoding="utf-8")
         parsed["articles"][art["slug"]] = {
             "fetch": "ok",
             "details": details,
@@ -294,7 +364,7 @@ def main() -> None:
         s_clean = re.sub(r"(\d+\.\d+)\.(\d+)", r"\1", s_clean)  # $13.5.0M -> $13.5M
         amt_article = parse_amount(s_clean)
         usd = amt_article.usd_equivalent if amt_article else 0.0
-        if usd <= 10_000_000 and title_amt and title_amt.usd_equivalent > 10_000_000:
+        if usd < 10_000_000 and title_amt and title_amt.usd_equivalent >= 10_000_000:
             # article Raised value missing/unparsable/below threshold while the
             # (pre-validated) title amount qualifies -> adopt title, flag it
             usd = title_amt.usd_equivalent
@@ -304,6 +374,8 @@ def main() -> None:
         # --- round verification: article field authoritative when present ---
         round_source = "article"
         pre_series_a_flag = False
+        pre_seed_flag = False
+        has_pre_seed = bool(re.search(r"pre-?\s?seed", round_field, re.I))
         rf_clean = re.sub(r"pre-?\s?seed", "", round_field, flags=re.I)
         has_seed = bool(re.search(r"\bseed\b", rf_clean, re.I))
         has_pre_series_a = bool(re.search(r"pre-?\s?series\s*-?\s*a", round_field, re.I))
@@ -315,21 +387,26 @@ def main() -> None:
             elif rnd_title.kind == "pre-series-a":
                 has_pre_series_a = True
                 pre_series_a_flag = True
+            elif rnd_title.kind == "pre-seed":
+                has_pre_seed = True
+                pre_seed_flag = True
             else:
                 rejected.append(
                     {**art, "reject_reason": "round_unknown_and_title_unlabeled", "details": d}
                 )
                 continue
-        elif not (has_seed or has_pre_series_a):
-            rejected.append({**art, "reject_reason": f"round_field_not_seed ({round_field!r})", "details": d})
+        elif not (has_seed or has_pre_series_a or has_pre_seed):
+            rejected.append({**art, "reject_reason": f"round_field_not_seed_or_pre_seed ({round_field!r})", "details": d})
             continue
-        if has_pre_series_a and not has_seed:
+        if has_pre_series_a and not (has_seed or has_pre_seed):
             pre_series_a_flag = True
+        if has_pre_seed:
+            pre_seed_flag = True
 
         reasons = []
         if not company:
             reasons.append("no_company_name")
-        if not usd > 10_000_000:
+        if usd < 10_000_000:
             reasons.append(f"raised_below_threshold ({usd:.0f} USD from {raised_raw!r})")
         if not site:
             # no website in article: keep, evaluate from article text with G5 gate
@@ -352,6 +429,7 @@ def main() -> None:
                 "slug": art["slug"],
                 "article_url": art["url"],
                 "title": art["title"],
+                "date": art.get("date") or "",
                 "company": company,
                 "normalized_name": normalize_name(company),
                 "domain": dom,
@@ -361,6 +439,7 @@ def main() -> None:
                 "amount_source": amount_source,
                 "round_field": round_field,
                 "round_source": round_source,
+                "pre_seed": pre_seed_flag,
                 "pre_series_a": pre_series_a_flag,
                 "flags": flags,
                 "funding_date": d.get("funding_date", ""),

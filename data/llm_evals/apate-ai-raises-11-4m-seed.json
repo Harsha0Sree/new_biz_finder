@@ -1,0 +1,23 @@
+{
+  "slug": "apate-ai-raises-11-4m-seed",
+  "company": "Apate.AI",
+  "domain": "apate.ai",
+  "website": "https://apate.ai",
+  "usd_equivalent": 11400000.0,
+  "raised_raw": "$11.4M",
+  "round_field": "Seed",
+  "funding_date": "August 31, 2026",
+  "lead_investor": "Lobby Capital",
+  "software_category": "Cybersecurity",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "evaluated_at": "2026-09-13T11:22:18Z"
+}

@@ -25,6 +25,32 @@
   }
  },
  {
+  "slug": "yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration",
+  "url": "https://www.thesaasnews.com/news/yzi-labs-leads-fintax-s-seed-round-establishing-long-term-ecosystem-collaboration/",
+  "title": "FinTax Raises Seed at $40M Valuation",
+  "date": "2026-08-27",
+  "tag_page": 6,
+  "amount_raw": "$40M",
+  "currency": "USD",
+  "amount_native": 40.0,
+  "unit_label": "M",
+  "usd_equivalent": 40000000.0,
+  "round_kind": "seed",
+  "pre_series_a": false,
+  "filter_reason": "check_article_valuation_only",
+  "reject_reason": "raised_below_threshold (0 USD from '')",
+  "details": {
+   "website": "https://fintax.tech",
+   "company": "FinTax",
+   "round": "Seed",
+   "funding_date": "August 27, 2026",
+   "lead_investor": "YZi Labs",
+   "additional_investors": "Amber, Hash House, Pundi AI, Waverider International, Nexus Holdings",
+   "software_category": "Fintech",
+   "source": "https://www.odaily.news/en/newsflash/513159"
+  }
+ },
+ {
   "slug": "compuvi-raises-seed-funding-at-40m-valuation-to-scale-confinaid-s-compliance-platform",
   "url": "https://www.thesaasnews.com/news/compuvi-raises-seed-funding-at-40m-valuation-to-scale-confinaid-s-compliance-platform/",
   "title": "Compuvi Raises Seed Funding at $40M Valuation",
@@ -129,6 +155,34 @@
   }
  },
  {
+  "slug": "talp-raises-20m-pre-seed",
+  "url": "https://www.thesaasnews.com/news/talp-raises-20m-pre-seed/",
+  "title": "Talp Secures Pre-Seed Funding at $20 Million Valuation",
+  "date": "2026-07-03",
+  "tag": "pre-seed",
+  "tag_page": 13,
+  "amount_raw": "$20 Million",
+  "currency": "USD",
+  "amount_native": 20.0,
+  "unit_label": "Million",
+  "usd_equivalent": 20000000.0,
+  "round_kind": "pre-seed",
+  "pre_series_a": false,
+  "filter_reason": "check_article_valuation_only",
+  "reject_reason": "raised_below_threshold (0 USD from 'Undisclosed')",
+  "details": {
+   "website": "https://talp.ai/",
+   "company": "Talp",
+   "raised": "Undisclosed",
+   "round": "Pre-seed",
+   "funding_date": "July 3, 2026",
+   "lead_investor": "Formus Capital",
+   "additional_investors": "a16z Scout Fund",
+   "software_category": "AI Analytics",
+   "source": "https://www.startupresearcher.com/news/ai-persona-startup-talp-secures-20-million-in-pre-seed-funding"
+  }
+ },
+ {
   "slug": "passpass-closes-seven-figure-seed-round-at-15m-valuation-pitching-gamified-music",
   "url": "https://www.thesaasnews.com/news/passpass-closes-seven-figure-seed-round-at-15m-valuation-pitching-gamified-music/",
   "title": "PassPass Closes Seed at $15M Valuation",
@@ -168,7 +222,7 @@
   "round_kind": "seed",
   "pre_series_a": false,
   "filter_reason": "ok",
-  "reject_reason": "round_field_not_seed ('Series A')",
+  "reject_reason": "round_field_not_seed_or_pre_seed ('Series A')",
   "details": {
    "company": "Waldo",
    "raised": "$15.0M",
@@ -179,60 +233,6 @@
    "website": "https://www.waldo.com/",
    "software_category": "no-code test automation platform",
    "source": "https://www.finsmes.com/2022/02/waldo-raises-15m-in-series-a-funding.html"
-  }
- },
- {
-  "slug": "generalmind-raises-12-million-in-funding",
-  "url": "https://www.thesaasnews.com/news/generalmind-raises-12-million-in-funding/",
-  "title": "GeneralMind Raises $12 Million in Funding",
-  "date": "2026-01-20",
-  "tag_page": 73,
-  "amount_raw": "$12 Million",
-  "currency": "USD",
-  "amount_native": 12.0,
-  "unit_label": "Million",
-  "usd_equivalent": 12000000.0,
-  "round_kind": "unlabeled",
-  "pre_series_a": false,
-  "filter_reason": "ok_unlabeled_check_round_in_article",
-  "reject_reason": "round_field_not_seed ('Pre-Seed')",
-  "details": {
-   "company": "ADA AI GmbH (GeneralMind)",
-   "raised": "$12.0M",
-   "round": "Pre-Seed",
-   "funding_date": "January 2026",
-   "lead_investor": "Lakestar, Leo Capital, Lucid Capital,\u00a0Heliad, BOOOM",
-   "additional_investors": "Alexander\u00a0Kudlich, Jens Urbaniak, Samir Sood",
-   "website": "https://www.generalmind.com/",
-   "software_category": "AI / Workflow Automation / ERP Integration (SaaS)",
-   "source": "https://www.eu-startups.com/2026/01/generalmind-new-ai-startup-founded-by-team-behind-german-unicorn-razor-group-secures-e10-2-million-just-months-after-launch/"
-  }
- },
- {
-  "slug": "alloy-raises-a11-5m-seed",
-  "url": "https://www.thesaasnews.com/news/alloy-raises-a11-5m-seed/",
-  "title": "Alloy Raises A$11.5M Seed",
-  "date": "2026-08-13",
-  "tag_page": 4,
-  "amount_raw": "$11.5M",
-  "currency": "USD",
-  "amount_native": 11.5,
-  "unit_label": "M",
-  "usd_equivalent": 11500000.0,
-  "round_kind": "seed",
-  "pre_series_a": false,
-  "filter_reason": "ok",
-  "reject_reason": "raised_below_threshold (7475000 USD from 'A$11.5M')",
-  "details": {
-   "website": "https://usealloy.ai",
-   "company": "Alloy",
-   "raised": "A$11.5M",
-   "round": "Seed",
-   "funding_date": "August 12, 2026",
-   "lead_investor": "Square Peg",
-   "additional_investors": "Blackbird, Airtree",
-   "software_category": "Robotics Software",
-   "source": "https://app.dealroom.co/news/note/alloy-raises-8m-seed-to-help-engineers-debug-robot-fleets-with-ai"
   }
  },
  {
@@ -249,7 +249,7 @@
   "round_kind": "unlabeled",
   "pre_series_a": false,
   "filter_reason": "ok_unlabeled_check_round_in_article",
-  "reject_reason": "round_field_not_seed ('Growth equity funding')",
+  "reject_reason": "round_field_not_seed_or_pre_seed ('Growth equity funding')",
   "details": {
    "company": "Centra",
    "raised": "10M EUR",
@@ -287,6 +287,111 @@
    "website": "https://gain.pro/",
    "software_category": "Investment Insights",
    "source": "https://siliconcanals.com/crowdfunding/gain-pro-raises-9-6m/"
+  }
+ },
+ {
+  "slug": "turnkey-lender-raises-10-million-in-funding",
+  "url": "https://www.thesaasnews.com/news/turnkey-lender-raises-10-million-in-funding/",
+  "title": "TurnKey Lender Raises $10 Million in funding",
+  "date": "2022-07-18",
+  "tag_page": 292,
+  "amount_raw": "$10 Million",
+  "currency": "USD",
+  "amount_native": 10.0,
+  "unit_label": "Million",
+  "usd_equivalent": 10000000.0,
+  "round_kind": "unlabeled",
+  "pre_series_a": false,
+  "filter_reason": "ok_unlabeled_check_round_in_article",
+  "reject_reason": "round_unknown_and_title_unlabeled",
+  "details": {
+   "company": "TurnKey Lender Inc.",
+   "raised": "$10.0M",
+   "round": "Unknown",
+   "funding_date": "July 2022",
+   "lead_investor": "OTB Ventures",
+   "additional_investors": "DEG and Vertex Ventures",
+   "website": "https://www.turnkey-lender.com/",
+   "software_category": "Lending Management Software",
+   "source": "https://ffnews.com/newsarticle/turnkey-lender-raises-10-million-in-new-funding-round-appoints-christian-morales-as-chairman-of-the-board/"
+  }
+ },
+ {
+  "slug": "moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into",
+  "url": "https://www.thesaasnews.com/news/moroccan-legaltech-charikaty-raises-pre-seed-round-at-3-4m-valuation-to-expand-into/",
+  "title": "Charikaty Raises Pre-seed Round at \u20ac3 Million Valuation",
+  "date": "2026-09-10",
+  "tag": "pre-seed",
+  "tag_page": 1,
+  "amount_raw": "\u20ac3 Million",
+  "currency": "EUR",
+  "amount_native": 3.0,
+  "unit_label": "Million",
+  "usd_equivalent": 3240000.0,
+  "round_kind": "pre-seed",
+  "pre_series_a": false,
+  "filter_reason": "check_article_valuation_only",
+  "reject_reason": "raised_below_threshold (0 USD from '')",
+  "details": {
+   "website": "https://charikaty.com",
+   "company": "Charikaty",
+   "round": "Pre-seed",
+   "funding_date": "September 10, 2026",
+   "lead_investor": "Red Tape Ventures, Faris Al-Obaid, Faris Abdi",
+   "software_category": "Legaltech",
+   "source": "https://www.moroccoworldnews.com/2026/09/337847/moroccan-legaltech-charikaty-raises-pre-seed-round-at-e3-million-valuation/"
+  }
+ },
+ {
+  "slug": "quantum-tiger-raises-pre-seed-at-2m-valuation",
+  "url": "https://www.thesaasnews.com/news/quantum-tiger-raises-pre-seed-at-2m-valuation/",
+  "title": "Quantum Tiger Raises Pre-Seed at $2M Valuation",
+  "date": "2026-05-26",
+  "tag": "pre-seed",
+  "tag_page": 24,
+  "amount_raw": "$2M",
+  "currency": "USD",
+  "amount_native": 2.0,
+  "unit_label": "M",
+  "usd_equivalent": 2000000.0,
+  "round_kind": "pre-seed",
+  "pre_series_a": false,
+  "filter_reason": "check_article_valuation_only",
+  "reject_reason": "raised_below_threshold (0 USD from 'Undisclosed')",
+  "details": {
+   "company": "Quantum Tiger",
+   "raised": "Undisclosed",
+   "round": "Pre-seed",
+   "funding_date": "May 26, 2026",
+   "website": "https://www.quantumtiger.in/",
+   "software_category": "Artificial Intelligence / Enterprise Software",
+   "source": "https://indianstartupnews.com/funding/ai-native-strategic-intelligence-startup-quantum-tiger-raises-funding-at-2-million-valuation-11876344"
+  }
+ },
+ {
+  "slug": "mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation",
+  "url": "https://www.thesaasnews.com/news/mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation/",
+  "title": "Eternity Raises Pre-seed at $1M Valuation",
+  "date": "2026-08-17",
+  "tag": "pre-seed",
+  "tag_page": 6,
+  "amount_raw": "$1M",
+  "currency": "USD",
+  "amount_native": 1.0,
+  "unit_label": "M",
+  "usd_equivalent": 1000000.0,
+  "round_kind": "pre-seed",
+  "pre_series_a": false,
+  "filter_reason": "check_article_valuation_only",
+  "reject_reason": "raised_below_threshold (0 USD from '')",
+  "details": {
+   "website": "https://studyeternity.com",
+   "company": "Eternity",
+   "round": "Pre-seed",
+   "funding_date": "August 16, 2026",
+   "additional_investors": "private investor",
+   "software_category": "EdTech",
+   "source": "https://markets.businessinsider.com/news/stocks/mohamed-al-shami-and-omar-abu-ghoush-complete-pre-seed-round-at-usd-1-million-valuation-1036461559"
   }
  }
 ]

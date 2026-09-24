@@ -1,0 +1,28 @@
+{
+  "slug": "advanced-machine-intelligence-labs-raises-1b-seed",
+  "company": "Advanced Machine Intelligence Labs",
+  "domain": "amilabs.xyz",
+  "website": "https://amilabs.xyz",
+  "usd_equivalent": 1000000000.0,
+  "raised_raw": "$1B",
+  "round_field": "Seed",
+  "funding_date": "March 10, 2026",
+  "lead_investor": "Jeff Bezos, Mark Cuban, and various venture capital firms",
+  "software_category": "Artificial Intelligence",
+  "pricing": null,
+  "in_previous_67": true,
+  "provider": "nvidia",
+  "model": "openai/gpt-oss-20b",
+  "score": 45,
+  "verdict": "Advanced\u202fMachine\u202fIntelligence\u202fLabs (AMI\u202fLabs) is a high\u2011profile research\u2011lab founded by Yann\u202fLeCun and backed by a $1\u202fB seed round. Its stated mission is to build \u201cnext\u2011generation AI systems that understand the real world, have persistent memory, can",
+  "parsed": {},
+  "raw_response": "**Executive Conclusion**  \nAdvanced\u202fMachine\u202fIntelligence\u202fLabs (AMI\u202fLabs) is a high\u2011profile research\u2011lab founded by Yann\u202fLeCun and backed by a $1\u202fB seed round. Its stated mission is to build \u201cnext\u2011generation AI systems that understand the real world, have persistent memory, can reason and plan, and are controllable and safe.\u201d The company\u2019s public narrative is heavily focused on foundational research (world\u2011models, action\u2011conditioned planning, real\u2011world sensor learning) and long\u2011term productization in sectors such as industrial process control, robotics, wearables, and healthcare.  \n\nFrom a market\u2011wave perspective, AMI\u202fLabs sits at the intersection of **AI\u2011driven automation** and **real\u2011world robotics**\u2014two sectors that are attracting significant venture capital but are still dominated by large incumbents and heavily regulated verticals. The underlying pain (safe, controllable, real\u2011world AI) is indeed severe, but the *solution* is a research agenda, not a ready\u2011to\u2011sell product.  \n\nThe key insight is that **high\u2011funded research labs rarely translate into immediate, low\u2011barrier agency opportunities**. The core value proposition\u2014advanced planning and world\u2011modeling\u2014requires sophisticated data pipelines, domain expertise, and safety validation that cannot be replicated with LLMs, no\u2011code tools, or a 48\u2011hour build. Moreover, the target industries (industrial control, robotics, healthcare) are heavily regulated and demand rigorous compliance, making it impossible for an unknown solo operator in India to credibly sell such a service without substantial credentials or a proven track record.  \n\nApplying the 25\u2011criterion framework, AMI\u202fLabs scores **45/100**. The score is dragged down by zero feasibility for a 48\u2011hour MVP, low AI replicability, high compliance risk, and a solo\u2011agency fit of zero. Consequently, the recommendation is **REJECT**: the startup does not expose a viable, low\u2011barrier agency opportunity for a beginner operator.\n\n---\n\n## AI Report Analysis\n\n| Market\u2011Level Signal | Observation |\n|---------------------|---------------|\n| **Emerging categories** | AI\u2011driven real\u2011world planning, world\u2011modeling, and controllable robotics. |\n| **Repeated problems** | Lack of safe, persistent memory in AI; inability to plan in noisy sensor environments. |\n| **New buyer behavior** | Enterprises in manufacturing and healthcare are increasingly seeking AI\u2011enabled automation but are constrained by safety and regulatory concerns. |\n| **AI adoption patterns** | Adoption is still in early research stages; most solutions are proprietary and require heavy engineering. |\n| **New workflows being automated** | End\u2011to\u2011end robotic control loops, predictive maintenance, and autonomous decision making. |\n| **Industries receiving disproportionate funding** | Robotics, industrial automation, and healthcare AI. |\n| **Startups replacing manual labor** | Few; most focus on augmenting human operators rather than full automation. |\n| **Startups creating new workflows** | AMI\u202fLabs aims to create new AI\u2011driven control loops that replace legacy PLCs and rule\u2011based systems. |\n| **Increasingly valuable outcomes** | Safety\u2011critical automation, real\u2011time decision making, and persistent context awareness. |\n| **Repeated complaints/pain points** | Legacy systems are brittle, lack adaptability, and are costly to maintain. |\n| **Markets becoming commoditized** | Basic LLM\u2011based chatbots, generic data pipelines. |\n| **Implementation remains difficult** | Real\u2011world sensor integration, safety validation, and regulatory compliance. |\n| **Software easier to reproduce with AI** | LLM\u2011based text generation, but not world\u2011modeling or real\u2011time planning. |\n\n**Agency Implications**\n\n| Insight | Implication |\n|---------|-------------|\n| Capabilities are research\u2011heavy | Not a commodity; requires deep expertise. |\n| Domain expertise still required | High barrier to entry for solo operators. |\n| Products are infrastructure\u2011heavy | Poor fit for agency services. |\n| Under",
+  "usage": {
+    "prompt_tokens": 5752,
+    "total_tokens": 9252,
+    "completion_tokens": 3500,
+    "prompt_tokens_details": null
+  },
+  "error": null,
+  "evaluated_at": "2026-09-13T10:15:29Z"
+}

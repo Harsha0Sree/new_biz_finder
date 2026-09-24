@@ -1,0 +1,23 @@
+{
+  "slug": "formx-raises-12-5m-seed",
+  "company": "FormX",
+  "domain": "formx.com",
+  "website": "https://formx.com",
+  "usd_equivalent": 12500000.0,
+  "raised_raw": "$12.5M",
+  "round_field": "Seed",
+  "funding_date": "July 31, 2026",
+  "lead_investor": "Grove Ventures",
+  "software_category": "Construction Technology",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: The read operation timed out",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "The read operation timed out",
+  "evaluated_at": "2026-09-13T11:28:51Z"
+}

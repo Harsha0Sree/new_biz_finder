@@ -1,0 +1,23 @@
+{
+  "slug": "harmony-raises-34m-seed",
+  "company": "Harmony",
+  "domain": "harmony.ai",
+  "website": "https://harmony.ai",
+  "usd_equivalent": 34000000.0,
+  "raised_raw": "$34M",
+  "round_field": "Seed",
+  "funding_date": "July 28, 2026",
+  "lead_investor": "Lightspeed Venture Partners",
+  "software_category": "Enterprise AI",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "evaluated_at": "2026-09-13T11:41:46Z"
+}

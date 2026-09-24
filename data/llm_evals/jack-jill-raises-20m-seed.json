@@ -1,0 +1,23 @@
+{
+  "slug": "jack-jill-raises-20m-seed",
+  "company": "Jack & Jill",
+  "domain": "jackandjill.ai",
+  "website": "https://jackandjill.ai",
+  "usd_equivalent": 20000000.0,
+  "raised_raw": "$20M",
+  "round_field": "Seed",
+  "funding_date": "October 16, 2025",
+  "lead_investor": "Creandum",
+  "software_category": "Recruitment Technology",
+  "pricing": null,
+  "in_previous_67": false,
+  "provider": "nvidia",
+  "model": "z-ai/glm-5.3-flash",
+  "score": 0,
+  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "parsed": {},
+  "raw_response": "",
+  "usage": {},
+  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "evaluated_at": "2026-09-13T11:24:36Z"
+}
