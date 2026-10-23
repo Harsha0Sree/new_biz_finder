@@ -1,6 +1,13 @@
 import pytest
 
-from scanner.amounts import parse_amount, parse_raise_amount, parse_round, qualifies
+from scanner.amounts import (
+    THRESHOLD_USD,
+    meets_threshold,
+    parse_amount,
+    parse_raise_amount,
+    parse_round,
+    qualifies,
+)
 
 GROUND_TRUTH = [
     # (title, should_qualify)
@@ -25,6 +32,8 @@ def test_ground_truth(title, expected):
 
 
 def test_threshold_at_least_10m():
+    assert meets_threshold(THRESHOLD_USD) is True
+    assert meets_threshold(THRESHOLD_USD - 0.01) is False
     assert qualifies("Arc Raises $10.76M Seed")[0] is True
     assert qualifies("X Raises $10,000,000 Seed")[0] is True
     assert qualifies("Metacognition Raises $10M Pre-seed")[0] is True
@@ -61,6 +70,26 @@ def test_formats():
     assert a.usd_equivalent == pytest.approx(744_000)
     a = parse_amount("Roopya Raises Rs 4 Cr Seed Round")
     assert a.usd_equivalent == pytest.approx(480_000)
+
+
+def test_large_units_and_abbreviations():
+    assert parse_amount("X Raises $2B Seed").usd_equivalent == pytest.approx(2_000_000_000)
+    assert parse_amount("X Raises $2.5 Billion Seed").usd_equivalent == pytest.approx(2.5e9)
+    assert parse_amount("X Raises $3bn Seed").usd_equivalent == pytest.approx(3e9)
+    assert parse_amount("X Raises $4 Tn Seed").usd_equivalent == pytest.approx(4e12)
+    assert parse_amount("X Raises $4 Trillion Seed").usd_equivalent == pytest.approx(4e12)
+    assert parse_amount("X Raises $5mn Seed").usd_equivalent == pytest.approx(5_000_000)
+    assert parse_amount("X Raises $5M Seed").usd_equivalent == pytest.approx(5_000_000)
+
+
+def test_indian_units_lakh_vs_crore():
+    # 1 crore = 100 lakh, so these must be two orders of magnitude apart.
+    crore = parse_amount("X Raises Rs 50 Cr Seed")
+    lakh = parse_amount("X Raises Rs 50 Lakh Seed")
+    assert crore.usd_equivalent == pytest.approx(6_000_000)
+    assert lakh.usd_equivalent == pytest.approx(60_000)
+    assert crore.usd_equivalent / lakh.usd_equivalent == pytest.approx(100)
+    assert parse_amount("X Raises ₹75 Lacs Seed").usd_equivalent == pytest.approx(90_000)
 
 
 def test_valuation_not_matched_instead_of_raise():

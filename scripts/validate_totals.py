@@ -6,7 +6,8 @@ importing scanner.compute, then diffs against data/scored.json.
 
 from __future__ import annotations
 
-import json
+from scanner.paths import EVALS, SCORED
+from scanner.storage import read_json
 
 HEADS = [("h1", 0.30), ("h2", 0.35), ("h3", 0.25), ("h4", 0.10)]
 PILLAR_WEIGHT = {"P1": 0.20, "P2": 0.15, "P3": 0.18, "P4": 0.12,
@@ -45,17 +46,18 @@ def independent_total(ev: dict) -> float:
     return round(mask * base * 100, 2)
 
 
-def main() -> None:
-    scored = json.load(open("data/scored.json"))["companies"]
+def main() -> int:
+    scored = read_json(SCORED)["companies"]
     bad = 0
     for s in scored:
-        ev = json.load(open(f"data/evals/{s['slug']}.json"))
+        ev = read_json(EVALS / f"{s['slug']}.json")
         t = independent_total(ev)
         if abs(t - s["total"]) > 0.01:
             bad += 1
             print(f"MISMATCH {s['slug']}: independent={t} reported={s['total']}")
     print(f"CHECK 3 - independent recompute: {len(scored)} totals checked, {bad} mismatches")
+    return 1 if bad else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

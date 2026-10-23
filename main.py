@@ -1,24 +1,24 @@
-"""Master Orchestrator — New Biz Finder Pipeline.
+"""Master orchestrator for the seed-round opportunity pipeline.
 
-Runs the entire intelligence and evaluation pipeline end-to-end with a single command:
-1. Crawl article index (from thesaasnews.com)
-2. Filter qualifying rounds (>= $10M USD-equivalent, seed / pre-seed / pre-series-a)
-3. Fetch article bodies & parse verified Funding Details -> companies.json
-4. Scrape company websites, recover SPA text, extract pricing info -> sites.json
-5. Run LLM evaluation loop using system prompt -> llm_evals/, scores.csv, and report
+Steps:
+1. Crawl the article index from thesaasnews.com.
+2. Filter qualifying rounds (at least $10M USD-equivalent).
+3. Fetch article bodies and parse Funding Details into companies.json.
+4. Scrape company websites, recover SPA text, and extract pricing into sites.json.
+5. Export isolated prompt dossiers for each company.
+6. Run the LLM evaluation loop and rebuild rankings/reports.
 """
 
 from __future__ import annotations
 
 import argparse
 import os
-import sys
 import time
 from pathlib import Path
 
 from scanner.env import load_dotenv
+from scanner.paths import ARTICLES_INDEX, DEFAULT_PROMPT, SITES
 
-# Ensure .env is loaded
 load_dotenv()
 
 
@@ -28,7 +28,7 @@ def run_pipeline(
     model: str | None = None,
     api_key: str | None = None,
     base_url: str | None = None,
-    prompt_file: Path = Path("prompts/system_prompt.txt"),
+    prompt_file: Path = DEFAULT_PROMPT,
     year: str = os.getenv("EVAL_YEAR", "2026"),
     limit: int | None = None,
     force_llm: bool = False,
@@ -37,62 +37,65 @@ def run_pipeline(
     skip_crawl: bool = False,
     skip_scrape: bool = False,
     aggregate_only: bool = False,
+    site_workers: int = 4,
+    llm_workers: int = 1,
+    retry_errors: bool = True,
+    include_errors: bool = False,
 ) -> None:
     print("=" * 72)
     print("       NEW BIZ FINDER — END-TO-END OPPORTUNITY PIPELINE")
     print("=" * 72)
-    t0 = time.time()
+    started = time.time()
 
-    # Step 1: Crawl Index
     if step in ("all", "crawl") and not aggregate_only:
-        if skip_crawl and Path("data/articles_index.json").exists():
-            print("\n[Step 1/5] Skipping index crawl (--skip-crawl set and articles_index.json exists)")
+        if skip_crawl and ARTICLES_INDEX.exists():
+            print("\n[Step 1/6] Skipping index crawl (--skip-crawl set)")
         else:
-            print("\n[Step 1/5] Crawling article index from thesaasnews.com (seed-round & pre-seed)...")
-            if refetch_index and "--refetch" not in sys.argv:
-                sys.argv.append("--refetch")
+            print("\n[Step 1/6] Crawling article index (seed-round & pre-seed)...")
             from scanner.crawl_index import main as crawl_main
-            crawl_main()
 
-    # Step 2: Filter Qualifying Rounds
+            crawl_main(refetch=refetch_index)
+
     if step in ("all", "filter") and not aggregate_only:
-        print("\n[Step 2/5] Filtering qualifying rounds (>= $10M USD seed / pre-seed / pre-series-a)...")
+        print("\n[Step 2/6] Filtering qualifying rounds (at least $10M USD-equivalent)...")
         from scanner.filter_articles import main as filter_main
+
         filter_main()
 
-    # Step 3: Fetch Articles & Parse Funding Details
     if step in ("all", "fetch-articles") and not aggregate_only:
-        print("\n[Step 3/5] Fetching article text & extracting funding details into companies.json...")
-        from scanner.fetch_articles import main as fetch_art_main
-        fetch_art_main()
+        print("\n[Step 3/6] Fetching article text and extracting funding details...")
+        from scanner.fetch_articles import main as fetch_articles_main
 
-    # Step 4: Scrape Sites, Recover SPA text & Extract Pricing
+        fetch_articles_main()
+
     if step in ("all", "fetch-sites") and not aggregate_only:
-        if skip_scrape and Path("data/sites.json").exists():
-            print("\n[Step 4/5] Skipping site scraping (--skip-scrape set and sites.json exists)")
+        if skip_scrape and SITES.exists():
+            print("\n[Step 4/6] Skipping site scrape (--skip-scrape set)")
         else:
-            print("\n[Step 4/5] Scraping company websites, recovering SPA state & extracting pricing...")
+            print("\n[Step 4/6] Scraping company websites and extracting pricing...")
             from scanner.fetch_sites import main as fetch_sites_main
-            fetch_sites_main()
 
-    # Step: Export LLM User Prompts
+            fetch_sites_main(workers=site_workers)
+
     if step in ("all", "export-prompts") and not aggregate_only:
-        print("\n[Export] Generating isolated company LLM user prompts -> data/company_prompts/...")
+        print("\n[Step 5/6] Exporting isolated company prompts...")
         from scanner.export_prompts import export_all_prompts
+
         export_all_prompts(year=year)
 
-    # Step 5: Run LLM Evaluation & Opportunity Ranking
     if step in ("all", "llm") or aggregate_only:
-        print("\n[Step 5/5] Running LLM Agency Opportunity Evaluation & Ranking...")
+        print("\n[Step 6/6] Running LLM evaluation and ranking...")
         from scanner.llm_analyzer import aggregate_scores, run_llm_pipeline
 
         if aggregate_only:
-            print("  Running aggregate-only mode (rebuilding scored.json, scores.csv, and reports)...")
-            evals, jpath, cpath = aggregate_scores()
-            print(f"  Aggregated {len(evals)} evaluations.")
-            print(f"  JSON:   {jpath}")
-            print(f"  CSV:    {cpath}")
-            print(f"  Report: reports/llm_opportunity_ranking.md")
+            print("  Aggregate-only mode (no LLM calls)...")
+            evaluations, json_path, csv_path = aggregate_scores(
+                include_errors=include_errors
+            )
+            print(f"  Aggregated {len(evaluations)} evaluations.")
+            print(f"  JSON:   {json_path}")
+            print(f"  CSV:    {csv_path}")
+            print("  Report: reports/llm_opportunity_ranking.md")
         else:
             run_llm_pipeline(
                 provider=provider,
@@ -104,48 +107,84 @@ def run_pipeline(
                 limit=limit,
                 resume=resume_llm,
                 force=force_llm,
-                scrape_missing=True,
+                scrape_missing=not skip_scrape,
+                workers=llm_workers,
+                retry_errors=retry_errors,
             )
 
-    elapsed = time.time() - t0
+    if step == "validate":
+        print("\n[Validate] Checking committed artifacts...")
+        from scanner.validate import main as validate_main
+
+        if validate_main() != 0:
+            raise SystemExit(1)
+
+    elapsed = time.time() - started
     print("\n" + "=" * 72)
     print(f"PIPELINE COMPLETED in {elapsed:.1f}s")
     print("=" * 72)
 
 
+def _env_limit() -> int | None:
+    raw = os.getenv("EVAL_LIMIT")
+    return int(raw) if raw else None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="New Biz Finder — Unified End-to-End Seed Startup Agency Opportunity Pipeline"
+        description="New Biz Finder — unified seed-startup agency opportunity pipeline"
     )
-    # Execution steps
     parser.add_argument(
         "--step",
-        choices=["all", "crawl", "filter", "fetch-articles", "fetch-sites", "export-prompts", "llm"],
+        choices=["all", "crawl", "filter", "fetch-articles", "fetch-sites", "export-prompts", "llm", "validate"],
         default="all",
         help="Pipeline step to execute (default: all)",
     )
-    parser.add_argument("--skip-crawl", action="store_true", help="Skip crawling if data/articles_index.json exists")
-    parser.add_argument("--skip-scrape", action="store_true", help="Skip website scrape if data/sites.json exists")
-    parser.add_argument("--refetch-index", action="store_true", help="Force re-crawling of all index pages")
+    parser.add_argument("--skip-crawl", action="store_true", help="Skip crawling if the index exists")
+    parser.add_argument("--skip-scrape", action="store_true", help="Skip website scraping if sites.json exists")
+    parser.add_argument("--refetch-index", action="store_true", help="Force a full index re-crawl")
 
-    # LLM Settings (defaults pulled from .env)
     default_provider = os.getenv("LLM_PROVIDER", "nvidia")
     default_year = os.getenv("EVAL_YEAR", "2026")
-    default_limit = int(os.getenv("EVAL_LIMIT")) if os.getenv("EVAL_LIMIT") else None
-
-    parser.add_argument("--provider", choices=["nvidia", "ollama"], default=default_provider,
-                        help=f"LLM provider: 'nvidia' or 'ollama' (default: {default_provider})")
-    parser.add_argument("--model", default=None, help="LLM model override (defaults from .env / provider)")
-    parser.add_argument("--api-key", default=None, help="NVIDIA NIM API key (defaults to NVIDIA_API_KEY from .env)")
+    parser.add_argument(
+        "--provider",
+        choices=["nvidia", "ollama"],
+        default=default_provider,
+        help=f"LLM provider (default: {default_provider})",
+    )
+    parser.add_argument("--model", default=None, help="LLM model override")
+    parser.add_argument("--api-key", default=None, help="NVIDIA NIM API key")
     parser.add_argument("--base-url", default=None, help="Custom LLM base endpoint URL")
-    parser.add_argument("--prompt-file", type=Path, default=Path("prompts/system_prompt.txt"),
-                        help="Path to system prompt file")
+    parser.add_argument(
+        "--prompt-file",
+        type=Path,
+        default=DEFAULT_PROMPT,
+        help="Path to the system prompt file",
+    )
     parser.add_argument("--year", default=default_year, help=f"Funding year filter (default: {default_year})")
-    parser.add_argument("--limit", type=int, default=default_limit, help="Limit number of companies to evaluate")
-    parser.add_argument("--force", action="store_true", help="Force re-evaluation of already evaluated companies")
-    parser.add_argument("--no-resume", dest="resume", action="store_false", help="Do not resume/skip evaluated files")
-    parser.add_argument("--aggregate-only", action="store_true",
-                        help="Rebuild scores.csv, scored.json, and ranking reports without calling LLM")
+    parser.add_argument("--limit", type=int, default=_env_limit(), help="Limit companies evaluated")
+    parser.add_argument("--site-workers", type=int, default=4, help="Concurrent site fetchers (1-16)")
+    parser.add_argument("--llm-workers", type=int, default=1, help="Concurrent LLM evaluations (1-16)")
+    parser.add_argument("--force", action="store_true", help="Re-evaluate already evaluated companies")
+    parser.add_argument(
+        "--no-resume", dest="resume", action="store_false", help="Do not skip existing eval files"
+    )
+    parser.add_argument(
+        "--no-retry-errors",
+        dest="retry_errors",
+        action="store_false",
+        help="Skip LLM eval files that previously errored",
+    )
+    parser.add_argument(
+        "--aggregate-only",
+        action="store_true",
+        help="Rebuild scores.csv, scored.json, and reports without calling the LLM",
+    )
+    parser.add_argument(
+        "--include-errors",
+        action="store_true",
+        help="Include LLM error records in aggregate output (diagnostics only)",
+    )
 
     args = parser.parse_args()
 
@@ -164,6 +203,10 @@ def main() -> None:
         skip_crawl=args.skip_crawl,
         skip_scrape=args.skip_scrape,
         aggregate_only=args.aggregate_only,
+        site_workers=args.site_workers,
+        llm_workers=args.llm_workers,
+        retry_errors=args.retry_errors,
+        include_errors=args.include_errors,
     )
 
 

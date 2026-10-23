@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-import json
-import sys
 from pathlib import Path
 
-EVALS_DIR = Path("data/evals")
+from scanner.paths import EVALS
+from scanner.storage import read_json
+
+EVALS_DIR = EVALS
 ARCHETYPES = {
     "ai_infra_devtools", "vertical_ai_saas", "fintech_regtech",
     "healthtech_bio", "sales_marketing_cx", "other",
@@ -17,9 +18,11 @@ GATES = {"G1", "G2", "G3", "G4", "G5"}
 def validate(path: Path) -> list[str]:
     errs: list[str] = []
     try:
-        ev = json.loads(path.read_text())
-    except Exception as exc:
+        ev = read_json(path)
+    except (ValueError, OSError) as exc:
         return [f"{path.name}: unreadable JSON: {exc}"]
+    if not isinstance(ev, dict):
+        return [f"{path.name}: expected an object"]
     for key in ("slug", "company", "archetype", "confidence", "gates",
                 "categories", "agency_play"):
         if key not in ev:
@@ -55,7 +58,7 @@ def validate(path: Path) -> list[str]:
     return errs
 
 
-def main() -> None:
+def main() -> int:
     files = sorted(EVALS_DIR.glob("*.json")) if EVALS_DIR.exists() else []
     bad = 0
     for p in files:
@@ -66,7 +69,8 @@ def main() -> None:
             for e in errs:
                 print("   ", e)
     print(f"{len(files)} eval files checked, {bad} invalid")
+    return 1 if bad else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

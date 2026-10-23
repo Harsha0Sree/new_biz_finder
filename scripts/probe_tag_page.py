@@ -1,13 +1,13 @@
 """One-off probe: inspect tag-page structure for the index crawler."""
 
-import re
+
+from bs4 import BeautifulSoup
 
 from scanner.httpcache import load_cached
-from bs4 import BeautifulSoup
 
 
 def main(page: int) -> None:
-    url = f"https://www.thesaasnews.com/tag/seed-round/"
+    url = "https://www.thesaasnews.com/tag/seed-round/"
     if page != 1:
         url = f"https://www.thesaasnews.com/tag/seed-round/page/{page}/"
     resp = load_cached(url)
@@ -22,8 +22,6 @@ def main(page: int) -> None:
         if "seed-round" in href or "page" in href:
             print(f"{href!r:70} {text!r}")
     print("=== scripts/classes sample ===")
-    for el in soup.find_all(True, class_=True)[:0]:
-        pass
     body_classes = soup.find("body").get("class") if soup.find("body") else None
     print("body class:", body_classes)
     main_el = soup.find("main") or soup.find(id="main")

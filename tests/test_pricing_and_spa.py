@@ -1,5 +1,7 @@
 import json
+
 from bs4 import BeautifulSoup
+
 from scanner.fetch_sites import extract_pricing, strip_html
 
 
@@ -29,6 +31,21 @@ def test_extract_pricing_sales_led():
     assert p["has_public_pricing"] is False
     assert p["is_sales_led"] is True
     assert "Sales-Led" in p["summary"]
+
+
+def test_extract_pricing_ignores_funding_and_copyright_years():
+    html_text = """
+    © 2026 Acme Inc. We raised $10M in seed funding.
+    Our plans: Starter $29/mo, Growth $99/mo.
+    """
+    soup = BeautifulSoup(html_text, "lxml")
+    p = extract_pricing(soup, html_text)
+
+    assert p["has_public_pricing"] is True
+    assert "$29/mo" in p["price_points"]
+    assert "$99/mo" in p["price_points"]
+    assert "$10" not in p["price_points"]
+    assert "$2026" not in p["price_points"]
 
 
 def test_strip_html_next_data_recovery():

@@ -1,5 +1,6 @@
 from pathlib import Path
-import json
+
+import httpx
 import pytest
 
 from scanner.llm import (
@@ -13,6 +14,45 @@ from scanner.llm_analyzer import (
     is_raised_in_year,
     load_system_prompt,
 )
+
+
+class _FakeHTTPResponse:
+    def __init__(self, status_code, payload=None):
+        self.status_code = status_code
+        self._payload = payload or {}
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError(f"HTTP {self.status_code}")
+
+    def json(self):
+        return self._payload
+
+
+class _FakeHTTPClient:
+    def __init__(self, responses):
+        self._responses = list(responses)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def post(self, *args, **kwargs):
+        return self._responses.pop(0)
+
+
+class _Fake404Response:
+    status_code = 404
+
+    def raise_for_status(self):
+        request = httpx.Request("POST", "https://example.com/v1/chat/completions")
+        response = httpx.Response(404, request=request)
+        raise httpx.HTTPStatusError("404 Not Found", request=request, response=response)
+
+    def json(self):
+        return {}
 
 
 def test_is_raised_in_year():
@@ -103,3 +143,70 @@ def test_llm_client_initialization():
 
     with pytest.raises(ValueError):
         LLMClient(provider="unknown_provider")
+
+
+def test_llm_429_exhaustion_is_an_error_not_a_neutral_score(monkeypatch):
+    responses = [_FakeHTTPResponse(429), _FakeHTTPResponse(429)]
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        max_retries=2,
+        client_factory=lambda _timeout: _FakeHTTPClient(responses),
+    )
+    monkeypatch.setattr("scanner.llm.time.sleep", lambda _seconds: None)
+
+    result = client.analyze_company("system prompt", "company context")
+
+    assert result.error is not None
+    assert "rate limited" in result.error
+    assert result.score == 0
+
+
+def test_llm_does_not_retry_permanent_4xx(monkeypatch):
+    fake_client = _FakeHTTPClient(
+        [_Fake404Response(), _Fake404Response(), _Fake404Response()]
+    )
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        max_retries=3,
+        client_factory=lambda _timeout: fake_client,
+    )
+    monkeypatch.setattr("scanner.llm.time.sleep", lambda _seconds: None)
+
+    result = client.analyze_company("system prompt", "company context")
+
+    assert result.error is not None
+    assert "404" in result.error
+    assert len(fake_client._responses) == 2
+
+
+def test_llm_successful_fenced_json_is_parsed():
+    payload = {
+        "choices": [
+            {
+                "message": {
+                    "content": (
+                        "Here is my verdict.\n```json\n"
+                        '{"score": 92, "verdict": "Strong niche service play"}\n'
+                        "```"
+                    )
+                }
+            }
+        ],
+        "usage": {"total_tokens": 42},
+    }
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        client_factory=lambda _timeout: _FakeHTTPClient(
+            [_FakeHTTPResponse(200, payload)]
+        ),
+    )
+
+    result = client.analyze_company("system prompt", "company context")
+
+    assert result.error is None
+    assert result.score == 92
+    assert result.verdict == "Strong niche service play"
+    assert result.usage == {"total_tokens": 42}

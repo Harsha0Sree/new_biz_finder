@@ -2,27 +2,26 @@
 
 from __future__ import annotations
 
-import json
 import sys
-from pathlib import Path
 
-COMPANIES = Path("data/companies.json")
-OUT_DIR = Path("data/eval_batches")
-SITES = Path("data/sites.json")
+from scanner.paths import COMPANIES, EVAL_BATCHES, SITES, TEXT
+from scanner.storage import read_json, write_json
+
+OUT_DIR = EVAL_BATCHES
 
 
 def site_files(domain: str | None) -> list[str]:
     if not domain:
         return []
     return sorted(
-        p.name for p in Path("data/cache/text").glob(f"site__{domain}__*.txt")
+        p.name for p in TEXT.glob(f"site__{domain}__*.txt")
     )
 
 
 def main() -> None:
     batch_size = int(sys.argv[sys.argv.index("--size") + 1]) if "--size" in sys.argv else 8
-    companies = json.loads(COMPANIES.read_text())
-    sites = json.loads(SITES.read_text())["sites"]
+    companies = read_json(COMPANIES)
+    sites = read_json(SITES)["sites"]
     uniq = [c for c in companies if not c.get("duplicate_of_previous")]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for old in OUT_DIR.glob("batch_*.json"):
@@ -51,7 +50,7 @@ def main() -> None:
                 }
             )
         path = OUT_DIR / f"batch_{len(batches):03d}.json"
-        path.write_text(json.dumps(items, indent=1), encoding="utf-8")
+        write_json(path, items)
         batches.append(path.name)
     print(f"wrote {len(batches)} batches x ~{batch_size} companies to {OUT_DIR}")
 

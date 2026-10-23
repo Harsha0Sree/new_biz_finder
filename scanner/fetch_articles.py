@@ -6,21 +6,29 @@ data/companies.json (deduped by normalized company name + domain).
 
 from __future__ import annotations
 
-import json
 import re
 import time
-from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from scanner.amounts import parse_amount, parse_raise_amount, parse_round
+from scanner.amounts import meets_threshold, parse_amount, parse_raise_amount, parse_round
 from scanner.filter_articles import OUT as QUALIFYING_OUT
 from scanner.httpcache import fetch
+from scanner.paths import (
+    ARTICLES_PARSED,
+    COMPANIES,
+    REJECTED,
+    TEXT,
+)
+from scanner.paths import (
+    ERRORS_LOG as ERRORS_LOG_PATH,
+)
+from scanner.storage import append_text, read_json, write_json, write_text
 
-PARSED_OUT = Path("data/articles_parsed.json")
-COMPANIES_OUT = Path("data/companies.json")
-ARTICLE_TEXT_DIR = Path("data/cache/text")
-ERRORS_LOG = Path("data/errors.log")
+PARSED_OUT = ARTICLES_PARSED
+COMPANIES_OUT = COMPANIES
+ARTICLE_TEXT_DIR = TEXT
+ERRORS_LOG = ERRORS_LOG_PATH
 
 LABELS = [
     "Company Website",
@@ -182,9 +190,7 @@ def extract_funding_details(html: str) -> dict | None:
 
 
 def log_error(msg: str) -> None:
-    ERRORS_LOG.parent.mkdir(parents=True, exist_ok=True)
-    with ERRORS_LOG.open("a", encoding="utf-8") as f:
-        f.write(f"{time.strftime('%Y-%m-%dT%H:%M:%SZ')} {msg}\n")
+    append_text(ERRORS_LOG, f"{time.strftime('%Y-%m-%dT%H:%M:%SZ')} {msg}\n")
 
 
 REF_PARAM_RE = re.compile(r"[?&]ref=thesaasnews\.com")
@@ -208,12 +214,13 @@ def fetch_source_pr(source_url: str | None, slug: str) -> str | None:
         return None
     target = ARTICLE_TEXT_DIR / f"source__{slug}.txt"
     if target.exists():
-        return target.read_text(encoding="utf-8", errors="replace")
+        cached = target.read_text(encoding="utf-8", errors="replace")
+        if cached.strip():
+            return cached
     try:
         resp = fetch(url, timeout=8.0, retries=1)
-        target.parent.mkdir(parents=True, exist_ok=True)
         if not resp.ok:
-            target.write_text("", encoding="utf-8")
+            write_text(target, "")
             return None
         soup = BeautifulSoup(resp.text, "lxml")
         title = soup.title.get_text(strip=True) if soup.title else ""
@@ -225,12 +232,11 @@ def fetch_source_pr(source_url: str | None, slug: str) -> str | None:
         if len(text) > 100:
             header = f"Source Title: {title}\nSource URL: {url}\n\n" if title else f"Source URL: {url}\n\n"
             content = header + text
-            target.write_text(content, encoding="utf-8")
+            write_text(target, content)
             return content
-        target.write_text("", encoding="utf-8")
+        write_text(target, "")
     except Exception:
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text("", encoding="utf-8")
+        write_text(target, "")
     return None
 
 
@@ -273,30 +279,28 @@ def clean_article_text(raw: str) -> str:
 
     lines = []
     for line in cut.splitlines():
-        l = line.strip()
-        if not l:
+        stripped = line.strip()
+        if not stripped:
             continue
-        if l.lower() in ("link copied!", "copy failed!", "link copied", "copy failed"):
+        if stripped.lower() in ("link copied!", "copy failed!", "link copied", "copy failed"):
             continue
-        lines.append(l)
+        lines.append(stripped)
 
     return "\n".join(lines)
 
 
 def load_parsed() -> dict:
-    if PARSED_OUT.exists():
-        return json.loads(PARSED_OUT.read_text())
-    return {"articles": {}}
+    return read_json(PARSED_OUT, {"articles": {}})
 
 
 def save_parsed(parsed: dict) -> None:
-    PARSED_OUT.write_text(json.dumps(parsed, indent=1), encoding="utf-8")
+    write_json(PARSED_OUT, parsed)
 
 
 def main() -> None:
     import sys
 
-    qualifying = json.loads(QUALIFYING_OUT.read_text())["qualifying"]
+    qualifying = read_json(QUALIFYING_OUT)["qualifying"]
     parsed = load_parsed()
     if "--reparse" in sys.argv:
         parsed = {"articles": {}}
@@ -321,11 +325,10 @@ def main() -> None:
             log_error(f"no funding-details block parsed {art['url']}")
             details = {}
         # store stripped article text for evaluation stage, cut strictly after Source
-        ARTICLE_TEXT_DIR.mkdir(parents=True, exist_ok=True)
         soup = BeautifulSoup(resp.text, "lxml")
         art_el = soup.find("article", class_="gh-post-page__article") or soup.find("main") or soup
         body_text = clean_article_text(art_el.get_text("\n", strip=True))
-        (ARTICLE_TEXT_DIR / f"article__{art['slug']}.txt").write_text(body_text, encoding="utf-8")
+        write_text(ARTICLE_TEXT_DIR / f"article__{art['slug']}.txt", body_text)
         parsed["articles"][art["slug"]] = {
             "fetch": "ok",
             "details": details,
@@ -343,7 +346,7 @@ def main() -> None:
     rejected: list[dict] = []
     seen: set[tuple[str, str]] = set()
     dup_count = 0
-    for art in json.loads(QUALIFYING_OUT.read_text())["qualifying"]:
+    for art in read_json(QUALIFYING_OUT)["qualifying"]:
         p = parsed["articles"].get(art["slug"], {})
         if p.get("fetch") != "ok":
             rejected.append({**art, "reject_reason": f"fetch_{p.get('fetch', 'missing')}"})
@@ -364,7 +367,7 @@ def main() -> None:
         s_clean = re.sub(r"(\d+\.\d+)\.(\d+)", r"\1", s_clean)  # $13.5.0M -> $13.5M
         amt_article = parse_amount(s_clean)
         usd = amt_article.usd_equivalent if amt_article else 0.0
-        if usd < 10_000_000 and title_amt and title_amt.usd_equivalent >= 10_000_000:
+        if not meets_threshold(usd) and title_amt and meets_threshold(title_amt.usd_equivalent):
             # article Raised value missing/unparsable/below threshold while the
             # (pre-validated) title amount qualifies -> adopt title, flag it
             usd = title_amt.usd_equivalent
@@ -406,7 +409,7 @@ def main() -> None:
         reasons = []
         if not company:
             reasons.append("no_company_name")
-        if usd < 10_000_000:
+        if not meets_threshold(usd):
             reasons.append(f"raised_below_threshold ({usd:.0f} USD from {raised_raw!r})")
         if not site:
             # no website in article: keep, evaluate from article text with G5 gate
@@ -451,8 +454,8 @@ def main() -> None:
             }
         )
 
-    COMPANIES_OUT.write_text(json.dumps(companies, indent=1), encoding="utf-8")
-    Path("data/rejected.json").write_text(json.dumps(rejected, indent=1), encoding="utf-8")
+    write_json(COMPANIES_OUT, companies)
+    write_json(REJECTED, rejected)
     kept_unique = [c for c in companies if not c["duplicate_of_previous"]]
     print(f"companies total={len(companies)} unique={len(kept_unique)} dups={dup_count} rejected={len(rejected)}")
     for r in rejected[:10]:

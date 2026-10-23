@@ -2,8 +2,9 @@
 
 import re
 
-from scanner.httpcache import load_cached
 from bs4 import BeautifulSoup
+
+from scanner.httpcache import load_cached
 
 
 def main() -> None:

@@ -1,54 +1,115 @@
-# Resume Runbook — Seed-Round Agency-Opportunity Scanner
+# Resume runbook
 
-State (this session): pipeline complete end-to-end; **67 of 423 companies
-fully evaluated** (all raise sizes >$34M done; ordered descending by raise).
-Everything is cached and resumable. Subagent (`task`) tooling was unstable
-earlier in the project; inline evaluation is proven and produces 0-invalid files.
+Operational notes for picking the project back up. Artifact counts below are a
+snapshot. `uv run python -m scanner.validate` prints the authoritative current
+numbers.
 
 ## Current state
 
-- `data/articles_index.json` — 4,203 articles from 351 tag pages (complete)
-- `data/qualifying.json` — 437 qualifying articles >$10M USD-equiv (complete)
-- `data/companies.json` — 423 unique companies after Funding-Details verification + dedupe (complete)
-- `data/sites.json` — website fetch status for all 421 domains: 367 ok / 29 js_only / 26 dead*
-- `data/evals/<slug>.json` — completed evaluations (**resume marker: file existence**)
-- `data/scored.json`, `data/scores.csv`, `reports/*.md` — regenerated after every batch
+- `data/articles_index.json`: 4,583 articles from the `/tag/seed-round/` and
+  `/tag/pre-seed/` archives (351 seed-round pages).
+- `data/qualifying.json`: 571 title-level candidates at or above $10M
+  USD-equivalent (seed, pre-seed, pre-Series-A, or deferred valuation-only).
+- `data/companies.json`: 556 rows, 550 unique companies after Funding Details
+  verification and dedupe.
+- `data/rejected.json`: 15 candidates rejected after article verification
+  (below threshold, unknown or non-seed round).
+- `data/sites.json`: 548 site records (488 `ok`, 28 `js_only`, 32 `dead`).
+- `data/evals/<slug>.json`: 67 completed deep evaluations.
+- `data/scored.json`: 67 evaluated, 483 unique companies still missing,
+  0 invalid.
+- `data/llm_evals/<slug>.json`: 52 LLM quick-pass records (5 successful,
+  47 errored and retryable).
+- `data/llm_scored.json`: 5 successful LLM evaluations, ranked.
+- `data/llm_eval_summary.json`: counts, models, invalid file list.
+- `reports/`: 67 per-company reports, `master-ranking.md`, `index.md`, and
+  `llm_opportunity_ranking.md`.
 
-*dead = mostly bot-blocks (403), SSL/DNS quirks, rate-limits — NOT parked domains.
-Per SCORING_SPEC.md, G5 applies only to truly dead/parked/no-website cases;
-js_only and bot-blocked sites are evaluated from article text with confidence=low.
+## Routine commands
 
-## How to continue the evaluation pass
+```bash
+uv run python -m scanner.validate          # artifact gate; non-zero on errors
+uv run pytest -q                           # 82 tests
+uv run ruff check .                        # lint
+make check                                 # lint + tests + validation
+```
 
-Companies are processed in `data/eval_order.txt` order (descending raise size).
-For each company without `data/evals/<slug>.json`:
+After changing evaluations or rankings:
 
-1. Read its evidence files:
+```bash
+uv run python -m scanner.compute           # rebuild scored.json + scores.csv
+uv run python -m scanner.reports           # rebuild reports/
+uv run python main.py --aggregate-only     # rebuild LLM aggregate/report
+```
+
+After changing crawl/filter/company data, re-run the affected downstream steps
+in order (`main.py --step ...` or the individual modules). Do not run
+`scanner.compute` against a stale `companies.json`.
+
+## Continuing the deep evaluation pass
+
+Deep evaluations are manual/LLM-assisted records in `data/evals/`. A company is
+considered evaluated when `data/evals/<slug>.json` exists and passes
+`scanner.compute` validation.
+
+1. Pick the next company from `data/companies.json` that has no eval file
+   (prefer descending `usd_equivalent`; `data/eval_order.txt` is a historical
+   ordering artifact, not authoritative).
+2. Read evidence:
    - `data/cache/text/article__<slug>.txt` (always)
-   - `data/cache/text/site__<domain>__*.txt` (when useful; skip if thin article suffices)
-2. Write `data/evals/<slug>.json` per the schema in `SCORING_SPEC.md`
-   (52 categories x h1-h4 integer scores + evidence, archetype, gates G1-G5,
-   agency_play, confidence).
-3. Periodically:
+   - `data/cache/text/site__<domain>__*.txt` (when available/useful)
+3. Write the evaluation per [`SCORING_SPEC.md`](SCORING_SPEC.md):
+   52 categories × h1–h4 integer scores with evidence, archetype, gates G1–G5,
+   agency play, confidence.
+4. Validate and rebuild:
+   ```bash
+   uv run python scripts/validate_evals.py
+   uv run python -m scanner.compute
+   uv run python -m scanner.reports
+   uv run python -m scanner.validate
    ```
-   uv run python scripts/validate_evals.py   # must report 0 invalid
-   uv run python -m scanner.compute          # rebuilds scored.json + scores.csv
-   uv run python -m scanner.reports          # rebuilds reports/
-   ```
 
-## Validation (rerunnable)
+## Continuing the LLM quick pass
 
-```
-uv run pytest tests/ -q               # parser unit tests incl. ground truth
-uv run python scripts/validate_totals.py   # independent recompute vs scored.json
+Errored records are retried automatically:
+
+```bash
+uv run python main.py --limit 10 --llm-workers 2
 ```
 
-## Known documented deviations
+Useful flags:
 
-- Plan validation list marked "Arc Raises $10.76M Seed" as excluded; this
-  contradicts the plan's formal rule "strictly >$10M USD-equivalent".
-  The formal rule wins -> Arc included (see tests/test_amounts.py).
-- Within-pillar category weights set to equal (plan gave no numbers); pillar P9
-  (bonus cats 51-52) added at 5% with renormalization - all in scanner/compute.py.
-- Amount-source discrepancies (7 companies) and round-from-title fallbacks (2)
-  are flagged in each company's `flags` field.
+- `--no-retry-errors`: skip files that previously errored.
+- `--force`: re-evaluate successes too.
+- `--no-resume`: do not skip existing files.
+- `--aggregate-only`: rebuild rankings without API calls.
+- `--include-errors`: include error records in aggregate output for
+  diagnostics only.
+
+The current 47 errors are mostly HTTP 404 (invalid/unavailable model endpoint)
+and timeouts. Check the configured provider/model and key before retrying a
+large batch:
+
+```bash
+uv run python -m scanner.llm_analyzer --provider nvidia --model <available-model> --limit 1
+```
+
+## Documented decisions and deviations
+
+- Qualification threshold is **inclusive**: `>= $10M` USD-equivalent.
+- **Pre-seed is included**; named later series (`Series A`, `Series B`, and
+  later named series) are excluded.
+- Valuation-only headlines are deferred to article-level Funding Details rather
+  than treated as raise amounts.
+- `is_raised_in_year` prefers a real `funding_date`/`date` over title, URL, or
+  slug years. A 2025 round republished in 2026 is not counted as 2026.
+- P9 is a 5% bonus pillar, so raw pillar weights sum to **1.05**; totals are
+  normalized by the computation. Do not assert they sum to 1.0.
+- Two evaluators coexist: the 52-category deep pass (`data/evals`) and the LLM
+  quick pass (`data/llm_evals`). Their scores are not merged.
+- Errored LLM evaluations remain on disk as diagnostics, are excluded from
+  rankings, and are retried by default.
+- Amount-source discrepancies and title-round fallbacks are recorded in each
+  company's `flags` field.
+- All artifact writes are atomic and all paths are anchored to the repository
+  root, so runs are safe from any working directory.

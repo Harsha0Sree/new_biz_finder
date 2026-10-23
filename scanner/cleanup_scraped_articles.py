@@ -1,17 +1,16 @@
-"""Clean up all existing data/cache/text/article__*.txt files.
+"""Truncate cached article text after the Source field.
 
-Truncates every article strictly after the Source field (discarding author footer,
-newsletter alerts, 'read more', and unrelated article cards).
+Removes author footers, newsletter prompts, "read more" cards, and unrelated
+article teasers from every `data/cache/text/article__*.txt` file.
 """
 
 from __future__ import annotations
 
-import glob
-from pathlib import Path
-
 from scanner.fetch_articles import clean_article_text
+from scanner.paths import TEXT
+from scanner.storage import write_text
 
-TEXT_DIR = Path("data/cache/text")
+TEXT_DIR = TEXT
 
 
 def cleanup_all_article_texts() -> int:
@@ -19,11 +18,11 @@ def cleanup_all_article_texts() -> int:
     print(f"Cleaning {len(files)} cached article text files...")
 
     cleaned_count = 0
-    for f in files:
-        raw = f.read_text(encoding="utf-8", errors="replace")
+    for path in files:
+        raw = path.read_text(encoding="utf-8", errors="replace")
         cleaned = clean_article_text(raw)
         if cleaned != raw:
-            f.write_text(cleaned, encoding="utf-8")
+            write_text(path, cleaned)
             cleaned_count += 1
 
     print(f"Successfully cleaned {cleaned_count} / {len(files)} article text files.")

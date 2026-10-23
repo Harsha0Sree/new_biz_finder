@@ -1,456 +1,448 @@
-# Seed-Round Agency Opportunity Scanner & LLM Analyzer
+# Seed-Round Agency Opportunity Scanner
 
-A high-throughput intelligence pipeline that discovers recently funded seed-stage SaaS and AI startups, ingests verified funding details, scrapes and parses company websites (with bot-block mitigation, Next.js SPA data extraction, and pricing tier detection), and evaluates each business using an LLM-driven agency opportunity scoring framework.
+A resumable Python pipeline that discovers recently funded seed-stage SaaS/AI
+startups, verifies their funding details, scrapes company websites and pricing,
+and evaluates each business as a potential productized agency opportunity.
 
----
+The repository produces **two independent evaluation passes**:
 
-## Table of Contents
+| Pass | Input | What it is | Current records |
+|---|---|---|---|
+| **Deep evaluation** | `data/evals/*.json` | 52-category deterministic framework (Builder/Seller/Buyer/Risk), hard gates G1–G5, six archetypes | 67 completed |
+| **LLM quick pass** | `data/llm_evals/*.json` | Fast single-score second opinion from an LLM with isolated, bounded evidence | 52 files: 5 successful, 47 errored |
 
-- [Quick Start: Single-Command Pipeline](#quick-start-single-command-pipeline)
-- [Environment Configuration (.env)](#environment-configuration-env)
-- [Overview & Architecture](#overview--architecture)
-- [Project Structure](#project-structure)
-- [Installation & Setup](#installation--setup)
-- [LLM Provider Configuration](#llm-provider-configuration)
-  - [Option A: NVIDIA NIM (Cloud / Hosted)](#option-a-nvidia-nim-cloud--hosted)
-  - [Option B: Ollama (Local / Self-Hosted GPU)](#option-b-ollama-local--self-hosted-gpu)
-- [End-to-End Automation Walkthrough](#end-to-end-automation-walkthrough)
-  - [Step 1: Crawl Article Index](#step-1-crawl-article-index)
-  - [Step 2: Filter Qualifying Rounds](#step-2-filter-qualifying-rounds)
-  - [Step 3: Fetch Article Bodies & Build Company Registry](#step-3-fetch-article-bodies--build-company-registry)
-  - [Step 4: Scrape Company Websites & Extract Pricing](#step-4-scrape-company-websites--extract-pricing)
-  - [Step 5: Run the LLM Evaluation Loop](#step-5-run-the-llm-evaluation-loop)
-  - [Step 6: Aggregate Scores & Generate Rankings](#step-6-aggregate-scores--generate-rankings)
-- [CLI Reference](#cli-reference)
-- [Understanding the Evaluation Framework](#understanding-the-evaluation-framework)
-- [Data Storage & Cache Management](#data-storage--cache-management)
-- [Testing & Quality Assurance](#testing--quality-assurance)
+Errored LLM evaluations stay on disk for diagnostics, are omitted from
+rankings, and are retried by default on the next run.
 
 ---
 
-## Quick Start: Single-Command Pipeline
-
-Instead of manually running 5 separate scripts in sequence, you can execute the entire end-to-end pipeline with **a single command**:
+## Quick start
 
 ```bash
-uv run python main.py
+uv sync
+uv run python main.py                 # crawl -> filter -> articles -> sites -> prompts -> LLM
+uv run python main.py --aggregate-only  # rebuild LLM rankings without API calls
+uv run python -m scanner.validate      # check every committed artifact
 ```
 
-This single command automatically:
-1. Crawls the SaaS news archive index (skips if cached).
-2. Filters seed rounds strictly $> \$10\text{M}$ USD-equivalent.
-3. Fetches article HTML and extracts verified Funding Details into `companies.json`.
-4. Scrapes company homepages and subpages, extracts pricing tiers, and recovers SPA state into `sites.json`.
-5. Runs the LLM opportunity evaluation for qualifying 2026 companies, saving individual evaluation JSONs, aggregating [`data/llm_scores.csv`](file:///home/mikeysama/products/new_biz_finder/data/llm_scores.csv), and writing the ranking report [`reports/llm_opportunity_ranking.md`](file:///home/mikeysama/products/new_biz_finder/reports/llm_opportunity_ranking.md).
-
-### Useful Command Variations
+Common variations:
 
 ```bash
-# Run using already cached scraped data directly to LLM evaluation:
-uv run python main.py --skip-crawl --skip-scrape
-
-# Run a quick test on the top 5 companies:
-uv run python main.py --limit 5
-
-# Re-generate CSV and ranking reports from existing evals without calling the LLM:
-uv run python main.py --aggregate-only
-
-# Run an individual step if needed:
-uv run python main.py --step fetch-sites
+uv run python main.py --skip-crawl --skip-scrape   # reuse cached data
+uv run python main.py --limit 5                    # evaluate only five companies
+uv run python main.py --step fetch-sites           # run one pipeline step
+uv run python main.py --step validate              # validation-only, non-zero on failure
+uv run python main.py --llm-workers 4              # concurrent LLM calls
 ```
 
-*(Note: All individual modular scripts in `scanner/` remain available to run standalone as well.)*
+Individual modules can still be run directly:
 
----
-
-## Environment Configuration (`.env`)
-
-The project includes an auto-loaded [`.env`](file:///home/mikeysama/products/new_biz_finder/.env) file (which is ignored by Git to protect your API keys). A template is provided in [`.env.example`](file:///home/mikeysama/products/new_biz_finder/.env.example).
-
-Open `.env` and set your preferred LLM provider, API key, and model:
-
-All values in `.env` are automatically loaded on startup by `main.py` and `scanner.llm_analyzer`.
-
----
-
-## Overview & Architecture
-
-The objective of this pipeline is to analyze seed-stage startups through the lens of an **agency opportunity**:
-> *Can a solo technical operator package the core value proposition of this startup as a high-ticket B2B service ($1k–$15k+) using modern AI/automation stacks in 1–2 days, delivering measurable client ROI without proprietary IP or enterprise credentials?*
-
-### Pipeline Workflow
-
-```
- ┌──────────────────────┐
- │  thesaasnews.com     │ (350+ archive pages)
- └──────────┬───────────┘
-            │ 1. crawl_index.py
-            ▼
- ┌──────────────────────┐
- │ articles_index.json  │ (4,200+ raw article cards)
- └──────────┬───────────┘
-            │ 2. filter_articles.py & amounts.py
-            ▼
- ┌──────────────────────┐
- │   qualifying.json    │ (Strictly > $10M USD-equiv, seed/pre-series-A)
- └──────────┬───────────┘
-            │ 3. fetch_articles.py
-            ▼
- ┌──────────────────────┐   ┌───────────────────────────┐
- │   companies.json     │ + │ cache/text/article__*.txt │
- └──────────┬───────────┘   └───────────────────────────┘
-            │ 4. fetch_sites.py (Browser headers, SPA recovery, pricing extraction)
-            ▼
- ┌──────────────────────┐   ┌───────────────────────────┐
- │     sites.json       │ + │ cache/text/site__*__*.txt │
- └──────────┬───────────┘   └─────────────┬─────────────┘
-            │                             │
-            └──────────────┬──────────────┘
-                           │ 5. llm_analyzer.py (assemble context + system prompt)
-                           ▼
-            ┌─────────────────────────────┐
-            │  LLM (NVIDIA NIM / Ollama)  │
-            └──────────────┬──────────────┘
-                           │ 6. save_evaluation & aggregate_scores
-                           ▼
- ┌──────────────────────┐   ┌───────────────────────┐   ┌─────────────────────────┐
- │   llm_evals/*.json   │   │     llm_scores.csv    │   │  reports/ranking.md     │
- └──────────────────────┘   └───────────────────────┘   └─────────────────────────┘
+```bash
+uv run python -m scanner.crawl_index
+uv run python -m scanner.filter_articles
+uv run python -m scanner.fetch_articles
+uv run python -m scanner.fetch_sites
+uv run python -m scanner.export_prompts
+uv run python -m scanner.llm_analyzer --aggregate-only
+uv run python -m scanner.compute
+uv run python -m scanner.reports
+uv run python -m scanner.validate
 ```
 
 ---
 
-## Project Structure
+## Current data snapshot
+
+As of the latest committed artifacts:
+
+- **Index**: 4,583 article cards from the `/tag/seed-round/` and
+  `/tag/pre-seed/` archives (351 seed-round pages).
+- **Qualifying**: 571 articles at or above **$10M USD-equivalent**.
+- **Companies**: 556 rows, 550 unique after name/domain dedupe.
+- **Sites**: 548 records (488 `ok`, 28 `js_only`, 32 `dead`).
+- **Rejected after article verification**: 15 (below threshold, unknown round, etc.).
+- **Deep evaluations**: 67, with `data/scored.json` and per-company reports.
+- **LLM evaluations**: 52 files; 5 successful, 47 errored/retryable.
+- **2026 selection**: 210 unique companies by real funding date.
+
+Numbers move as the archive grows; the validator and report headers always show
+the current counts.
+
+### Qualification rule
+
+A round qualifies when:
+
+1. The headline round is **seed, pre-seed, pre-Series-A, or unlabeled**.
+   Pre-seed is included. Named later series (`Series A`, `Series B`, and later
+   named series) are excluded.
+2. The **raise amount** is **at least $10M USD-equivalent** (inclusive).
+3. Valuation-only titles are not accepted on the valuation number. They are
+   passed to `fetch_articles`, which reads the Funding Details block and keeps
+   the company only if the actual raise clears the threshold.
+
+Fixed FX planning constants live in `scanner/amounts.py`. Amount parsing handles
+`$`, `€`, `£`, `¥`, `₹`, `Rs`, `A$`, `S$`, and `US$`, with thousand/million/
+billion/trillion and crore/lakh units.
+
+---
+
+## How it works
+
+```
+thesaasnews.com /tag/seed-round/ + /tag/pre-seed/
+        │
+        │ 1. scanner.crawl_index
+        ▼
+data/articles_index.json
+        │
+        │ 2. scanner.filter_articles + scanner.amounts
+        ▼
+data/qualifying.json
+        │
+        │ 3. scanner.fetch_articles
+        ▼
+data/companies.json  +  data/cache/text/article__<slug>.txt
+        │
+        │ 4. scanner.fetch_sites
+        ▼
+data/sites.json      +  data/cache/text/site__<domain>__*.txt
+        │
+        │ 5. scanner.export_prompts
+        ▼
+data/company_prompts/
+        │
+        │ 6. scanner.llm_analyzer
+        ▼
+data/llm_evals/<slug>.json -> data/llm_scored.json + reports/
+```
+
+Separately, the deterministic pass reads `data/evals/*.json`, computes totals,
+and writes `data/scored.json`, `data/scores.csv`, and `reports/*.md`.
+
+### Reliability behavior
+
+- All artifact paths are anchored to the repository root (`scanner/paths.py`),
+  so commands work from any directory.
+- JSON, CSV, and text writes are atomic (`scanner/storage.py`), preventing a
+  truncated artifact if a long run is interrupted.
+- HTTP responses are cached on disk. Successful responses and permanent errors
+  are cached; transient failures (408/425/429/5xx) are retried and **not**
+  cached, so a later run can recover.
+- Requests are throttled per host. Site and LLM work can run concurrently
+  (`--site-workers`, `--llm-workers`), with independent hosts progressing in
+  parallel.
+- LLM evaluation resumes by slug. Existing successes are skipped; errored files
+  are retried unless `--no-retry-errors` is set.
+- Scraped article/site text is wrapped in `<untrusted_web_content>` and the
+  prompt explicitly tells the model to ignore instructions embedded in it.
+
+---
+
+## Project structure
 
 ```
 .
 ├── data/
-│   ├── articles_index.json      # Discovered article metadata from the index crawl
-│   ├── qualifying.json          # Filtered articles meeting the >$10M seed threshold
-│   ├── companies.json           # Canonical deduplicated company registry with funding facts
-│   ├── sites.json               # Website status (ok/js_only/dead) & extracted pricing info
-│   ├── cache/
-│   │   ├── pages/               # Raw HTTP response cache (.meta.json + .body)
-│   │   └── text/                # Clean extracted text for articles and website subpages
-│   ├── evals/                   # Legacy 52-category deterministic evaluation records
-│   ├── llm_evals/               # Individual JSON evaluation dossiers produced by LLMs
-│   ├── llm_scored.json          # Master aggregated JSON of all LLM evaluations
-│   └── llm_scores.csv           # Tabular export for spreadsheets and CRM imports
-├── prompts/
-│   └── system_prompt.txt        # The production market evaluation prompt (Iman persona)
+│   ├── articles_index.json      # Article metadata from the index crawl
+│   ├── qualifying.json          # Title-level candidates (>= $10M, seed stage)
+│   ├── articles_parsed.json     # Per-article Funding Details (resumable)
+│   ├── companies.json           # Deduplicated company registry
+│   ├── rejected.json            # Candidates rejected after article verification
+│   ├── sites.json               # Website status + extracted pricing
+│   ├── evals/                   # Deep 52-category evaluation records
+│   ├── llm_evals/               # LLM quick-pass records (including errors)
+│   ├── llm_scored.json          # Successful LLM evaluations, ranked
+│   ├── llm_scores.csv           # Spreadsheet export
+│   ├── llm_eval_summary.json    # Counts + invalid/errored file list
+│   └── cache/                   # HTTP page cache + extracted text (gitignored)
+├── prompts/system_prompt.txt    # Production LLM evaluation prompt
 ├── reports/
-│   └── llm_opportunity_ranking.md # Formatted Markdown ranking report
+│   ├── index.md                 # Entry point for both ranking passes
+│   ├── master-ranking.md        # Deep-evaluation ranking
+│   ├── llm_opportunity_ranking.md
+│   └── <company-slug>.md        # Per-company deep reports
 ├── scanner/
-│   ├── amounts.py               # Currency parsing, fixed FX normalization, valuation detector
-│   ├── compute.py               # Deterministic mathematical rollup engine (52 categories)
-│   ├── crawl_index.py           # Spider for index pages (binary searches last page)
-│   ├── fetch_articles.py        # Ingests article bodies and extracts Funding Details
-│   ├── fetch_sites.py           # Scrapes homepages/subpages, extracts pricing and SPA data
+│   ├── amounts.py               # Currency parsing, FX, threshold, round labels
+│   ├── compute.py               # 52-category deterministic scoring
+│   ├── crawl_index.py           # Index crawler and pagination discovery
+│   ├── enrich.py                # Company <-> site join (pricing/status)
+│   ├── env.py                   # .env loader
+│   ├── export_prompts.py        # Isolated prompt dossiers
+│   ├── fetch_articles.py        # Funding Details parser + company registry
+│   ├── fetch_sites.py           # Site/subpage scraper, pricing extraction
 │   ├── filter_articles.py       # Title-level qualification filter
-│   ├── httpcache.py             # Disk-cached polite HTTP client with browser headers
-│   ├── llm.py                   # Unified client abstraction for NVIDIA NIM and Ollama
-│   ├── llm_analyzer.py          # Orchestration runner for LLM evaluation loop
-│   └── reports.py               # Report generator for legacy evaluation passes
-├── scripts/
-│   ├── make_eval_batches.py     # Partitions companies into batch files
-│   ├── validate_evals.py        # Schema validator for evaluation JSON records
-│   └── validate_totals.py       # Independent mathematical recomputation check
-├── tests/                       # Complete Pytest suite (amounts, funding details, LLM, pricing)
-├── main.py                      # Main entrypoint (aliases scanner.llm_analyzer.main)
-├── pyproject.toml               # Package configuration and dependencies
-└── README.md                    # This document
+│   ├── httpcache.py             # Cached, throttled, retrying HTTP client
+│   ├── llm.py                   # NVIDIA NIM / Ollama client + JSON extraction
+│   ├── llm_analyzer.py          # LLM evaluation loop + aggregation
+│   ├── models.py                # TypedDict schemas for artifacts/records
+│   ├── paths.py                 # Canonical project paths
+│   ├── reports.py               # Deep-pass report renderer
+│   ├── storage.py               # Atomic JSON/text/bytes writers
+│   └── validate.py              # End-to-end artifact validator
+├── scripts/                     # One-off probes and independent checks
+├── tests/                       # Pytest suite
+├── main.py                      # Unified pipeline entry point
+├── Makefile                     # test / lint / validate / check targets
+└── pyproject.toml
 ```
 
 ---
 
-## Installation & Setup
+## Installation
 
-### Requirements
-- **Python**: `>= 3.12`
-- **uv** (recommended) or **pip**
+Requirements: Python `>= 3.12` and [uv](https://docs.astral.sh/uv/).
 
-### 1. Clone the Repository
 ```bash
 git clone https://github.com/Harsha0Sree/new_biz_finder.git
 cd new_biz_finder
-```
-
-### 2. Install Dependencies
-
-Using `uv` (recommended):
-```bash
 uv sync
 ```
 
-Using standard `pip`:
+With plain `pip`:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-### 3. Verify the Installation
-Run the test suite to ensure parser and network modules are functioning:
+Verify:
+
 ```bash
-uv run pytest tests/ -v
-```
-All unit tests should pass.
-
----
-
-## LLM Provider Configuration
-
-The analyzer supports both **NVIDIA NIM** (cloud-hosted high-throughput API) and **Ollama** (local or on-premise GPU hosting). Both provide completely isolated context windows for each evaluated startup.
-
----
-
-### Option A: NVIDIA NIM (Cloud / Hosted)
-
-NVIDIA NIM provides access to state-of-the-art open models with high throughput.
-
-#### 1. Obtain an API Key
-1. Go to [build.nvidia.com](https://build.nvidia.com/).
-2. Sign up or log in.
-3. Select any instruct model (e.g. `nvidia/llama-3.1-nemotron-70b-instruct`).
-4. Click **"Get API Key"** and generate a key beginning with `nvapi-...`.
-
-#### 2. Configure Environment Variables
-Add to your environment or `.env`:
-```bash
-export NVIDIA_API_KEY="nvapi-your-actual-key-here"
-export LLM_PROVIDER="nvidia"
-export NVIDIA_MODEL="nvidia/llama-3.1-nemotron-70b-instruct"
-```
-
-#### 3. Recommended NVIDIA Models
-- `nvidia/llama-3.1-nemotron-70b-instruct` *(Default: exceptional structured reasoning & skepticism)*
-- `meta/llama-3.3-70b-instruct` *(Strong B2B analysis and fast generation)*
-- `mistralai/mistral-large-2-instruct` *(Detailed code and workflow breakdown)*
-
-#### 4. Run the Analyzer with NVIDIA
-```bash
-uv run python -m scanner.llm_analyzer \
-  --provider nvidia \
-  --api-key "$NVIDIA_API_KEY" \
-  --model "nvidia/llama-3.1-nemotron-70b-instruct"
+uv run pytest -q
+uv run ruff check .
+uv run python -m scanner.validate
 ```
 
 ---
 
-### Option B: Ollama (Local / Self-Hosted GPU)
+## Environment configuration
 
-If you have a local workstation with an NVIDIA/Apple Silicon GPU or want zero-cost evaluations:
+Copy `.env.example` to `.env` and fill in your provider settings. `main.py`,
+`scanner.llm_analyzer`, and `scanner.env` load it automatically.
 
-#### 1. Install Ollama
-- **Linux**:
-  ```bash
-  curl -fsSL https://ollama.com/install.sh | sh
-  ```
-- **macOS / Windows**:
-  Download installer from [ollama.com/download](https://ollama.com/download).
-
-#### 2. Pull an Instruct Model
 ```bash
-# Recommended for workstations with >= 48GB VRAM:
-ollama pull llama3.1:70b
+LLM_PROVIDER=nvidia
+NVIDIA_API_KEY=nvapi-...
+NVIDIA_MODEL=openai/gpt-oss-20b
+NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
 
-# Recommended for laptops or machines with 16GB–32GB RAM/VRAM:
-ollama pull llama3.1:8b
-
-# Strong alternative:
-ollama pull qwen2.5:32b
+EVAL_YEAR=2026
+# EVAL_LIMIT=5
 ```
 
-#### 3. Start the Ollama Service
-Ensure the Ollama daemon is running and listening on port `11434`:
+### NVIDIA NIM
+
+1. Create a key at <https://build.nvidia.com/>.
+2. Set `NVIDIA_API_KEY` and choose a model available to your account.
+3. Run:
+
+```bash
+uv run python -m scanner.llm_analyzer --provider nvidia --model openai/gpt-oss-20b
+```
+
+A `404` usually means the configured model ID is not available on that endpoint;
+check the model name before retrying a batch.
+
+### Ollama
+
 ```bash
 ollama serve
-```
-
-Verify that the local API is responding:
-```bash
-curl -s http://localhost:11434/api/tags
-```
-
-#### 4. Run the Analyzer with Ollama
-```bash
+ollama pull llama3.1:8b
 uv run python -m scanner.llm_analyzer \
   --provider ollama \
-  --model "llama3.1:8b" \
-  --base-url "http://localhost:11434/v1"
+  --model llama3.1:8b \
+  --base-url http://localhost:11434/v1
 ```
 
-#### Running on a Remote GPU Machine on your LAN
-If Ollama is running on a dedicated server at `192.168.1.50`:
-1. On the server, set `OLLAMA_HOST=0.0.0.0` in its environment.
-2. Run the client on your local machine:
-   ```bash
-   uv run python -m scanner.llm_analyzer \
-     --provider ollama \
-     --model "llama3.1:70b" \
-     --base-url "http://192.168.1.50:11434/v1"
-   ```
+For a remote Ollama host, set `OLLAMA_HOST=0.0.0.0` on the server and point
+`--base-url` at `http://<host>:11434/v1`.
 
 ---
 
-## End-to-End Automation Walkthrough
+## Pipeline steps
 
-Here is the exact step-by-step sequence to run the entire pipeline from scratch.
+### 1. Crawl the article index
 
-### Step 1: Crawl Article Index
-Discovers all seed-round announcements from *The SaaS News* archive.
 ```bash
 uv run python -m scanner.crawl_index
+uv run python -m scanner.crawl_index --refetch   # force fresh pages
 ```
-- **Inputs**: Online website `https://www.thesaasnews.com/tag/seed-round/`
-- **Output**: [`data/articles_index.json`](file:///home/mikeysama/products/new_biz_finder/data/articles_index.json)
-- **Features**: Binary-searches pagination boundary and crawls in descending order to minimize newly published post drift.
 
----
+Crawls `/tag/seed-round/` and `/tag/pre-seed/`, discovers the last page, and
+writes `data/articles_index.json`. Existing cache is reused unless `--refetch`
+is passed. In `main.py`, use `--refetch-index`.
 
-### Step 2: Filter Qualifying Rounds
-Applies strict qualification rules ($> \$10\text{M}$ USD-equivalent, seed / pre-series-A).
+### 2. Filter qualifying rounds
+
 ```bash
 uv run python -m scanner.filter_articles
 ```
-- **Inputs**: [`data/articles_index.json`](file:///home/mikeysama/products/new_biz_finder/data/articles_index.json)
-- **Output**: [`data/qualifying.json`](file:///home/mikeysama/products/new_biz_finder/data/qualifying.json)
-- **Features**: Multi-currency regex parsing (`$`, `€`, `£`, `¥`, `₹`, `A$`, `S$`), valuation filter exclusion, fixed FX conversion.
 
----
+Writes `data/qualifying.json` with the parsed amount, USD equivalent, round
+label, qualification reason, and drop-reason counts.
 
-### Step 3: Fetch Article Bodies & Build Company Registry
-Fetches full article HTML, parses structured Funding Details, and creates the deduplicated company list.
+### 3. Fetch articles and build the company registry
+
 ```bash
 uv run python -m scanner.fetch_articles
 ```
-- **Inputs**: [`data/qualifying.json`](file:///home/mikeysama/products/new_biz_finder/data/qualifying.json)
-- **Outputs**:
-  - [`data/companies.json`](file:///home/mikeysama/products/new_biz_finder/data/companies.json) (Registry of unique companies)
-  - [`data/cache/text/article__<slug>.txt`](file:///home/mikeysama/products/new_biz_finder/data/cache/text/) (Clean article bodies)
-- **Features**: Tolerant heuristic parsing for split table labels, domain extraction, name normalization.
 
----
+Parses the structured Funding Details block, verifies the raise amount and round
+against the article, stores clean article text, and writes `companies.json` plus
+`rejected.json`. Runs are resumable via `articles_parsed.json`; use
+`--reparse` to re-fetch.
 
-### Step 4: Scrape Company Websites & Extract Pricing
-Fetches homepages and linked subpages (`/pricing`, `/product`, `/solutions`, etc.) for every unique domain.
+### 4. Scrape company websites
+
 ```bash
-uv run python -m scanner.fetch_sites
-```
-- **Inputs**: [`data/companies.json`](file:///home/mikeysama/products/new_biz_finder/data/companies.json)
-- **Outputs**:
-  - [`data/sites.json`](file:///home/mikeysama/products/new_biz_finder/data/sites.json) (Domain status and pricing summaries)
-  - [`data/cache/text/site__<domain>__*.txt`](file:///home/mikeysama/products/new_biz_finder/data/cache/text/) (Extracted subpage content)
-- **Features**:
-  - **Bot-block bypass**: Uses realistic Chrome browser headers.
-  - **SPA recovery**: Extracts Next.js pre-rendered state (`__NEXT_DATA__`) and JSON-LD structured schemas.
-  - **Pricing extraction**: Automatically parses pricing tiers, dollar amounts, or detects sales-led CTAs (*"Book a Demo"*).
-  - **Polite caching**: Re-runs skip already fetched `ok` domains.
-
----
-
-### Step 5: Run the LLM Evaluation Loop
-Builds an isolated context dossier for each company and executes the evaluation using the system prompt.
-```bash
-# Evaluate all qualifying 2026 companies using NVIDIA NIM:
-uv run python -m scanner.llm_analyzer \
-  --provider nvidia \
-  --api-key "$NVIDIA_API_KEY" \
-  --year 2026
-
-# Or test a small batch of 3 companies using local Ollama:
-uv run python -m scanner.llm_analyzer \
-  --provider ollama \
-  --model "llama3.1:8b" \
-  --limit 3
-```
-- **Inputs**:
-  - [`prompts/system_prompt.txt`](file:///home/mikeysama/products/new_biz_finder/prompts/system_prompt.txt)
-  - Data from [`data/companies.json`](file:///home/mikeysama/products/new_biz_finder/data/companies.json), `article__*.txt`, `site__*.txt`
-- **Outputs**:
-  - [`data/llm_evals/<slug>.json`](file:///home/mikeysama/products/new_biz_finder/data/llm_evals/) (Individual evaluation JSONs)
-
----
-
-### Step 6: Aggregate Scores & Generate Rankings
-If you need to re-generate the CSV and Markdown rankings from existing evaluation files without making LLM calls:
-```bash
-uv run python -m scanner.llm_analyzer --aggregate-only
-```
-- **Outputs**:
-  - [`data/llm_scored.json`](file:///home/mikeysama/products/new_biz_finder/data/llm_scored.json)
-  - [`data/llm_scores.csv`](file:///home/mikeysama/products/new_biz_finder/data/llm_scores.csv)
-  - [`reports/llm_opportunity_ranking.md`](file:///home/mikeysama/products/new_biz_finder/reports/llm_opportunity_ranking.md)
-
----
-
-## CLI Reference
-
-### `scanner.llm_analyzer` (or `main.py`)
-
-| Flag | Type | Default | Description |
-|---|---|---|---|
-| `--provider` | `string` | `nvidia` | LLM backend: `nvidia` or `ollama` (or set `LLM_PROVIDER`) |
-| `--model` | `string` | *provider default* | Model name override |
-| `--api-key` | `string` | `None` | NVIDIA NIM API key (or set `NVIDIA_API_KEY`) |
-| `--base-url` | `string` | *provider default* | Custom endpoint URL |
-| `--prompt-file`| `path` | `prompts/system_prompt.txt` | Path to system prompt |
-| `--year` | `string` | `2026` | Funding year filter (e.g. `2026`, `2025`, `all`) |
-| `--limit` | `int` | `None` | Max number of companies to evaluate |
-| `--force` | `flag` | `False` | Force re-evaluation even if eval file exists |
-| `--no-resume` | `flag` | `False` | Overwrite existing eval files rather than resuming |
-| `--no-scrape` | `flag` | `False` | Do not fetch missing website text during context build |
-| `--aggregate-only` | `flag` | `False` | Re-generate CSV and report from existing evaluations without API calls |
-
----
-
-## Understanding the Evaluation Framework
-
-The system prompt ([`prompts/system_prompt.txt`](file:///home/mikeysama/products/new_biz_finder/prompts/system_prompt.txt)) enforces the **Iman persona**—a brutally realistic market analyst evaluating opportunities for a solo operator:
-
-### Core Scoring Dimensions (0–5 per criterion)
-1. **Problem Severity & Frequency**: Is this a daily business catastrophe or an optional luxury?
-2. **Existing Manual Pain**: What messy manual steps exist before software?
-3. **Buyer Purchasing Power & High-Ticket Ceiling**: Plausible willingness to pay $1k–$15k+ for outcome delivery.
-4. **AI Replicability & 48-Hour Feasibility**: Can modern LLMs, automations, and no-code tools deliver 80% of the outcome in 1–2 days?
-5. **No-Case-Study Sellability**: Can an unknown provider sell this via audits, diagnostic teardowns, or outcome pilots?
-6. **India-Origin Friction**: Trust barriers, timezone compatibility, and cold outreach realism.
-7. **Solo-Agency Fit**: Can 1 person realistically sell, build, deploy, and support the service?
-
-### Hard-Reality Tests
-- **Test A (The 48-Hour Replication Test)**: Requires explicit specification of workflow, LLM role, automation role, and manual tasks.
-- **Test B (The $5,000 Buyer Test)**: Reality check on whether a real buyer pays $5k to an unknown agency.
-- **Test C (The No-Case-Study Test)**: Viable demo, diagnostic, or sample deliverables.
-- **Test D (The "Why Not Do It Internally?" Test)**: Why the client doesn't just use ChatGPT or an internal employee.
-- **Test E (The Painkiller Test)**: Classification into *Vitamin*, *Painkiller*, or *Fire Extinguisher*.
-- **Test F (Sell the Outcome)**: Formulating an outcome-based offer rather than generic "AI services."
-
----
-
-## Data Storage & Cache Management
-
-### Disk Caching
-- **Raw Web Pages**: Stored in `data/cache/pages/<hash>.meta.json` and `<hash>.body`. Re-fetching an already cached URL takes 0 network requests.
-- **Text Cache**: Stored in `data/cache/text/`:
-  - `article__<slug>.txt`: Plaintext funding announcements.
-  - `site__<domain>__home.txt` & `site__<domain>__<subpage>.txt`: Clean extracted text from websites.
-- **Purging Cache**: If you need to re-download a specific website or article, simply remove the corresponding file from `data/cache/text/` and `data/cache/pages/`.
-
-### Keeping Only Filtered Records
-The pipeline strictly preserves disk space and evaluation clarity by retaining only the articles for companies that pass the qualification criteria. Non-qualifying articles are automatically pruned.
-
----
-
-## Testing & Quality Assurance
-
-Run the entire unit test suite:
-```bash
-uv run pytest tests/ -v
+uv run python -m scanner.fetch_sites --workers 4
+uv run python -m scanner.fetch_sites --refetch
 ```
 
-### What the Test Suite Validates
-- **`tests/test_amounts.py`**: Validates monetary regex parsing, multi-currency conversions (EUR, GBP, JPY, AUD, SGD, INR Cr/Lakh), threshold filtering, and valuation phrase exclusion.
-- **`tests/test_funding_details.py`**: Tests extraction of irregular funding table structures from HTML.
-- **`tests/test_pricing_and_spa.py`**: Validates detection of self-serve pricing tiers, sales-led demo markers, and recovery of Next.js SPA pre-rendered state.
-- **`tests/test_llm.py`**: Tests payload extraction, fallback score parsing, context assembly, and provider initialization.
-- **`scripts/validate_totals.py`**: Provides independent mathematical verification of weighted score rollups.
+Fetches homepages and linked pricing/product/about/customer pages, recovers
+Next.js/JSON-LD data, extracts pricing signals, and merges results into
+`sites.json`. `--workers` controls concurrency (1–16).
+
+### 5. Export isolated prompts
+
+```bash
+uv run python -m scanner.export_prompts
+```
+
+Writes one self-contained prompt dossier per company to
+`data/company_prompts/`.
+
+### 6. Run LLM evaluation and aggregate
+
+```bash
+uv run python -m scanner.llm_analyzer --provider nvidia --year 2026
+uv run python main.py --aggregate-only
+```
+
+Each company gets a fresh context with bounded article/source/site evidence,
+joined pricing data, and an explicit JSON output schema. Evaluation records are
+saved per slug. Errored records are retried by default. Aggregation writes
+`data/llm_scored.json`, `data/llm_scores.csv`, `data/llm_eval_summary.json`, and
+`reports/llm_opportunity_ranking.md`.
+
+### Deterministic deep pass
+
+```bash
+uv run python -m scanner.compute
+uv run python -m scanner.reports
+```
+
+`compute` validates every deep evaluation, recomputes totals independently of
+the evaluation file, and writes `data/scored.json` + `data/scores.csv`.
+`reports` writes per-company reports, `reports/master-ranking.md`, and
+`reports/index.md`.
+
+---
+
+## CLI reference
+
+### `main.py`
+
+| Flag | Default | Description |
+|---|---|---|
+| `--step` | `all` | `all`, `crawl`, `filter`, `fetch-articles`, `fetch-sites`, `export-prompts`, `llm`, `validate` |
+| `--skip-crawl` | off | Reuse the existing index |
+| `--skip-scrape` | off | Reuse `sites.json` and skip missing-site scraping |
+| `--refetch-index` | off | Force a full index re-crawl |
+| `--provider` | env / `nvidia` | `nvidia` or `ollama` |
+| `--model` | provider default | Model override |
+| `--api-key` | env | NVIDIA NIM key |
+| `--base-url` | provider default | Custom endpoint |
+| `--prompt-file` | `prompts/system_prompt.txt` | System prompt path |
+| `--year` | env / `2026` | Funding year filter |
+| `--limit` | env / none | Max companies to evaluate |
+| `--site-workers` | `4` | Concurrent site fetchers (1–16) |
+| `--llm-workers` | `1` | Concurrent LLM evaluations (1–16) |
+| `--force` | off | Re-evaluate existing companies |
+| `--no-resume` | off | Do not skip existing eval files |
+| `--no-retry-errors` | off | Skip previously errored LLM evaluations |
+| `--aggregate-only` | off | Rebuild rankings without LLM calls |
+| `--include-errors` | off | Include error records in aggregate output (diagnostics only) |
+
+### `scanner.llm_analyzer`
+
+Same core LLM flags as above (`--provider`, `--model`, `--api-key`,
+`--base-url`, `--prompt-file`, `--year`, `--limit`, `--force`, `--no-resume`,
+`--no-scrape`, `--workers`, `--no-retry-errors`, `--aggregate-only`,
+`--include-errors`).
+
+### `scanner.fetch_sites`
+
+`--workers N`, `--refetch`, `--limit N`.
+
+---
+
+## Evaluation framework (deep pass)
+
+The deterministic pass scores 52 categories across four heads:
+
+- **H1 Builder (30%)**: can a solo operator reproduce the core value?
+- **H2 Seller (35%)**: is there a reachable, high-ticket buyer?
+- **H3 Buyer (25%)**: economic pain, budget, and measurable outcome.
+- **H4 Risk, inverse (10%)**: compliance, security, platform, and support risk.
+
+Categories marked `(inv)` reward lower burden. Six archetypes apply pillar-level
+multipliers. Hard gates G1–G5 can cap or scale the total; G5 (dead/parked/no
+website) multiplies by 0.20. Tiers: **A ≥ 80, B ≥ 65, C ≥ 50, D < 50**.
+
+See [`SCORING_SPEC.md`](SCORING_SPEC.md) for the full schema. The pillar weights
+sum to 1.05 because P9 is a 5% bonus pillar added before renormalization; totals
+are normalized when computed.
+
+The LLM quick pass is a separate, faster signal. It is **not** a replacement for
+the deep evaluation and its scores are not merged into `scored.json`.
+
+---
+
+## Data, cache, and validation
+
+### Cache semantics
+
+- `data/cache/pages/<hash>.meta.json` + `.body`: raw HTTP cache.
+- `data/cache/text/article__<slug>.txt`: cleaned funding articles.
+- `data/cache/text/site__<domain>__*.txt`: cleaned site pages.
+- Delete a specific cache entry (or pass `--refetch`) to force a re-fetch.
+- Transient HTTP failures are never cached.
+
+### Validation gate
+
+```bash
+uv run python -m scanner.validate
+```
+
+Checks article counts/slugs, qualifying amounts and deferred valuation cases,
+company uniqueness and round provenance, site statuses/pricing shapes, deep
+eval schema and gate coverage, LLM eval status/ranking consistency, report
+links, and fetch-error volume. Exit code is non-zero on errors.
+
+### Tests and lint
+
+```bash
+uv run pytest -q                 # 82 tests
+uv run ruff check .
+make check                       # lint + tests + artifact validation
+```
+
+The suite covers amount parsing (billion/trillion/crore/lakh), inclusive
+threshold behavior, Funding Details variants, retry/cache semantics, atomic
+storage, site-pricing enrichment, prompt-injection isolation, date precedence,
+errored-eval retry/aggregation, report links, and validator corruption cases.
+
+---
+
+## Known limitations
+
+- Amounts and dates rely on publisher-reported figures; FX is a fixed planning
+  table, not live market data.
+- Some sites are JS-only or bot-blocked; those companies are scored from article
+  evidence with lower confidence.
+- The LLM quick pass requires a working provider/model. The committed 47 errored
+  records are retryable diagnostics, not scores.
+- Deep evaluations are expensive; the pass is resumable by file existence and
+  `scanner.compute` validates every record before ranking.

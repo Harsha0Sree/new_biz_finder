@@ -1,7 +1,6 @@
 """One-off probe: inspect pagination markup on a cached tag page."""
 
 import sys
-from pathlib import Path
 
 from scanner.httpcache import load_cached
 

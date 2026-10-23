@@ -1,7 +1,7 @@
 {
  "framework_version": "v1",
  "evaluated_count": 67,
- "missing_count": 356,
+ "missing_count": 483,
  "invalid_count": 0,
  "companies": [
   {
@@ -2556,7 +2556,7 @@
   },
   {
    "slug": "rowspace-ai-secures-50-million-in-funding",
-   "company": "Rowspace\u00a0AI, Inc.",
+   "company": "Rowspace AI, Inc.",
    "domain": "rowspace.ai",
    "archetype": "vertical_ai_saas",
    "archetype_rationale": "Financial-decision intelligence over firm-proprietary data, deployed in-client - enterprise RAG/knowledge layer.",
@@ -4596,7 +4596,7 @@
   },
   {
    "slug": "mirelo-raises-41-million-seed-round",
-   "company": "Mirelo\u00a0AI GmbH",
+   "company": "Mirelo AI GmbH",
    "domain": "mirelo.ai",
    "archetype": "ai_infra_devtools",
    "archetype_rationale": "Foundation models for video sound effects (audio-layer for visual media) - creator/enterprise API product.",
@@ -8478,7 +8478,7 @@
      "h2": 8,
      "h3": 8,
      "h4": 7,
-     "evidence": "dentists/cl\u00ednics/restaurants listable en masse"
+     "evidence": "dentists/clínics/restaurants listable en masse"
     },
     "41": {
      "h1": 7,
@@ -16838,7 +16838,7 @@
   },
   {
    "slug": "artemis-lands-70-million-in-funding",
-   "company": "Artemis Global Technologies,\u00a0Inc.",
+   "company": "Artemis Global Technologies, Inc.",
    "domain": "artemissecurity.com",
    "archetype": "vertical_ai_saas",
    "archetype_rationale": "AI-native detection-and-response (SOC) platform - established security-operations category.",
@@ -24674,7 +24674,7 @@
      "h2": 9,
      "h3": 9,
      "h4": 8,
-     "evidence": "article: OSS Capital led; L\u00fctke, Ravikant, Siegel angels"
+     "evidence": "article: OSS Capital led; Lütke, Ravikant, Siegel angels"
     },
     "23": {
      "h1": 9,
@@ -26019,7 +26019,7 @@
   },
   {
    "slug": "humans-raises-480m-seed-at-4-48b-valuation",
-   "company": "humans&,\u00a0inc.",
+   "company": "humans&, inc.",
    "domain": "humansand.ai",
    "archetype": "ai_infra_devtools",
    "archetype_rationale": "Human-centric frontier AI lab doing multi-agent RL/memory/planning research; pre-product manifesto site.",

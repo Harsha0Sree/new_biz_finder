@@ -22,7 +22,12 @@ INR_USD_PER_CRORE = 120_000.0
 INR_USD_PER_LAKH = 1_200.0
 
 THRESHOLD_USD = 10_000_000.0
-STRICTLY_ABOVE = False
+
+
+def meets_threshold(usd_equivalent: float) -> bool:
+    """Single source of truth for the qualification threshold (inclusive)."""
+    return usd_equivalent >= THRESHOLD_USD
+
 
 # first capture group = currency, second = numeric amount (commas/dots allowed)
 _MONEY_RE = re.compile(
@@ -31,7 +36,14 @@ _MONEY_RE = re.compile(
     \s?
     (?P<num>\d[\d,]*(?:\.\d+)?)
     \s*
-    (?P<unit>B\b|Million\b|Millions\b|M\b|K\b|Thousand\b|Cr\b|Crore\b|Crores\b|Lakh\b|Lakhs\b)?
+    (?P<unit>
+        Billions?\b|Bn\b|B\b|
+        Trillions?\b|Tn\b|T\b|
+        Millions?\b|Mn\b|M\b|
+        Thousands?\b|K\b|
+        Crores?\b|Cr\b|
+        Lakhs?\b|Lacs?\b|L\b
+    )?
     """,
     re.IGNORECASE | re.VERBOSE,
 )
@@ -49,11 +61,13 @@ def _unit_multiplier(unit: str | None) -> float:
     if unit is None:
         return 1.0
     u = unit.lower().rstrip(".")
-    if u in ("b", "billion"):
+    if u in ("b", "bn", "billion", "billions"):
         return 1_000_000_000.0
-    if u in ("million", "millions", "m"):
+    if u in ("t", "tn", "trillion", "trillions"):
+        return 1_000_000_000_000.0
+    if u in ("m", "mn", "million", "millions"):
         return 1_000_000.0
-    if u in ("thousand", "k"):
+    if u in ("k", "thousand", "thousands"):
         return 1_000.0
     # crore/lakh units are handled with INR FX; multiplier stays 1 here
     return 1.0
@@ -98,11 +112,11 @@ def parse_amount(title: str) -> ParsedAmount | None:
         label = unit or ""
     else:  # Rs / ₹
         currency = "INR"
-        u = (unit or "").lower()
-        if u.startswith(("cr", "l")) and not u.startswith("lak"):
+        u = (unit or "").lower().rstrip(".")
+        if u in ("cr", "crore", "crores"):
             usd = number * INR_USD_PER_CRORE
             label = unit
-        elif u.startswith("lak") or u == "l":
+        elif u in ("l", "lac", "lacs", "lakh", "lakhs"):
             usd = number * INR_USD_PER_LAKH
             label = unit
         else:
@@ -118,12 +132,6 @@ def parse_amount(title: str) -> ParsedAmount | None:
     )
 
 
-_VALUATION_CONTEXT_RE = re.compile(
-    r"(?:\bat\b|\b@\b|\bvalued\s+at\b)[\s\S]{0,15}?valuation\b|valuation\s+(?:of|at)\b",
-    re.IGNORECASE,
-)
-
-
 def _is_valuation_context(title: str, match: re.Match) -> bool:
     """True if a money match sits inside an 'at $X valuation' style phrase."""
     window_start = max(0, match.start() - 25)
@@ -132,11 +140,10 @@ def _is_valuation_context(title: str, match: re.Match) -> bool:
     if re.search(r"valua?tion|valu(ed|ing)", tail):
         return True
     # 'at $500M valuation' -> the words between 'at' and number then valuation after
-    if re.search(r"\b(?:at|@)\s*(?:a\s+)?$", head) and re.search(
-        r"^\s*(?:post[- ]-money\s*)?valua?tion", tail
-    ):
-        return True
-    return False
+    return bool(
+        re.search(r"\b(?:at|@)\s*(?:a\s+)?$", head)
+        and re.search(r"^\s*(?:post[- ]-money\s*)?valua?tion", tail)
+    )
 
 
 def parse_raise_amount(title: str) -> tuple[ParsedAmount | None, ParsedAmount | None]:
@@ -177,8 +184,9 @@ def parse_round(title: str) -> RoundLabel:
 
 
 def qualifies(title: str) -> tuple[bool, str]:
-    """Return (qualifies, reason). Qualifies = seed/pre-seed/pre-series-a AND >=$10M USD.
+    """Return (qualifies, reason).
 
+    Qualifies = seed/pre-seed/pre-series-a AND at least $10M USD-equivalent.
     Reasons starting with "check_article_" mean the title alone cannot decide
     and the article's Funding Details block must be consulted.
     """
@@ -190,7 +198,7 @@ def qualifies(title: str) -> tuple[bool, str]:
         if val_amt is not None:
             return True, "check_article_valuation_only"
         return False, "no_parsable_amount"
-    if amt.usd_equivalent < THRESHOLD_USD:
+    if not meets_threshold(amt.usd_equivalent):
         return False, f"amount_below_threshold ({amt.usd_equivalent:.0f} USD)"
     if rnd.kind == "unlabeled":
         return True, "ok_unlabeled_check_round_in_article"

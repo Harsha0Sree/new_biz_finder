@@ -2,14 +2,21 @@
 
 from __future__ import annotations
 
-import json
 import re
-from pathlib import Path
+import time
 
 from scanner.compute import PILLARS
+from scanner.paths import (
+    LLM_SUMMARY,
+    MASTER_RANKING_REPORT,
+    REPORTS,
+    REPORTS_INDEX,
+    SCORED,
+)
+from scanner.storage import read_json, write_text
 
-SCORED = Path("data/scored.json")
-REPORTS_DIR = Path("reports")
+SCORED_PATH = SCORED
+REPORTS_DIR = REPORTS
 
 CAT_NAMES = {
     1: "Commodity-stack maturity", 2: "FM/API substitutability", 3: "Minimal sellable scope",
@@ -114,7 +121,12 @@ def master_ranking(scored: list[dict]) -> str:
     lines: list[str] = []
     lines.append("# Master Ranking — Seed-Round Agency Opportunities")
     lines.append("")
-    lines.append(f"**{len(scored)} companies evaluated** | Tiers: A={tiers['A']} (build now), B={tiers['B']}, C={tiers['C']}, D={tiers['D']} (skip)")
+    lines.append(
+        f"**{len(scored)} companies evaluated** | "
+        f"Tiers: A={tiers['A']} (build now), B={tiers['B']}, "
+        f"C={tiers['C']}, D={tiers['D']} (skip)"
+    )
+    lines.append(f"**Generated**: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}")
     lines.append("")
     lines.append("| Rank | Company | Domain | Category | Raised (USD-eq) | Archetype | Total | Tier | One-line thesis |")
     lines.append("|---|---|---|---|---|---|---|---|---|")
@@ -125,7 +137,7 @@ def master_ranking(scored: list[dict]) -> str:
         raised = f"${s['usd_equivalent']/1e6:,.1f}M" if s.get("usd_equivalent") else "n/a"
         gate_note = f" (gates: {','.join(s['applied_gates'])})" if s["applied_gates"] else ""
         lines.append(
-            f"| {i} | [{s['company']}](/{slug_to_filename(s['slug'])}) | {s.get('domain') or '-'} "
+            f"| {i} | [{s['company']}]({slug_to_filename(s['slug'])}) | {s.get('domain') or '-'} "
             f"| {(s.get('software_category') or '-')[:30]} | {raised} | {s['archetype']} "
             f"| **{s['total']}** {s['tier']}{gate_note} | {thesis} |"
         )
@@ -133,8 +145,15 @@ def master_ranking(scored: list[dict]) -> str:
     lines.append("## Methodology Appendix")
     lines.append("""
 ### Pipeline
-1. Crawled the full `/tag/seed-round/` archive of thesaasnews.com (351 tag pages, 4,203 articles, descending page order).
-2. Title-parsed amounts across currencies ($ € £ ¥ ₹ Rs A$ S$ US$) with fixed FX (EUR 1.08, GBP 1.27, JPY 0.0067, AUD 0.65, SGD 0.74, INR Cr=$120k); kept strictly >$10M USD-equivalent; Pre-Seed and named later series excluded; unlabeled rounds verified against each article's Funding Details block.
+1. Crawled the `/tag/seed-round/` and `/tag/pre-seed/` archives (351
+   seed-round pages; see `data/articles_index.json` for the current article
+   count).
+2. Title-parsed amounts across currencies ($ € £ ¥ ₹ Rs A$ S$ US$) with fixed
+   FX (EUR 1.08, GBP 1.27, JPY 0.0067, AUD 0.65, SGD 0.74, INR Cr=$120k);
+   kept rounds at or above $10M USD-equivalent. Seed, pre-seed, and
+   pre-Series-A rounds are included; named later series are excluded.
+   Valuation-only titles are held for article-level verification against the
+   Funding Details block, which supplies the actual raise amount.
 3. Parsed Funding Details (company, website, raised, round, investors, category) from every qualifying article; deduped by normalized company name + domain.
 4. Fetched each company website (homepage + linked pricing/product/about/customers/blog pages), stripped to text, classified ok/js_only/dead.
 5. Scored every company on 52 categories x 4 heads (Builder .30 / Seller .35 / Buyer .25 / Risk-inverse .10) with cited evidence; assigned one of six archetypes (pillar-weight multipliers); evaluated hard gates G1-G5.
@@ -153,15 +172,54 @@ def master_ranking(scored: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def reports_index(scored: list[dict], llm_summary: dict | None = None) -> str:
+    lines = [
+        "# Reports",
+        "",
+        "Two evaluation passes are produced by this repository:",
+        "",
+        f"- [Master ranking]({MASTER_RANKING_REPORT.name}) — "
+        f"{len(scored)} companies scored on the 52-category deterministic framework.",
+        "- [LLM quick ranking](llm_opportunity_ranking.md) — faster, single-score pass; "
+        "error records are listed separately and excluded from the ranking.",
+        "",
+        "## Data status",
+        "",
+        f"- Deep evaluations: {len(scored)}",
+    ]
+    if llm_summary:
+        lines.append(
+            f"- LLM evaluations: {llm_summary.get('successful', 0)} successful, "
+            f"{llm_summary.get('errored', 0)} errored"
+        )
+    lines.extend(
+        [
+            "",
+            "Regenerate with `uv run python -m scanner.compute && "
+            "uv run python -m scanner.reports` for the deep pass, or "
+            "`uv run python main.py --aggregate-only` for the LLM pass.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
 def main() -> None:
-    payload = json.loads(SCORED.read_text())
+    payload = read_json(SCORED_PATH)
+    if not payload:
+        raise FileNotFoundError(f"{SCORED_PATH} not found. Run scanner.compute first.")
     scored = payload["companies"]
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    for rank, s in enumerate(scored, 1):
-        path = REPORTS_DIR / slug_to_filename(s["slug"])
-        path.write_text(company_report(s, rank), encoding="utf-8")
-    (REPORTS_DIR / "master-ranking.md").write_text(master_ranking(scored), encoding="utf-8")
-    print(f"wrote {len(scored)} company reports + master-ranking.md to {REPORTS_DIR}/")
+    for rank, company in enumerate(scored, 1):
+        write_text(
+            REPORTS_DIR / slug_to_filename(company["slug"]),
+            company_report(company, rank),
+        )
+    write_text(MASTER_RANKING_REPORT, master_ranking(scored))
+    write_text(REPORTS_INDEX, reports_index(scored, read_json(LLM_SUMMARY)))
+    print(
+        f"wrote {len(scored)} company reports + master-ranking.md + index.md "
+        f"to {REPORTS_DIR}/"
+    )
 
 
 if __name__ == "__main__":

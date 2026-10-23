@@ -10,6 +10,7 @@ import json
 import os
 import re
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -131,6 +132,7 @@ class LLMClient:
         base_url: str | None = None,
         timeout: float = 60.0,
         max_retries: int = 3,
+        client_factory: Callable[[float], httpx.Client] | None = None,
     ) -> None:
         self.provider = provider.lower().strip()
         if self.provider not in ("nvidia", "ollama"):
@@ -138,6 +140,9 @@ class LLMClient:
 
         self.timeout = timeout
         self.max_retries = max_retries
+        self._client_factory = client_factory or (
+            lambda timeout: httpx.Client(timeout=timeout)
+        )
 
         if self.provider == "nvidia":
             self.base_url = (
@@ -216,11 +221,14 @@ class LLMClient:
 
         for attempt in range(1, self.max_retries + 1):
             try:
-                with httpx.Client(timeout=self.timeout) as client:
+                with self._client_factory(self.timeout) as client:
                     resp = client.post(endpoint, headers=headers, json=payload)
                     if resp.status_code == 429:
-                        wait = 2.0 * (2 ** (attempt - 1))
-                        time.sleep(wait)
+                        last_error = (
+                            f"rate limited (HTTP 429) after {self.max_retries} attempts"
+                        )
+                        if attempt < self.max_retries:
+                            time.sleep(2.0 * (2 ** (attempt - 1)))
                         continue
                     resp.raise_for_status()
                     data = resp.json()
@@ -239,6 +247,14 @@ class LLMClient:
                     usage = data.get("usage", {})
                     last_error = None
                     break
+            except httpx.HTTPStatusError as exc:
+                last_error = str(exc)
+                status = exc.response.status_code
+                # A 4xx (other than 429, handled above) will not fix itself.
+                if 400 <= status < 500:
+                    break
+                if attempt < self.max_retries:
+                    time.sleep(1.5 * attempt)
             except Exception as exc:
                 if self.provider == "ollama" and "connect" in str(exc).lower():
                     last_error = (
@@ -250,16 +266,17 @@ class LLMClient:
                 if attempt < self.max_retries:
                     time.sleep(1.5 * attempt)
 
-        if last_error and not raw_text:
+        if not raw_text:
+            error = last_error or "LLM returned an empty response"
             return LLMResult(
                 score=0,
-                verdict=f"Analysis failed: {last_error}",
+                verdict=f"Analysis failed: {error}",
                 parsed={},
                 raw_response="",
                 provider=self.provider,
                 model=self.model,
                 usage={},
-                error=last_error,
+                error=error,
             )
 
         parsed = extract_json_payload(raw_text) or {}

@@ -6,13 +6,13 @@ along with an INDEX.md and manifest.json for easy consumption elsewhere.
 
 from __future__ import annotations
 
-import json
 import time
-from pathlib import Path
 
 from scanner.llm_analyzer import assemble_company_context, get_qualifying_2026_companies
+from scanner.paths import COMPANY_PROMPTS
+from scanner.storage import write_json, write_text
 
-PROMPTS_DIR = Path("data/company_prompts")
+PROMPTS_DIR = COMPANY_PROMPTS
 
 
 def export_all_prompts(year: str = "2026") -> list[dict]:
@@ -37,7 +37,7 @@ def export_all_prompts(year: str = "2026") -> list[dict]:
 
         # File name by slug
         out_file = PROMPTS_DIR / f"{slug}.md"
-        out_file.write_text(prompt_content, encoding="utf-8")
+        write_text(out_file, prompt_content)
 
         manifest.append({
             "rank": rank,
@@ -57,7 +57,7 @@ def export_all_prompts(year: str = "2026") -> list[dict]:
 
     # Save manifest.json
     manifest_path = PROMPTS_DIR / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    write_json(manifest_path, manifest, indent=2)
 
     # Generate an INDEX.md
     index_lines = [
@@ -65,7 +65,7 @@ def export_all_prompts(year: str = "2026") -> list[dict]:
         "",
         f"**Total Companies**: {len(companies)}  ",
         f"**Exported At**: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}  ",
-        f"**Directory**: `data/company_prompts/`  ",
+        "**Directory**: `data/company_prompts/`  ",
         "",
         "This directory contains the exact, isolated user prompts sent to the LLM for agency opportunity evaluation.",
         "Each file aggregates verified funding details, source announcement press releases, pricing economics, and scraped website content.",
@@ -81,7 +81,7 @@ def export_all_prompts(year: str = "2026") -> list[dict]:
             f"| #{item['rank']} | {item['date']} | **{item['company']}** | {item['round']} | {usd_str} | {item['category'] or 'n/a'} | {file_link} |"
         )
 
-    (PROMPTS_DIR / "INDEX.md").write_text("\n".join(index_lines), encoding="utf-8")
+    write_text(PROMPTS_DIR / "INDEX.md", "\n".join(index_lines))
     elapsed = time.time() - t0
     print(f"\nSuccessfully exported {len(companies)} prompts in {elapsed:.2f}s.")
     print(f"Manifest: {manifest_path}")
