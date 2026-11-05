@@ -1,12 +1,14 @@
 """Step 1: crawl /tag/seed-round/ and /tag/pre-seed/ index pages.
 
-Writes `data/articles_index.json`. Existing indexes are updated incrementally
-(newest pages until two consecutive pages add nothing); `--refetch` rebuilds
-from scratch.
+Writes `data/articles_index.json`. Incremental mode re-scans from page 1 and
+stops after two consecutive pages yield no unseen slugs; it draws from the
+HTTP cache rather than re-downloading known pages. Articles backfilled deep
+in the past only surface via `--refetch`.
 """
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 import time
@@ -66,25 +68,46 @@ def parse_page(html: str, page_no: int, tag_name: str = "") -> list[dict]:
     return out
 
 
+class CrawlProbeError(RuntimeError):
+    """The crawler cannot determine the archive depth; abort instead of guessing."""
+
+
 def page_ok(base: str, n: int) -> bool:
-    """Return whether a tag page exists. Transport failures are not a 404."""
-    resp = fetch(page_url(base, n))
-    return resp.ok
+    """Return whether a tag page exists.
+
+    2xx means it exists, 404/410 means it does not. Anything else is
+    indeterminate and raises, so the caller can stop the crawl rather than
+    silently cap it too low or too high.
+    """
+    url = page_url(base, n)
+    try:
+        resp = fetch(url)
+    except ConnectionError as exc:
+        raise CrawlProbeError(f"[{base}] page {n}: could not determine: {exc}") from exc
+    if resp.status in (404, 410):
+        return False
+    if 200 <= resp.status < 300:
+        return True
+    raise CrawlProbeError(f"[{base}] page {n}: indeterminate HTTP {resp.status}")
 
 
 def find_max_page(base: str) -> int:
-    """Find the last existing tag page with a doubling probe, then binary search."""
+    """Find the last existing tag page with a doubling probe, then binary search.
+
+    Capped at MAX_PAGES. `hi` is either the first known-bad page or an
+    unprobed sentinel at MAX_PAGES + 1, never beyond it.
+    """
     if not page_ok(base, 1):
         return 0
     lo = 1
     hi = 2
     while hi <= MAX_PAGES and page_ok(base, hi):
         lo = hi
-        hi *= 2
+        hi = min(hi * 2, MAX_PAGES + 1)
         print(f"  probe [{base}]: page {hi} boundary search, ok up to {lo}", flush=True)
     if lo >= MAX_PAGES:
         return lo
-    # invariant: lo ok, hi not ok -> binary search largest ok in [lo+1, hi-1]
+    # invariant: lo is ok, hi is the first known-bad page or the cap+1 sentinel
     while hi - lo > 1:
         mid = (lo + hi) // 2
         if page_ok(base, mid):
@@ -123,7 +146,7 @@ def crawl_incremental(existing_payload: dict) -> dict:
         while page <= MAX_PAGES:
             url = page_url(base, page)
             try:
-                resp = fetch(url, force_refetch=True)
+                resp = fetch(url)
             except ConnectionError as exc:
                 errors.append(f"incremental {tag_name} page {page}: {exc}")
                 break
@@ -230,14 +253,22 @@ def crawl_full() -> dict:
     return payload
 
 
-def main(refetch: bool | None = None) -> None:
-    if refetch is None:
-        refetch = "--refetch" in sys.argv or "--full" in sys.argv
-    if OUT.exists() and not refetch:
-        crawl_incremental(read_json(OUT))
-        return
-    crawl_full()
+def main(refetch: bool = False) -> None:
+    try:
+        if OUT.exists() and not refetch:
+            crawl_incremental(read_json(OUT))
+            return
+        crawl_full()
+    except CrawlProbeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(2)
+
+
+def _cli() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Step 1: crawl the seed/pre-seed index")
+    parser.add_argument("--refetch", action="store_true", help="Rebuild the index from scratch")
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
-    main()
+    main(refetch=_cli().refetch)

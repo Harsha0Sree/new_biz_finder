@@ -64,16 +64,21 @@ def test_429_exhaustion_returns_error_response_not_success(monkeypatch):
     assert not body_path.exists()
 
 
-def test_permanent_404_is_cached(monkeypatch):
-    client = FakeClient([FakeResponse("https://example.com/missing", status=404)])
+def test_404_is_not_cached(monkeypatch):
+    client = FakeClient(
+        [
+            FakeResponse("https://example.com/missing", status=404),
+            FakeResponse("https://example.com/missing", status=404),
+        ]
+    )
     monkeypatch.setattr(httpcache, "_get_client", lambda: client)
 
     first = httpcache.fetch("https://example.com/missing", min_interval=0)
     second = httpcache.fetch("https://example.com/missing", min_interval=0)
 
     assert first.status == 404 and first.from_cache is False
-    assert second.status == 404 and second.from_cache is True
-    assert client.calls == 1
+    assert second.status == 404 and second.from_cache is False
+    assert client.calls == 2
 
 
 def test_force_refetch_bypasses_cache(monkeypatch):

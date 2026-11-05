@@ -1,14 +1,13 @@
 [project]
 name = "new-biz-finder"
 version = "0.1.0"
-description = "Add your description here"
+description = "Resumable pipeline that discovers recently funded seed-stage SaaS/AI startups and evaluates them as agency opportunities"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.27",
     "beautifulsoup4>=4.12",
     "lxml>=5.2",
-    "openai>=3.13.0",
 ]
 
 [dependency-groups]
@@ -27,7 +26,7 @@ packages = ["scanner"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-exclude = [".venv", "data", "reports"]
+exclude = [".venv", "data", "reports", ".agents", "cloned_skills", "frontends"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "RUF"]

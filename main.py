@@ -41,6 +41,9 @@ def run_pipeline(
     llm_workers: int = 1,
     retry_errors: bool = True,
     include_errors: bool = False,
+    max_tokens: int = 6000,
+    temperature: float = 0.2,
+    timeout: float = 120.0,
 ) -> None:
     print("=" * 72)
     print("       NEW BIZ FINDER — END-TO-END OPPORTUNITY PIPELINE")
@@ -107,7 +110,9 @@ def run_pipeline(
                 limit=limit,
                 resume=resume_llm,
                 force=force_llm,
-                scrape_missing=not skip_scrape,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                timeout=timeout,
                 workers=llm_workers,
                 retry_errors=retry_errors,
             )
@@ -165,6 +170,9 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=_env_limit(), help="Limit companies evaluated")
     parser.add_argument("--site-workers", type=int, default=4, help="Concurrent site fetchers (1-16)")
     parser.add_argument("--llm-workers", type=int, default=1, help="Concurrent LLM evaluations (1-16)")
+    parser.add_argument("--max-tokens", type=int, default=6000, help="Token cap for the LLM completion")
+    parser.add_argument("--temperature", type=float, default=0.2, help="Sampling temperature")
+    parser.add_argument("--timeout", type=float, default=120.0, help="HTTP timeout in seconds per attempt")
     parser.add_argument("--force", action="store_true", help="Re-evaluate already evaluated companies")
     parser.add_argument(
         "--no-resume", dest="resume", action="store_false", help="Do not skip existing eval files"
@@ -207,6 +215,9 @@ def main() -> None:
         llm_workers=args.llm_workers,
         retry_errors=args.retry_errors,
         include_errors=args.include_errors,
+        max_tokens=args.max_tokens,
+        temperature=args.temperature,
+        timeout=args.timeout,
     )
 
 

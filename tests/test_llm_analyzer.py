@@ -40,7 +40,7 @@ def test_context_isolates_untrusted_evidence(tmp_path, monkeypatch):
         "Acme sells workflow automation to mid-market teams.",
     )
 
-    context = la.assemble_company_context(_company(), scrape_missing=False)
+    context = la.assemble_company_context(_company())
 
     assert context.count(la.UNTRUSTED_CLOSE) == 1
     assert la.UNTRUSTED_OPEN in context
@@ -53,7 +53,7 @@ def test_context_includes_joined_site_pricing(tmp_path, monkeypatch):
     monkeypatch.setattr(la, "ARTICLE_TEXT_DIR", tmp_path)
     write_text(tmp_path / "article__acme-seed.txt", "Acme funding article.")
 
-    context = la.assemble_company_context(_company(), scrape_missing=False)
+    context = la.assemble_company_context(_company())
 
     assert "Pro $99/mo" in context
     assert "$99/mo" in context
@@ -79,7 +79,7 @@ def test_context_falls_back_to_sites_json(tmp_path, monkeypatch):
         },
     )
 
-    context = la.assemble_company_context(company, scrape_missing=False)
+    context = la.assemble_company_context(company)
 
     assert "Contact sales" in context
     assert "Sales-led (demo/contact sales required)" in context
@@ -90,7 +90,7 @@ def test_context_is_bounded(tmp_path, monkeypatch):
     write_text(tmp_path / "article__acme-seed.txt", "x" * 5000)
 
     context = la.assemble_company_context(
-        _company(), scrape_missing=False, max_chars=3000
+        _company(), max_chars=3000
     )
 
     assert "# Company Analysis Target" in context
@@ -156,7 +156,7 @@ def test_save_evaluation_records_status_and_pricing(tmp_path):
     assert error_data["error"] == "timeout"
 
 
-def _write_eval(path, slug, *, score=None, error=None, company=None):
+def _write_eval(path, slug, *, score=None, error=None, company=None, parsed="auto"):
     payload = {
         "slug": slug,
         "company": company or slug.title(),
@@ -173,6 +173,10 @@ def _write_eval(path, slug, *, score=None, error=None, company=None):
         payload["score"] = score
     if error is not None:
         payload["error"] = error
+    if parsed == "auto":
+        parsed = {"score": score} if (error is None and score is not None) else {}
+    if parsed is not None:
+        payload["parsed"] = parsed
     path.write_text(json.dumps(payload), encoding="utf-8")
 
 
@@ -204,6 +208,7 @@ def test_aggregate_excludes_errors_and_reports_them(tmp_path, monkeypatch):
     assert summary_data["files"] == 3
     assert summary_data["successful"] == 1
     assert summary_data["errored"] == 1
+    assert summary_data["unverified"] == 0
     assert summary_data["invalid"] == ["corrupt.json"]
     text = ranking.read_text(encoding="utf-8")
     assert "Errored evaluations (excluded from ranking)" in text
@@ -230,9 +235,34 @@ def test_aggregate_can_include_errors_for_diagnostics(tmp_path, monkeypatch):
     assert len(read_json(tmp_path / "scored.json")) == 2
 
 
+def test_unverified_records_never_rank(tmp_path, monkeypatch):
+    evals = tmp_path / "evals"
+    evals.mkdir()
+    _write_eval(evals / "good.json", "good", score=91)
+    # Score present, parsed block missing: looks like a score to a naive
+    # reader, but the model never produced machine output.
+    _write_eval(evals / "fake.json", "fake", score=45, parsed={})
+
+    monkeypatch.setattr(la, "SCORED_JSON_PATH", tmp_path / "scored.json")
+    monkeypatch.setattr(la, "SCORED_CSV_PATH", tmp_path / "scores.csv")
+    monkeypatch.setattr(la, "SUMMARY_PATH", tmp_path / "summary.json")
+    monkeypatch.setattr(la, "REPORTS_DIR", tmp_path / "reports")
+    monkeypatch.setattr(la, "LLM_RANKING_REPORT", tmp_path / "reports" / "ranking.md")
+
+    selected, _, _ = la.aggregate_scores(evals)
+
+    assert [item["slug"] for item in selected] == ["good"]
+    summary_data = read_json(tmp_path / "summary.json")
+    assert summary_data["successful"] == 1
+    assert summary_data["unverified"] == 1
+    ranking = (tmp_path / "reports" / "ranking.md").read_text(encoding="utf-8")
+    assert "## Unverified evaluations (excluded from ranking)" in ranking
+    assert "| Fake |" in ranking
+
+
 def test_pending_companies_retries_errors_by_default(tmp_path, monkeypatch):
     monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80})
+    write_json(tmp_path / "ok.json", {"score": 80, "parsed": {"score": 80}})
     write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
     write_text(tmp_path / "corrupt.json", "{not json")
     companies = [{"slug": "ok"}, {"slug": "bad"}, {"slug": "corrupt"}]
@@ -248,7 +278,7 @@ def test_pending_companies_retries_errors_by_default(tmp_path, monkeypatch):
 
 def test_pending_companies_can_skip_errors(tmp_path, monkeypatch):
     monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80})
+    write_json(tmp_path / "ok.json", {"score": 80, "parsed": {"score": 80}})
     write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
     companies = [{"slug": "ok"}, {"slug": "bad"}]
 
@@ -263,7 +293,7 @@ def test_pending_companies_can_skip_errors(tmp_path, monkeypatch):
 
 def test_pending_companies_force_evaluates_everything(tmp_path, monkeypatch):
     monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80})
+    write_json(tmp_path / "ok.json", {"score": 80, "parsed": {"score": 80}})
     write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
     companies = [{"slug": "ok"}, {"slug": "bad"}]
 

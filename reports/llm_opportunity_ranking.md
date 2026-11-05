@@ -1,16 +1,23 @@
 # 2026 Seed-Round Agency Opportunity Rankings (LLM Evaluated)
 
-**Evaluations on disk**: 52 | **Successful**: 5 | **Errored**: 47
-**Included in ranking**: 5
-**Generated**: 2026-10-23 12:16:20 UTC
+**Evaluations on disk**: 52 | **Verified**: 1 | **Unverified**: 4 | **Errored**: 47
+**Included in ranking**: 1
+**Generated**: 2026-11-05 05:14:26 UTC
 
 | Rank | Score | Company | Category | Raised | On-Site Pricing | Prior 67? | Verdict |
 |:---:|:---:|:---|:---|:---|:---|:---:|:---|
-| #1 | **47/100** | Credible Data | Enterprise AI | $10,000,000 | None | new | Let me carefully analyze this. The company is Credible Data — an enterprise AI semantic layer / business context engine built on Malloy. $10M seed from Gradient, SignalFire, K5 Global, plus angels like Godard Abel (G2 CEO), Wes McKinney (pandas creat |
-| #2 | **45/100** | Advanced Machine Intelligence Labs | Artificial Intelligence | $1,000,000,000 | None | ✓ | Advanced Machine Intelligence Labs (AMI Labs) is a high‑profile research‑lab founded by Yann LeCun and backed by a $1 B seed round. Its stated mission is to build “next‑generation AI systems that understand the real world, have persistent memory, can |
-| #3 | **15/100** | humans&, inc. | AI / Collaboration Tools | $480,000,000 | None | ✓ | The human‑centric AI lab *humans&* is a research‑heavy venture with no publicly‑available product, pricing, or use‑case demos. The core promise—“AI that augments human collaboration”—is too vague to translate into a concrete, high‑ticket service that |
-| #4 | **0/100** | Ineffable Intelligence | n/a | $1,000,000,000 | None | ✓ | Disqualified – Ineffable Intelligence is a research‑focused AI startup with no commercial product or solvable business pain, making it unsuitable for a solo agency opportunity. |
-| #5 | **0/100** | Agon | Defence Technology | $30,000,000 | None | new | Let me work through this carefully. |
+| #1 | **0/100** | Ineffable Intelligence | n/a | $1,000,000,000 | None | ✓ | Disqualified – Ineffable Intelligence is a research‑focused AI startup with no commercial product or solvable business pain, making it unsuitable for a solo agency opportunity. |
+
+## Unverified evaluations (excluded from ranking)
+
+No parsed score JSON block; scores were never produced in a machine-readable form. These files are re-evaluated on the next run.
+
+| Company | Model | Parse Status |
+|---|---|---|
+| Advanced Machine Intelligence Labs | openai/gpt-oss-20b | unknown |
+| Agon | z-ai/glm-5.3-flash | unknown |
+| Credible Data | z-ai/glm-5.3-flash | unknown |
+| humans&, inc. | openai/gpt-oss-20b | unknown |
 
 ## Errored evaluations (excluded from ranking)
 
@@ -49,7 +56,7 @@ These files remain on disk and are retried on the next run unless `--no-retry-er
 | Limetax | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |
 | Malachyte | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |
 | Maximum Technologies Inc. | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |
-| Metacognition | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |
+| Metacognition | openai/gpt-oss-20b | The read operation timed out |
 | Modus | z-ai/glm-5.3-flash | The read operation timed out |
 | Nayla | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |
 | NeoSoul | z-ai/glm-5.3-flash | Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions' For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404 |

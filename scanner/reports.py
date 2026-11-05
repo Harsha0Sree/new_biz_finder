@@ -189,7 +189,8 @@ def reports_index(scored: list[dict], llm_summary: dict | None = None) -> str:
     ]
     if llm_summary:
         lines.append(
-            f"- LLM evaluations: {llm_summary.get('successful', 0)} successful, "
+            f"- LLM evaluations: {llm_summary.get('successful', 0)} verified, "
+            f"{llm_summary.get('unverified', 0)} unverified, "
             f"{llm_summary.get('errored', 0)} errored"
         )
     lines.extend(

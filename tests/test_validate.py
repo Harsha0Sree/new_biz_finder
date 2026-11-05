@@ -170,6 +170,7 @@ def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
                 "provider": "nvidia",
                 "model": "m",
                 "score": 80,
+                "parsed": {"score": 80},
                 "status": "ok",
             }
         ),

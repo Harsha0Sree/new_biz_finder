@@ -9,15 +9,31 @@
   "funding_date": "September 2026",
   "lead_investor": "Main Sequence",
   "software_category": "Artificial Intelligence",
-  "pricing": null,
+  "pricing": {
+    "has_public_pricing": true,
+    "price_points": [
+      "$1",
+      "$600"
+    ],
+    "plans": [
+      "Business"
+    ],
+    "is_sales_led": false,
+    "summary": "Public Pricing: $1, $600 | Tiers: Business"
+  },
   "in_previous_67": false,
   "provider": "nvidia",
-  "model": "z-ai/glm-5.3-flash",
+  "model": "openai/gpt-oss-20b",
   "score": 0,
-  "verdict": "Analysis failed: Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+  "verdict": "Analysis failed: The read operation timed out",
   "parsed": {},
   "raw_response": "",
   "usage": {},
-  "error": "Client error '404 Not Found' for url 'https://integrate.api.nvidia.com/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
-  "evaluated_at": "2026-09-13T11:20:18Z"
+  "error": "The read operation timed out",
+  "status": "error",
+  "parse_status": "error",
+  "truncated": false,
+  "latency_s": 1805.819,
+  "context_chars": 8045,
+  "evaluated_at": "2026-11-05T05:14:26Z"
 }

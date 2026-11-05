@@ -32,8 +32,8 @@ def test_master_ranking_uses_relative_links_that_exist():
 
 
 def test_reports_index_links_to_both_evaluation_passes():
-    text = reports_index(_scored_records(), {"successful": 5, "errored": 47})
+    text = reports_index(_scored_records(), {"successful": 1, "unverified": 4, "errored": 47})
 
     assert "[Master ranking](master-ranking.md)" in text
     assert "[LLM quick ranking](llm_opportunity_ranking.md)" in text
-    assert "5 successful, 47 errored" in text
+    assert "1 verified, 4 unverified, 47 errored" in text

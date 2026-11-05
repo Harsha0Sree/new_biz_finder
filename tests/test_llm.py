@@ -5,7 +5,6 @@ import pytest
 
 from scanner.llm import (
     LLMClient,
-    extract_fallback_score,
     extract_json_payload,
 )
 from scanner.llm_analyzer import (
@@ -40,6 +39,9 @@ class _FakeHTTPClient:
         return False
 
     def post(self, *args, **kwargs):
+        return self._responses.pop(0)
+
+    def get(self, *args, **kwargs):
         return self._responses.pop(0)
 
 
@@ -101,10 +103,108 @@ Hope this helps!"""
     assert extract_json_payload(bad) is None
 
 
-def test_extract_fallback_score():
-    assert extract_fallback_score('"score": 75') == 75
-    assert extract_fallback_score('Overall Score: 85/100') == 85
-    assert extract_fallback_score('No numbers here') == 50
+def test_unparseable_output_is_an_error_not_a_fabricated_score():
+    payload = {
+        "choices": [{"message": {"content": "Overall Score: looks hard, capping out around 45."}}],
+        "usage": {"completion_tokens": 100, "total_tokens": 500},
+    }
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        client_factory=lambda _timeout: _FakeHTTPClient([_FakeHTTPResponse(200, payload)]),
+    )
+
+    result = client.analyze_company("system prompt", "company context")
+
+    assert result.error is not None
+    assert result.parse_status == "unparseable"
+    assert result.score == 0
+
+
+def test_output_at_max_tokens_cap_reports_truncation():
+    payload = {
+        "choices": [{"message": {"content": "reasoning without the required JSON block"}}],
+        "usage": {"completion_tokens": 6000, "total_tokens": 9000},
+    }
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        client_factory=lambda _timeout: _FakeHTTPClient([_FakeHTTPResponse(200, payload)]),
+    )
+
+    result = client.analyze_company("system prompt", "company context", max_tokens=6000)
+
+    assert result.error is not None
+    assert result.truncated is True
+    assert "6000" in result.error
+
+
+def test_preflight_accepts_listed_model():
+    resp = _FakeHTTPResponse(200, {"data": [{"id": "z-ai/glm-5.3-flash"}]})
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        model="z-ai/glm-5.3-flash",
+        client_factory=lambda _timeout: _FakeHTTPClient([resp]),
+    )
+
+    ok, message = client.preflight()
+
+    assert ok is True
+    assert "glm-5.3-flash" in message
+
+
+def test_preflight_rejects_unlisted_model():
+    resp = _FakeHTTPResponse(200, {"data": [{"id": "openai/gpt-oss-20b"}]})
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        model="z-ai/glm-5.3-flash",
+        base_url="https://example.com/v1",
+        client_factory=lambda _timeout: _FakeHTTPClient([resp]),
+    )
+
+    ok, message = client.preflight()
+
+    assert ok is False
+    assert "not found" in message
+    assert "openai/gpt-oss-20b" in message
+
+
+def test_preflight_fails_closed_on_bad_key():
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        client_factory=lambda _timeout: _FakeHTTPClient([_FakeHTTPResponse(401)]),
+    )
+
+    ok, message = client.preflight()
+
+    assert ok is False
+    assert "401" in message
+
+
+def test_preflight_unreachable_endpoint_warns_and_proceeds():
+    class _BoomClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def get(self, *args, **kwargs):
+            raise httpx.ConnectError("no route to host")
+
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        client_factory=lambda _timeout: _BoomClient(),
+    )
+
+    ok, message = client.preflight()
+
+    assert ok is True
+    assert "warning" in message
 
 
 def test_assemble_company_context():
@@ -122,7 +222,7 @@ def test_assemble_company_context():
         "additional_investors": "Angel Fund",
         "software_category": "AI Automation",
     }
-    context = assemble_company_context(sample_company, scrape_missing=False)
+    context = assemble_company_context(sample_company)
     assert "# Company Analysis Target: Test AI" in context
     assert "$25M" in context
     assert "Top Tier Ventures" in context

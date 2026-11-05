@@ -8,10 +8,31 @@ Keeping the join here means every consumer sees the same shape.
 from __future__ import annotations
 
 import threading
+from collections.abc import Iterator
+from contextlib import contextmanager
+from pathlib import Path
 from typing import Any
 
 from scanner.paths import SITES
 from scanner.storage import read_json, write_json
+
+try:
+    import fcntl
+
+    @contextmanager
+    def _file_lock(path: Path) -> Iterator[None]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a+") as handle:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+except ImportError:  # pragma: no cover - non-Linux fallback
+    @contextmanager
+    def _file_lock(path: Path) -> Iterator[None]:
+        yield
 
 _sites_lock = threading.Lock()
 
@@ -49,8 +70,14 @@ def update_site(
     record: dict[str, Any],
     path=SITES,
 ) -> None:
-    """Merge one site record into sites.json under a process-wide lock."""
-    with _sites_lock:
+    """Merge one site record into sites.json.
+
+    Serialized across threads with `_sites_lock` and across processes with
+    an flock on a sibling lockfile, so a concurrent writer can never see a
+    torn read or overwrite an unrelated entry.
+    """
+    path = Path(path)
+    with _sites_lock, _file_lock(path.with_suffix(path.suffix + ".lock")):
         payload = read_json(path, {"sites": {}})
         sites = payload.setdefault("sites", {})
         sites[domain] = record

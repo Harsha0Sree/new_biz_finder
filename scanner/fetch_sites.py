@@ -7,20 +7,20 @@ the HTTP cache throttles per host and writes atomically.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
-import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
+from scanner.enrich import load_sites, update_site
 from scanner.httpcache import fetch
-from scanner.paths import COMPANIES, SITES, TEXT
-from scanner.storage import read_json, write_json, write_text
+from scanner.paths import COMPANIES, TEXT
+from scanner.storage import read_json, write_text
 
-SITES_OUT = SITES
 TEXT_DIR = TEXT
 COMPANIES_PATH = COMPANIES
 
@@ -229,17 +229,6 @@ def classify(status_code: int, text: str) -> str:
     return "ok"
 
 
-def load_sites() -> dict:
-    payload = read_json(SITES_OUT, {"sites": {}})
-    if not isinstance(payload, dict) or not isinstance(payload.get("sites"), dict):
-        return {"sites": {}}
-    return payload
-
-
-def save_sites(data: dict) -> None:
-    write_json(SITES_OUT, data)
-
-
 def fetch_site(
     domain: str,
     base_url: str,
@@ -317,29 +306,25 @@ def fetch_site(
     return entry
 
 
-def _parse_cli(limit: int | None, workers: int, refetch: bool) -> tuple[int | None, int, bool]:
-    if "--limit" in sys.argv:
-        limit = int(sys.argv[sys.argv.index("--limit") + 1])
-    if "--workers" in sys.argv:
-        workers = int(sys.argv[sys.argv.index("--workers") + 1])
-    if "--refetch" in sys.argv:
-        refetch = True
-    return limit, max(1, min(workers, 16)), refetch
+def _cli() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Step 4: fetch company websites")
+    parser.add_argument("--limit", type=int, default=None, help="Max companies to fetch")
+    parser.add_argument("--workers", type=int, default=4, help="Concurrent fetchers (1-16)")
+    parser.add_argument("--refetch", action="store_true", help="Re-fetch even cached sites")
+    return parser.parse_args()
 
 
 def main(limit: int | None = None, workers: int = 4, refetch: bool = False) -> None:
-    limit, workers, refetch = _parse_cli(limit, workers, refetch)
+    workers = max(1, min(int(workers), 16))
     companies = read_json(COMPANIES_PATH)
     if companies is None:
         raise FileNotFoundError(f"{COMPANIES_PATH} not found. Run scanner.fetch_articles first.")
     unique = [c for c in companies if not c.get("duplicate_of_previous")]
-    sites = load_sites()
+    cached_domains = set(load_sites()) if not refetch else set()
     todo = []
     for company in unique:
         domain = company.get("domain")
-        if not domain:
-            continue
-        if domain in sites["sites"] and not refetch:
+        if not domain or domain in cached_domains:
             continue
         todo.append(company)
     print(f"{len(unique)} unique companies, {len(todo)} sites to fetch (workers={workers})", flush=True)
@@ -348,8 +333,7 @@ def main(limit: int | None = None, workers: int = 4, refetch: bool = False) -> N
         print(f"limiting to {limit}", flush=True)
 
     def persist(company: dict, entry: dict) -> None:
-        sites["sites"][company["domain"]] = entry
-        save_sites(sites)
+        update_site(company["domain"], entry)
 
     if workers == 1:
         for index, company in enumerate(todo, 1):
@@ -389,11 +373,12 @@ def main(limit: int | None = None, workers: int = 4, refetch: bool = False) -> N
                     print(f"  {index}/{len(todo)}", flush=True)
 
     statuses: dict[str, int] = {}
-    for entry in sites["sites"].values():
+    for entry in load_sites().values():
         key = entry.get("status", "?")
         statuses[key] = statuses.get(key, 0) + 1
     print("done:", statuses)
 
 
 if __name__ == "__main__":
-    main()
+    args = _cli()
+    main(limit=args.limit, workers=args.workers, refetch=args.refetch)

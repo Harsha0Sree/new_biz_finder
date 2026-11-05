@@ -6,8 +6,10 @@ data/companies.json (deduped by normalized company name + domain).
 
 from __future__ import annotations
 
+import argparse
 import re
 import time
+from pathlib import Path
 
 from bs4 import BeautifulSoup
 
@@ -217,27 +219,30 @@ def fetch_source_pr(source_url: str | None, slug: str) -> str | None:
         cached = target.read_text(encoding="utf-8", errors="replace")
         if cached.strip():
             return cached
+    return _fetch_source_pr(url, target)
+
+
+def _fetch_source_pr(url: str, target: Path) -> str | None:
+    """Fetch and cache the PR. Failures leave no placeholder, so a later run retries."""
     try:
         resp = fetch(url, timeout=8.0, retries=1)
-        if not resp.ok:
-            write_text(target, "")
-            return None
-        soup = BeautifulSoup(resp.text, "lxml")
-        title = soup.title.get_text(strip=True) if soup.title else ""
-        for tag in soup(["script", "style", "noscript", "svg", "iframe", "nav", "footer"]):
-            tag.decompose()
-        main_el = soup.find("article") or soup.find("main") or soup
-        text = main_el.get_text("\n", strip=True)
-        text = re.sub(r"\n{3,}", "\n\n", text)
-        if len(text) > 100:
-            header = f"Source Title: {title}\nSource URL: {url}\n\n" if title else f"Source URL: {url}\n\n"
-            content = header + text
-            write_text(target, content)
-            return content
-        write_text(target, "")
     except Exception:
-        write_text(target, "")
-    return None
+        return None
+    if not resp.ok:
+        return None
+    soup = BeautifulSoup(resp.text, "lxml")
+    title = soup.title.get_text(strip=True) if soup.title else ""
+    for tag in soup(["script", "style", "noscript", "svg", "iframe", "nav", "footer"]):
+        tag.decompose()
+    main_el = soup.find("article") or soup.find("main") or soup
+    text = main_el.get_text("\n", strip=True)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    if len(text) <= 100:
+        return None
+    header = f"Source Title: {title}\nSource URL: {url}\n\n" if title else f"Source URL: {url}\n\n"
+    content = header + text
+    write_text(target, content)
+    return content
 
 
 def normalize_name(name: str) -> str:
@@ -297,12 +302,10 @@ def save_parsed(parsed: dict) -> None:
     write_json(PARSED_OUT, parsed)
 
 
-def main() -> None:
-    import sys
-
+def main(reparse: bool = False) -> None:
     qualifying = read_json(QUALIFYING_OUT)["qualifying"]
     parsed = load_parsed()
-    if "--reparse" in sys.argv:
+    if reparse:
         parsed = {"articles": {}}
     todo = [a for a in qualifying if a["slug"] not in parsed["articles"]]
     print(f"{len(qualifying)} qualifying, {len(todo)} to fetch")
@@ -462,5 +465,11 @@ def main() -> None:
         print("  REJ:", r["title"], "->", r["reject_reason"])
 
 
+def _cli() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Step 3: fetch qualifying articles")
+    parser.add_argument("--reparse", action="store_true", help="Re-download and re-parse every article")
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    main()
+    main(reparse=_cli().reparse)

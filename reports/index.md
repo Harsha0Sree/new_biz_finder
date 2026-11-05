@@ -8,6 +8,6 @@ Two evaluation passes are produced by this repository:
 ## Data status
 
 - Deep evaluations: 67
-- LLM evaluations: 5 successful, 47 errored
+- LLM evaluations: 1 verified, 4 unverified, 47 errored
 
 Regenerate with `uv run python -m scanner.compute && uv run python -m scanner.reports` for the deep pass, or `uv run python main.py --aggregate-only` for the LLM pass.

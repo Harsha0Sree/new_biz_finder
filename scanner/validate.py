@@ -58,6 +58,16 @@ def _as_list(payload: Any) -> list[Any]:
     return payload if isinstance(payload, list) else []
 
 
+def _verified_llm_record(record: dict[str, Any]) -> bool:
+    """Mirror of the aggregation rule: no error flag and a parsed score block."""
+    if record.get("error"):
+        return False
+    score = record.get("score")
+    if not isinstance(score, (int, float)) or isinstance(score, bool) or not 0 <= score <= 100:
+        return False
+    return isinstance(record.get("parsed"), dict) and bool(record["parsed"])
+
+
 def validate_articles(payload: Any, report: Report) -> list[dict[str, Any]]:
     if not isinstance(payload, dict):
         report.error("articles_index.json: expected an object")
@@ -358,6 +368,7 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
     report.checks["llm_scored"] = len(scored)
     successful: set[str] = set()
     errored: set[str] = set()
+    unverified: set[str] = set()
     if evals_dir.exists():
         for path in sorted(evals_dir.glob("*.json")):
             record = _load(path, report, f"llm_evals/{path.name}")
@@ -366,16 +377,19 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
             for key in ("slug", "company", "provider", "model", "score"):
                 if record.get(key) in (None, ""):
                     report.error(f"llm_evals/{path.name}: missing {key}")
-            status = "error" if record.get("error") else (record.get("status") or "ok")
-            if status == "error":
-                errored.add(path.stem)
-                if not record.get("error"):
-                    report.error(f"llm_evals/{path.name}: status=error but no error text")
-            else:
+            if _verified_llm_record(record):
                 successful.add(path.stem)
-                score = record.get("score")
-                if not isinstance(score, int) or not 0 <= score <= 100:
+                continue
+            if record.get("error"):
+                errored.add(path.stem)
+                continue
+            unverified.add(path.stem)
+            score = record.get("score")
+            if isinstance(score, (int, float)) and not isinstance(score, bool):
+                if not 0 <= score <= 100:
                     report.error(f"llm_evals/{path.name}: bad score {score!r}")
+            else:
+                report.error(f"llm_evals/{path.name}: bad score {score!r}")
     scored_slugs = {item.get("slug") for item in scored if isinstance(item, dict)}
     for index, item in enumerate(scored):
         if not isinstance(item, dict):
@@ -388,6 +402,8 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
         )
     if errored:
         report.warn(f"llm_evals: {len(errored)} errored records will be retried on the next run")
+    if unverified:
+        report.warn(f"llm_evals: {len(unverified)} unverified records (no parsed score) will be retried on the next run")
 
 
 def validate_reports(reports_dir: Path, report: Report) -> None:

@@ -33,7 +33,7 @@ def export_all_prompts(year: str = "2026") -> list[dict]:
         website = comp.get("website") or ""
 
         # Assemble the exact markdown prompt that goes to the LLM
-        prompt_content = assemble_company_context(comp, scrape_missing=False)
+        prompt_content = assemble_company_context(comp)
 
         # File name by slug
         out_file = PROMPTS_DIR / f"{slug}.md"

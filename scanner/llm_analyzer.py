@@ -13,21 +13,22 @@ import csv
 import io
 import os
 import re
+import statistics
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
-from scanner.enrich import enrich_companies, load_sites, update_site
+from scanner.enrich import enrich_companies, load_sites
 from scanner.env import load_dotenv
 from scanner.fetch_articles import fetch_source_pr
-from scanner.fetch_sites import fetch_site
 from scanner.llm import LLMClient, LLMResult
 from scanner.paths import (
     COMPANIES,
     DEFAULT_PROMPT,
     EVALS,
     LLM_EVALS,
+    LLM_RANKING_REPORT,
     LLM_SCORED,
     LLM_SCORES_CSV,
     LLM_SUMMARY,
@@ -46,7 +47,6 @@ SCORED_CSV_PATH = LLM_SCORES_CSV
 REPORTS_DIR = REPORTS
 DEFAULT_PROMPT_PATH = DEFAULT_PROMPT
 SUMMARY_PATH = LLM_SUMMARY
-LLM_RANKING_REPORT = REPORTS / "llm_opportunity_ranking.md"
 
 MAX_CONTEXT_CHARS = 60_000
 ARTICLE_LIMIT = 20_000
@@ -146,33 +146,17 @@ def _site_pricing(company: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
 
 def assemble_company_context(
     company: dict[str, Any],
-    scrape_missing: bool = True,
     max_chars: int = MAX_CONTEXT_CHARS,
 ) -> str:
-    """Assemble one company's evidence into a bounded, isolated context."""
+    """Assemble one company's evidence into a bounded, isolated context.
+
+    Read-only: all evidence must already be on disk (run the scrape steps
+    first, or use `--prefetch-sources` for the press-release cache). No
+    network calls and no artifact writes happen here.
+    """
     slug = company["slug"]
     domain = company.get("domain")
-    website = company.get("website")
     source_url = company.get("source_url")
-
-    if scrape_missing and domain and website:
-        home_txt = ARTICLE_TEXT_DIR / f"site__{domain}__home.txt"
-        if not home_txt.exists():
-            try:
-                entry = fetch_site(domain, website)
-                update_site(domain, entry)
-                company = {
-                    **company,
-                    "site_status": entry.get("status"),
-                    "pricing": entry.get("pricing") or {},
-                }
-            except Exception:
-                pass
-
-    if scrape_missing and source_url:
-        source_file = ARTICLE_TEXT_DIR / f"source__{slug}.txt"
-        if not source_file.exists():
-            fetch_source_pr(source_url, slug)
 
     article_file = ARTICLE_TEXT_DIR / f"article__{slug}.txt"
     if article_file.exists():
@@ -304,11 +288,24 @@ def assemble_company_context(
     return evidence + "\n" + instructions_text
 
 
+def is_verified_record(data: Any) -> bool:
+    """True only for records whose score came from a parsed JSON block."""
+    if not isinstance(data, dict):
+        return False
+    if data.get("error"):
+        return False
+    score = data.get("score")
+    if not isinstance(score, (int, float)) or isinstance(score, bool):
+        return False
+    return isinstance(data.get("parsed"), dict) and bool(data["parsed"])
+
+
 def save_evaluation(
     company: dict[str, Any],
     result: LLMResult,
     evals_dir: Path = EVALS_DIR,
     context_chars: int = 0,
+    latency_s: float | None = None,
 ) -> Path:
     """Save one company evaluation. Error records stay on disk for diagnostics."""
     slug = company["slug"]
@@ -336,6 +333,9 @@ def save_evaluation(
         "usage": result.usage,
         "error": result.error,
         "status": "error" if result.error else "ok",
+        "parse_status": result.parse_status,
+        "truncated": result.truncated,
+        "latency_s": round(latency_s, 3) if latency_s is not None else None,
         "context_chars": context_chars,
         "evaluated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
@@ -348,10 +348,7 @@ def is_successful_eval(path: Path) -> bool:
         data = read_json(path, None)
     except (ValueError, OSError):
         return False
-    if not isinstance(data, dict):
-        return False
-    score = data.get("score")
-    return not data.get("error") and isinstance(score, (int, float))
+    return is_verified_record(data)
 
 
 def _csv_text(rows: list[dict[str, Any]]) -> str:
@@ -398,14 +395,29 @@ def aggregate_scores(
     evals_dir: Path = EVALS_DIR,
     *,
     include_errors: bool = False,
+    scored_json_path: Path | None = None,
+    scored_csv_path: Path | None = None,
+    summary_path: Path | None = None,
+    reports_dir: Path | None = None,
+    ranking_report: Path | None = None,
 ) -> tuple[list[dict[str, Any]], Path, Path]:
     """Aggregate LLM evaluations into JSON, CSV, a summary, and a ranking report.
 
-    Error records are counted and listed, never ranked as zero-quality ideas.
+    Records split three ways. Verified records carry a parsed score JSON and
+    are the only ones that rank. Unverified records have neither an error
+    flag nor a parsed score; ranking them would fabricate a signal the
+    model never gave. Error records are counted and listed, never ranked.
     """
+    scored_json_path = Path(scored_json_path) if scored_json_path else SCORED_JSON_PATH
+    scored_csv_path = Path(scored_csv_path) if scored_csv_path else SCORED_CSV_PATH
+    summary_path = Path(summary_path) if summary_path else SUMMARY_PATH
+    reports_dir = Path(reports_dir) if reports_dir else REPORTS_DIR
+    ranking_report = Path(ranking_report) if ranking_report else LLM_RANKING_REPORT
+
     files = sorted(Path(evals_dir).glob("*.json"))
     successful: list[dict[str, Any]] = []
     errored: list[dict[str, Any]] = []
+    unverified: list[dict[str, Any]] = []
     invalid: list[str] = []
 
     for path in files:
@@ -420,38 +432,55 @@ def aggregate_scores(
         if data.get("error"):
             errored.append(data)
             continue
-        score = data.get("score")
-        if not isinstance(score, (int, float)):
-            invalid.append(path.name)
+        if not is_verified_record(data):
+            unverified.append(data)
             continue
         successful.append(data)
 
-    selected = successful + errored if include_errors else successful
+    selected = successful if not include_errors else successful + errored + unverified
     selected.sort(
         key=lambda e: (e.get("score") or 0, e.get("usd_equivalent") or 0),
         reverse=True,
     )
 
-    write_json(SCORED_JSON_PATH, selected, indent=2)
-    write_text(SCORED_CSV_PATH, _csv_text(selected))
+    write_json(scored_json_path, selected, indent=2)
+    write_text(scored_csv_path, _csv_text(selected))
 
+    latencies = sorted(
+        float(item["latency_s"])
+        for item in successful
+        if isinstance(item.get("latency_s"), (int, float))
+    )
+    total_tokens = sum(
+        int((item.get("usage") or {}).get("total_tokens") or 0)
+        for item in successful
+        if isinstance((item.get("usage") or {}).get("total_tokens"), int)
+    )
+    stats = {
+        "verified_latency_avg_s": round(statistics.fmean(latencies), 3) if latencies else None,
+        "verified_latency_p95_s": latencies[(95 * len(latencies) - 1) // 100] if latencies else None,
+        "verified_total_tokens": total_tokens,
+    }
     summary = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "files": len(files),
         "successful": len(successful),
         "errored": len(errored),
+        "unverified": len(unverified),
         "invalid": invalid,
         "included": len(selected),
         "models": sorted({str(e.get("model") or "") for e in successful}),
+        **stats,
     }
-    write_json(SUMMARY_PATH, summary, indent=2)
+    write_json(summary_path, summary, indent=2)
 
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    reports_dir.mkdir(parents=True, exist_ok=True)
     lines: list[str] = [
         "# 2026 Seed-Round Agency Opportunity Rankings (LLM Evaluated)",
         "",
         f"**Evaluations on disk**: {len(files)} | "
-        f"**Successful**: {len(successful)} | **Errored**: {len(errored)}",
+        f"**Verified**: {len(successful)} | **Unverified**: {len(unverified)} | "
+        f"**Errored**: {len(errored)}",
         f"**Included in ranking**: {len(selected)}",
         f"**Generated**: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}",
         "",
@@ -470,6 +499,24 @@ def aggregate_scores(
             f"| ${item.get('usd_equivalent', 0):,.0f} | {pricing_short} "
             f"| {prior} | {verdict} |"
         )
+    if unverified:
+        lines.extend(
+            [
+                "",
+                "## Unverified evaluations (excluded from ranking)",
+                "",
+                "No parsed score JSON block; scores were never produced in a "
+                "machine-readable form. These files are re-evaluated on the next run.",
+                "",
+                "| Company | Model | Parse Status |",
+                "|---|---|---|",
+            ]
+        )
+        for item in unverified:
+            lines.append(
+                f"| {item.get('company') or item.get('slug')} "
+                f"| {item.get('model') or ''} | {item.get('parse_status') or 'unknown'} |"
+            )
     if errored:
         lines.extend(
             [
@@ -489,21 +536,26 @@ def aggregate_scores(
                 f"| {item.get('company') or item.get('slug')} "
                 f"| {item.get('model') or ''} | {error[:180]} |"
             )
-    write_text(LLM_RANKING_REPORT, "\n".join(lines) + "\n")
+    write_text(ranking_report, "\n".join(lines) + "\n")
 
-    return selected, SCORED_JSON_PATH, SCORED_CSV_PATH
+    return selected, scored_json_path, scored_csv_path
 
 
 def _evaluate_one(
     client: LLMClient,
     system_prompt: str,
     company: dict[str, Any],
-    scrape_missing: bool,
+    *,
+    max_tokens: int = 6000,
+    temperature: float = 0.2,
 ) -> tuple[LLMResult, int, float]:
     started = time.time()
     try:
-        context = assemble_company_context(company, scrape_missing=scrape_missing)
-        result = client.analyze_company(system_prompt=system_prompt, company_context=context)
+        context = assemble_company_context(company)
+        result = client.analyze_company(
+            system_prompt=system_prompt, company_context=context,
+            max_tokens=max_tokens, temperature=temperature,
+        )
         return result, len(context), time.time() - started
     except Exception as exc:
         result = LLMResult(
@@ -515,6 +567,7 @@ def _evaluate_one(
             model=client.model,
             usage={},
             error=str(exc),
+            parse_status="error",
         )
         return result, 0, time.time() - started
 
@@ -554,7 +607,10 @@ def run_llm_pipeline(
     limit: int | None = None,
     resume: bool = True,
     force: bool = False,
-    scrape_missing: bool = True,
+    max_tokens: int = 6000,
+    temperature: float = 0.2,
+    timeout: float = 120.0,
+    prefetch_sources: bool = True,
     workers: int = 1,
     retry_errors: bool = True,
 ) -> None:
@@ -569,7 +625,12 @@ def run_llm_pipeline(
         model=model,
         api_key=api_key,
         base_url=base_url,
+        timeout=timeout,
     )
+    ok, message = client.preflight()
+    print(message, flush=True)
+    if not ok:
+        raise SystemExit(message)
     print(f"Provider: {client.provider} | Model: {client.model} | Base URL: {client.base_url}")
 
     companies = get_qualifying_2026_companies(year)
@@ -584,13 +645,27 @@ def run_llm_pipeline(
         force=force,
         retry_errors=retry_errors,
     )
+    if prefetch_sources:
+
+        def _source_cached(slug: str) -> bool:
+            path = ARTICLE_TEXT_DIR / f"source__{slug}.txt"
+            return path.is_file() and bool(path.read_text(encoding="utf-8", errors="replace").strip())
+
+        missing = [
+            c for c in todo
+            if c.get("source_url") and not _source_cached(c["slug"])
+        ]
+        if missing:
+            print(f"Prefetching press releases for {len(missing)} companies...", flush=True)
+            for c in missing:
+                fetch_source_pr(c["source_url"], c["slug"])
     print(
         f"Pending evaluation: {len(todo)} "
         f"(skipped completed: {skipped}, retrying errors: {retrying}, workers: {workers})"
     )
 
     def handle(company: dict[str, Any], result: LLMResult, chars: int, elapsed: float) -> None:
-        save_evaluation(company, result, context_chars=chars)
+        save_evaluation(company, result, context_chars=chars, latency_s=elapsed)
         marker = "ERROR" if result.error else f"{result.score}/100"
         print(
             f"    -> {marker} | {result.verdict[:80]}... ({elapsed:.1f}s)",
@@ -605,13 +680,17 @@ def run_llm_pipeline(
             usd = company.get("usd_equivalent", 0)
             print(f"[{idx}/{len(todo)}] Evaluating: {name} (${usd:,.0f})...", flush=True)
             result, chars, elapsed = _evaluate_one(
-                client, system_prompt, company, scrape_missing
+                client, system_prompt, company,
+                max_tokens=max_tokens, temperature=temperature,
             )
             handle(company, result, chars, elapsed)
     else:
         with ThreadPoolExecutor(max_workers=workers) as pool:
             futures = {
-                pool.submit(_evaluate_one, client, system_prompt, company, scrape_missing): company
+                pool.submit(
+                    _evaluate_one, client, system_prompt, company,
+                    max_tokens=max_tokens, temperature=temperature,
+                ): company
                 for company in todo
             }
             for idx, future in enumerate(as_completed(futures), 1):
@@ -621,7 +700,8 @@ def run_llm_pipeline(
                     result, chars, elapsed = future.result()
                 except Exception as exc:
                     result, chars, elapsed = _evaluate_one(
-                        client, system_prompt, company, scrape_missing
+                        client, system_prompt, company,
+                        max_tokens=max_tokens, temperature=temperature,
                     )
                     print(f"    [!] worker failure for {name}: {exc}", flush=True)
                 print(
@@ -682,10 +762,22 @@ def main() -> None:
         help="Skip eval files that previously ended in an error",
     )
     parser.add_argument(
-        "--no-scrape",
-        dest="scrape_missing",
+        "--max-tokens", type=int, default=6000,
+        help="Token cap for the model completion (default: 6000)",
+    )
+    parser.add_argument(
+        "--temperature", type=float, default=0.2,
+        help="Sampling temperature (default: 0.2)",
+    )
+    parser.add_argument(
+        "--timeout", type=float, default=120.0,
+        help="HTTP timeout in seconds per attempt (default: 120)",
+    )
+    parser.add_argument(
+        "--no-prefetch-sources",
+        dest="prefetch_sources",
         action="store_false",
-        help="Do not attempt to scrape missing websites/sources",
+        help="Do not prefetch the press-release cache before evaluation",
     )
     parser.add_argument(
         "--aggregate-only",
@@ -720,7 +812,10 @@ def main() -> None:
         limit=args.limit,
         resume=args.resume,
         force=args.force,
-        scrape_missing=args.scrape_missing,
+        max_tokens=args.max_tokens,
+        temperature=args.temperature,
+        timeout=args.timeout,
+        prefetch_sources=args.prefetch_sources,
         workers=args.workers,
         retry_errors=args.retry_errors,
     )

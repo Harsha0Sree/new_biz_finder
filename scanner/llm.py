@@ -33,6 +33,10 @@ class LLMResult:
     model: str
     usage: dict[str, int] = field(default_factory=dict)
     error: str | None = None
+    # "ok" when the score came from a parsed JSON block. "unparseable" when no
+    # machine-readable score existed; those records never rank.
+    parse_status: str = "ok"
+    truncated: bool = False
 
 
 def extract_json_payload(text: str) -> dict[str, Any] | None:
@@ -74,51 +78,11 @@ def extract_json_payload(text: str) -> dict[str, Any] | None:
     return None
 
 
-def extract_fallback_score(text: str) -> int:
-    """Extract a numeric score 0-100 when JSON parsing is incomplete."""
-    if not text:
-        return 50
-
-    # 1. Look for explicit score field or statement
-    patterns = [
-        r'"score"\s*:\s*(\d{1,3})',
-        r'final\s+score\s+(?:of\s+the\s+startup\s*)?[:*–-]*\s*(\d{1,3})',
-        r'overall\s+(?:agency\s+)?score\s*[:*–-]*\s*(\d{1,3})',
-        r'agency\s+opportunity\s+score\s*[:*–-]*\s*(\d{1,3})',
-        r'\bscore\b\s*[:*–-]*\s*(\d{1,3})(?:/100)?',
-        r'\b(\d{1,3})\s*/\s*100\b',
-    ]
-    for pat in patterns:
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            try:
-                val = int(m.group(1))
-                if 0 <= val <= 100:
-                    return val
-            except ValueError:
-                pass
-
-    # 2. Heuristic check based on strong rejection / disqualification language
-    lower = text.lower()
-    if any(phrase in lower for phrase in [
-        "not a viable solo-agency opportunity",
-        "not a viable agency opportunity",
-        "does not create a viable agency opportunity",
-        "terrible agency opportunity",
-        "zero agency opportunity",
-        "disqualified",
-    ]):
-        return 15
-
-    if any(phrase in lower for phrase in [
-        "exceptional agency opportunity",
-        "strong agency opportunity",
-        "ideal agency opportunity",
-        "high potential agency opportunity",
-    ]):
-        return 85
-
-    return 50  # neutral fallback
+def _parse_score(parsed: dict[str, Any] | None) -> int | None:
+    score = (parsed or {}).get("score")
+    if isinstance(score, bool) or not isinstance(score, (int, float)):
+        return None
+    return max(0, min(100, int(score)))
 
 
 class LLMClient:
@@ -175,12 +139,55 @@ class LLMClient:
                 or DEFAULT_OLLAMA_MODEL
             )
 
+    def preflight(self) -> tuple[bool, str]:
+        """Verify the endpoint serves the configured model before a batch run.
+
+        A hard `False` means every call in the batch would fail the same way,
+        so the caller must stop instead of burning an entire run on HTTP 404s.
+        Unverifiable checks (unreachable or unusable /models) warn and proceed.
+        """
+        if self.provider == "nvidia" and not self.api_key:
+            return False, "NVIDIA_API_KEY is not set. Export it or pass --api-key."
+        headers = {"Accept": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        try:
+            with self._client_factory(self.timeout) as client:
+                resp = client.get(f"{self.base_url}/models", headers=headers)
+        except Exception as exc:
+            return True, f"preflight warning: cannot reach {self.base_url}/models ({exc}); continuing"
+        if resp.status_code == 401:
+            return False, "preflight failed: HTTP 401 unauthorized; check the API key"
+        if resp.status_code == 403:
+            return False, "preflight failed: HTTP 403 forbidden; the key lacks endpoint access"
+        if resp.status_code != 200:
+            return True, f"preflight warning: /models returned HTTP {resp.status_code}; continuing"
+        try:
+            ids = {
+                str(item.get("id"))
+                for item in (resp.json().get("data") or [])
+                if isinstance(item, dict) and item.get("id")
+            }
+        except (ValueError, AttributeError):
+            return True, "preflight warning: /models payload unparsable; continuing"
+        if not ids:
+            return True, "preflight warning: /models returned an empty list; continuing"
+        if self.model in ids or any(m.endswith(f"/{self.model}") for m in ids):
+            return True, f"preflight ok: {self.model} is served by {self.base_url}"
+        short = self.model.split("/")[-1]
+        close = sorted(m for m in ids if short and short in m)[:5]
+        examples = ", ".join(close or sorted(ids)[:5])
+        return False, (
+            f"preflight failed: model {self.model!r} not found at {self.base_url}. "
+            f"Closest available: {examples}. Fix NVIDIA_MODEL or pass --model."
+        )
+
     def analyze_company(
         self,
         system_prompt: str,
         company_context: str,
         temperature: float = 0.2,
-        max_tokens: int = 3500,
+        max_tokens: int = 6000,
     ) -> LLMResult:
         """Execute a single-turn analysis with a completely fresh context window."""
         if self.provider == "nvidia" and not self.api_key:
@@ -238,12 +245,8 @@ class LLMClient:
                         msg = choices[0].get("message", {})
                         content = (msg.get("content") or "").strip()
                         reasoning = (msg.get("reasoning_content") or "").strip()
-                        if content and len(content) > 150:
-                            raw_text = content
-                        elif reasoning:
-                            raw_text = (content + "\n\n" + reasoning).strip() if content else reasoning
-                        else:
-                            raw_text = content
+                        # Keep both channels; the score JSON may land in either.
+                        raw_text = "\n\n".join(t for t in (content, reasoning) if t)
                     usage = data.get("usage", {})
                     last_error = None
                     break
@@ -277,16 +280,39 @@ class LLMClient:
                 model=self.model,
                 usage={},
                 error=error,
+                parse_status="error",
             )
 
-        parsed = extract_json_payload(raw_text) or {}
-        score = parsed.get("score")
-        if isinstance(score, (int, float)):
-            score_int = max(0, min(100, int(score)))
-        else:
-            score_int = extract_fallback_score(raw_text)
+        completed_tokens = (usage or {}).get("completion_tokens")
+        truncated = (
+            isinstance(completed_tokens, int)
+            and not isinstance(completed_tokens, bool)
+            and completed_tokens >= max_tokens
+        )
+        parsed = extract_json_payload(raw_text)
+        score_int = _parse_score(parsed)
+        if score_int is None:
+            if truncated:
+                error = (
+                    f"LLM output hit the max_tokens cap ({max_tokens}) before emitting "
+                    "the score JSON block"
+                )
+            else:
+                error = "LLM output contained no machine-readable score JSON block"
+            return LLMResult(
+                score=0,
+                verdict=f"Analysis failed: {error}",
+                parsed=parsed or {},
+                raw_response=raw_text,
+                provider=self.provider,
+                model=self.model,
+                usage=usage,
+                error=error,
+                parse_status="unparseable",
+                truncated=truncated,
+            )
 
-        verdict = parsed.get("verdict") or ""
+        verdict = str((parsed or {}).get("verdict") or "")
         if not verdict and raw_text:
             lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
             for ln in lines:
@@ -307,10 +333,12 @@ class LLMClient:
         return LLMResult(
             score=score_int,
             verdict=verdict,
-            parsed=parsed,
+            parsed=parsed or {},
             raw_response=raw_text,
             provider=self.provider,
             model=self.model,
             usage=usage,
             error=None,
+            parse_status="ok",
+            truncated=truncated,
         )

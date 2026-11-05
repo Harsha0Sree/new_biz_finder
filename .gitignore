@@ -31,3 +31,6 @@ data/eval_batches/
 .env.*.local
 !.env.example
 
+
+# Interprocess lock files (flock companions of JSON artifacts)
+data/*.json.lock

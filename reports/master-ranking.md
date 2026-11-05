@@ -1,7 +1,7 @@
 # Master Ranking — Seed-Round Agency Opportunities
 
 **67 companies evaluated** | Tiers: A=0 (build now), B=3, C=38, D=26 (skip)
-**Generated**: 2026-10-23 11:50:14 UTC
+**Generated**: 2026-11-05 04:47:40 UTC
 
 | Rank | Company | Domain | Category | Raised (USD-eq) | Archetype | Total | Tier | One-line thesis |
 |---|---|---|---|---|---|---|---|---|

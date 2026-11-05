@@ -60,6 +60,9 @@ def compute_total(eval_data: dict) -> dict:
     expected = {str(i) for i in range(1, 53)}
     if set(cats) != expected:
         raise ValueError(f"{eval_data.get('slug')}: expected categories 1..52")
+    slug = eval_data.get("slug")
+    if not slug:
+        raise ValueError("evaluation is missing its slug")
 
     pillar_scores: dict[str, float] = {}
     for pillar_id, pillar in PILLARS.items():
@@ -82,11 +85,13 @@ def compute_total(eval_data: dict) -> dict:
     base = sum(adjusted_weights[pid] * pillar_scores[pid] for pid in PILLARS)
 
     gate_ids = [gate["gate"] for gate in eval_data.get("gates", [])]
+    if set(gate_ids) != GATE_IDS:
+        raise ValueError(
+            f"{eval_data.get('slug')}: gates must cover exactly {sorted(GATE_IDS)}, "
+            f"got {sorted(gate_ids)}"
+        )
     if len(gate_ids) != len(set(gate_ids)):
         raise ValueError(f"duplicate gate in {eval_data.get('slug')}")
-    unknown = set(gate_ids) - GATE_IDS
-    if unknown:
-        raise ValueError(f"unknown gates {sorted(unknown)} in {eval_data.get('slug')}")
 
     gate_mask = 1.0
     applied_gates = []
@@ -163,6 +168,10 @@ def main() -> None:
             continue
         try:
             evaluation = read_json(path)
+            if evaluation.get("slug") != company["slug"]:
+                raise ValueError(
+                    f"eval file slug {evaluation.get('slug')!r} does not match {company['slug']!r}"
+                )
             computed = compute_total(evaluation)
         except Exception as exc:  # schema/validation errors surface loudly
             invalid.append(f"{company['slug']}: {exc}")
@@ -185,11 +194,13 @@ def main() -> None:
         scored.append(merged)
 
     scored.sort(key=lambda item: item["total"], reverse=True)
+    duplicate_count = sum(1 for c in companies if c.get("duplicate_of_previous"))
     payload = {
         "framework_version": "v1",
         "evaluated_count": len(scored),
         "missing_count": len(missing),
         "invalid_count": len(invalid),
+        "duplicate_count": duplicate_count,
         "companies": scored,
     }
     write_json(SCORED_OUT, payload)

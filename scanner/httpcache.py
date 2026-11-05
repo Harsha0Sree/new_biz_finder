@@ -34,7 +34,8 @@ DEFAULT_HEADERS = {
     "Upgrade-Insecure-Requests": "1",
 }
 RETRY_STATUSES = frozenset({408, 425, 429, 500, 502, 503, 504})
-NO_CACHE_STATUSES = frozenset({408, 425, 429})
+# Permanent and not-yet-settled responses are never cached so growth is visible.
+NO_CACHE_STATUSES = frozenset({403, 404, 408, 410, 425, 429})
 
 _client_lock = threading.Lock()
 _shared_client: httpx.Client | None = None
@@ -74,6 +75,8 @@ def load_cached(url: str) -> Response | None:
         return None
     try:
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        if meta.get("url") != url:
+            return None
         return Response(
             url=meta["url"],
             final_url=meta.get("final_url", meta["url"]),
@@ -182,8 +185,11 @@ def fetch(
     }
     if response.status_code < 500 and response.status_code not in NO_CACHE_STATUSES:
         meta_path, body_path = _paths(url)
-        write_json(meta_path, meta)
+        # Body first, then the meta that points at it. A reader either sees a
+        # matching fresh pair or no meta at all; it never sees meta for a
+        # body that has not landed yet.
         write_bytes(body_path, response.content)
+        write_json(meta_path, meta)
 
     return Response(
         url=url,

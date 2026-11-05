@@ -3,6 +3,7 @@
  "evaluated_count": 67,
  "missing_count": 483,
  "invalid_count": 0,
+ "duplicate_count": 6,
  "companies": [
   {
    "slug": "decagon-raises-35-million-in-funding",

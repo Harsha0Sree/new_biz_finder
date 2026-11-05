@@ -1,12 +1,15 @@
 {
-  "generated_at": "2026-10-23T12:16:20Z",
+  "generated_at": "2026-11-05T05:14:26Z",
   "files": 52,
-  "successful": 5,
+  "successful": 1,
   "errored": 47,
+  "unverified": 4,
   "invalid": [],
-  "included": 5,
+  "included": 1,
   "models": [
-    "openai/gpt-oss-20b",
-    "z-ai/glm-5.3-flash"
-  ]
+    "openai/gpt-oss-20b"
+  ],
+  "verified_latency_avg_s": null,
+  "verified_latency_p95_s": null,
+  "verified_total_tokens": 7870
 }

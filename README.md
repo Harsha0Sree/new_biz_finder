@@ -9,10 +9,12 @@ The repository produces **two independent evaluation passes**:
 | Pass | Input | What it is | Current records |
 |---|---|---|---|
 | **Deep evaluation** | `data/evals/*.json` | 52-category deterministic framework (Builder/Seller/Buyer/Risk), hard gates G1–G5, six archetypes | 67 completed |
-| **LLM quick pass** | `data/llm_evals/*.json` | Fast single-score second opinion from an LLM with isolated, bounded evidence | 52 files: 5 successful, 47 errored |
+| **LLM quick pass** | `data/llm_evals/*.json` | Fast single-score second opinion from an LLM with isolated, bounded evidence | 52 files: 1 verified, 4 unverified, 47 errored |
 
-Errored LLM evaluations stay on disk for diagnostics, are omitted from
-rankings, and are retried by default on the next run.
+Only records with a parsed score JSON block rank. A record without one is
+listed as **unverified** and re-evaluated on the next run; it never counts
+as a score. Errored LLM evaluations stay on disk for diagnostics, are
+omitted from rankings, and are retried by default on the next run.
 
 ---
 
@@ -62,8 +64,12 @@ As of the latest committed artifacts:
 - **Sites**: 548 records (488 `ok`, 28 `js_only`, 32 `dead`).
 - **Rejected after article verification**: 15 (below threshold, unknown round, etc.).
 - **Deep evaluations**: 67, with `data/scored.json` and per-company reports.
-- **LLM evaluations**: 52 files; 5 successful, 47 errored/retryable.
+- **LLM evaluations**: 52 files; 1 verified, 4 unverified, 47 errored/retryable.
 - **2026 selection**: 210 unique companies by real funding date.
+- **Note on past LLM runs**: evaluations written before the scoring fix used a
+  heuristic fallback that recorded a fabricated `50/100` on unparseable output.
+  Those records are now excluded from the ranking as unverified and will be
+  re-evaluated on the next run.
 
 Numbers move as the archive grows; the validator and report headers always show
 the current counts.
@@ -131,8 +137,8 @@ and writes `data/scored.json`, `data/scores.csv`, and `reports/*.md`.
 - Requests are throttled per host. Site and LLM work can run concurrently
   (`--site-workers`, `--llm-workers`), with independent hosts progressing in
   parallel.
-- LLM evaluation resumes by slug. Existing successes are skipped; errored files
-  are retried unless `--no-retry-errors` is set.
+- LLM evaluation resumes by slug. Existing verified records are skipped;
+  errored or unverified files are retried unless `--no-retry-errors` is set.
 - Scraped article/site text is wrapped in `<untrusted_web_content>` and the
   prompt explicitly tells the model to ignore instructions embedded in it.
 
@@ -241,8 +247,14 @@ EVAL_YEAR=2026
 uv run python -m scanner.llm_analyzer --provider nvidia --model openai/gpt-oss-20b
 ```
 
-A `404` usually means the configured model ID is not available on that endpoint;
-check the model name before retrying a batch.
+The pipeline runs a **preflight** before any evaluation: it queries
+`/v1/models`, confirms the configured model is served, and stops with the
+closest available model names when it is not. A `404` during preflight means
+the model ID is not available on that endpoint.
+
+`openai/gpt-oss-20b` is confirmed to work on a free-tier key. Note that
+`z-ai/glm-5.3-flash` returned HTTP 404 for every call and no evaluation from
+it could complete; do not point the pipeline at it.
 
 ### Ollama
 
@@ -364,13 +376,19 @@ the evaluation file, and writes `data/scored.json` + `data/scores.csv`.
 | `--no-retry-errors` | off | Skip previously errored LLM evaluations |
 | `--aggregate-only` | off | Rebuild rankings without LLM calls |
 | `--include-errors` | off | Include error records in aggregate output (diagnostics only) |
+| `--max-tokens` | `6000` | Token cap for the LLM completion |
+| `--temperature` | `0.2` | Sampling temperature |
+| `--timeout` | `120.0` | HTTP timeout in seconds per attempt |
 
 ### `scanner.llm_analyzer`
 
 Same core LLM flags as above (`--provider`, `--model`, `--api-key`,
 `--base-url`, `--prompt-file`, `--year`, `--limit`, `--force`, `--no-resume`,
-`--no-scrape`, `--workers`, `--no-retry-errors`, `--aggregate-only`,
-`--include-errors`).
+`--workers`, `--no-retry-errors`, `--aggregate-only`, `--include-errors`,
+`--max-tokens`, `--temperature`, `--timeout`, `--no-prefetch-sources`).
+
+The LLM pipeline prefetches the press-release cache before evaluation so
+workers only read from disk; pass `--no-prefetch-sources` to skip that.
 
 ### `scanner.fetch_sites`
 
@@ -424,7 +442,7 @@ links, and fetch-error volume. Exit code is non-zero on errors.
 ### Tests and lint
 
 ```bash
-uv run pytest -q                 # 82 tests
+uv run pytest -q                 # 88 tests
 uv run ruff check .
 make check                       # lint + tests + artifact validation
 ```
@@ -432,7 +450,8 @@ make check                       # lint + tests + artifact validation
 The suite covers amount parsing (billion/trillion/crore/lakh), inclusive
 threshold behavior, Funding Details variants, retry/cache semantics, atomic
 storage, site-pricing enrichment, prompt-injection isolation, date precedence,
-errored-eval retry/aggregation, report links, and validator corruption cases.
+errored-eval retry/aggregation, report links, validator corruption cases, and
+the 404-must-not-be-cached rule that keeps the archive probe honest.
 
 ---
 
@@ -443,6 +462,10 @@ errored-eval retry/aggregation, report links, and validator corruption cases.
 - Some sites are JS-only or bot-blocked; those companies are scored from article
   evidence with lower confidence.
 - The LLM quick pass requires a working provider/model. The committed 47 errored
-  records are retryable diagnostics, not scores.
+  records and 4 unverified records are retryable diagnostics, not scores; only
+  records with a parsed score JSON block are ranked.
 - Deep evaluations are expensive; the pass is resumable by file existence and
   `scanner.compute` validates every record before ranking.
+- Incremental index crawl re-scans from page 1 and stops after two pages with
+  no unseen slugs; articles backfilled deep in the archive require
+  `uv run python -m scanner.crawl_index --refetch`.
