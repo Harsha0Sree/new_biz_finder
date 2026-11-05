@@ -18,10 +18,11 @@ numbers.
 - `data/evals/<slug>.json`: 67 completed deep evaluations.
 - `data/scored.json`: 67 evaluated, 483 unique companies still missing,
   0 invalid.
-- `data/llm_evals/<slug>.json`: 52 LLM quick-pass records (5 successful,
-  47 errored and retryable).
-- `data/llm_scored.json`: 5 successful LLM evaluations, ranked.
-- `data/llm_eval_summary.json`: counts, models, invalid file list.
+- `data/llm_evals/<slug>.json`: 52 LLM quick-pass records (1 verified,
+  4 unverified, 47 errored; only verified records are ranked).
+- `data/llm_scored.json`: 1 verified LLM evaluation, ranked.
+- `data/llm_eval_summary.json`: counts, models, invalid file list,
+  verified-latency/token stats.
 - `reports/`: 67 per-company reports, `master-ranking.md`, `index.md`, and
   `llm_opportunity_ranking.md`.
 
@@ -29,7 +30,7 @@ numbers.
 
 ```bash
 uv run python -m scanner.validate          # artifact gate; non-zero on errors
-uv run pytest -q                           # 82 tests
+uv run pytest -q                           # 88 tests
 uv run ruff check .                        # lint
 make check                                 # lint + tests + validation
 ```
@@ -83,16 +84,25 @@ Useful flags:
 - `--force`: re-evaluate successes too.
 - `--no-resume`: do not skip existing files.
 - `--aggregate-only`: rebuild rankings without API calls.
-- `--include-errors`: include error records in aggregate output for
-  diagnostics only.
+- `--include-errors`: write `llm_scored_with_errors.json` (diagnostics
+  only); the ranked artifacts are left untouched.
 
 The current 47 errors are mostly HTTP 404 (invalid/unavailable model endpoint)
-and timeouts. Check the configured provider/model and key before retrying a
-large batch:
+and timeouts. The pipeline now preflights the endpoint (`/v1/models` plus a
+one-token chat probe) and stops before burning a batch when the endpoint
+cannot answer. Measured on the free NVIDIA endpoint: `openai/gpt-oss-20b`
+passes preflight (model listed, key accepted) but every chat completion call
+timed out (45s probe and 600s x 3 batch attempts), so no live evaluation
+completes there right now. Check whether your key reaches a chat completion
+before retrying a large batch:
 
 ```bash
 uv run python -m scanner.llm_analyzer --provider nvidia --model <available-model> --limit 1
 ```
+
+Only records with a parsed score JSON block rank. The 4 pre-fix "successful"
+records (fallback-derived scores 45/47/15/0) are listed as unverified and are
+re-evaluated on the next run; they were never honestly scored.
 
 ## Documented decisions and deviations
 

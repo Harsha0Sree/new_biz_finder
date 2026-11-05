@@ -131,9 +131,10 @@ and writes `data/scored.json`, `data/scores.csv`, and `reports/*.md`.
   so commands work from any directory.
 - JSON, CSV, and text writes are atomic (`scanner/storage.py`), preventing a
   truncated artifact if a long run is interrupted.
-- HTTP responses are cached on disk. Successful responses and permanent errors
-  are cached; transient failures (408/425/429/5xx) are retried and **not**
-  cached, so a later run can recover.
+- HTTP responses are cached on disk. 2xx, 3xx, and 4xx responses other
+  than 403/404/408/410/425/429 are cached; transient failures and negative
+  results are retried and **not** cached, so a later run can recover and a
+  growing archive is never blocked by a stale 404.
 - Requests are throttled per host. Site and LLM work can run concurrently
   (`--site-workers`, `--llm-workers`), with independent hosts progressing in
   parallel.
@@ -248,13 +249,19 @@ uv run python -m scanner.llm_analyzer --provider nvidia --model openai/gpt-oss-2
 ```
 
 The pipeline runs a **preflight** before any evaluation: it queries
-`/v1/models`, confirms the configured model is served, and stops with the
-closest available model names when it is not. A `404` during preflight means
-the model ID is not available on that endpoint.
+`/v1/models`, confirms the configured model is listed, and then sends a
+one-token chat probe to confirm completions actually return. It stops
+before burning a batch when either check fails; pass `--skip-preflight` to
+run anyway. A `404` from `/models` is a hard failure and means the base
+URL or provider is wrong, not merely that the model ID is unavailable.
 
-`openai/gpt-oss-20b` is confirmed to work on a free-tier key. Note that
-`z-ai/glm-5.3-flash` returned HTTP 404 for every call and no evaluation from
-it could complete; do not point the pipeline at it.
+Measured on a free-tier key: `openai/gpt-oss-20b` passes both preflights,
+but every chat completion timed out (a trivial 16-token probe at 45s and
+a full evaluation at 600s × 3 attempts), so no live evaluation completes
+on that endpoint right now. `z-ai/glm-5.3-flash` returned HTTP 404 for
+every call and is not servable there; do not point the pipeline at it.
+The preflight exists to make those failures cheap instead of a wasted
+batch.
 
 ### Ollama
 
@@ -282,8 +289,10 @@ uv run python -m scanner.crawl_index --refetch   # force fresh pages
 ```
 
 Crawls `/tag/seed-round/` and `/tag/pre-seed/`, discovers the last page, and
-writes `data/articles_index.json`. Existing cache is reused unless `--refetch`
-is passed. In `main.py`, use `--refetch-index`.
+writes `data/articles_index.json`. Incremental mode always re-downloads the
+head pages (the ones carrying new posts) and stops after two consecutive
+pages yield no unseen slugs; articles backfilled deep in the past only
+surface with `--refetch`. In `main.py`, use `--refetch-index`.
 
 ### 2. Filter qualifying rounds
 
@@ -375,17 +384,19 @@ the evaluation file, and writes `data/scored.json` + `data/scores.csv`.
 | `--no-resume` | off | Do not skip existing eval files |
 | `--no-retry-errors` | off | Skip previously errored LLM evaluations |
 | `--aggregate-only` | off | Rebuild rankings without LLM calls |
-| `--include-errors` | off | Include error records in aggregate output (diagnostics only) |
+| `--include-errors` | off | Write `llm_scored_with_errors.json` (diagnostics only); ranked artifacts untouched |
 | `--max-tokens` | `6000` | Token cap for the LLM completion |
 | `--temperature` | `0.2` | Sampling temperature |
 | `--timeout` | `120.0` | HTTP timeout in seconds per attempt |
+| `--skip-preflight` | off | Skip the endpoint preflight (/v1/models + one-token chat probe) |
 
 ### `scanner.llm_analyzer`
 
 Same core LLM flags as above (`--provider`, `--model`, `--api-key`,
 `--base-url`, `--prompt-file`, `--year`, `--limit`, `--force`, `--no-resume`,
 `--workers`, `--no-retry-errors`, `--aggregate-only`, `--include-errors`,
-`--max-tokens`, `--temperature`, `--timeout`, `--no-prefetch-sources`).
+`--max-tokens`, `--temperature`, `--timeout`, `--skip-preflight`,
+`--no-prefetch-sources`).
 
 The LLM pipeline prefetches the press-release cache before evaluation so
 workers only read from disk; pass `--no-prefetch-sources` to skip that.
@@ -426,7 +437,8 @@ the deep evaluation and its scores are not merged into `scored.json`.
 - `data/cache/text/article__<slug>.txt`: cleaned funding articles.
 - `data/cache/text/site__<domain>__*.txt`: cleaned site pages.
 - Delete a specific cache entry (or pass `--refetch`) to force a re-fetch.
-- Transient HTTP failures are never cached.
+- Transient HTTP failures and 403/404/410 are never cached; entries written
+  before that rule shipped are treated as misses.
 
 ### Validation gate
 
@@ -434,9 +446,12 @@ the deep evaluation and its scores are not merged into `scored.json`.
 uv run python -m scanner.validate
 ```
 
-Checks article counts/slugs, qualifying amounts and deferred valuation cases,
-company uniqueness and round provenance, site statuses/pricing shapes, deep
-eval schema and gate coverage, LLM eval status/ranking consistency, report
+Checks article counts/slugs (including an allowlist on every slug),
+qualifying amounts and deferred valuation cases, company uniqueness and
+round provenance, site statuses/pricing shapes plus presence of a record
+per domain, deep eval schema and gate coverage (the scored artifacts are
+recomputed from the eval files and compared), LLM eval records against
+the ranked file field-by-field, the LLM summary against disk, report
 links, and fetch-error volume. Exit code is non-zero on errors.
 
 ### Tests and lint
@@ -466,6 +481,6 @@ the 404-must-not-be-cached rule that keeps the archive probe honest.
   records with a parsed score JSON block are ranked.
 - Deep evaluations are expensive; the pass is resumable by file existence and
   `scanner.compute` validates every record before ranking.
-- Incremental index crawl re-scans from page 1 and stops after two pages with
-  no unseen slugs; articles backfilled deep in the archive require
-  `uv run python -m scanner.crawl_index --refetch`.
+- **Incremental index crawl** re-downloads the head pages each run and
+  stops after two pages with no unseen slugs; articles backfilled deep in
+  the archive require `uv run python -m scanner.crawl_index --refetch`.

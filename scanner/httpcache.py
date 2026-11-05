@@ -77,6 +77,9 @@ def load_cached(url: str) -> Response | None:
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
         if meta.get("url") != url:
             return None
+        # Entries cached before negative results were excluded must not serve.
+        if meta.get("status") in NO_CACHE_STATUSES:
+            return None
         return Response(
             url=meta["url"],
             final_url=meta.get("final_url", meta["url"]),
@@ -143,7 +146,12 @@ def fetch(
     headers: dict[str, str] | None = None,
     force_refetch: bool = False,
 ) -> Response:
-    """Fetch url with a disk cache. Successful and permanent errors are cached."""
+    """Fetch url with a disk cache. Only cacheable statuses are persisted.
+
+    2xx, 3xx, and 4xx responses other than 403/404/408/410/425/429 are
+    cached. Everything else is re-requested: network failures, 5xx, and
+    the excluded negative/transient statuses.
+    """
     if not force_refetch:
         cached = load_cached(url)
         if cached is not None:

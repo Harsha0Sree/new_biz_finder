@@ -40,49 +40,103 @@ class LLMResult:
 
 
 def extract_json_payload(text: str) -> dict[str, Any] | None:
-    """Extract and parse JSON from LLM response (handling markdown fences and preamble)."""
+    """Return the last schema-complete JSON object in the model's output.
+
+    Candidates are tried in reverse order of appearance (the outermost
+    brace span first, then fenced blocks from last to first, then a
+    direct parse). An earlier block that happens to match the schema
+    is accepted only because it is the last one that does; a block
+    missing the six-key contract is ignored even when it carries a
+    score, so an echoed injection block cannot stand in for the
+    model's own answer.
+    """
     text = text.strip()
     if not text:
         return None
 
-    # Try direct parse
+    candidates: list[dict[str, Any]] = []
+
     try:
         data = json.loads(text)
         if isinstance(data, dict):
-            return data
+            candidates.append(data)
     except json.JSONDecodeError:
         pass
 
-    # Try extracting from ```json ... ``` or ``` ... ```
-    m = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text, re.DOTALL)
-    if m:
+    for m in re.finditer(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text):
         try:
             data = json.loads(m.group(1))
-            if isinstance(data, dict):
-                return data
         except json.JSONDecodeError:
-            pass
+            continue
+        if isinstance(data, dict):
+            candidates.append(data)
 
-    # Try finding outermost { ... }
     first_brace = text.find("{")
     last_brace = text.rfind("}")
     if first_brace != -1 and last_brace > first_brace:
-        candidate = text[first_brace : last_brace + 1]
         try:
-            data = json.loads(candidate)
+            data = json.loads(text[first_brace : last_brace + 1])
             if isinstance(data, dict):
-                return data
+                candidates.append(data)
         except json.JSONDecodeError:
             pass
 
+    for candidate in reversed(candidates):
+        if schema_valid_score(candidate) is not None:
+            return candidate
     return None
 
 
-def _parse_score(parsed: dict[str, Any] | None) -> int | None:
-    score = (parsed or {}).get("score")
+_SCHEMA_KEYS = (
+    "score",
+    "verdict",
+    "can_reproduce_48h",
+    "agency_tier",
+    "primary_risk",
+    "target_service_offer",
+)
+
+
+def schema_valid_score(parsed: dict[str, Any] | None) -> int | None:
+    """Validate the six-key output contract; return the int score or None."""
+    if not isinstance(parsed, dict):
+        return None
+    for key in _SCHEMA_KEYS:
+        if key not in parsed:
+            return None
+    score = parsed["score"]
     if isinstance(score, bool) or not isinstance(score, (int, float)):
         return None
-    return max(0, min(100, int(score)))
+    if not 0 <= score <= 100:
+        return None
+    if not isinstance(parsed["verdict"], str):
+        return None
+    if not isinstance(parsed["can_reproduce_48h"], bool):
+        return None
+    for key in ("agency_tier", "primary_risk", "target_service_offer"):
+        if not isinstance(parsed[key], str):
+            return None
+    return int(score)
+
+
+def is_verified_record(data: Any) -> bool:
+    """True only for records whose score came from a parsed score JSON.
+
+    The stored score must agree with the parsed score, both must be
+    in-range numbers, and the parsed block must satisfy the six-key
+    schema. Records without a parsed score are diagnostics, not scores.
+    """
+    if not isinstance(data, dict) or data.get("error"):
+        return False
+    parsed_score = schema_valid_score(data.get("parsed"))
+    if parsed_score is None:
+        return False
+    stored = data.get("score")
+    if isinstance(stored, bool) or not isinstance(stored, (int, float)):
+        return False
+    if not 0 <= stored <= 100:
+        return False
+    return int(stored) == parsed_score
 
 
 class LLMClient:
@@ -139,12 +193,14 @@ class LLMClient:
                 or DEFAULT_OLLAMA_MODEL
             )
 
-    def preflight(self) -> tuple[bool, str]:
+    def preflight(self, *, probe_chat: bool = True) -> tuple[bool, str]:
         """Verify the endpoint serves the configured model before a batch run.
 
-        A hard `False` means every call in the batch would fail the same way,
-        so the caller must stop instead of burning an entire run on HTTP 404s.
-        Unverifiable checks (unreachable or unusable /models) warn and proceed.
+        `False` means every call in the batch would fail the same way, so the
+        caller must stop instead of burning an entire run. The /models listing
+        confirms availability; a one-token chat probe confirms completions
+        actually stream back, which is what the 404/timeout failures lacked.
+        Transport blips on /models warn and proceed.
         """
         if self.provider == "nvidia" and not self.api_key:
             return False, "NVIDIA_API_KEY is not set. Export it or pass --api-key."
@@ -160,6 +216,11 @@ class LLMClient:
             return False, "preflight failed: HTTP 401 unauthorized; check the API key"
         if resp.status_code == 403:
             return False, "preflight failed: HTTP 403 forbidden; the key lacks endpoint access"
+        if resp.status_code in (404, 405):
+            return False, (
+                f"preflight failed: HTTP {resp.status_code} at {self.base_url}/models; "
+                "the base URL or provider is wrong"
+            )
         if resp.status_code != 200:
             return True, f"preflight warning: /models returned HTTP {resp.status_code}; continuing"
         try:
@@ -171,9 +232,12 @@ class LLMClient:
         except (ValueError, AttributeError):
             return True, "preflight warning: /models payload unparsable; continuing"
         if not ids:
-            return True, "preflight warning: /models returned an empty list; continuing"
+            return False, f"preflight failed: /models at {self.base_url} lists no models"
         if self.model in ids or any(m.endswith(f"/{self.model}") for m in ids):
-            return True, f"preflight ok: {self.model} is served by {self.base_url}"
+            listed = f"preflight ok: {self.model} is served by {self.base_url}"
+            if not probe_chat:
+                return True, listed + " (chat probe skipped)"
+            return self._probe_chat(listed)
         short = self.model.split("/")[-1]
         close = sorted(m for m in ids if short and short in m)[:5]
         examples = ", ".join(close or sorted(ids)[:5])
@@ -181,6 +245,42 @@ class LLMClient:
             f"preflight failed: model {self.model!r} not found at {self.base_url}. "
             f"Closest available: {examples}. Fix NVIDIA_MODEL or pass --model."
         )
+
+    def _probe_chat(self, listed: str) -> tuple[bool, str]:
+        endpoint = f"{self.base_url}/chat/completions"
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        payload = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": "Reply with exactly: OK"}],
+            "temperature": 0,
+            "max_tokens": 4,
+        }
+        try:
+            with self._client_factory(min(self.timeout, 60.0)) as client:
+                resp = client.post(endpoint, headers=headers, json=payload)
+        except Exception as exc:
+            return False, (
+                f"preflight failed: chat probe could not connect ({exc}); every evaluation "
+                "would fail. Fix the endpoint or pass --skip-preflight."
+            )
+        if resp.status_code != 200:
+            return False, (
+                f"preflight failed: chat probe returned HTTP {resp.status_code}; every "
+                "evaluation would fail. Fix the model/endpoint or pass --skip-preflight."
+            )
+        try:
+            message = (resp.json().get("choices") or [{}])[0].get("message") or {}
+            text = (message.get("content") or message.get("reasoning_content") or "").strip()
+        except (ValueError, IndexError, AttributeError, TypeError):
+            text = ""
+        if not text:
+            return False, (
+                "preflight failed: chat probe returned an empty completion; every "
+                "evaluation would fail. Pass --skip-preflight to run anyway."
+            )
+        return True, f"{listed}; chat probe answered"
 
     def analyze_company(
         self,
@@ -290,7 +390,7 @@ class LLMClient:
             and completed_tokens >= max_tokens
         )
         parsed = extract_json_payload(raw_text)
-        score_int = _parse_score(parsed)
+        score_int = schema_valid_score(parsed)
         if score_int is None:
             if truncated:
                 error = (
@@ -298,7 +398,7 @@ class LLMClient:
                     "the score JSON block"
                 )
             else:
-                error = "LLM output contained no machine-readable score JSON block"
+                error = "LLM output contained no schema-complete score JSON block"
             return LLMResult(
                 score=0,
                 verdict=f"Analysis failed: {error}",

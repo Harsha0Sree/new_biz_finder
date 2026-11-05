@@ -170,7 +170,15 @@ def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
                 "provider": "nvidia",
                 "model": "m",
                 "score": 80,
-                "parsed": {"score": 80},
+                "verdict": "test verdict",
+                "parsed": {
+                    "score": 80,
+                    "verdict": "test verdict",
+                    "can_reproduce_48h": True,
+                    "agency_tier": "Tier 2",
+                    "primary_risk": "risk",
+                    "target_service_offer": "offer",
+                },
                 "status": "ok",
             }
         ),
@@ -196,7 +204,20 @@ def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
     assert any("1 errored records" in warning for warning in report.warnings)
 
     report = _report()
-    validate.validate_llm_evals([{"slug": "ok"}], evals, report)
+    validate.validate_llm_evals(
+        [
+            {
+                "slug": "ok",
+                "score": 80,
+                "model": "m",
+                "provider": "nvidia",
+                "verdict": "test verdict",
+                "usd_equivalent": 10_000_000.0,
+            }
+        ],
+        evals,
+        report,
+    )
     assert report.errors == []
 
 

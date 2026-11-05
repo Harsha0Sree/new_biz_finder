@@ -34,3 +34,11 @@ data/eval_batches/
 
 # Interprocess lock files (flock companions of JSON artifacts)
 data/*.json.lock
+
+# Workspace artifacts kept out of the repo
+.agents/
+cloned_skills/
+frontends/
+on
+data/producthunt_2026.html
+scripts/verify_atomic_studios.py

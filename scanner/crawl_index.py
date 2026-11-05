@@ -1,9 +1,9 @@
 """Step 1: crawl /tag/seed-round/ and /tag/pre-seed/ index pages.
 
-Writes `data/articles_index.json`. Incremental mode re-scans from page 1 and
-stops after two consecutive pages yield no unseen slugs; it draws from the
-HTTP cache rather than re-downloading known pages. Articles backfilled deep
-in the past only surface via `--refetch`.
+Writes `data/articles_index.json`. Incremental mode re-downloads the head of
+each tag archive (the pages with new posts) and stops after two consecutive
+pages yield no unseen slugs. Articles backfilled deep in the past only
+surface via `--refetch`.
 """
 
 from __future__ import annotations
@@ -146,7 +146,8 @@ def crawl_incremental(existing_payload: dict) -> dict:
         while page <= MAX_PAGES:
             url = page_url(base, page)
             try:
-                resp = fetch(url)
+                # Tag pages are mutable; the cache alone would freeze the head.
+                resp = fetch(url, force_refetch=True)
             except ConnectionError as exc:
                 errors.append(f"incremental {tag_name} page {page}: {exc}")
                 break

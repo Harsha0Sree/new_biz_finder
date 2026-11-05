@@ -16,7 +16,8 @@ from pathlib import Path
 from typing import Any
 
 from scanner.amounts import THRESHOLD_USD, parse_round
-from scanner.compute import ARCHETYPES, GATE_IDS
+from scanner.compute import ARCHETYPES, GATE_IDS, compute_total
+from scanner.llm import is_verified_record
 from scanner.paths import ROOT
 from scanner.storage import read_json
 
@@ -24,6 +25,7 @@ CONFIDENCE_LEVELS = {"high", "medium", "low"}
 SITE_STATUSES = {"ok", "js_only", "dead", "dead_parked", "error"}
 AGENCY_PLAY_KEYS = ("build_scope", "packaging", "pricing", "first_clients")
 LOCAL_LINK_RE = re.compile(r"\]\(([^)#]+\.md)\)")
+SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,199}$")
 
 
 @dataclass
@@ -58,16 +60,6 @@ def _as_list(payload: Any) -> list[Any]:
     return payload if isinstance(payload, list) else []
 
 
-def _verified_llm_record(record: dict[str, Any]) -> bool:
-    """Mirror of the aggregation rule: no error flag and a parsed score block."""
-    if record.get("error"):
-        return False
-    score = record.get("score")
-    if not isinstance(score, (int, float)) or isinstance(score, bool) or not 0 <= score <= 100:
-        return False
-    return isinstance(record.get("parsed"), dict) and bool(record["parsed"])
-
-
 def validate_articles(payload: Any, report: Report) -> list[dict[str, Any]]:
     if not isinstance(payload, dict):
         report.error("articles_index.json: expected an object")
@@ -88,6 +80,8 @@ def validate_articles(payload: Any, report: Report) -> list[dict[str, Any]]:
         if not slug:
             report.error(f"articles_index.json: article {index} has no slug")
             continue
+        if not isinstance(slug, str) or not SLUG_RE.match(slug):
+            report.error(f"articles_index.json: unsafe slug {slug!r}")
         if slug in seen:
             report.error(f"articles_index.json: duplicate slug {slug}")
         seen.add(slug)
@@ -171,6 +165,8 @@ def validate_companies(payload: Any, qualifying_count: int, report: Report) -> l
         if not slug:
             report.error(f"companies.json: entry {index} has no slug")
             continue
+        if not isinstance(slug, str) or not SLUG_RE.match(slug):
+            report.error(f"companies.json: unsafe slug {slug!r}")
         if slug in seen_slugs:
             report.error(f"companies.json: duplicate slug {slug}")
         seen_slugs.add(slug)
@@ -202,7 +198,7 @@ def validate_companies(payload: Any, qualifying_count: int, report: Report) -> l
             report.error(f"companies.json: {slug} has website but no domain")
         key = (str(company.get("normalized_name") or ""), str(domain or ""))
         if key in seen_keys and not company.get("duplicate_of_previous"):
-            report.warn(f"companies.json: {slug} repeats company/domain key {key}")
+            report.error(f"companies.json: {slug} repeats company/domain key {key}")
         seen_keys.add(key)
     return unique
 
@@ -234,7 +230,7 @@ def validate_sites(payload: Any, companies: list[dict[str, Any]], report: Report
         if c.get("domain") and c.get("domain") not in sites
     ]
     if missing:
-        report.warn(
+        report.error(
             f"sites.json: {len(missing)} company domains have no site record "
             f"(e.g. {', '.join(map(str, missing[:5]))})"
         )
@@ -257,6 +253,11 @@ def validate_eval_record(record: Any, name: str, report: Report) -> None:
             report.error(f"evals/{name}: missing key {key}")
     if record.get("archetype") not in ARCHETYPES:
         report.error(f"evals/{name}: bad archetype {record.get('archetype')!r}")
+    slug_val = record.get("slug")
+    if slug_val is not None and (
+        not isinstance(slug_val, str) or not SLUG_RE.match(slug_val)
+    ):
+        report.error(f"evals/{name}: unsafe slug {slug_val!r}")
     if record.get("confidence") not in CONFIDENCE_LEVELS:
         report.error(f"evals/{name}: bad confidence {record.get('confidence')!r}")
     gates = record.get("gates")
@@ -312,9 +313,42 @@ def validate_deep_evals(evals_dir: Path, report: Report) -> dict[str, dict[str, 
             continue
         validate_eval_record(record, path.name, report)
         if record.get("slug") and record["slug"] != path.stem:
-            report.warn(f"evals/{path.name}: slug {record['slug']} does not match filename")
+            report.error(f"evals/{path.name}: slug {record['slug']} does not match filename")
         records[path.stem] = record
     return records
+
+
+def _verify_scored_against_eval(
+    item: Any, record: dict[str, Any], report: Report
+) -> None:
+    slug = record.get("slug")
+    try:
+        recomputed = compute_total(record)
+    except Exception as exc:
+        report.error(f"scored.json: {slug} could not be recomputed: {exc}")
+        return
+
+    def close(got: Any, want: float, tol: float) -> bool:
+        return isinstance(got, (int, float)) and not isinstance(got, bool) and abs(got - want) <= tol
+
+    for key in ("total", "gate_mask"):
+        if not close(item.get(key), recomputed[key], 1e-6):
+            report.error(
+                f"scored.json: {slug} {key}={item.get(key)} != recomputed {recomputed[key]}"
+            )
+    if item.get("tier") != recomputed["tier"]:
+        report.error(
+            f"scored.json: {slug} tier {item.get('tier')} != recomputed {recomputed['tier']}"
+        )
+    if sorted(item.get("applied_gates") or []) != sorted(recomputed["applied_gates"]):
+        report.error(f"scored.json: {slug} applied_gates != recomputed")
+    got_pillars = item.get("pillar_scores_0_10") or {}
+    for pillar_id, want in recomputed["pillar_scores_0_10"].items():
+        got = got_pillars.get(pillar_id)
+        if not close(got, want, 1e-3):
+            report.error(
+                f"scored.json: {slug} pillar {pillar_id}={got} != recomputed {want}"
+            )
 
 
 def validate_scored(payload: Any, companies: list[dict[str, Any]], evals: dict, report: Report) -> None:
@@ -354,13 +388,22 @@ def validate_scored(payload: Any, companies: list[dict[str, Any]], evals: dict, 
         if not isinstance(item, dict):
             report.error("scored.json: company entry is not an object")
             continue
+        slug = item.get("slug")
         if not isinstance(item.get("total"), (int, float)):
-            report.error(f"scored.json: {item.get('slug')} has no numeric total")
+            report.error(f"scored.json: {slug} has no numeric total")
         if item.get("tier") not in {"A", "B", "C", "D"}:
-            report.error(f"scored.json: {item.get('slug')} has bad tier {item.get('tier')!r}")
+            report.error(f"scored.json: {slug} has bad tier {item.get('tier')!r}")
+        record = evals.get(slug) if isinstance(slug, str) else None
+        if record:
+            _verify_scored_against_eval(item, record, report)
 
 
-def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
+def validate_llm_evals(
+    payload: Any,
+    evals_dir: Path,
+    report: Report,
+    summary_path: Path | None = None,
+) -> None:
     if not isinstance(payload, list):
         report.error("llm_scored.json: expected a list")
         return
@@ -369,15 +412,28 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
     successful: set[str] = set()
     errored: set[str] = set()
     unverified: set[str] = set()
+    eval_records: dict[str, dict[str, Any]] = {}
+    invalid: list[str] = []
+    file_count = 0
     if evals_dir.exists():
         for path in sorted(evals_dir.glob("*.json")):
+            file_count += 1
             record = _load(path, report, f"llm_evals/{path.name}")
             if not isinstance(record, dict):
+                invalid.append(path.name)
                 continue
             for key in ("slug", "company", "provider", "model", "score"):
                 if record.get(key) in (None, ""):
                     report.error(f"llm_evals/{path.name}: missing {key}")
-            if _verified_llm_record(record):
+            slug_val = record.get("slug")
+            if slug_val is not None and (
+                not isinstance(slug_val, str) or not SLUG_RE.match(slug_val)
+            ):
+                report.error(f"llm_evals/{path.name}: unsafe slug {slug_val!r}")
+            if isinstance(slug_val, str) and slug_val != path.stem:
+                report.error(f"llm_evals/{path.name}: slug {slug_val} does not match filename")
+            eval_records[path.stem] = record
+            if is_verified_record(record):
                 successful.add(path.stem)
                 continue
             if record.get("error"):
@@ -394,6 +450,22 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
     for index, item in enumerate(scored):
         if not isinstance(item, dict):
             report.error(f"llm_scored.json: entry {index} is not an object")
+            continue
+        record = eval_records.get(item.get("slug") or "")
+        if record is None:
+            continue
+        for key in ("slug", "score", "model", "provider"):
+            if item.get(key) != record.get(key):
+                report.error(f"llm_scored.json: {item.get('slug')} {key} does not match its llm_evals record")
+        if str(item.get("verdict")) != str(record.get("verdict")):
+            report.error(f"llm_scored.json: {item.get('slug')} verdict does not match its llm_evals record")
+        usd_item, usd_record = item.get("usd_equivalent"), record.get("usd_equivalent")
+        if (
+            usd_item is not None
+            and usd_record is not None
+            and float(usd_item) != float(usd_record)
+        ):
+            report.error(f"llm_scored.json: {item.get('slug')} usd_equivalent does not match")
     if scored_slugs != successful:
         report.error(
             "llm_scored.json: does not match successful llm_evals "
@@ -404,6 +476,26 @@ def validate_llm_evals(payload: Any, evals_dir: Path, report: Report) -> None:
         report.warn(f"llm_evals: {len(errored)} errored records will be retried on the next run")
     if unverified:
         report.warn(f"llm_evals: {len(unverified)} unverified records (no parsed score) will be retried on the next run")
+    if summary_path is not None:
+        summary = _load(summary_path, report, "llm_eval_summary.json")
+        if isinstance(summary, dict):
+            expected = {
+                "files": file_count,
+                "successful": len(successful),
+                "errored": len(errored),
+                "unverified": len(unverified),
+                "included": len(successful),
+            }
+            for key, want in expected.items():
+                got = summary.get(key)
+                if got != want:
+                    report.error(
+                        f"llm_eval_summary.json: {key}={got} but disk yields {want}"
+                    )
+            if list(summary.get("invalid") or []) != invalid:
+                report.error(
+                    f"llm_eval_summary.json: invalid={summary.get('invalid')} but disk yields {invalid}"
+                )
 
 
 def validate_reports(reports_dir: Path, report: Report) -> None:
@@ -460,7 +552,11 @@ def validate_repo(root: str | Path = ROOT) -> Report:
     scored_payload = _load(data / "scored.json", report, "scored.json")
     validate_scored(scored_payload, companies, evals, report)
     llm_payload = _load(data / "llm_scored.json", report, "llm_scored.json")
-    validate_llm_evals(llm_payload, data / "llm_evals", report)
+    validate_llm_evals(llm_payload, data / "llm_evals", report, data / "llm_eval_summary.json")
+    if isinstance(articles_payload, dict) and articles_payload.get("errors"):
+        report.warn(
+            f"articles_index.json: {len(articles_payload['errors'])} crawl fetch errors recorded"
+        )
     validate_reports(reports, report)
 
     errors_log = data / "errors.log"

@@ -22,7 +22,7 @@ from typing import Any
 from scanner.enrich import enrich_companies, load_sites
 from scanner.env import load_dotenv
 from scanner.fetch_articles import fetch_source_pr
-from scanner.llm import LLMClient, LLMResult
+from scanner.llm import LLMClient, LLMResult, is_verified_record
 from scanner.paths import (
     COMPANIES,
     DEFAULT_PROMPT,
@@ -52,8 +52,10 @@ MAX_CONTEXT_CHARS = 60_000
 ARTICLE_LIMIT = 20_000
 SOURCE_LIMIT = 6_000
 SITE_PAGE_LIMIT = 5_000
+SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,199}$")
 UNTRUSTED_OPEN = "<untrusted_web_content>"
 UNTRUSTED_CLOSE = "</untrusted_web_content>"
+_UNTRUSTED_TAG_RE = re.compile(r"<\s*(/)?\s*untrusted_web_content\s*>", re.IGNORECASE)
 
 _YEAR_RE = re.compile(r"\b(19|20)\d{2}\b")
 
@@ -129,7 +131,10 @@ def _clip(text: str, limit: int) -> str:
 
 
 def _untrusted(text: str) -> str:
-    return f"{UNTRUSTED_OPEN}\n{text.strip()}\n{UNTRUSTED_CLOSE}"
+    # A literal tag inside the evidence would prematurely end the untrusted
+    # section; defang it before publishing the block.
+    cleaned = _UNTRUSTED_TAG_RE.sub("[untrusted-content]", text.strip())
+    return f"{UNTRUSTED_OPEN}\n{cleaned}\n{UNTRUSTED_CLOSE}"
 
 
 def _site_pricing(company: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
@@ -288,18 +293,6 @@ def assemble_company_context(
     return evidence + "\n" + instructions_text
 
 
-def is_verified_record(data: Any) -> bool:
-    """True only for records whose score came from a parsed JSON block."""
-    if not isinstance(data, dict):
-        return False
-    if data.get("error"):
-        return False
-    score = data.get("score")
-    if not isinstance(score, (int, float)) or isinstance(score, bool):
-        return False
-    return isinstance(data.get("parsed"), dict) and bool(data["parsed"])
-
-
 def save_evaluation(
     company: dict[str, Any],
     result: LLMResult,
@@ -309,6 +302,8 @@ def save_evaluation(
 ) -> Path:
     """Save one company evaluation. Error records stay on disk for diagnostics."""
     slug = company["slug"]
+    if not SLUG_RE.match(slug):
+        raise ValueError(f"refusing to write an evaluation for unsafe slug {slug!r}")
     out_path = Path(evals_dir) / f"{slug}.json"
     pricing, _ = _site_pricing(company)
     data = {
@@ -437,6 +432,14 @@ def aggregate_scores(
             continue
         successful.append(data)
 
+    if include_errors:
+        scored_json_path = scored_json_path.with_name(
+            f"{scored_json_path.stem}_with_errors{scored_json_path.suffix}")
+        scored_csv_path = scored_csv_path.with_name(
+            f"{scored_csv_path.stem}_with_errors{scored_csv_path.suffix}")
+        ranking_report = ranking_report.with_name(
+            f"{ranking_report.stem}_with_errors{ranking_report.suffix}")
+
     selected = successful if not include_errors else successful + errored + unverified
     selected.sort(
         key=lambda e: (e.get("score") or 0, e.get("usd_equivalent") or 0),
@@ -468,10 +471,13 @@ def aggregate_scores(
         "errored": len(errored),
         "unverified": len(unverified),
         "invalid": invalid,
-        "included": len(selected),
+        # The canonical ranked file always contains the verified set.
+        "included": len(successful),
         "models": sorted({str(e.get("model") or "") for e in successful}),
         **stats,
     }
+    if include_errors:
+        summary["diagnostics_included"] = len(selected)
     write_json(summary_path, summary, indent=2)
 
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -611,6 +617,7 @@ def run_llm_pipeline(
     temperature: float = 0.2,
     timeout: float = 120.0,
     prefetch_sources: bool = True,
+    preflight: bool = True,
     workers: int = 1,
     retry_errors: bool = True,
 ) -> None:
@@ -627,10 +634,13 @@ def run_llm_pipeline(
         base_url=base_url,
         timeout=timeout,
     )
-    ok, message = client.preflight()
-    print(message, flush=True)
-    if not ok:
-        raise SystemExit(message)
+    if preflight:
+        ok, message = client.preflight()
+        print(message, flush=True)
+        if not ok:
+            raise SystemExit(message)
+    else:
+        print("preflight skipped (--skip-preflight)", flush=True)
     print(f"Provider: {client.provider} | Model: {client.model} | Base URL: {client.base_url}")
 
     companies = get_qualifying_2026_companies(year)
@@ -699,11 +709,20 @@ def run_llm_pipeline(
                 try:
                     result, chars, elapsed = future.result()
                 except Exception as exc:
-                    result, chars, elapsed = _evaluate_one(
-                        client, system_prompt, company,
-                        max_tokens=max_tokens, temperature=temperature,
+                    result = LLMResult(
+                        score=0,
+                        verdict=f"Analysis failed: {exc}",
+                        parsed={},
+                        raw_response="",
+                        provider=client.provider,
+                        model=client.model,
+                        usage={},
+                        error=str(exc),
+                        parse_status="error",
                     )
+                    handle(company, result, 0, 0.0)
                     print(f"    [!] worker failure for {name}: {exc}", flush=True)
+                    continue
                 print(
                     f"[{idx}/{len(todo)}] Evaluated: {name} "
                     f"(${company.get('usd_equivalent', 0):,.0f})",
@@ -774,6 +793,12 @@ def main() -> None:
         help="HTTP timeout in seconds per attempt (default: 120)",
     )
     parser.add_argument(
+        "--skip-preflight",
+        dest="preflight",
+        action="store_false",
+        help="Skip the endpoint preflight (/v1/models + chat probe)",
+    )
+    parser.add_argument(
         "--no-prefetch-sources",
         dest="prefetch_sources",
         action="store_false",
@@ -816,6 +841,7 @@ def main() -> None:
         temperature=args.temperature,
         timeout=args.timeout,
         prefetch_sources=args.prefetch_sources,
+        preflight=args.preflight,
         workers=args.workers,
         retry_errors=args.retry_errors,
     )

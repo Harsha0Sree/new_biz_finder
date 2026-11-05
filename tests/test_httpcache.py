@@ -81,6 +81,56 @@ def test_404_is_not_cached(monkeypatch):
     assert client.calls == 2
 
 
+def test_legacy_negative_cache_entries_are_not_served(tmp_path, monkeypatch):
+    import hashlib
+
+    from scanner.storage import write_bytes, write_json
+
+    monkeypatch.setattr(httpcache, "CACHE_DIR", tmp_path)
+    url = "https://example.com/missing"
+    key = hashlib.sha256(url.encode()).hexdigest()[:40]
+    write_json(
+        tmp_path / f"{key}.meta.json",
+        {
+            "url": url,
+            "final_url": url,
+            "status": 404,
+            "content_type": "text/html",
+            "fetched_at": "2026-01-01T00:00:00Z",
+        },
+    )
+    write_bytes(tmp_path / f"{key}.body", b"not found")
+
+    assert httpcache.load_cached(url) is None
+
+
+def test_fresh_cached_entries_are_still_served(tmp_path, monkeypatch):
+    import hashlib
+
+    from scanner.storage import write_bytes, write_json
+
+    monkeypatch.setattr(httpcache, "CACHE_DIR", tmp_path)
+    url = "https://example.com/page"
+    key = hashlib.sha256(url.encode()).hexdigest()[:40]
+    write_json(
+        tmp_path / f"{key}.meta.json",
+        {
+            "url": url,
+            "final_url": url,
+            "status": 200,
+            "content_type": "text/html",
+            "fetched_at": "2026-01-01T00:00:00Z",
+        },
+    )
+    write_bytes(tmp_path / f"{key}.body", b"ok")
+
+    cached = httpcache.load_cached(url)
+
+    assert cached is not None
+    assert cached.status == 200
+    assert cached.body == b"ok"
+
+
 def test_force_refetch_bypasses_cache(monkeypatch):
     client = FakeClient(
         [

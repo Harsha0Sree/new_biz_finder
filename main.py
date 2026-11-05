@@ -44,6 +44,7 @@ def run_pipeline(
     max_tokens: int = 6000,
     temperature: float = 0.2,
     timeout: float = 120.0,
+    preflight: bool = True,
 ) -> None:
     print("=" * 72)
     print("       NEW BIZ FINDER — END-TO-END OPPORTUNITY PIPELINE")
@@ -113,6 +114,7 @@ def run_pipeline(
                 max_tokens=max_tokens,
                 temperature=temperature,
                 timeout=timeout,
+                preflight=preflight,
                 workers=llm_workers,
                 retry_errors=retry_errors,
             )
@@ -173,6 +175,7 @@ def main() -> None:
     parser.add_argument("--max-tokens", type=int, default=6000, help="Token cap for the LLM completion")
     parser.add_argument("--temperature", type=float, default=0.2, help="Sampling temperature")
     parser.add_argument("--timeout", type=float, default=120.0, help="HTTP timeout in seconds per attempt")
+    parser.add_argument("--skip-preflight", dest="preflight", action="store_false", help="Skip the endpoint preflight (/v1/models + chat probe)")
     parser.add_argument("--force", action="store_true", help="Re-evaluate already evaluated companies")
     parser.add_argument(
         "--no-resume", dest="resume", action="store_false", help="Do not skip existing eval files"
@@ -218,6 +221,7 @@ def main() -> None:
         max_tokens=args.max_tokens,
         temperature=args.temperature,
         timeout=args.timeout,
+        preflight=args.preflight,
     )
 
 
