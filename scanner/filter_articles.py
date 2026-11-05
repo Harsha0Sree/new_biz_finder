@@ -12,11 +12,12 @@ from scanner.amounts import (
     parse_round,
     qualifies,
 )
-from scanner.paths import ARTICLES_INDEX, QUALIFYING
+from scanner.paths import ARTICLES_INDEX, DROPPED, QUALIFYING
 from scanner.storage import read_json, write_json
 
 INDEX = ARTICLES_INDEX
 OUT = QUALIFYING
+DROPPED_OUT = DROPPED
 
 
 def main() -> None:
@@ -76,6 +77,16 @@ def main() -> None:
         raise ValueError(f"kept articles below threshold: {below[:5]}")
 
     write_json(OUT, payload)
+    write_json(
+        DROPPED_OUT,
+        {
+            "generated_at": payload["generated_at"],
+            "index_count": len(idx["articles"]),
+            "dropped_count": len(dropped),
+            "drop_reasons": dict(reasons),
+            "dropped": sorted(dropped, key=lambda e: e["slug"]),
+        },
+    )
     print(f"index={payload['index_count']} kept={len(kept)} dropped={len(dropped)}")
     print("drop reasons:", dict(reasons))
     print("top 15:")

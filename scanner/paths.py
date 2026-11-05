@@ -21,6 +21,7 @@ REPORTS = ROOT / "reports"
 
 ARTICLES_INDEX = DATA / "articles_index.json"
 QUALIFYING = DATA / "qualifying.json"
+DROPPED = DATA / "dropped.json"
 ARTICLES_PARSED = DATA / "articles_parsed.json"
 COMPANIES = DATA / "companies.json"
 REJECTED = DATA / "rejected.json"

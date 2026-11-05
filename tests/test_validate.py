@@ -245,3 +245,27 @@ def test_validate_reports_accepts_existing_relative_links(tmp_path):
     validate.validate_reports(tmp_path, report)
 
     assert report.errors == []
+
+
+def test_validate_filter_reconciliation_detects_gaps():
+    report = _report()
+    articles = [{"slug": "a"}, {"slug": "b"}, {"slug": "c"}]
+    qualifying = [{"slug": "a"}]
+    dropped_payload = {"dropped_count": 1, "dropped": [{"slug": "b"}]}
+
+    validate.validate_filter_reconciliation(articles, qualifying, dropped_payload, report)
+
+    joined = "\n".join(report.errors)
+    assert "1 index slugs are neither kept nor dropped" in joined
+    assert report.checks["dropped"] == 1
+
+
+def test_validate_filter_reconciliation_accepts_exact_partition():
+    report = _report()
+    articles = [{"slug": "a"}, {"slug": "b"}]
+
+    validate.validate_filter_reconciliation(
+        articles, [{"slug": "a"}], {"dropped_count": 1, "dropped": [{"slug": "b"}]}, report
+    )
+
+    assert report.errors == []

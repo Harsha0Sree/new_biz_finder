@@ -142,6 +142,36 @@ def validate_qualifying(
     return [a for a in qualifying if isinstance(a, dict)]
 
 
+def validate_filter_reconciliation(
+    articles: list[dict[str, Any]],
+    qualifying: list[dict[str, Any]],
+    dropped_payload: Any,
+    report: Report,
+) -> None:
+    if not isinstance(dropped_payload, dict):
+        report.error("dropped.json: expected an object")
+        return
+    dropped = _as_list(dropped_payload.get("dropped"))
+    report.checks["dropped"] = len(dropped)
+    if dropped_payload.get("dropped_count") != len(dropped):
+        report.error(
+            f"dropped.json: dropped_count={dropped_payload.get('dropped_count')} "
+            f"but dropped={len(dropped)}"
+        )
+    index_slugs = {a.get("slug") for a in articles if isinstance(a, dict)}
+    kept_slugs = {a.get("slug") for a in qualifying if isinstance(a, dict)}
+    dropped_slugs = {a.get("slug") for a in dropped if isinstance(a, dict)}
+    overlap = kept_slugs & dropped_slugs
+    if overlap:
+        report.error(f"filter: {len(overlap)} slugs are both kept and dropped")
+    missing = index_slugs - kept_slugs - dropped_slugs
+    if missing:
+        report.error(f"filter: {len(missing)} index slugs are neither kept nor dropped")
+    extra = (kept_slugs | dropped_slugs) - index_slugs
+    if extra:
+        report.error(f"filter: {len(extra)} kept/dropped slugs are not in the index")
+
+
 def validate_companies(payload: Any, qualifying_count: int, report: Report) -> list[dict[str, Any]]:
     companies = _as_list(payload)
     report.checks["companies"] = len(companies)
@@ -566,6 +596,8 @@ def validate_repo(root: str | Path = ROOT) -> Report:
     qualifying = validate_qualifying(
         qualifying_payload, len(articles), resolved, report
     )
+    dropped_payload = _load(data / "dropped.json", report, "dropped.json")
+    validate_filter_reconciliation(articles, qualifying, dropped_payload, report)
     companies = validate_companies(companies_payload, len(qualifying), report)
     for article in qualifying:
         if article.get("slug") not in resolved:
