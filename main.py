@@ -45,11 +45,19 @@ def run_pipeline(
     temperature: float = 0.2,
     timeout: float = 120.0,
     preflight: bool = True,
+    dry_run: bool = False,
 ) -> None:
     print("=" * 72)
     print("       NEW BIZ FINDER — END-TO-END OPPORTUNITY PIPELINE")
     print("=" * 72)
     started = time.time()
+
+    if dry_run:
+        print(f"DRY RUN step={step} aggregate_only={aggregate_only} limit={limit}")
+        print(f"  provider={provider} model={model or '<default>'} year={year} workers(site={site_workers},llm={llm_workers})")
+        print(f"  crawl={'skip' if skip_crawl else 'run'} scrape={'skip' if skip_scrape else 'run'} refetch_index={refetch_index}")
+        print("DRY RUN complete: no artifacts were written.")
+        return
 
     if step in ("all", "crawl") and not aggregate_only:
         if skip_crawl and ARTICLES_INDEX.exists():
@@ -131,6 +139,25 @@ def run_pipeline(
     print(f"PIPELINE COMPLETED in {elapsed:.1f}s")
     print("=" * 72)
 
+    try:
+        from scanner.runlog import append_run_log
+
+        append_run_log(
+            {
+                "event": "pipeline_completed",
+                "step": step,
+                "aggregate_only": aggregate_only,
+                "dry_run": dry_run,
+                "provider": provider,
+                "model": model,
+                "year": year,
+                "limit": limit,
+                "duration_s": round(elapsed, 1),
+            }
+        )
+    except OSError:
+        pass
+
 
 def _env_limit() -> int | None:
     raw = os.getenv("EVAL_LIMIT")
@@ -192,6 +219,11 @@ def main() -> None:
         help="Rebuild scores.csv, scored.json, and reports without calling the LLM",
     )
     parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print the planned run and exit without writing any artifacts",
+    )
+    parser.add_argument(
         "--include-errors",
         action="store_true",
         help="Include LLM error records in aggregate output (diagnostics only)",
@@ -222,6 +254,7 @@ def main() -> None:
         temperature=args.temperature,
         timeout=args.timeout,
         preflight=args.preflight,
+        dry_run=args.dry_run,
     )
 
 

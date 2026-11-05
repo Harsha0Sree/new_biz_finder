@@ -42,3 +42,4 @@ frontends/
 on
 data/producthunt_2026.html
 scripts/verify_atomic_studios.py
+data/run_log.jsonl

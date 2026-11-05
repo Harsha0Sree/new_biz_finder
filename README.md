@@ -396,6 +396,7 @@ the evaluation file, and writes `data/scored.json` + `data/scores.csv`.
 | `--temperature` | `0.2` | Sampling temperature |
 | `--timeout` | `120.0` | HTTP timeout in seconds per attempt |
 | `--skip-preflight` | off | Skip the endpoint preflight (/v1/models + one-token chat probe) |
+| `--dry-run` | off | Print the planned run and exit without writing artifacts |
 
 ### `scanner.llm_analyzer`
 

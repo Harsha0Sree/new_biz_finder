@@ -40,6 +40,7 @@ LLM_SUMMARY = DATA / "llm_eval_summary.json"
 
 COMPANY_PROMPTS = DATA / "company_prompts"
 EVAL_BATCHES = DATA / "eval_batches"
+RUN_LOG = DATA / "run_log.jsonl"
 
 DEFAULT_PROMPT = PROMPTS / "system_prompt.txt"
 LLM_RANKING_REPORT = REPORTS / "llm_opportunity_ranking.md"
