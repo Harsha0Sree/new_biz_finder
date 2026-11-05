@@ -70,7 +70,7 @@ def main() -> None:
     below = [
         e["slug"]
         for e in kept
-        if e["filter_reason"] != "check_article_valuation_only"
+        if e["filter_reason"] not in ("check_article_valuation_only", "check_article_no_amount")
         and not meets_threshold(e["usd_equivalent"] or 0)
     ]
     if below:

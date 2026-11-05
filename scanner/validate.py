@@ -112,6 +112,7 @@ def validate_qualifying(
             f"qualifying.json: index_count={payload.get('index_count')} "
             f"but articles_index has {index_count}; re-run scanner.filter_articles"
         )
+    unresolved_deferred: list[str] = []
     for index, article in enumerate(qualifying):
         if not isinstance(article, dict):
             report.error(f"qualifying.json: entry {index} is not an object")
@@ -120,25 +121,31 @@ def validate_qualifying(
         reason = article.get("filter_reason") or ""
         slug = article.get("slug")
         if usd is None:
-            report.error(f"qualifying.json: {slug} has no usd_equivalent")
+            if reason in ("check_article_valuation_only", "check_article_no_amount"):
+                if slug not in resolved_slugs:
+                    unresolved_deferred.append(str(slug))
+            else:
+                report.error(f"qualifying.json: {slug} has no usd_equivalent")
         elif not isinstance(usd, (int, float)) or isinstance(usd, bool):
             report.error(f"qualifying.json: {slug} has non-numeric usd_equivalent {usd!r}")
         elif usd < THRESHOLD_USD:
-            # Valuation-only titles are deliberately deferred: filter_articles
+            # Deferred titles are deliberately tolerated: filter_articles
             # cannot tell the raise from the valuation, so fetch_articles parses
             # the Funding Details block and either keeps or rejects the company.
-            if reason == "check_article_valuation_only":
+            if reason in ("check_article_valuation_only", "check_article_no_amount"):
                 if slug not in resolved_slugs:
-                    report.warn(
-                        f"qualifying.json: {slug} is an unresolved valuation-only "
-                        "candidate; re-run scanner.fetch_articles"
-                    )
+                    unresolved_deferred.append(str(slug))
             else:
                 report.error(f"qualifying.json: {slug} is below threshold ({usd})")
         if article.get("round_kind") == "other-series":
             report.error(
                 f"qualifying.json: {article.get('slug')} is a named later series"
             )
+    if unresolved_deferred:
+        report.warn(
+            f"qualifying.json: {len(unresolved_deferred)} unresolved deferred "
+            "candidates; re-run scanner.fetch_articles"
+        )
     return [a for a in qualifying if isinstance(a, dict)]
 
 
@@ -601,6 +608,8 @@ def validate_repo(root: str | Path = ROOT) -> Report:
     companies = validate_companies(companies_payload, len(qualifying), report)
     for article in qualifying:
         if article.get("slug") not in resolved:
+            if (article.get("filter_reason") or "").startswith("check_article_"):
+                continue
             report.warn(
                 f"qualifying.json: {article.get('slug')} is not represented in "
                 "companies.json or rejected.json"

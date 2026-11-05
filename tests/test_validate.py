@@ -85,7 +85,7 @@ def test_validate_qualifying_warns_on_unresolved_valuation_only_candidate():
     validate.validate_qualifying(payload, 10, set(), report)
 
     assert report.errors == []
-    assert any("unresolved valuation-only" in warning for warning in report.warnings)
+    assert any("unresolved deferred" in warning for warning in report.warnings)
 
 
 def _company(**overrides):

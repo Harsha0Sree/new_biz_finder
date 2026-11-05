@@ -59,7 +59,10 @@ As of the latest committed artifacts:
 
 - **Index**: 4,583 article cards from the `/tag/seed-round/` and
   `/tag/pre-seed/` archives (351 seed-round pages).
-- **Qualifying**: 571 articles at or above **$10M USD-equivalent**.
+- **Qualifying**: 887 articles (571 with an amount at or above **$10M
+  USD-equivalent**, plus 316 seed-stage titles with no amount in the title
+  that are deferred to article verification).
+- **Dropped**: 3,696 articles (3,694 below threshold, 2 named later series).
 - **Companies**: 556 rows, 550 unique after name/domain dedupe.
 - **Sites**: 548 records (488 `ok`, 28 `js_only`, 32 `dead`).
 - **Rejected after article verification**: 15 (below threshold, unknown round, etc.).
@@ -82,9 +85,13 @@ A round qualifies when:
    Pre-seed is included. Named later series (`Series A`, `Series B`, and later
    named series) are excluded.
 2. The **raise amount** is **at least $10M USD-equivalent** (inclusive).
-3. Valuation-only titles are not accepted on the valuation number. They are
-   passed to `fetch_articles`, which reads the Funding Details block and keeps
-   the company only if the actual raise clears the threshold.
+3. Valuation-only titles are not accepted on the valuation number, and
+   seed-stage titles with no amount are not dropped on that absence alone.
+   Both are passed to `fetch_articles`, which reads the Funding Details
+   block and keeps the company only if the actual raise clears the
+   threshold. Every indexed title lands in exactly one of
+   `data/qualifying.json` or `data/dropped.json`, and the validator
+   checks the partition.
 
 Fixed FX planning constants live in `scanner/amounts.py`. Amount parsing handles
 `$`, `€`, `£`, `¥`, `₹`, `Rs`, `A$`, `S$`, and `US$`, with thousand/million/

@@ -132,3 +132,14 @@ def test_pre_seed_included_when_large():
     assert ok is True and why == "ok_pre_seed"
     assert qualifies("Metacognition Raises $10M Pre-seed")[0] is True
     assert qualifies("SmallCo Raises $2 Million in Pre-Seed Round")[0] is False
+
+
+def test_seed_titles_without_amount_are_deferred_to_article():
+    ok, why = qualifies("KAVIA AI Raises Seed Funding Round")
+    assert ok is True and why == "check_article_no_amount"
+    ok, why = qualifies("Eubrics Raises Pre-Seed Funding")
+    assert ok is True and why == "check_article_no_amount"
+    ok, why = qualifies("Acme Raises Funding Round")
+    assert ok is True and why == "check_article_no_amount"
+    assert qualifies("X Raises $2M Seed")[0] is False
+    assert qualifies("X Raises $10M Series B")[0] is False

@@ -197,7 +197,10 @@ def qualifies(title: str) -> tuple[bool, str]:
     if amt is None:
         if val_amt is not None:
             return True, "check_article_valuation_only"
-        return False, "no_parsable_amount"
+        # Seed-stage titles that omit the amount are deferred, not dropped:
+        # fetch_articles reads the Funding Details block and keeps the
+        # company only if the actual raise clears the threshold.
+        return True, "check_article_no_amount"
     if not meets_threshold(amt.usd_equivalent):
         return False, f"amount_below_threshold ({amt.usd_equivalent:.0f} USD)"
     if rnd.kind == "unlabeled":
