@@ -332,7 +332,7 @@ def test_preflight_fails_closed_on_bad_key():
     assert "401" in message
 
 
-def test_preflight_unreachable_endpoint_warns_and_proceeds():
+def test_preflight_unreachable_endpoint_fails_closed():
     class _BoomClient:
         def __enter__(self):
             return self
@@ -343,6 +343,9 @@ def test_preflight_unreachable_endpoint_warns_and_proceeds():
         def get(self, *args, **kwargs):
             raise httpx.ConnectError("no route to host")
 
+        def post(self, *args, **kwargs):
+            raise httpx.ConnectError("no route to host")
+
     client = LLMClient(
         provider="nvidia",
         api_key="test_key",
@@ -351,8 +354,28 @@ def test_preflight_unreachable_endpoint_warns_and_proceeds():
 
     ok, message = client.preflight()
 
+    assert ok is False
+    assert "chat probe" in message
+
+
+def test_preflight_models_500_falls_through_to_chat_probe():
+    models = _FakeHTTPResponse(500)
+    chat = _FakeHTTPResponse(
+        200,
+        {"choices": [{"message": {"content": "OK"}}], "usage": {"total_tokens": 5}},
+    )
+    phases = iter([_FakeHTTPClient([models]), _FakeHTTPClient([chat])])
+    client = LLMClient(
+        provider="nvidia",
+        api_key="test_key",
+        model="z-ai/glm-5.3-flash",
+        client_factory=lambda _timeout: next(phases),
+    )
+
+    ok, message = client.preflight()
+
     assert ok is True
-    assert "warning" in message
+    assert "chat probe answered" in message
 
 
 def test_assemble_company_context():

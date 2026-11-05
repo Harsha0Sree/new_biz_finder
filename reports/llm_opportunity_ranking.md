@@ -2,7 +2,7 @@
 
 **Evaluations on disk**: 52 | **Verified**: 1 | **Unverified**: 4 | **Errored**: 47
 **Included in ranking**: 1
-**Generated**: 2026-11-05 05:14:26 UTC
+**Generated**: 2026-11-05 06:56:45 UTC
 
 | Rank | Score | Company | Category | Raised | On-Site Pricing | Prior 67? | Verdict |
 |:---:|:---:|:---|:---|:---|:---|:---:|:---|

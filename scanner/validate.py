@@ -300,11 +300,28 @@ def validate_eval_record(record: Any, name: str, report: Report) -> None:
                 report.error(f"evals/{name}: agency_play.{key} is too short")
 
 
-def validate_deep_evals(evals_dir: Path, report: Report) -> dict[str, dict[str, Any]]:
+_NBSP_CHARS = "\u00a0\u202f"
+
+
+def _norm_domain(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    for nbsp in _NBSP_CHARS:
+        text = text.replace(nbsp, "")
+    return text.rstrip(".")
+
+
+def validate_deep_evals(
+    evals_dir: Path,
+    report: Report,
+    companies: list[dict[str, Any]] | None = None,
+) -> dict[str, dict[str, Any]]:
     records: dict[str, dict[str, Any]] = {}
     if not evals_dir.exists():
         report.error(f"missing evals directory {evals_dir}")
         return records
+    by_slug = {
+        c.get("slug"): c for c in (companies or []) if isinstance(c, dict) and c.get("slug")
+    }
     files = sorted(evals_dir.glob("*.json"))
     report.checks["deep_evals"] = len(files)
     for path in files:
@@ -314,6 +331,13 @@ def validate_deep_evals(evals_dir: Path, report: Report) -> dict[str, dict[str, 
         validate_eval_record(record, path.name, report)
         if record.get("slug") and record["slug"] != path.stem:
             report.error(f"evals/{path.name}: slug {record['slug']} does not match filename")
+        comp = by_slug.get(path.stem)
+        if comp is not None:
+            doma, domb = _norm_domain(record.get("domain")), _norm_domain(comp.get("domain"))
+            if doma and domb and doma != domb:
+                report.error(
+                    f"evals/{path.name}: domain {doma!r} does not match registry domain {domb!r}"
+                )
         records[path.stem] = record
     return records
 
@@ -370,8 +394,11 @@ def validate_scored(payload: Any, companies: list[dict[str, Any]], evals: dict, 
             f"{expected_missing} unique companies lack a valid evaluation; "
             "re-run scanner.compute"
         )
-    if invalid_count:
-        report.warn(f"scored.json: {invalid_count} evaluation files failed validation")
+    live_invalid = _as_list(payload.get("invalid")) if isinstance(payload, dict) else []
+    if live_invalid or payload.get("invalid_count"):
+        report.error(
+            f"scored.json: {payload.get('invalid_count')} invalid evaluation files; fix them or remove them"
+        )
     expected = {
         c.get("slug")
         for c in companies
@@ -403,6 +430,7 @@ def validate_llm_evals(
     evals_dir: Path,
     report: Report,
     summary_path: Path | None = None,
+    known: set[str] | None = None,
 ) -> None:
     if not isinstance(payload, list):
         report.error("llm_scored.json: expected a list")
@@ -432,6 +460,8 @@ def validate_llm_evals(
                 report.error(f"llm_evals/{path.name}: unsafe slug {slug_val!r}")
             if isinstance(slug_val, str) and slug_val != path.stem:
                 report.error(f"llm_evals/{path.name}: slug {slug_val} does not match filename")
+            if known is not None and path.stem not in known:
+                report.error(f"llm_evals/{path.name}: no matching company or rejected candidate")
             eval_records[path.stem] = record
             if is_verified_record(record):
                 successful.add(path.stem)
@@ -452,6 +482,8 @@ def validate_llm_evals(
             report.error(f"llm_scored.json: entry {index} is not an object")
             continue
         record = eval_records.get(item.get("slug") or "")
+        if known is not None and isinstance(item.get("slug"), str) and item["slug"] not in known:
+            report.error(f"llm_scored.json: {item['slug']} has no matching company")
         if record is None:
             continue
         for key in ("slug", "score", "model", "provider"):
@@ -498,7 +530,7 @@ def validate_llm_evals(
                 )
 
 
-def validate_reports(reports_dir: Path, report: Report) -> None:
+def validate_reports(reports_dir: Path, report: Report, scored_count: int | None = None) -> None:
     for name in ("master-ranking.md", "index.md"):
         path = reports_dir / name
         if not path.exists():
@@ -548,16 +580,25 @@ def validate_repo(root: str | Path = ROOT) -> Report:
             report.error(f"rejected.json: {item.get('slug')} has no reject_reason")
     sites_payload = _load(data / "sites.json", report, "sites.json")
     validate_sites(sites_payload, companies, report)
-    evals = validate_deep_evals(data / "evals", report)
+    known = {c.get("slug") for c in companies}
+    known |= {r.get("slug") for r in rejected if isinstance(r, dict)}
+    evals = validate_deep_evals(data / "evals", report, companies)
+    for stem in evals:
+        if stem not in known:
+            report.error(f"evals/{stem}.json: no matching company or rejected candidate")
     scored_payload = _load(data / "scored.json", report, "scored.json")
+    for item in _as_list((scored_payload or {}).get("companies") if isinstance(scored_payload, dict) else []):
+        if isinstance(item, dict) and item.get("slug") not in known:
+            report.error(f"scored.json: {item.get('slug')} has no matching company")
     validate_scored(scored_payload, companies, evals, report)
     llm_payload = _load(data / "llm_scored.json", report, "llm_scored.json")
-    validate_llm_evals(llm_payload, data / "llm_evals", report, data / "llm_eval_summary.json")
+    validate_llm_evals(llm_payload, data / "llm_evals", report, data / "llm_eval_summary.json", known)
     if isinstance(articles_payload, dict) and articles_payload.get("errors"):
-        report.warn(
+        report.error(
             f"articles_index.json: {len(articles_payload['errors'])} crawl fetch errors recorded"
         )
-    validate_reports(reports, report)
+    scored_count = len(_as_list((scored_payload or {}).get("companies") if isinstance(scored_payload, dict) else []))
+    validate_reports(reports, report, scored_count)
 
     errors_log = data / "errors.log"
     if errors_log.exists():

@@ -81,7 +81,8 @@ def page_ok(base: str, n: int) -> bool:
     """
     url = page_url(base, n)
     try:
-        resp = fetch(url)
+        # Probes must see the origin's truth; cached 200s would pin archives.
+        resp = fetch(url, force_refetch=True)
     except ConnectionError as exc:
         raise CrawlProbeError(f"[{base}] page {n}: could not determine: {exc}") from exc
     if resp.status in (404, 410):
@@ -130,7 +131,8 @@ def crawl_incremental(existing_payload: dict) -> dict:
     existing_articles = {a["slug"]: a for a in existing_payload.get("articles", [])}
     print(f"Checking for new articles (currently indexed: {len(existing_articles)})...", flush=True)
 
-    errors: list[str] = list(existing_payload.get("errors", []))
+    # Run-scoped: a transient failure from months ago should not ride along forever.
+    errors: list[str] = []
     total_new = 0
     tag_max_pages: dict[str, int] = {}
 
@@ -152,13 +154,23 @@ def crawl_incremental(existing_payload: dict) -> dict:
                 errors.append(f"incremental {tag_name} page {page}: {exc}")
                 break
             if not resp.ok:
-                if resp.status != 404:
+                if page == 1:
+                    errors.append(
+                        f"incremental {tag_name} page 1: HTTP {resp.status}; "
+                        "archive may have moved or the tag may have changed"
+                    )
+                elif resp.status != 404:
                     errors.append(f"incremental {tag_name} page {page}: HTTP {resp.status}")
                 break
             tag_max_pages[tag_name] = page
 
             cards = parse_page(resp.text, page, tag_name=tag_name)
             if not cards:
+                if page == 1:
+                    errors.append(
+                        f"incremental {tag_name} page 1: no article cards parsed; "
+                        "page structure may have changed"
+                    )
                 break
 
             page_new = 0
@@ -224,7 +236,7 @@ def crawl_full() -> dict:
         for n in range(max_page, 0, -1):
             url = page_url(base, n)
             try:
-                resp = fetch(url)
+                resp = fetch(url, force_refetch=True)
             except ConnectionError as exc:
                 errors.append(f"{tag_name} page {n}: {exc}")
                 continue

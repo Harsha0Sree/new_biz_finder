@@ -107,6 +107,8 @@ def schema_valid_score(parsed: dict[str, Any] | None) -> int | None:
     score = parsed["score"]
     if isinstance(score, bool) or not isinstance(score, (int, float)):
         return None
+    if isinstance(score, float) and not score.is_integer():
+        return None
     if not 0 <= score <= 100:
         return None
     if not isinstance(parsed["verdict"], str):
@@ -133,6 +135,8 @@ def is_verified_record(data: Any) -> bool:
         return False
     stored = data.get("score")
     if isinstance(stored, bool) or not isinstance(stored, (int, float)):
+        return False
+    if isinstance(stored, float) and not stored.is_integer():
         return False
     if not 0 <= stored <= 100:
         return False
@@ -211,7 +215,9 @@ class LLMClient:
             with self._client_factory(self.timeout) as client:
                 resp = client.get(f"{self.base_url}/models", headers=headers)
         except Exception as exc:
-            return True, f"preflight warning: cannot reach {self.base_url}/models ({exc}); continuing"
+            return self._probe_chat(
+                f"preflight warning: cannot reach {self.base_url}/models ({exc}); verifying with chat probe"
+            )
         if resp.status_code == 401:
             return False, "preflight failed: HTTP 401 unauthorized; check the API key"
         if resp.status_code == 403:
@@ -222,15 +228,20 @@ class LLMClient:
                 "the base URL or provider is wrong"
             )
         if resp.status_code != 200:
-            return True, f"preflight warning: /models returned HTTP {resp.status_code}; continuing"
+            return self._probe_chat(
+                f"preflight warning: /models returned HTTP {resp.status_code}; verifying with chat probe"
+            )
         try:
+            raw = resp.json()
             ids = {
                 str(item.get("id"))
-                for item in (resp.json().get("data") or [])
+                for item in (raw.get("data") or [])
                 if isinstance(item, dict) and item.get("id")
             }
         except (ValueError, AttributeError):
-            return True, "preflight warning: /models payload unparsable; continuing"
+            return self._probe_chat(
+                "preflight warning: /models payload unparsable; verifying with chat probe"
+            )
         if not ids:
             return False, f"preflight failed: /models at {self.base_url} lists no models"
         if self.model in ids or any(m.endswith(f"/{self.model}") for m in ids):

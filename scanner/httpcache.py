@@ -10,6 +10,7 @@ import hashlib
 import json
 import threading
 import time
+from contextlib import suppress
 from dataclasses import dataclass
 from urllib.parse import urlsplit
 
@@ -183,6 +184,14 @@ def fetch(
 
     if response is None:
         raise ConnectionError(f"failed after {retries + 1} attempts: {url}: {last_error}")
+
+    if response.status_code in (403, 404, 410):
+        # The origin is authoritative here: drop any stale cache pair so a
+        # later probe does not resurrect content the server retracted.
+        stale_meta, stale_body = _paths(url)
+        for stale in (stale_meta, stale_body):
+            with suppress(OSError):
+                stale.unlink()
 
     meta = {
         "url": url,
