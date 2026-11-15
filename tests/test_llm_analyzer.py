@@ -281,10 +281,10 @@ def test_unverified_records_never_rank(tmp_path, monkeypatch):
 
 
 def test_pending_companies_retries_errors_by_default(tmp_path, monkeypatch):
-    monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80, "parsed": _six_key(80)})
-    write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
-    write_text(tmp_path / "corrupt.json", "{not json")
+    monkeypatch.setattr(la, "LLM_EVALS_ROOT", tmp_path)
+    write_json(tmp_path / "thesaasnews" / "ok.json", {"score": 80, "parsed": _six_key(80)})
+    write_json(tmp_path / "thesaasnews" / "bad.json", {"score": 0, "error": "timeout"})
+    write_text(tmp_path / "thesaasnews" / "corrupt.json", "{not json")
     companies = [{"slug": "ok"}, {"slug": "bad"}, {"slug": "corrupt"}]
 
     todo, skipped, retrying = la._pending_companies(
@@ -297,9 +297,9 @@ def test_pending_companies_retries_errors_by_default(tmp_path, monkeypatch):
 
 
 def test_pending_companies_can_skip_errors(tmp_path, monkeypatch):
-    monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80, "parsed": _six_key(80)})
-    write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
+    monkeypatch.setattr(la, "LLM_EVALS_ROOT", tmp_path)
+    write_json(tmp_path / "thesaasnews" / "ok.json", {"score": 80, "parsed": _six_key(80)})
+    write_json(tmp_path / "thesaasnews" / "bad.json", {"score": 0, "error": "timeout"})
     companies = [{"slug": "ok"}, {"slug": "bad"}]
 
     todo, skipped, retrying = la._pending_companies(
@@ -312,9 +312,9 @@ def test_pending_companies_can_skip_errors(tmp_path, monkeypatch):
 
 
 def test_pending_companies_force_evaluates_everything(tmp_path, monkeypatch):
-    monkeypatch.setattr(la, "EVALS_DIR", tmp_path)
-    write_json(tmp_path / "ok.json", {"score": 80, "parsed": _six_key(80)})
-    write_json(tmp_path / "bad.json", {"score": 0, "error": "timeout"})
+    monkeypatch.setattr(la, "LLM_EVALS_ROOT", tmp_path)
+    write_json(tmp_path / "thesaasnews" / "ok.json", {"score": 80, "parsed": _six_key(80)})
+    write_json(tmp_path / "thesaasnews" / "bad.json", {"score": 0, "error": "timeout"})
     companies = [{"slug": "ok"}, {"slug": "bad"}]
 
     todo, skipped, retrying = la._pending_companies(

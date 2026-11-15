@@ -39,20 +39,11 @@ class LLMResult:
     truncated: bool = False
 
 
-def extract_json_payload(text: str) -> dict[str, Any] | None:
-    """Return the last schema-complete JSON object in the model's output.
-
-    Candidates are tried in reverse order of appearance (the outermost
-    brace span first, then fenced blocks from last to first, then a
-    direct parse). An earlier block that happens to match the schema
-    is accepted only because it is the last one that does; a block
-    missing the six-key contract is ignored even when it carries a
-    score, so an echoed injection block cannot stand in for the
-    model's own answer.
-    """
+def _json_candidates(text: str) -> list[dict[str, Any]]:
+    """Every JSON object in the text, outermost span last."""
     text = text.strip()
     if not text:
-        return None
+        return []
 
     candidates: list[dict[str, Any]] = []
 
@@ -81,7 +72,36 @@ def extract_json_payload(text: str) -> dict[str, Any] | None:
         except json.JSONDecodeError:
             pass
 
-    for candidate in reversed(candidates):
+    return candidates
+
+
+def extract_json_object(text: str) -> dict[str, Any] | None:
+    """Return the last parsable JSON object in the text, whatever its shape.
+
+    `extract_json_payload` only accepts the six-key scoring contract. This one
+    accepts any object, for tasks whose output schema is something else.
+    """
+    for candidate in reversed(_json_candidates(text)):
+        return candidate
+    return None
+
+
+def extract_json_payload(text: str) -> dict[str, Any] | None:
+    """Return the last schema-complete JSON object in the model's output.
+
+    Candidates are tried in reverse order of appearance (the outermost
+    brace span first, then fenced blocks from last to first, then a
+    direct parse). An earlier block that happens to match the schema
+    is accepted only because it is the last one that does; a block
+    missing the six-key contract is ignored even when it carries a
+    score, so an echoed injection block cannot stand in for the
+    model's own answer.
+    """
+    text = text.strip()
+    if not text:
+        return None
+
+    for candidate in reversed(_json_candidates(text)):
         if schema_valid_score(candidate) is not None:
             return candidate
     return None

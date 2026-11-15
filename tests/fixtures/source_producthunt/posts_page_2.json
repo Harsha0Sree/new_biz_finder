@@ -1,0 +1,33 @@
+{
+  "data": {
+    "posts": {
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "eyJkaXJlY3Qtc2l6ZToyfQ"
+      },
+      "edges": [
+        {
+          "node": {
+            "id": "ph-post-boundary",
+            "name": "Boundary Post",
+            "tagline": "Just at the cutoff.",
+            "description": "A post that landed below the cutoff.",
+            "url": "https://www.producthunt.com/posts/boundary-post",
+            "website": "https://boundarypost.com",
+            "votesCount": 480,
+            "commentsCount": 0,
+            "createdAt": "2026-10-05T11:00:00Z",
+            "featuredAt": null,
+            "topics": {
+              "edges": []
+            },
+            "makers": {
+              "id": "maker-4",
+              "name": "Kay Tester"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

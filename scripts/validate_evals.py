@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from scanner.paths import EVALS
+from scanner.paths import ALL_SOURCES, EVALS
 from scanner.storage import read_json
 
 EVALS_DIR = EVALS
@@ -59,7 +59,11 @@ def validate(path: Path) -> list[str]:
 
 
 def main() -> int:
-    files = sorted(EVALS_DIR.glob("*.json")) if EVALS_DIR.exists() else []
+    files = []
+    for source in ALL_SOURCES:
+        folder = EVALS_DIR / source
+        if folder.exists():
+            files.extend(sorted(folder.glob("*.json")))
     bad = 0
     for p in files:
         errs = validate(p)

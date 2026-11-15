@@ -84,14 +84,15 @@ def main() -> None:
             "index_count": len(idx["articles"]),
             "dropped_count": len(dropped),
             "drop_reasons": dict(reasons),
-            "dropped": sorted(dropped, key=lambda e: e["slug"]),
+            "dropped": sorted(dropped, key=lambda e: str(e.get("slug", ""))),
         },
     )
     print(f"index={payload['index_count']} kept={len(kept)} dropped={len(dropped)}")
     print("drop reasons:", dict(reasons))
     print("top 15:")
-    for e in payload["qualifying"][:15]:
-        print(f"  ${e['usd_equivalent']:>13,.0f}  {e['title']}")
+    for e in kept[:15]:
+        usd = e.get("usd_equivalent") or 0
+        print(f"  ${usd:>13,.0f}  {e.get('title', '')}")
 
 
 if __name__ == "__main__":

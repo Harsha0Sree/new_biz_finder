@@ -18,17 +18,19 @@ from scanner.filter_articles import OUT as QUALIFYING_OUT
 from scanner.httpcache import fetch
 from scanner.paths import (
     ARTICLES_PARSED,
-    COMPANIES,
     REJECTED,
+    SOURCE_TBSAASNEWS,
     TEXT,
+    source_companies,
 )
 from scanner.paths import (
     ERRORS_LOG as ERRORS_LOG_PATH,
 )
+from scanner.sources.base import domain_of, normalize_name
 from scanner.storage import append_text, read_json, write_json, write_text
 
 PARSED_OUT = ARTICLES_PARSED
-COMPANIES_OUT = COMPANIES
+COMPANIES_OUT = source_companies(SOURCE_TBSAASNEWS)
 ARTICLE_TEXT_DIR = TEXT
 ERRORS_LOG = ERRORS_LOG_PATH
 
@@ -243,20 +245,6 @@ def _fetch_source_pr(url: str, target: Path) -> str | None:
     content = header + text
     write_text(target, content)
     return content
-
-
-def normalize_name(name: str) -> str:
-    n = name.lower().strip()
-    n = re.sub(r"[^\w\s]", "", n)
-    n = re.sub(r"\s+(inc|llc|ltd|gmbh|bv|pty|co|corp|technologies|technology|labs|ai)\b.*$", "", n)
-    return re.sub(r"\s+", " ", n).strip()
-
-
-def domain_of(url: str | None) -> str | None:
-    if not url:
-        return None
-    m = re.match(r"^https?://(?:www\.)?([^/:?#]+)", url)
-    return m.group(1).lower() if m else None
 
 
 def clean_article_text(raw: str) -> str:

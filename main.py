@@ -3,10 +3,12 @@
 Steps:
 1. Crawl the article index from thesaasnews.com.
 2. Filter qualifying rounds (at least $10M USD-equivalent).
-3. Fetch article bodies and parse Funding Details into companies.json.
-4. Scrape company websites, recover SPA text, and extract pricing into sites.json.
-5. Export isolated prompt dossiers for each company.
-6. Run the LLM evaluation loop and rebuild rankings/reports.
+3. Fetch article bodies and parse Funding Details into the thesaasnews source.
+4. Crawl every other source (TechCrunch, startups.gallery, YC, Product Hunt).
+5. Extract companies from every source and merge them into the corpus.
+6. Scrape company websites, recover SPA text, and extract pricing into sites.json.
+7. Export isolated prompt dossiers for each company.
+8. Run the LLM evaluation loop and rebuild rankings/reports.
 """
 
 from __future__ import annotations
@@ -61,42 +63,71 @@ def run_pipeline(
 
     if step in ("all", "crawl") and not aggregate_only:
         if skip_crawl and ARTICLES_INDEX.exists():
-            print("\n[Step 1/6] Skipping index crawl (--skip-crawl set)")
+            print("\n[Step 1/8] Skipping index crawl (--skip-crawl set)")
         else:
-            print("\n[Step 1/6] Crawling article index (seed-round & pre-seed)...")
+            print("\n[Step 1/8] Crawling article index (seed-round & pre-seed)...")
             from scanner.crawl_index import main as crawl_main
 
             crawl_main(refetch=refetch_index)
 
     if step in ("all", "filter") and not aggregate_only:
-        print("\n[Step 2/6] Filtering qualifying rounds (at least $10M USD-equivalent)...")
+        print("\n[Step 2/8] Filtering qualifying rounds (at least $10M USD-equivalent)...")
         from scanner.filter_articles import main as filter_main
 
         filter_main()
 
     if step in ("all", "fetch-articles") and not aggregate_only:
-        print("\n[Step 3/6] Fetching article text and extracting funding details...")
+        print("\n[Step 3/8] Fetching article text and extracting funding details...")
         from scanner.fetch_articles import main as fetch_articles_main
 
         fetch_articles_main()
 
+    if step in ("all", "crawl-sources") and not aggregate_only:
+        print("\n[Step 4/8] Crawling the remaining sources...")
+        from scanner.sources.registry import ADAPTERS
+
+        for source, adapter in ADAPTERS.items():
+            print(f"  {source}:")
+            try:
+                adapter.crawl(force=refetch_index)
+            except Exception as exc:
+                print(f"  {source}: crawl failed: {exc}")
+
+    if step in ("all", "extract-sources") and not aggregate_only:
+        print("\n[Step 5/8] Extracting companies and merging the corpus...")
+        from scanner.companies import build_corpus
+        from scanner.sources.registry import ADAPTERS
+
+        for source, adapter in ADAPTERS.items():
+            print(f"  {source}:")
+            try:
+                records = adapter.extract()
+                print(f"  {source}: {len(records)} records")
+            except FileNotFoundError:
+                print(f"  {source}: nothing on disk, skipping")
+            except Exception as exc:
+                print(f"  {source}: extract failed: {exc}")
+        corpus = build_corpus()
+        unique = [c for c in corpus if not c.get("duplicate_of_previous")]
+        print(f"  corpus: {len(corpus)} records, {len(unique)} unique companies")
+
     if step in ("all", "fetch-sites") and not aggregate_only:
         if skip_scrape and SITES.exists():
-            print("\n[Step 4/6] Skipping site scrape (--skip-scrape set)")
+            print("\n[Step 6/8] Skipping site scrape (--skip-scrape set)")
         else:
-            print("\n[Step 4/6] Scraping company websites and extracting pricing...")
+            print("\n[Step 6/8] Scraping company websites and extracting pricing...")
             from scanner.fetch_sites import main as fetch_sites_main
 
             fetch_sites_main(workers=site_workers)
 
     if step in ("all", "export-prompts") and not aggregate_only:
-        print("\n[Step 5/6] Exporting isolated company prompts...")
+        print("\n[Step 7/8] Exporting isolated company prompts...")
         from scanner.export_prompts import export_all_prompts
 
         export_all_prompts(year=year)
 
     if step in ("all", "llm") or aggregate_only:
-        print("\n[Step 6/6] Running LLM evaluation and ranking...")
+        print("\n[Step 8/8] Running LLM evaluation and ranking...")
         from scanner.llm_analyzer import aggregate_scores, run_llm_pipeline
 
         if aggregate_only:
@@ -170,7 +201,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--step",
-        choices=["all", "crawl", "filter", "fetch-articles", "fetch-sites", "export-prompts", "llm", "validate"],
+        choices=["all", "crawl", "filter", "fetch-articles", "crawl-sources", "extract-sources", "fetch-sites", "export-prompts", "llm", "validate"],
         default="all",
         help="Pipeline step to execute (default: all)",
     )

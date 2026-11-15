@@ -18,7 +18,7 @@ from typing import Any
 from scanner.amounts import THRESHOLD_USD, parse_round
 from scanner.compute import ARCHETYPES, GATE_IDS, compute_total
 from scanner.llm import is_verified_record
-from scanner.paths import ROOT
+from scanner.paths import ALL_SOURCES, ROOT, SOURCE_TBSAASNEWS
 from scanner.storage import read_json
 
 CONFIDENCE_LEVELS = {"high", "medium", "low"}
@@ -179,43 +179,47 @@ def validate_filter_reconciliation(
         report.error(f"filter: {len(extra)} kept/dropped slugs are not in the index")
 
 
-def validate_companies(payload: Any, qualifying_count: int, report: Report) -> list[dict[str, Any]]:
+def validate_companies(payload: Any, report: Report) -> list[dict[str, Any]]:
     companies = _as_list(payload)
     report.checks["companies"] = len(companies)
     if not companies:
-        report.error("companies.json: expected a non-empty list")
+        report.error("corpus.json: expected a non-empty list")
         return []
     unique = [c for c in companies if isinstance(c, dict) and not c.get("duplicate_of_previous")]
     report.checks["companies_unique"] = len(unique)
-    if len(unique) > qualifying_count:
-        report.warn(
-            f"companies.json: {len(unique)} unique companies from "
-            f"{qualifying_count} qualifying articles"
-        )
+    per_source: dict[str, int] = {}
     seen_slugs: set[str] = set()
     seen_keys: set[tuple[str, str]] = set()
     for index, company in enumerate(companies):
         if not isinstance(company, dict):
-            report.error(f"companies.json: entry {index} is not an object")
+            report.error(f"corpus.json: entry {index} is not an object")
             continue
         slug = company.get("slug")
         if not slug:
-            report.error(f"companies.json: entry {index} has no slug")
+            report.error(f"corpus.json: entry {index} has no slug")
             continue
         if not isinstance(slug, str) or not SLUG_RE.match(slug):
-            report.error(f"companies.json: unsafe slug {slug!r}")
+            report.error(f"corpus.json: unsafe slug {slug!r}")
         if slug in seen_slugs:
-            report.error(f"companies.json: duplicate slug {slug}")
+            report.error(f"corpus.json: duplicate slug {slug}")
         seen_slugs.add(slug)
-        for key in ("company", "article_url", "title", "usd_equivalent"):
+        source = str(company.get("source") or "")
+        if source not in ALL_SOURCES:
+            report.error(f"corpus.json: {slug} has unknown source {source!r}")
+        per_source[source] = per_source.get(source, 0) + 1
+        for key in ("company", "title"):
             if company.get(key) in (None, ""):
-                report.error(f"companies.json: {slug} missing {key}")
+                report.error(f"corpus.json: {slug} missing {key}")
+        if source == SOURCE_TBSAASNEWS:
+            for key in ("article_url", "usd_equivalent"):
+                if company.get(key) in (None, ""):
+                    report.error(f"corpus.json: {slug} missing {key}")
         round_source = company.get("round_source")
         if round_source not in (None, "article", "title"):
-            report.error(f"companies.json: {slug} has bad round_source {round_source!r}")
-        if not company.get("round_field") and round_source != "title":
+            report.error(f"corpus.json: {slug} has bad round_source {round_source!r}")
+        if not company.get("round_field") and round_source not in ("title", None):
             report.error(
-                f"companies.json: {slug} has no round_field and did not infer one "
+                f"corpus.json: {slug} has no round_field and did not infer one "
                 "from the title"
             )
         if round_source == "title" and parse_round(str(company.get("title") or "")).kind in (
@@ -223,20 +227,21 @@ def validate_companies(payload: Any, qualifying_count: int, report: Report) -> l
             "other-series",
         ):
             report.error(
-                f"companies.json: {slug} round_source=title but the title has no "
+                f"corpus.json: {slug} round_source=title but the title has no "
                 "seed-stage label"
             )
         usd = company.get("usd_equivalent")
-        if isinstance(usd, (int, float)) and usd < THRESHOLD_USD:
-            report.error(f"companies.json: {slug} is below threshold ({usd})")
+        if source == SOURCE_TBSAASNEWS and isinstance(usd, (int, float)) and usd < THRESHOLD_USD:
+            report.error(f"corpus.json: {slug} is below threshold ({usd})")
         domain = company.get("domain")
         website = company.get("website")
         if website and not domain:
-            report.error(f"companies.json: {slug} has website but no domain")
-        key = (str(company.get("normalized_name") or ""), str(domain or ""))
-        if key in seen_keys and not company.get("duplicate_of_previous"):
-            report.error(f"companies.json: {slug} repeats company/domain key {key}")
-        seen_keys.add(key)
+            report.error(f"corpus.json: {slug} has website but no domain")
+        company_key = (str(company.get("normalized_name") or ""), str(domain or ""))
+        if company_key in seen_keys and not company.get("duplicate_of_previous"):
+            report.error(f"corpus.json: {slug} repeats company/domain key {company_key}")
+        seen_keys.add(company_key)
+    report.checks["companies_per_source"] = len(per_source)
     return unique
 
 
@@ -348,34 +353,40 @@ def _norm_domain(value: Any) -> str:
 
 
 def validate_deep_evals(
-    evals_dir: Path,
+    evals_root: Path,
     report: Report,
     companies: list[dict[str, Any]] | None = None,
 ) -> dict[str, dict[str, Any]]:
     records: dict[str, dict[str, Any]] = {}
-    if not evals_dir.exists():
-        report.error(f"missing evals directory {evals_dir}")
+    if not any((evals_root / source).exists() for source in ALL_SOURCES):
+        report.error(f"missing evals directory {evals_root}")
         return records
     by_slug = {
         c.get("slug"): c for c in (companies or []) if isinstance(c, dict) and c.get("slug")
     }
-    files = sorted(evals_dir.glob("*.json"))
-    report.checks["deep_evals"] = len(files)
-    for path in files:
-        record = _load(path, report, f"evals/{path.name}")
-        if not isinstance(record, dict):
+    for source in ALL_SOURCES:
+        evals_dir = evals_root / source
+        if not evals_dir.exists():
             continue
-        validate_eval_record(record, path.name, report)
-        if record.get("slug") and record["slug"] != path.stem:
-            report.error(f"evals/{path.name}: slug {record['slug']} does not match filename")
-        comp = by_slug.get(path.stem)
-        if comp is not None:
-            doma, domb = _norm_domain(record.get("domain")), _norm_domain(comp.get("domain"))
-            if doma and domb and doma != domb:
+        files = sorted(evals_dir.glob("*.json"))
+        report.checks[f"deep_evals_{source}"] = len(files)
+        for path in files:
+            record = _load(path, report, f"evals/{source}/{path.name}")
+            if not isinstance(record, dict):
+                continue
+            validate_eval_record(record, path.name, report)
+            if record.get("slug") and record["slug"] != path.stem:
                 report.error(
-                    f"evals/{path.name}: domain {doma!r} does not match registry domain {domb!r}"
+                    f"evals/{source}/{path.name}: slug {record['slug']} does not match filename"
                 )
-        records[path.stem] = record
+            comp = by_slug.get(path.stem)
+            if comp is not None:
+                doma, domb = _norm_domain(record.get("domain")), _norm_domain(comp.get("domain"))
+                if doma and domb and doma != domb:
+                    report.error(
+                        f"evals/{source}/{path.name}: domain {doma!r} does not match registry domain {domb!r}"
+                    )
+            records[path.stem] = record
     return records
 
 
@@ -436,12 +447,12 @@ def validate_scored(payload: Any, companies: list[dict[str, Any]], evals: dict, 
         report.error(
             f"scored.json: {payload.get('invalid_count')} invalid evaluation files; fix them or remove them"
         )
-    expected = {
-        c.get("slug")
+    expected: set[str] = {
+        str(c.get("slug"))
         for c in companies
         if c.get("slug") and (c.get("slug") in evals)
     }
-    scored_slugs = {s.get("slug") for s in scored if isinstance(s, dict)}
+    scored_slugs: set[str] = {str(s.get("slug")) for s in scored if isinstance(s, dict)}
     missing = expected - scored_slugs
     if missing:
         report.error(f"scored.json: missing evaluated companies {sorted(missing)[:5]}")
@@ -464,7 +475,7 @@ def validate_scored(payload: Any, companies: list[dict[str, Any]], evals: dict, 
 
 def validate_llm_evals(
     payload: Any,
-    evals_dir: Path,
+    evals_root: Path,
     report: Report,
     summary_path: Path | None = None,
     known: set[str] | None = None,
@@ -480,25 +491,32 @@ def validate_llm_evals(
     eval_records: dict[str, dict[str, Any]] = {}
     invalid: list[str] = []
     file_count = 0
-    if evals_dir.exists():
+    for source in ALL_SOURCES:
+        evals_dir = evals_root / source
+        if not evals_dir.exists():
+            continue
         for path in sorted(evals_dir.glob("*.json")):
             file_count += 1
-            record = _load(path, report, f"llm_evals/{path.name}")
+            record = _load(path, report, f"llm_evals/{source}/{path.name}")
             if not isinstance(record, dict):
-                invalid.append(path.name)
+                invalid.append(f"{source}/{path.name}")
                 continue
             for key in ("slug", "company", "provider", "model", "score"):
                 if record.get(key) in (None, ""):
-                    report.error(f"llm_evals/{path.name}: missing {key}")
+                    report.error(f"llm_evals/{source}/{path.name}: missing {key}")
             slug_val = record.get("slug")
             if slug_val is not None and (
                 not isinstance(slug_val, str) or not SLUG_RE.match(slug_val)
             ):
-                report.error(f"llm_evals/{path.name}: unsafe slug {slug_val!r}")
+                report.error(f"llm_evals/{source}/{path.name}: unsafe slug {slug_val!r}")
             if isinstance(slug_val, str) and slug_val != path.stem:
-                report.error(f"llm_evals/{path.name}: slug {slug_val} does not match filename")
+                report.error(
+                    f"llm_evals/{source}/{path.name}: slug {slug_val} does not match filename"
+                )
             if known is not None and path.stem not in known:
-                report.error(f"llm_evals/{path.name}: no matching company or rejected candidate")
+                report.error(
+                    f"llm_evals/{source}/{path.name}: no matching company or rejected candidate"
+                )
             eval_records[path.stem] = record
             if is_verified_record(record):
                 successful.add(path.stem)
@@ -510,9 +528,9 @@ def validate_llm_evals(
             score = record.get("score")
             if isinstance(score, (int, float)) and not isinstance(score, bool):
                 if not 0 <= score <= 100:
-                    report.error(f"llm_evals/{path.name}: bad score {score!r}")
+                    report.error(f"llm_evals/{source}/{path.name}: bad score {score!r}")
             else:
-                report.error(f"llm_evals/{path.name}: bad score {score!r}")
+                report.error(f"llm_evals/{source}/{path.name}: bad score {score!r}")
     scored_slugs = {item.get("slug") for item in scored if isinstance(item, dict)}
     for index, item in enumerate(scored):
         if not isinstance(item, dict):
@@ -585,34 +603,74 @@ def validate_reports(reports_dir: Path, report: Report, scored_count: int | None
         report.error("reports/llm_opportunity_ranking.md: missing")
 
 
+def validate_sources(data: Path, report: Report) -> None:
+    """Each source folder holds an index, its raw articles and its companies."""
+    for source in ALL_SOURCES:
+        folder = data / "sources" / source
+        index_path = folder / "index.json"
+        if not index_path.exists():
+            report.warn(f"sources/{source}: no index.json, this source has not been crawled")
+            continue
+        index = _load(index_path, report, f"sources/{source}/index.json")
+        companies_payload = _load(
+            folder / "companies.json", report, f"sources/{source}/companies.json"
+        )
+        companies = _as_list(companies_payload)
+        report.checks[f"source_{source}_companies"] = len(companies)
+        if isinstance(index, dict):
+            expected = index.get("company_count")
+            if isinstance(expected, int) and expected != len(companies):
+                report.error(
+                    f"sources/{source}/index.json: company_count={expected} but "
+                    f"companies.json holds {len(companies)}"
+                )
+        for company in companies:
+            if not isinstance(company, dict):
+                report.error(f"sources/{source}/companies.json: entry is not an object")
+                continue
+            if str(company.get("source") or "") != source:
+                report.error(
+                    f"sources/{source}/companies.json: record has source "
+                    f"{company.get('source')!r}"
+                )
+
+
 def validate_repo(root: str | Path = ROOT) -> Report:
     root = Path(root)
     data = root / "data"
     reports = root / "reports"
     report = Report()
+    thesaasnews = data / "sources" / SOURCE_TBSAASNEWS
 
-    articles_payload = _load(data / "articles_index.json", report, "articles_index.json")
+    articles_payload = _load(thesaasnews / "articles_index.json", report, "articles_index.json")
     articles = validate_articles(articles_payload, report)
-    qualifying_payload = _load(data / "qualifying.json", report, "qualifying.json")
-    companies_payload = _load(data / "companies.json", report, "companies.json")
-    rejected_payload = _load(data / "rejected.json", report, "rejected.json")
+    qualifying_payload = _load(thesaasnews / "qualifying.json", report, "qualifying.json")
+    companies_payload = _load(data / "corpus.json", report, "corpus.json")
+    rejected_payload = _load(thesaasnews / "rejected.json", report, "rejected.json")
     rejected = _as_list(rejected_payload)
     report.checks["rejected"] = len(rejected)
-    resolved = {c.get("slug") for c in _as_list(companies_payload) if isinstance(c, dict)}
-    resolved |= {r.get("slug") for r in rejected if isinstance(r, dict)}
+    resolved: set[str] = {
+        str(c.get("slug")) for c in _as_list(companies_payload)
+        if isinstance(c, dict) and isinstance(c.get("slug"), str)
+    }
+    resolved |= {
+        str(r.get("slug")) for r in rejected
+        if isinstance(r, dict) and isinstance(r.get("slug"), str)
+    }
     qualifying = validate_qualifying(
         qualifying_payload, len(articles), resolved, report
     )
-    dropped_payload = _load(data / "dropped.json", report, "dropped.json")
+    dropped_payload = _load(thesaasnews / "dropped.json", report, "dropped.json")
     validate_filter_reconciliation(articles, qualifying, dropped_payload, report)
-    companies = validate_companies(companies_payload, len(qualifying), report)
+    companies = validate_companies(companies_payload, report)
+    validate_sources(data, report)
     for article in qualifying:
         if article.get("slug") not in resolved:
             if (article.get("filter_reason") or "").startswith("check_article_"):
                 continue
             report.warn(
                 f"qualifying.json: {article.get('slug')} is not represented in "
-                "companies.json or rejected.json"
+                "corpus.json or rejected.json"
             )
     for index, item in enumerate(rejected):
         if not isinstance(item, dict):

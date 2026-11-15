@@ -18,11 +18,11 @@ from bs4 import BeautifulSoup
 
 from scanner.enrich import load_sites, update_site
 from scanner.httpcache import fetch
-from scanner.paths import COMPANIES, TEXT
+from scanner.paths import CORPUS, TEXT
 from scanner.storage import read_json, write_text
 
 TEXT_DIR = TEXT
-COMPANIES_PATH = COMPANIES
+COMPANIES_PATH = CORPUS
 
 ALLOWED_PATH_RE = re.compile(
     r"^/(pricing|product|products|solutions|features|platform|technology|tech|"

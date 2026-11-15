@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 
-from scanner.paths import COMPANIES, EVAL_BATCHES, SITES, TEXT
+from scanner.paths import CORPUS, EVAL_BATCHES, SITES, TEXT
 from scanner.storage import read_json, write_json
 
 OUT_DIR = EVAL_BATCHES
@@ -20,7 +20,7 @@ def site_files(domain: str | None) -> list[str]:
 
 def main() -> None:
     batch_size = int(sys.argv[sys.argv.index("--size") + 1]) if "--size" in sys.argv else 8
-    companies = read_json(COMPANIES)
+    companies = read_json(CORPUS)
     sites = read_json(SITES)["sites"]
     uniq = [c for c in companies if not c.get("duplicate_of_previous")]
     OUT_DIR.mkdir(parents=True, exist_ok=True)

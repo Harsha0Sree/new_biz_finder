@@ -132,18 +132,26 @@ def parse_amount(title: str) -> ParsedAmount | None:
     )
 
 
+# A money figure is a valuation when the words right before it or right after
+# it say so. The cue has to sit next to the number: "raises $5B, doubles
+# valuation to $61B" is a $5B raise and a $61B valuation.
+_VALUATION_BEFORE_RE = re.compile(
+    r"(?:valued?|valuing)\s+(?:it\s+)?at\s*$"
+    r"|valuation\s+(?:of|to|at)\s*$"
+    r"|post[- ]money\s+valuation\s+(?:of|to)\s*$"
+)
+_VALUATION_AFTER_RE = re.compile(
+    r"^\s*(?:usd\s*)?(?:post[- ]money\s+)?valua?tion\b"
+)
+
+
 def _is_valuation_context(title: str, match: re.Match) -> bool:
     """True if a money match sits inside an 'at $X valuation' style phrase."""
-    window_start = max(0, match.start() - 25)
-    tail = title[match.end() : match.end() + 20].lower()
-    head = title[window_start : match.start()].lower()
-    if re.search(r"valua?tion|valu(ed|ing)", tail):
+    head = title[max(0, match.start() - 40) : match.start()].lower()
+    tail = title[match.end() : match.end() + 40].lower()
+    if _VALUATION_BEFORE_RE.search(head):
         return True
-    # 'at $500M valuation' -> the words between 'at' and number then valuation after
-    return bool(
-        re.search(r"\b(?:at|@)\s*(?:a\s+)?$", head)
-        and re.search(r"^\s*(?:post[- ]-money\s*)?valua?tion", tail)
-    )
+    return bool(_VALUATION_AFTER_RE.match(tail))
 
 
 def parse_raise_amount(title: str) -> tuple[ParsedAmount | None, ParsedAmount | None]:

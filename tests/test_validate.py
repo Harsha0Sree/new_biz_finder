@@ -91,6 +91,7 @@ def test_validate_qualifying_warns_on_unresolved_valuation_only_candidate():
 def _company(**overrides):
     company = {
         "slug": "acme-seed",
+        "source": "thesaasnews",
         "company": "Acme",
         "article_url": "https://example.com/acme",
         "title": "Acme Raises $12M Seed",
@@ -109,7 +110,7 @@ def test_validate_companies_accepts_title_inferred_round():
     report = _report()
 
     validate.validate_companies(
-        [_company(round_field="", round_source="title")], 1, report
+        [_company(round_field="", round_source="title")], report
     )
 
     assert report.errors == []
@@ -119,7 +120,7 @@ def test_validate_companies_rejects_empty_round_without_title_fallback():
     report = _report()
 
     validate.validate_companies(
-        [_company(round_field="", round_source="article")], 1, report
+        [_company(round_field="", round_source="article")], report
     )
 
     assert any("no round_field" in error for error in report.errors)
@@ -136,7 +137,6 @@ def test_validate_companies_rejects_unlabeled_title_fallback():
                 title="Acme Raises $12M in Funding",
             )
         ],
-        1,
         report,
     )
 
@@ -159,8 +159,8 @@ def test_validate_scored_detects_stale_missing_count():
 
 
 def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
-    evals = tmp_path / "llm_evals"
-    evals.mkdir()
+    evals = tmp_path / "llm_evals" / "thesaasnews"
+    evals.mkdir(parents=True)
     write_text(
         evals / "ok.json",
         json.dumps(
@@ -198,7 +198,7 @@ def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
     )
     report = _report()
 
-    validate.validate_llm_evals([{"slug": "bad"}], evals, report)
+    validate.validate_llm_evals([{"slug": "bad"}], tmp_path / "llm_evals", report)
 
     assert any("does not match successful" in error for error in report.errors)
     assert any("1 errored records" in warning for warning in report.warnings)
@@ -215,7 +215,7 @@ def test_validate_llm_evals_requires_aggregate_to_match_successes(tmp_path):
                 "usd_equivalent": 10_000_000.0,
             }
         ],
-        evals,
+        tmp_path / "llm_evals",
         report,
     )
     assert report.errors == []

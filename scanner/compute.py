@@ -12,7 +12,7 @@ import csv
 import io
 from pathlib import Path
 
-from scanner.paths import COMPANIES, EVALS, SCORED, SCORES_CSV
+from scanner.paths import CORPUS, SCORED, SCORES_CSV, source_evals
 from scanner.storage import read_json, write_json, write_text
 
 HEAD_WEIGHTS = {"h1": 0.30, "h2": 0.35, "h3": 0.25, "h4": 0.10}
@@ -42,8 +42,7 @@ ARCHETYPES: dict[str, dict[str, float]] = {
 GATE_MULTIPLIERS = {"G1": 0.05, "G2": 0.15, "G3": 0.10, "G4": 0.25, "G5": 0.20}
 GATE_IDS = frozenset(GATE_MULTIPLIERS)
 
-EVALS_DIR = EVALS
-COMPANIES_OUT = COMPANIES
+COMPANIES_OUT = CORPUS
 SCORED_OUT = SCORED
 CSV_OUT = SCORES_CSV
 
@@ -162,7 +161,7 @@ def main() -> None:
     for company in companies:
         if company.get("duplicate_of_previous"):
             continue
-        path = Path(EVALS_DIR) / f"{company['slug']}.json"
+        path = source_evals(company.get("source") or "") / f"{company['slug']}.json"
         if not path.exists():
             missing.append(company["slug"])
             continue

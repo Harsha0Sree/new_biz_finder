@@ -3,6 +3,11 @@
 These are documentation with teeth: every boundary that reads or writes one of
 these files has a name for what it expects. Runtime validation lives in
 `scanner.validate`, because JSON on disk is untrusted input.
+
+One `Company` shape covers every source. The `source` field says where a
+record came from; the source-specific facts (`batch`, `upvotes`,
+`employee_range`, `work_type`, `location`) stay empty when a source does not
+report them.
 """
 
 from __future__ import annotations
@@ -11,6 +16,9 @@ from typing import Any, Literal, TypedDict
 
 RoundKind = Literal["seed", "pre-seed", "pre-series-a", "other-series", "unlabeled"]
 SiteStatus = Literal["ok", "js_only", "dead", "dead_parked", "error"]
+SourceName = Literal[
+    "thesaasnews", "techcrunch", "startups_gallery", "yc", "producthunt"
+]
 
 
 class ArticleIndexEntry(TypedDict, total=False):
@@ -36,13 +44,17 @@ class FundingDetails(TypedDict, total=False):
 
 class Company(TypedDict, total=False):
     slug: str
+    source: SourceName
+    qualification: str
     article_url: str
+    source_url: str
     title: str
     date: str
     company: str
     normalized_name: str
     domain: str | None
     website: str | None
+    description: str
     raised_raw: str
     usd_equivalent: float
     amount_source: str
@@ -55,8 +67,12 @@ class Company(TypedDict, total=False):
     lead_investor: str
     additional_investors: str
     software_category: str
-    source_url: str
     duplicate_of_previous: bool
+    batch: str
+    upvotes: int
+    employee_range: str
+    work_type: str
+    location: str
     pricing: dict[str, Any]
     site_status: str
 

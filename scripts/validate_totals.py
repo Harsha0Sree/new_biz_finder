@@ -6,7 +6,7 @@ importing scanner.compute, then diffs against data/scored.json.
 
 from __future__ import annotations
 
-from scanner.paths import EVALS, SCORED
+from scanner.paths import EVALS, SCORED, source_evals
 from scanner.storage import read_json
 
 HEADS = [("h1", 0.30), ("h2", 0.35), ("h3", 0.25), ("h4", 0.10)]
@@ -50,7 +50,8 @@ def main() -> int:
     scored = read_json(SCORED)["companies"]
     bad = 0
     for s in scored:
-        ev = read_json(EVALS / f"{s['slug']}.json")
+        source = str(s.get("source") or "thesaasnews")
+        ev = read_json(source_evals(source) / f"{s['slug']}.json")
         t = independent_total(ev)
         if abs(t - s["total"]) > 0.01:
             bad += 1

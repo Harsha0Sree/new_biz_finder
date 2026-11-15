@@ -34,6 +34,8 @@ You will receive:
 
 Do not skip details that could materially affect niche selection.
 
+A source may not report a funding round at all. An unreported round, amount or investor list is unknown, not disqualifying, and you must not infer a stage from it. Judge the company on the product evidence you were given.
+
 Then evaluate **every company individually**.
 
 Do not prematurely select winners.

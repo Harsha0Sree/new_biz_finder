@@ -116,6 +116,21 @@ def test_valuation_ignored_when_raise_present():
     assert val.usd_equivalent == pytest.approx(4_480_000_000)
 
 
+def test_valuation_word_far_from_the_number_does_not_hide_the_raise():
+    amt, val = parse_raise_amount("Anduril raises $5B, doubles valuation to $61B")
+    assert amt.usd_equivalent == pytest.approx(5_000_000_000)
+    assert val.usd_equivalent == pytest.approx(61_000_000_000)
+
+
+def test_valuation_before_the_number_is_not_a_raise():
+    amt, val = parse_raise_amount("Acme valued at $500M")
+    assert amt is None
+    assert val.usd_equivalent == pytest.approx(500_000_000)
+    amt, val = parse_raise_amount("Acme raises $100M, valuing it at $1B")
+    assert amt.usd_equivalent == pytest.approx(100_000_000)
+    assert val.usd_equivalent == pytest.approx(1_000_000_000)
+
+
 def test_round_labels():
     r = parse_round("NeoSoul Raises $11M Pre-Series A")
     assert (r.kind, r.flagged) == ("pre-series-a", True)

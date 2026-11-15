@@ -1,0 +1,89 @@
+{
+  "data": {
+    "posts": {
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "eyJkaXJlY3Qtc2l6ZToxfQ"
+      },
+      "edges": [
+        {
+          "node": {
+            "id": "ph-post-acme-ai",
+            "name": "Acme AI",
+            "tagline": "Ship AI features 10x faster.",
+            "description": "Acme AI helps product teams ship AI features faster than the alternatives.",
+            "url": "https://www.producthunt.com/posts/acme-ai",
+            "website": "https://acmeai.com",
+            "votesCount": 812,
+            "commentsCount": 24,
+            "createdAt": "2026-06-11T14:30:00Z",
+            "featuredAt": "2026-06-11T18:00:00Z",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "name": "Artificial Intelligence",
+                    "slug": "artificial-intelligence"
+                  }
+                }
+              ]
+            },
+            "makers": {
+              "id": "maker-1",
+              "name": "Jane Builder"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "ph-post-loopware",
+            "name": "Loopware",
+            "tagline": "",
+            "description": "Loopware builds workflow automation for support teams.",
+            "url": "https://www.producthunt.com/posts/loopware",
+            "website": "",
+            "votesCount": 640,
+            "commentsCount": 8,
+            "createdAt": "2026-08-02T09:15:00Z",
+            "featuredAt": null,
+            "topics": {
+              "edges": []
+            },
+            "makers": {
+              "id": "maker-2",
+              "name": "Sam Coder"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "ph-post-metricly",
+            "name": "Metricly",
+            "tagline": "Metrics without the dashboard sprawl.",
+            "description": "Metricly tracks product metrics without heavy dashboards.",
+            "url": "https://www.producthunt.com/posts/metricly",
+            "website": "https://metricly.com",
+            "votesCount": 540,
+            "commentsCount": 3,
+            "createdAt": "2026-09-19T20:45:00Z",
+            "featuredAt": null,
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "name": "SaaS",
+                    "slug": "saas"
+                  }
+                }
+              ]
+            },
+            "makers": {
+              "id": "maker-3",
+              "name": "Pat Analyst"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

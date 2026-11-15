@@ -3,6 +3,8 @@ from pathlib import Path
 import httpx
 import pytest
 
+import scanner.llm_analyzer as la
+
 from scanner.llm import (
     LLMClient,
     extract_json_payload,
@@ -10,7 +12,7 @@ from scanner.llm import (
 )
 from scanner.llm_analyzer import (
     assemble_company_context,
-    get_qualifying_2026_companies,
+    get_pipeline_companies,
     is_raised_in_year,
     load_system_prompt,
 )
@@ -73,14 +75,40 @@ def test_is_raised_in_year():
     assert is_raised_in_year({"source_url": "https://example.com/2026/02/raise.html"}, "2026") is True
 
 
-def test_get_qualifying_2026_companies():
-    companies = get_qualifying_2026_companies("2026")
-    assert len(companies) > 0
-    # Every company must have raised >= 10M USD and be 2026
-    for c in companies:
-        assert c["usd_equivalent"] >= 10_000_000
-        assert is_raised_in_year(c, "2026")
-        assert not c.get("duplicate_of_previous")
+def test_get_pipeline_companies_filters_only_thesaasnews_by_year(monkeypatch):
+    companies = [
+        {
+            "slug": "acme",
+            "source": "thesaasnews",
+            "usd_equivalent": 12_000_000,
+            "funding_date": "March 10, 2026",
+            "duplicate_of_previous": False,
+        },
+        {
+            "slug": "yc-bolt",
+            "source": "yc",
+            "usd_equivalent": 0.0,
+            "date": "2026-03-01",
+            "duplicate_of_previous": False,
+        },
+        {
+            "slug": "old-seed",
+            "source": "thesaasnews",
+            "usd_equivalent": 12_000_000,
+            "funding_date": "March 10, 2024",
+            "duplicate_of_previous": False,
+        },
+        {
+            "slug": "dupe",
+            "source": "yc",
+            "usd_equivalent": 0.0,
+            "date": "2026-03-01",
+            "duplicate_of_previous": True,
+        },
+    ]
+    monkeypatch.setattr(la, "load_corpus", lambda: companies)
+    selected = la.get_pipeline_companies("2026")
+    assert {c["slug"] for c in selected} == {"acme", "yc-bolt"}
 
 
 def test_load_system_prompt():

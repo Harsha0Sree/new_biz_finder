@@ -19,29 +19,34 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
+from scanner.companies import load_corpus
 from scanner.enrich import enrich_companies, load_sites
 from scanner.env import load_dotenv
 from scanner.fetch_articles import fetch_source_pr
 from scanner.llm import LLMClient, LLMResult, is_verified_record
 from scanner.paths import (
-    COMPANIES,
+    ALL_SOURCES,
+    CORPUS,
     DEFAULT_PROMPT,
-    EVALS,
     LLM_EVALS,
     LLM_RANKING_REPORT,
     LLM_SCORED,
     LLM_SCORES_CSV,
     LLM_SUMMARY,
     REPORTS,
+    SOURCE_TBSAASNEWS,
     TEXT,
+    source_evals,
+    source_llm_evals,
 )
 from scanner.storage import read_json, write_json, write_text
 
 load_dotenv()
 
-COMPANIES_PATH = COMPANIES
+COMPANIES_PATH = CORPUS
 ARTICLE_TEXT_DIR = TEXT
 EVALS_DIR = LLM_EVALS
+LLM_EVALS_ROOT = LLM_EVALS
 SCORED_JSON_PATH = LLM_SCORED
 SCORED_CSV_PATH = LLM_SCORES_CSV
 REPORTS_DIR = REPORTS
@@ -114,25 +119,28 @@ def is_raised_in_year(company: dict[str, Any], year: str = "2026") -> bool:
     return False
 
 
-def get_qualifying_2026_companies(
+def get_pipeline_companies(
     year: str = "2026",
     sites: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Return deduplicated companies that raised in `year`, enriched with site data.
+    """Every company in the merged corpus, enriched with site data.
 
-    All qualifying companies are returned; no gate narrowing happens here.
+    The year filter applies to thesaasnews only. The other four sources were
+    qualified by their own rule (every company named in a 2026 TechCrunch
+    article, every listed startups.gallery company, six YC batches, every
+    Product Hunt post over 500 votes), so their records are already in.
     """
-    companies = read_json(COMPANIES_PATH)
-    if companies is None:
-        raise FileNotFoundError(f"{COMPANIES_PATH} not found. Run previous pipeline steps first.")
+    companies = load_corpus()
     qualifying = [
         c
         for c in companies
-        if not c.get("duplicate_of_previous") and is_raised_in_year(c, year)
+        if not c.get("duplicate_of_previous")
+        and (c.get("source") != SOURCE_TBSAASNEWS or is_raised_in_year(c, year))
     ]
     qualifying = enrich_companies(qualifying, sites)
     qualifying.sort(
         key=lambda c: (
+            bool(c.get("date") or c.get("funding_date")),
             c.get("date") or c.get("funding_date") or "",
             c.get("usd_equivalent") or 0.0,
         ),
@@ -168,6 +176,19 @@ def _site_pricing(company: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
     return site.get("pricing") or {}, site.get("status") or status
 
 
+SOURCE_LABELS = {
+    "thesaasnews": "thesaasnews",
+    "techcrunch": "TechCrunch",
+    "startups_gallery": "startups.gallery",
+    "yc": "Y Combinator",
+    "producthunt": "Product Hunt",
+}
+
+
+def _source_label(company: dict[str, Any]) -> str:
+    return SOURCE_LABELS.get(str(company.get("source") or ""), "the publisher")
+
+
 def assemble_company_context(
     company: dict[str, Any],
     max_chars: int = MAX_CONTEXT_CHARS,
@@ -181,6 +202,8 @@ def assemble_company_context(
     slug = company["slug"]
     domain = company.get("domain")
     source_url = company.get("source_url")
+    label = _source_label(company)
+    missing = f"Not reported by {label}"
 
     article_file = ARTICLE_TEXT_DIR / f"article__{slug}.txt"
     if article_file.exists():
@@ -222,26 +245,51 @@ def assemble_company_context(
     sections.append("")
     sections.append("## Overview & Reported Funding Facts (from the publisher; not independently verified)")
     sections.append(f"- **Company Name**: {_safe_scalar(company.get('company'))}")
+    sections.append(f"- **Data Source**: {_safe_scalar(label)}")
     sections.append(f"- **Website**: {_safe_scalar(company.get('website')) or 'None provided'}")
     sections.append(f"- **Domain**: {_safe_scalar(company.get('domain')) or 'None'}")
+    description = _safe_scalar(company.get("description"), cap=600)
+    if description:
+        sections.append(f"- **What The Company Does**: {description}")
+    round_field = _safe_scalar(company.get("round_field"))
+    round_source = _safe_scalar(company.get("round_source"))
+    if round_field:
+        sections.append(
+            f"- **Funding Round**: {round_field}"
+            + (f" (source: {round_source})" if round_source else "")
+        )
+    else:
+        sections.append(f"- **Funding Round**: {missing}")
+    raised_raw = _safe_scalar(company.get("raised_raw"))
+    if raised_raw:
+        sections.append(
+            f"- **Amount Raised**: {raised_raw} "
+            f"(~{_fmt_usd(company.get('usd_equivalent', 0))} USD-equivalent)"
+        )
+    else:
+        sections.append(f"- **Amount Raised**: {missing}")
     sections.append(
-        f"- **Funding Round**: {_safe_scalar(company.get('round_field'))} "
-        f"(source: {_safe_scalar(company.get('round_source'))})"
+        f"- **Funding Date**: {_safe_scalar(company.get('funding_date')) or missing}"
     )
     sections.append(
-        f"- **Amount Raised**: {_safe_scalar(company.get('raised_raw'))} "
-        f"(~{_fmt_usd(company.get('usd_equivalent', 0))} USD-equivalent)"
-    )
-    sections.append(f"- **Funding Date**: {_safe_scalar(company.get('funding_date')) or 'Unknown'}")
-    sections.append(
-        f"- **Lead Investor(s)**: {_safe_scalar(company.get('lead_investor')) or 'Not specified'}"
+        f"- **Lead Investor(s)**: {_safe_scalar(company.get('lead_investor')) or missing}"
     )
     sections.append(
-        f"- **Additional Investors**: {_safe_scalar(company.get('additional_investors')) or 'None listed'}"
+        f"- **Additional Investors**: {_safe_scalar(company.get('additional_investors')) or missing}"
     )
     sections.append(
-        f"- **Software Category**: {_safe_scalar(company.get('software_category')) or 'Unclassified'}"
+        f"- **Software Category**: {_safe_scalar(company.get('software_category')) or missing}"
     )
+    if company.get("batch"):
+        sections.append(f"- **Batch**: {_safe_scalar(company.get('batch'))}")
+    if company.get("upvotes"):
+        sections.append(f"- **Product Hunt Upvotes**: {int(company['upvotes']):,}")
+    if company.get("employee_range"):
+        sections.append(f"- **Employee Range**: {_safe_scalar(company.get('employee_range'))}")
+    if company.get("work_type"):
+        sections.append(f"- **Work Type**: {_safe_scalar(company.get('work_type'))}")
+    if company.get("location"):
+        sections.append(f"- **Location**: {_safe_scalar(company.get('location'))}")
     if site_status:
         sections.append(f"- **Website Fetch Status**: {_safe_scalar(site_status)}")
     if source_url:
@@ -324,18 +372,21 @@ def assemble_company_context(
 def save_evaluation(
     company: dict[str, Any],
     result: LLMResult,
-    evals_dir: Path = EVALS_DIR,
+    evals_dir: Path | None = None,
     context_chars: int = 0,
     latency_s: float | None = None,
 ) -> Path:
     """Save one company evaluation. Error records stay on disk for diagnostics."""
     slug = company["slug"]
+    source = str(company.get("source") or SOURCE_TBSAASNEWS)
     if not SLUG_RE.match(slug):
         raise ValueError(f"refusing to write an evaluation for unsafe slug {slug!r}")
-    out_path = Path(evals_dir) / f"{slug}.json"
+    out_dir = Path(evals_dir) if evals_dir else Path(LLM_EVALS_ROOT) / source
+    out_path = out_dir / f"{slug}.json"
     pricing, _ = _site_pricing(company)
     data = {
         "slug": slug,
+        "source": source,
         "company": company.get("company"),
         "domain": company.get("domain"),
         "website": company.get("website"),
@@ -346,7 +397,7 @@ def save_evaluation(
         "lead_investor": company.get("lead_investor"),
         "software_category": company.get("software_category"),
         "pricing": pricing,
-        "in_previous_67": (EVALS / f"{slug}.json").exists(),
+        "has_deep_eval": (source_evals(source) / f"{slug}.json").exists(),
         "provider": result.provider,
         "model": result.model,
         "score": result.score,
@@ -386,7 +437,7 @@ def _csv_text(rows: list[dict[str, Any]]) -> str:
             "category",
             "raised_usd",
             "pricing_on_site",
-            "in_previous_67",
+            "has_deep_eval",
             "verdict",
             "model",
             "status",
@@ -404,7 +455,7 @@ def _csv_text(rows: list[dict[str, Any]]) -> str:
                 item.get("software_category", ""),
                 f"${item.get('usd_equivalent', 0):,.0f}",
                 pricing_data.get("summary") or "",
-                "yes" if item.get("in_previous_67") else "no",
+                "yes" if item.get("has_deep_eval") else "no",
                 (item.get("verdict") or "").replace("\n", " "),
                 item.get("model", ""),
                 "error" if item.get("error") else item.get("status", "ok"),
@@ -415,7 +466,7 @@ def _csv_text(rows: list[dict[str, Any]]) -> str:
 
 
 def aggregate_scores(
-    evals_dir: Path = EVALS_DIR,
+    evals_dir: Path | None = None,
     *,
     include_errors: bool = False,
     scored_json_path: Path | None = None,
@@ -437,7 +488,12 @@ def aggregate_scores(
     reports_dir = Path(reports_dir) if reports_dir else REPORTS_DIR
     ranking_report = Path(ranking_report) if ranking_report else LLM_RANKING_REPORT
 
-    files = sorted(Path(evals_dir).glob("*.json"))
+    if evals_dir is None:
+        files: list[Path] = []
+        for source in ALL_SOURCES:
+            files.extend(sorted((Path(LLM_EVALS_ROOT) / source).glob("*.json")))
+    else:
+        files = sorted(Path(evals_dir).glob("*.json"))
     successful: list[dict[str, Any]] = []
     errored: list[dict[str, Any]] = []
     unverified: list[dict[str, Any]] = []
@@ -520,7 +576,7 @@ def aggregate_scores(
         f"**Included in ranking**: {len(selected)}",
         f"**Generated**: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}",
         "",
-        "| Rank | Score | Company | Category | Raised | On-Site Pricing | Prior 67? | Verdict |",
+        "| Rank | Score | Company | Category | Raised | On-Site Pricing | Deep Eval? | Verdict |",
         "|:---:|:---:|:---|:---|:---|:---|:---:|:---|",
     ]
     for rank, item in enumerate(selected, 1):
@@ -528,7 +584,7 @@ def aggregate_scores(
         pricing_data = item.get("pricing") or {}
         pricing_str = pricing_data.get("summary") or "None"
         pricing_short = (pricing_str[:45] + "...") if len(pricing_str) > 48 else pricing_str
-        prior = "✓" if item.get("in_previous_67") else "new"
+        prior = "yes" if item.get("has_deep_eval") else "no"
         lines.append(
             f"| #{rank} | **{item.get('score', 0)}/100** | {item.get('company')} "
             f"| {item.get('software_category') or 'n/a'} "
@@ -619,7 +675,8 @@ def _pending_companies(
     skipped = 0
     retrying = 0
     for company in companies:
-        out_file = EVALS_DIR / f"{company['slug']}.json"
+        source = str(company.get("source") or SOURCE_TBSAASNEWS)
+        out_file = Path(LLM_EVALS_ROOT) / source / f"{company['slug']}.json"
         if out_file.exists() and not force:
             if resume and is_successful_eval(out_file):
                 skipped += 1
@@ -673,8 +730,8 @@ def run_llm_pipeline(
         print("preflight skipped (--skip-preflight)", flush=True)
     print(f"Provider: {client.provider} | Model: {client.model} | Base URL: {client.base_url}")
 
-    companies = get_qualifying_2026_companies(year)
-    print(f"Found {len(companies)} qualifying companies that raised in {year}.")
+    companies = get_pipeline_companies(year)
+    print(f"Found {len(companies)} companies in the corpus.")
 
     todo, skipped, retrying = _pending_companies(
         companies,
@@ -697,7 +754,9 @@ def run_llm_pipeline(
 
         missing = [
             c for c in todo
-            if c.get("source_url") and not _source_cached(c["slug"])
+            if c.get("source_url")
+            and c.get("source") != "techcrunch"
+            and not _source_cached(c["slug"])
         ]
         if missing:
             print(f"Prefetching press releases for {len(missing)} companies...", flush=True)
@@ -765,7 +824,7 @@ def run_llm_pipeline(
                 handle(company, result, chars, elapsed)
 
     print("\nAggregating final rankings and reports...")
-    evaluations, json_path, csv_path = aggregate_scores(EVALS_DIR)
+    evaluations, json_path, csv_path = aggregate_scores()
     print(f"Successfully processed {len(evaluations)} evaluations.")
     print(f"Saved ranked JSON: {json_path}")
     print(f"Saved ranked CSV:  {csv_path}")
