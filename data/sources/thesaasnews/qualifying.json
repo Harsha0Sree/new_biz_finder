@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T07:02:17Z",
+ "generated_at": "2026-11-15T07:23:37Z",
  "threshold_usd": 10000000.0,
  "rule": "at least $10M USD-equivalent; seed, pre-seed, pre-series-a, or unlabeled (unlabeled and valuation-only titles re-checked against the article Funding Details); named later series excluded",
  "index_count": 4583,
