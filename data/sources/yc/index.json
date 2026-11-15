@@ -1,0 +1,31 @@
+{
+ "batches": [
+  {
+   "batch": "Winter 2026",
+   "count": 198
+  },
+  {
+   "batch": "Spring 2026",
+   "count": 192
+  },
+  {
+   "batch": "Summer 2026",
+   "count": 227
+  },
+  {
+   "batch": "Fall 2026",
+   "count": 234
+  },
+  {
+   "batch": "Winter 2027",
+   "count": 13
+  },
+  {
+   "batch": "Summer 2027",
+   "count": 1
+  }
+ ],
+ "total": 865,
+ "generated_at": "2026-11-15T07:08:04Z",
+ "source": "yc"
+}

@@ -1,0 +1,10 @@
+{
+ "source": "techcrunch",
+ "year": 2026,
+ "api": "https://techcrunch.com/wp-json/wp/v2/posts",
+ "expected_total": 5267,
+ "fetched_total": 5267,
+ "pages": 53,
+ "fetched_at": "2026-11-15T07:07:36Z",
+ "generated_at": "2026-11-15T07:07:36Z"
+}
